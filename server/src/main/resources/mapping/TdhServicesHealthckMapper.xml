@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ucd.server.mapper.tdhservicesmapper.TdhServicesHealthckMapper" >
+  <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhservicemodel.TdhServicesHealthck" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="health_checks_id" property="healthChecksId" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="VARCHAR" />
+    <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
+    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, health_checks_id, type, result, detail, last_check, creattime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tdh_services_healthck
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByThdServices" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServices" >
+    select
+    <include refid="Base_Column_List" />
+    from tdh_services_healthck
+    <where>
+      1 = 1
+      <if test="healthChecksId != null" >
+        and health_checks_id = #{healthChecksId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tdh_services_healthck
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesHealthck" >
+    insert into tdh_services_healthck (Id, health_checks_id, type, 
+      result, detail, last_check, 
+      creattime)
+    values (#{id,jdbcType=VARCHAR}, #{healthChecksId,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{lastCheck,jdbcType=VARCHAR}, 
+      #{creattime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesHealthck" >
+    insert into tdh_services_healthck
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="healthChecksId != null" >
+        health_checks_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="lastCheck != null" >
+        last_check,
+      </if>
+      <if test="creattime != null" >
+        creattime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="healthChecksId != null" >
+        #{healthChecksId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCheck != null" >
+        #{lastCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesHealthck" >
+    update tdh_services_healthck
+    <set >
+      <if test="healthChecksId != null" >
+        health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCheck != null" >
+        last_check = #{lastCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesHealthck" >
+    update tdh_services_healthck
+    set health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      last_check = #{lastCheck,jdbcType=VARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

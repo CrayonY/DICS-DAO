@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ucd.server.mapper.tdhservicesmapper.TdhServicesMapper" >
+  <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhservicemodel.TdhServices" >
+    <id column="services_id" property="servicesId" jdbcType="VARCHAR" />
+    <result column="enable_kerberos" property="enableKerberos" jdbcType="VARCHAR" />
+    <result column="health" property="health" jdbcType="VARCHAR" />
+    <result column="monitored" property="monitored" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pages" property="pages" jdbcType="VARCHAR" />
+    <result column="health_checks_id" property="healthChecksId" jdbcType="VARCHAR" />
+    <result column="cluster_id" property="clusterId" jdbcType="INTEGER" />
+    <result column="upgrade_status" property="upgradeStatus" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="metrics" property="metrics" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="busy" property="busy" jdbcType="VARCHAR" />
+    <result column="cluster_name" property="clusterName" jdbcType="VARCHAR" />
+    <result column="installed" property="installed" jdbcType="VARCHAR" />
+    <result column="dependencies" property="dependencies" jdbcType="VARCHAR" />
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    services_id, enable_kerberos, health, monitored, release_date, name, pages, health_checks_id, 
+    cluster_id, upgrade_status, version, id, metrics, type, busy, cluster_name, installed, 
+    dependencies, sid, product, creattime
+  </sql>
+  <select id="selectCountTdhServices" resultType="java.lang.Long" >
+    select
+    count(*)
+    from tdh_services
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tdh_services
+    where services_id = #{servicesId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectTdhServicesInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tdh_services
+  </select>
+  <!--<select id="selectTdhServicesByParame" resultMap="java.util.HashMap" parameterType="java.lang.String" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from tdh_services-->
+  <!--</select>-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tdh_services
+    where services_id = #{servicesId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ucd.server.model.tdhservicemodel.TdhServices" >
+    insert into tdh_services (services_id, enable_kerberos, health, 
+      monitored, release_date, name, 
+      pages, health_checks_id, cluster_id, 
+      upgrade_status, version, id, 
+      metrics, type, busy, 
+      cluster_name, installed, dependencies, 
+      sid, product, creattime
+      )
+    values (#{servicesId,jdbcType=VARCHAR}, #{enableKerberos,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR}, 
+      #{monitored,jdbcType=VARCHAR}, #{releaseDate,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{pages,jdbcType=VARCHAR}, #{healthChecksId,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER}, 
+      #{upgradeStatus,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, 
+      #{metrics,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{busy,jdbcType=VARCHAR}, 
+      #{clusterName,jdbcType=VARCHAR}, #{installed,jdbcType=VARCHAR}, #{dependencies,jdbcType=VARCHAR}, 
+      #{sid,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServices" >
+    insert into tdh_services
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servicesId != null" >
+        services_id,
+      </if>
+      <if test="enableKerberos != null" >
+        enable_kerberos,
+      </if>
+      <if test="health != null" >
+        health,
+      </if>
+      <if test="monitored != null" >
+        monitored,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="pages != null" >
+        pages,
+      </if>
+      <if test="healthChecksId != null" >
+        health_checks_id,
+      </if>
+      <if test="clusterId != null" >
+        cluster_id,
+      </if>
+      <if test="upgradeStatus != null" >
+        upgrade_status,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="metrics != null" >
+        metrics,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="busy != null" >
+        busy,
+      </if>
+      <if test="clusterName != null" >
+        cluster_name,
+      </if>
+      <if test="installed != null" >
+        installed,
+      </if>
+      <if test="dependencies != null" >
+        dependencies,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="creattime != null" >
+        creattime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servicesId != null" >
+        #{servicesId,jdbcType=VARCHAR},
+      </if>
+      <if test="enableKerberos != null" >
+        #{enableKerberos,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null" >
+        #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="monitored != null" >
+        #{monitored,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pages != null" >
+        #{pages,jdbcType=VARCHAR},
+      </if>
+      <if test="healthChecksId != null" >
+        #{healthChecksId,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterId != null" >
+        #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="upgradeStatus != null" >
+        #{upgradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="metrics != null" >
+        #{metrics,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="busy != null" >
+        #{busy,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterName != null" >
+        #{clusterName,jdbcType=VARCHAR},
+      </if>
+      <if test="installed != null" >
+        #{installed,jdbcType=VARCHAR},
+      </if>
+      <if test="dependencies != null" >
+        #{dependencies,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServices" >
+    update tdh_services
+    <set >
+      <if test="enableKerberos != null" >
+        enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null" >
+        health = #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="monitored != null" >
+        monitored = #{monitored,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pages != null" >
+        pages = #{pages,jdbcType=VARCHAR},
+      </if>
+      <if test="healthChecksId != null" >
+        health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterId != null" >
+        cluster_id = #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="upgradeStatus != null" >
+        upgrade_status = #{upgradeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="metrics != null" >
+        metrics = #{metrics,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="busy != null" >
+        busy = #{busy,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterName != null" >
+        cluster_name = #{clusterName,jdbcType=VARCHAR},
+      </if>
+      <if test="installed != null" >
+        installed = #{installed,jdbcType=VARCHAR},
+      </if>
+      <if test="dependencies != null" >
+        dependencies = #{dependencies,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where services_id = #{servicesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicemodel.TdhServices" >
+    update tdh_services
+    set enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
+      health = #{health,jdbcType=VARCHAR},
+      monitored = #{monitored,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pages = #{pages,jdbcType=VARCHAR},
+      health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+      cluster_id = #{clusterId,jdbcType=INTEGER},
+      upgrade_status = #{upgradeStatus,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      id = #{id,jdbcType=INTEGER},
+      metrics = #{metrics,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      busy = #{busy,jdbcType=VARCHAR},
+      cluster_name = #{clusterName,jdbcType=VARCHAR},
+      installed = #{installed,jdbcType=VARCHAR},
+      dependencies = #{dependencies,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP}
+    where services_id = #{servicesId,jdbcType=VARCHAR}
+  </update>
+</mapper>

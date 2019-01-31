@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ucd.server.mapper.usermapper.UserExtendsMapper" >
+  <select id="getUserByName"  resultMap="com.ucd.server.mapper.usermapper.UserMapper.BaseResultMap"  parameterType="map">
+    select
+    *
+    from user
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="username != null and username != ''">
+        user.username = #{username}
+      </if>
+    </trim>
+  </select>
+
+</mapper>

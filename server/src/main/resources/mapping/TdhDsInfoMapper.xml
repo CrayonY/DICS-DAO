@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ucd.server.mapper.tdhdsinfomapper.TdhDsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="table_name" property="tableName" jdbcType="VARCHAR" />
+      <result column="state" property="state" jdbcType="INTEGER" />
+      <result column="startdown_time" property="startdownTime" jdbcType="TIMESTAMP" />
+      <result column="startup_time" property="startupTime" jdbcType="TIMESTAMP" />
+      <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+      <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+      <result column="audit_notes" property="auditNotes" jdbcType="VARCHAR" />
+      <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
+      <result column="type" property="type" jdbcType="INTEGER" />
+      <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+      <result column="sync_time" property="syncTime" jdbcType="TIMESTAMP" />
+      <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+    id, table_name, state, startdown_time, startup_time, creattime, audit_status, audit_notes,
+    last_check, type, audit_time, sync_time, user_code
+  </sql>
+
+    <select id="countByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" resultType="java.lang.Integer" >
+        select count(*) from ${centreTableName}
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <delete id="deleteByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" >
+        delete from ${centreTableName}
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from ${centreTableName}
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update ${centreTableName}
+        <set >
+            <if test="tableName != null" >
+                table_name = #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="startdownTime != null" >
+                startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startupTime != null" >
+                startup_time = #{startupTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creattime != null" >
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auditStatus != null" >
+                audit_status = #{record.auditStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditNotes != null" >
+                audit_notes = #{record.auditNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastCheck != null" >
+                last_check = #{record.lastCheck,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncTime != null" >
+                sync_time = #{syncTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.userCode != null" >
+                user_code = #{record.userCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update ${centreTableName}
+        set table_name = #{tableName,jdbcType=VARCHAR},
+        state = #{record.state,jdbcType=INTEGER},
+        startdown_time = #{record.startdownTime,jdbcType=TIMESTAMP},
+        startup_time = #{record.startupTime,jdbcType=TIMESTAMP},
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+        audit_status = #{record.auditStatus,jdbcType=INTEGER},
+        audit_notes = #{record.auditNotes,jdbcType=VARCHAR},
+        last_check = #{record.lastCheck,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=INTEGER},
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+        sync_time = #{syncTime,jdbcType=TIMESTAMP},
+        user_code = #{record.userCode,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from ${centreTableName}
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectTdhDsInfo" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    select
+    <include refid="Base_Column_List" />
+    from ${centreTableName}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    delete from ${centreTableName}
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    insert into ${centreTableName} (id, table_name, state,
+      startdown_time, startup_time, creattime, type, audit_time, sync_time, user_code)
+    values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{startdownTime,jdbcType=TIMESTAMP}, #{startupTime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER},#{auditTime,jdbcType=TIMESTAMP},#{syncTime,jdbcType=TIMESTAMP},#{record.userCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    insert into ${centreTableName}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="startdownTime != null" >
+        startdown_time,
+      </if>
+      <if test="startupTime != null" >
+        startup_time,
+      </if>
+      <if test="creattime != null" >
+        creattime,
+      </if>
+        <if test="auditStatus != null" >
+            audit_status,
+        </if>
+        <if test="auditNotes != null" >
+            audit_notes,
+        </if>
+        <if test="lastCheck != null" >
+            last_check,
+        </if>
+      <if test="type != null" >
+        type,
+      </if>
+        <if test="auditTime != null" >
+            audit_time,
+        </if>
+        <if test="syncTime != null" >
+            sync_time,
+        </if>
+        <if test="record.userCode != null" >
+            user_code,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="startdownTime != null" >
+        #{startdownTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startupTime != null" >
+        #{startupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="auditStatus != null" >
+            #{auditStatus,jdbcType=INTEGER},
+        </if>
+        <if test="auditNotes != null" >
+            #{auditNotes,jdbcType=VARCHAR},
+        </if>
+        <if test="lastCheck != null" >
+            #{lastCheck,jdbcType=VARCHAR},
+        </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+        <if test="auditTime != null" >
+            #{auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="syncTime != null" >
+            #{syncTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.userCode != null" >
+            #{record.userCode,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    update ${centreTableName}
+    <set >
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="startdownTime != null" >
+        startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startupTime != null" >
+        startup_time = #{startupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="auditStatus != null" >
+            audit_status = #{auditStatus,jdbcType=INTEGER},
+        </if>
+        <if test="auditNotes != null" >
+            audit_notes = #{auditNotes,jdbcType=VARCHAR},
+        </if>
+        <if test="lastCheck != null" >
+            last_check = #{lastCheck,jdbcType=VARCHAR},
+        </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+        <if test="auditTime != null" >
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="syncTime != null" >
+            sync_time = #{syncTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="userCode != null" >
+            user_code = #{userCode,jdbcType=VARCHAR},
+        </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    update ${centreTableName}
+    set table_name = #{tableName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
+      startup_time = #{startupTime,jdbcType=TIMESTAMP},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      audit_notes = #{auditNotes,jdbcType=VARCHAR},
+      last_check = #{lastCheck,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      sync_time = #{syncTime,jdbcType=TIMESTAMP},
+      user_code = #{record.userCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectTdhServicesDsInfoByDTO" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    select
+    <include refid="Base_Column_List" />
+    from ${centreTableName}
+    where 1=1
+    <if test="id != null and id != ''">
+      and id = #{id,jdbcType=VARCHAR}
+    </if>
+    <if test="tableName != null and tableName != ''">
+      and table_name = #{tableName,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null ">
+      and state = #{state,jdbcType=INTEGER}
+    </if>
+    <if test="type != null and type != ''">
+      and type = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="creattime != null and creattime != ''">
+      and creattime = #{creattime,jdbcType=TIMESTAMP}
+    </if>
+      <if test="auditStatus != null" >
+        and audit_status = #{auditStatus,jdbcType=INTEGER}
+      </if>
+      <if test="auditNotes != null" >
+        and audit_notes = #{auditNotes,jdbcType=VARCHAR}
+      </if>
+      <if test="lastCheck != null" >
+        and last_check = #{lastCheck,jdbcType=VARCHAR}
+      </if>
+    <if test="startdownTimems != null and startdownTimems != ''">
+      and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
+    </if>
+    <if test="startupTimems != null and startupTimems != ''">
+      and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
+    </if>
+      <if test="auditTime != null" >
+        and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="syncTime != null" >
+         and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="userCode != null userCode != ''" >
+         and user_code = #{userCode,jdbcType=VARCHAR}
+      </if>
+  </select>
+  <select id="selectCountTdhServicesDs" resultType="java.lang.Long" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    select
+    count(*)
+    from ${centreTableName}
+    where 1=1
+    <if test="id != null and id != ''">
+      and id = #{id,jdbcType=VARCHAR}
+    </if>
+    <if test="tableName != null and tableName != ''">
+      and table_name = #{tableName,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null and state != ''">
+      and state = #{state,jdbcType=INTEGER}
+    </if>
+    <if test="type != null and type != ''">
+      and type = #{type,jdbcType=INTEGER}
+    </if>
+    <if test="creattime != null and creattime != ''">
+      and creattime = #{creattime,jdbcType=TIMESTAMP}
+    </if>
+      <if test="auditStatus != null" >
+          and audit_status = #{auditStatus,jdbcType=INTEGER}
+      </if>
+      <if test="auditNotes != null" >
+          and audit_notes = #{auditNotes,jdbcType=VARCHAR}
+      </if>
+      <if test="lastCheck != null" >
+          and last_check = #{lastCheck,jdbcType=VARCHAR}
+      </if>
+    <if test="startdownTimems != null and startdownTimems != ''">
+      and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
+    </if>
+    <if test="startupTimems != null and startupTimems != ''">
+      and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
+    </if>
+      <if test="auditTime != null" >
+          and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="syncTime != null" >
+          and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="userCode != null and userCode != ''" >
+          and user_code = #{userCode,jdbcType=VARCHAR}
+      </if>
+  </select>
+
+  <update id="emptyThdDsData" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+    truncate table ${centreTableName}
+</update>
+
+    <select id="selectTdhDsInfoByTdhDsMonthsDTO" resultMap="BaseResultMap" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
+        select * from (SELECT table_name,state,audit_status,audit_notes,audit_time,sync_time,user_code
+        FROM ${centreTableName}
+        WHERE 1=1
+        <if test="tableName != null and tableName != ''">
+            and table_name LIKE concat('%',#{tableName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="state != null ">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="auditStatus != null">
+            and audit_status = #{auditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="auditNotes != null">
+            and audit_notes LIKE concat('%',#{auditNotes,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startdownTime != null and startdownTime != ''">
+            AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}
+        </if>
+        <if test="auditTime != null" >
+            and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncTime != null" >
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="userCode != null and userCode != ''" >
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        ) a GROUP by a.table_name
+    </select>
+
+    <select id="countByTdhDsMonthsDTO" resultType="java.lang.Long" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
+        select count(*) from (select * from (SELECT table_name,state,audit_status,audit_notes,audit_time,sync_time,user_code
+        FROM ${centreTableName}
+        WHERE 1=1
+        <if test="tableName != null and tableName != ''">
+            and table_name LIKE concat('%',#{tableName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="state != null ">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="auditStatus != null">
+            and audit_status = #{auditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="auditNotes != null">
+            and audit_notes LIKE concat('%',#{auditNotes,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startdownTime != null and startdownTime != ''">
+            AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}
+        </if>
+        <if test="auditTime != null" >
+            and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncTime != null" >
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="userCode != null and userCode != ''" >
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        ) a GROUP by a.table_name) b
+    </select>
+
+
+    <update id="updateTdhDsMonthsInfo" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
+        update ${centreTableName}
+        <set >
+            <if test="state != null" >
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="auditStatus != null" >
+                audit_status = #{auditStatus,jdbcType=INTEGER},
+            </if>
+            <if test="auditNotes != null" >
+                audit_notes = #{auditNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncTime != null" >
+                sync_time = #{syncTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCode != null and userCode != ''" >
+                user_code = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="operCode != null" >
+                user_code = concat_ws(',',user_code,#{operCode,jdbcType=VARCHAR}),
+            </if>
+        </set>
+        WHERE 1=1
+        <if test="tableName != null and tableName != ''">
+            and table_name LIKE concat('%',#{tableName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startdownTime != null and startdownTime != ''">
+            AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}
+        </if>
+    </update>
+
+    <select id="countTdhDsDataByAuditStatusAndState" resultType="java.lang.Integer" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO" >
+        select
+        count(*)
+        from ${centreTableName}
+        where 1=1
+        <if test="state != null">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="auditStatus != null" >
+            and audit_status = #{auditStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+
+</mapper>
