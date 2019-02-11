@@ -275,13 +275,17 @@ public class ThdDsServiceImpl implements TdhDsService {
                 tdhDsMonthsDTO.setOperCode(String.valueOf(models.get("operCode")));
                 tdhDsMonthsDTO.setUserCode(null);
             }
-            tdhDsMonthsDTO.setAuditStatus(auditStatus);
-            if (auditStatus == 3 || auditStatus == 4) {
-                tdhDsMonthsDTO.setAuditTime(new Date());
+            if (models.get("auditStatus") != null ) {
+                tdhDsMonthsDTO.setAuditStatus(auditStatus);
+                if (auditStatus == 3 || auditStatus == 4) {
+                    tdhDsMonthsDTO.setAuditTime(new Date());
+                }
             }
-            tdhDsMonthsDTO.setState(state);
-            if (state == 2 || state == 3) {
-                tdhDsMonthsDTO.setSyncTime(new Date());
+            if (models.get("syncState") != null ) {
+                tdhDsMonthsDTO.setState(state);
+                if (state == 2 || state == 3) {
+                    tdhDsMonthsDTO.setSyncTime(new Date());
+                }
             }
             System.out.println("222222222222222222222"+tdhDsMonthsDTO);
            int count = tdhDsInfoMapper.updateTdhDsMonthsInfo(tdhDsMonthsDTO);
