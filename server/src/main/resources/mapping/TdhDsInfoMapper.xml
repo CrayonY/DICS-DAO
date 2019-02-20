@@ -193,7 +193,7 @@
     insert into ${centreTableName} (id, table_name, state,
       startdown_time, startup_time, creattime, type, audit_time, sync_time, user_code)
     values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{startdownTime,jdbcType=TIMESTAMP}, #{startupTime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER},#{auditTime,jdbcType=TIMESTAMP},#{syncTime,jdbcType=TIMESTAMP},#{record.userCode,jdbcType=VARCHAR})
+      #{startdownTime,jdbcType=TIMESTAMP}, #{startupTime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER},#{auditTime,jdbcType=TIMESTAMP},#{syncTime,jdbcType=TIMESTAMP},#{userCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
     insert into ${centreTableName}
@@ -234,7 +234,7 @@
         <if test="syncTime != null" >
             sync_time,
         </if>
-        <if test="record.userCode != null" >
+        <if test="userCode != null" >
             user_code,
         </if>
     </trim>
@@ -275,8 +275,8 @@
         <if test="syncTime != null" >
             #{syncTime,jdbcType=TIMESTAMP},
         </if>
-        <if test="record.userCode != null" >
-            #{record.userCode,jdbcType=VARCHAR},
+        <if test="userCode != null" >
+            #{userCode,jdbcType=VARCHAR},
         </if>
     </trim>
   </insert>
@@ -335,7 +335,7 @@
       type = #{type,jdbcType=INTEGER},
       audit_time = #{auditTime,jdbcType=TIMESTAMP},
       sync_time = #{syncTime,jdbcType=TIMESTAMP},
-      user_code = #{record.userCode,jdbcType=VARCHAR}
+      user_code = #{userCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectTdhServicesDsInfoByDTO" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >

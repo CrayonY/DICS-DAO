@@ -19,6 +19,8 @@ public class TdhDsInfo {
 
     private String centreTableName;
 
+    private String lastCheck;
+
     private Integer type;
 
     private String startdownTimems;

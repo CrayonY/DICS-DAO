@@ -3,6 +3,7 @@ package com.ucd.client;
 //import com.netflix.hystrix.util.Exceptions;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareDTO;
+import com.ucd.daocommon.DTO.operationLogInfoDTO.OperationLogInfoDTO;
 import com.ucd.daocommon.DTO.tdhDsauditDTO.TdhDsauditDTO;
 import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesInfoDTO;
 import com.ucd.common.VO.ResultVO;
@@ -114,6 +115,12 @@ public interface DaoClient {
     @RequestMapping(value="/User/validateUser",method= RequestMethod.POST)
     public ResultVO userValidate(@RequestParam(value = "username",required = true) String username,
                                  @RequestParam(value = "password",required = true)String password);
+
+    @PostMapping(value = "/operationDao/saveOperationLogInfo")
+    public ResultVO saveOperationLogInfo(@RequestBody OperationLogInfoDTO operationLogInfoDTO);
+
+    @PostMapping(value = "/operationDao/getOperationLogInfo")
+    public ResultVO getOperationLogInfo(@RequestBody Map<String, Object> models);
 
 
     @Component
@@ -262,6 +269,16 @@ public interface DaoClient {
 
         @Override
         public ResultVO userValidate(String username, String password) {
+            return null;
+        }
+
+        @Override
+        public ResultVO saveOperationLogInfo(OperationLogInfoDTO operationLogInfoDTO) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getOperationLogInfo(Map<String, Object> models) {
             return null;
         }
 
