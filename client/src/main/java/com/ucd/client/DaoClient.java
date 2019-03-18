@@ -12,6 +12,7 @@ import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesListDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDssyncDTO;
+import com.ucd.daocommon.DTO.userDTO.UserDTO;
 import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -25,101 +26,110 @@ public interface DaoClient {
 
 
 
-    @PostMapping(value = "/TdhServicesDao/saveThdServicesData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/saveThdServicesData")
     public ResultVO saveThdServicesData(@RequestBody TdhServicesInfoDTO tdhServicesInfoDTO);
 
-    @PostMapping(value = "/TdhServicesDao/saveThdServicesListData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/saveThdServicesListData")
     public ResultVO saveThdServicesListData(@RequestBody TdhServicesListDTO tdhServicesListDTO);
 
-    @PostMapping(value = "/TdhServicesDao/getThdServicesInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getThdServicesInfo")
     public ResultVO getThdServicesInfo(@RequestBody Map<String, Object> models);
 
-    @PostMapping(value = "/TdhServicesjobDao/saveThdServicesjobListData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/saveThdServicesjobListData")
     public  ResultVO saveThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
-    @PostMapping(value = "/TdhServicesjobDao/getThdServicesjobData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/getThdServicesjobData")
     public ResultVO getThdServicesjobData(@RequestBody Map<String, Object> models);
 
-    @PostMapping(value = "/TdhServicesjobDao/getThdServicesjobListData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/getThdServicesjobListData")
     public  ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO);
 
-    @PostMapping(value = "/TdhServicesjobDao/updateThdServicesjobListData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/updateThdServicesjobListData")
     public  ResultVO updateThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
-    @PostMapping(value = "/TdhServicesjobDao/emptyThdServicesjobListData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/emptyThdServicesjobListData")
     public  ResultVO emptyThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
-    @PostMapping(value = "/TdhServicesjobDao/getThdServicesjobListDataS")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/getThdServicesjobListDataS")
     public  ResultVO getThdServicesjobListDataS(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
-    @PostMapping(value = "/TdhDSDao/saveTdhDsData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/saveTdhDsData")
     public  ResultVO saveTdhDsData(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
-    @PostMapping(value = "/TdhDSDao/getTdhDsInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsInfo")
     public ResultVO getTdhDsInfo(@RequestBody Map<String, Object> models);
 
-    @PostMapping(value = "/TdhDSDao/emptyThdDsListData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/emptyThdDsListData")
     public  ResultVO emptyThdDsListData(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
-    @PostMapping(value = "/TdhDSDao/getThdDsListDataS")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getThdDsListDataS")
     public  ResultVO getThdDsListDataS(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
-    @PostMapping(value = "/TdhDSDao/getTdhDsMonthsInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsMonthsInfo")
     public ResultVO getTdhDsMonthsInfo(@RequestBody Map<String, Object> models);
 
-    @PostMapping(value = "/TdhDSDao/getTdhDsMonthsInfoS")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsMonthsInfoS")
     public  ResultVO getTdhDsMonthsInfoS(@RequestBody List<TdhDsMonthsDTO> tdhDsMonthsDTOS);
 
-    @PostMapping(value = "/TdhDSDao/updateTdhDsMonthsInfoS")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/updateTdhDsMonthsInfoS")
     public  ResultVO updateTdhDsMonthsInfoS(@RequestBody Map<String, Object> models);
 
-    @PostMapping(value = "/TdhDSDao/countTdhDsauditDataoByAuditStatus")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/countTdhDsauditDataoByAuditStatus")
     public  ResultVO countTdhDsDataByAuditStatusAndState(@RequestBody TdhDsDTO tdhDsDTO);
 
-    @PostMapping(value = "/TdhDSauditDao/saveTdhDsauditInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/saveTdhDsauditInfo")
     public  ResultVO saveTdhDsauditInfo(@RequestBody TdhDsauditDTO tdhDsauditDTO);
 
-    @PostMapping(value = "/TdhDSauditDao/saveTdhDsauditData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/saveTdhDsauditData")
     public  ResultVO saveTdhDsauditData(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
 
-    @PostMapping(value = "/TdhDSauditDao/getTdhDsauditInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/getTdhDsauditInfo")
     public ResultVO getTdhDsauditInfo(@RequestBody Map<String, Object> models);
 
-    @PostMapping(value = "/TdhDSauditDao/getTdhDsauditListDataS")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/getTdhDsauditListDataS")
     public  ResultVO getTdhDsauditListDataS(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
 
-    @PostMapping(value = "/TdhDSauditDao/updateTdhDsauditDataS")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/updateTdhDsauditDataS")
     public  ResultVO updateTdhDsauditDataS(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
 
-    @PostMapping(value = "/TdhDSauditDao/countTdhDsauditDataoByAuditStatus")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/countTdhDsauditDataoByAuditStatus")
     public  ResultVO countTdhDsauditDataoByAuditStatus(@RequestParam(value = "auditStatus",required = true) Integer auditStatus);
 
-    @PostMapping(value = "/TdhDSsyncDao/saveTdhDssyncData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/saveTdhDssyncData")
     public  ResultVO saveTdhDssyncData(@RequestBody List<TdhDssyncDTO> tdhDssyncDTOList);
 
-    @PostMapping(value = "/TdhDSsyncDao/updateTdhDssyncData")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/updateTdhDssyncData")
     public  ResultVO updateTdhDssyncData(@RequestBody TdhDssyncDTO tdhDssyncDTO);
 
-    @PostMapping(value = "/TdhDSsyncDao/getTdhDssyncInfoById")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/getTdhDssyncInfoById")
     public  ResultVO getTdhDssyncInfoById(@RequestBody TdhDssyncDTO tdhDssyncDTO);
 
-    @PostMapping(value = "/TdhDSsyncDao/getTdhDssyncInfoByState")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/getTdhDssyncInfoByState")
     public  ResultVO getTdhDssyncInfoByState(@RequestParam(value = "state",required = true) Integer state);
 
-    @PostMapping(value = "/hardDao/saveHardWareInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/saveHardWareInfo")
     public ResultVO saveHardWareInfo(@RequestBody HardwareDTO hardwareDTO );
 
-    @PostMapping(value = "/hardDao/getHardWareInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfo")
     public ResultVO getHardWareInfo(@RequestBody Map<String, Object> models);
 
-    @RequestMapping(value="/User/validateUser",method= RequestMethod.POST)
+    @RequestMapping(value="/server-0.0.1-SNAPSHOT/User/validateUser",method= RequestMethod.POST)
     public ResultVO userValidate(@RequestParam(value = "username",required = true) String username,
                                  @RequestParam(value = "password",required = true)String password);
 
-    @PostMapping(value = "/operationDao/saveOperationLogInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/User/saveUserInfo")
+    public ResultVO saveUserInfo(@RequestBody List<UserDTO> userDTOList );
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/User/getUserListData")
+    public  ResultVO getUserListData(@RequestBody UserDTO userDTO);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/User/getUser")
+    public ResultVO getUser(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/operationDao/saveOperationLogInfo")
     public ResultVO saveOperationLogInfo(@RequestBody OperationLogInfoDTO operationLogInfoDTO);
 
-    @PostMapping(value = "/operationDao/getOperationLogInfo")
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/operationDao/getOperationLogInfo")
     public ResultVO getOperationLogInfo(@RequestBody Map<String, Object> models);
 
 
@@ -269,6 +279,21 @@ public interface DaoClient {
 
         @Override
         public ResultVO userValidate(String username, String password) {
+            return null;
+        }
+
+        @Override
+        public ResultVO saveUserInfo(List<UserDTO> userDTOList) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getUserListData(UserDTO userDTO) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getUser(Map<String, Object> models) {
             return null;
         }
 
