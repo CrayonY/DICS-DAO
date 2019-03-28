@@ -3,18 +3,25 @@ package com.ucd.server.service.impl.hardwareserviceimpl;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ucd.common.VO.ResultVO;
 import com.ucd.common.enums.ResultExceptEnum;
 import com.ucd.common.utils.KeyUtil;
 import com.ucd.common.utils.UUIDUtils;
 import com.ucd.common.utils.pager.PageView;
-import com.ucd.daocommon.DTO.hardwareDTO.HardwareDTO;
+import com.ucd.daocommon.DTO.hardwareDTO.*;
 import com.ucd.daocommon.VO.hardwareVO.HardwareVO;
-import com.ucd.server.enums.TdhServiceDaoEnum;
 import com.ucd.server.exception.DaoException;
 import com.ucd.server.mapper.hardwareinfomapper.HardWareInfoMapper;
+import com.ucd.server.mapper.hardwareinfomapper.hardWareCpumapper.HardWareCpuMapper;
+import com.ucd.server.mapper.hardwareinfomapper.hardWareDiskmapper.HardWareDiskMapper;
+import com.ucd.server.mapper.hardwareinfomapper.hardWareInfoNowmapper.HardWareInfoNowMapper;
+import com.ucd.server.mapper.hardwareinfomapper.hardWareMemmapper.HardWareMemMapper;
+import com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper.HardWareNicMapper;
+import com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper.HardWareThreadMapper;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfo;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfoExample;
+import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
+import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
+import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread;
 import com.ucd.server.service.hardwareservice.HardWareService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +32,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 public class HardWareServiceimpl implements HardWareService {
     @Autowired
     public HardWareInfoMapper hardWareInfoMapper;
+    @Autowired
+    public HardWareCpuMapper CpuMapper;
+    @Autowired
+    public HardWareDiskMapper DiskMapper;
+    @Autowired
+    public HardWareInfoNowMapper InfoNowMapper;
+    @Autowired
+    public HardWareMemMapper MemMapper;
+    @Autowired
+    public HardWareNicMapper NicMapper;
+    @Autowired
+    public HardWareThreadMapper ThreadMapper;
     private final static Logger logger = LoggerFactory.getLogger(HardWareService.class);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -125,6 +145,183 @@ public class HardWareServiceimpl implements HardWareService {
         }
         pageView.setRecords(hardwareVOList);
         return pageView;
+    }
+
+    @Override
+    @Transactional
+    public String saveHardWareInfo(HardwareInfoDTO hardwareInfoDTO) throws Exception {
+        HardwareNowDTO hardwareNowDTO = new HardwareNowDTO();
+        hardwareNowDTO.setHost(hardwareInfoDTO.getHost());
+        List<HardWareInfoNow> InfoNowList = InfoNowMapper.selectByDTO(hardwareNowDTO);
+        List<HardWareNic> NicList = NicMapper.selectByHost(hardwareInfoDTO.getHost());
+        List<HardWareThread> ThreadList = ThreadMapper.selectByHost(hardwareInfoDTO.getHost());
+            //update
+            HardWareInfoNow hardWareInfoNow = InfoNowList.get(0);
+            hardWareInfoNow.setIntime(hardwareInfoDTO.getIntime());
+            hardWareInfoNow.setStarttime(hardwareInfoDTO.getStartTimems());
+            Date now = new Date();
+            String ID = KeyUtil.genUniqueKey()+ UUIDUtils.getUUID();
+            String numID = ID+100;
+            if (hardwareInfoDTO.getCpu() != null){
+                hardWareInfoNow.setCpucount(hardwareInfoDTO.getCpu().getCpucount());
+                hardWareInfoNow.setCpustatus(hardwareInfoDTO.getCpu().getCpustatus());
+                hardWareInfoNow.setCpuusedper(hardwareInfoDTO.getCpu().getCpuusedper());
+                if (!("healthy".equals(hardwareInfoDTO.getCpu().getCpustatus()))){
+                    HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
+                    hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareCpuDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareCpuDTO.setCreattime(now);
+                    hardwareCpuDTO.setId(ID);
+                    CpuMapper.insertByDTO(hardwareCpuDTO);
+                }
+                if (hardWareInfoNow.getNum() == 180){
+                    HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
+                    hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareCpuDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareCpuDTO.setCreattime(now);
+                    hardwareCpuDTO.setId(numID);
+                    CpuMapper.insertByDTO(hardwareCpuDTO);
+                }
+            }
+            if (hardwareInfoDTO.getMem() != null){
+                hardWareInfoNow.setMemcount(hardwareInfoDTO.getMem().getMemcount());
+                hardWareInfoNow.setMemstatus(hardwareInfoDTO.getMem().getMemstatus());
+                hardWareInfoNow.setMemusedper(hardwareInfoDTO.getMem().getMemusedper());
+                if (!("healthy".equals(hardwareInfoDTO.getMem().getMemstatus()))){
+                    HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
+                    hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareMemDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareMemDTO.setCreattime(now);
+                    hardwareMemDTO.setId(ID);
+                    MemMapper.insertByDTO(hardwareMemDTO);
+                }
+                if (hardWareInfoNow.getNum() == 180){
+                    HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
+                    hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareMemDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareMemDTO.setCreattime(now);
+                    hardwareMemDTO.setId(numID);
+                    MemMapper.insertByDTO(hardwareMemDTO);
+                }
+            }
+            if (hardwareInfoDTO.getDisk() != null){
+                hardWareInfoNow.setDiskcount(hardwareInfoDTO.getDisk().getDiskcount());
+                hardWareInfoNow.setDiskstatus(hardwareInfoDTO.getDisk().getDiskstatus());
+                hardWareInfoNow.setDiskusedper(hardwareInfoDTO.getDisk().getDiskusedper());
+                if (!("healthy".equals(hardwareInfoDTO.getDisk().getDiskstatus()))){
+                    HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
+                    hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareDiskDTO.setCreattime(now);
+                    hardwareDiskDTO.setId(ID);
+                    DiskMapper.insertByDTO(hardwareDiskDTO);
+                }
+                if (hardWareInfoNow.getNum() == 180){
+                    HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
+                    hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareDiskDTO.setCreattime(now);
+                    hardwareDiskDTO.setId(numID);
+                    DiskMapper.insertByDTO(hardwareDiskDTO);
+                }
+            }
+            if (hardwareInfoDTO.getNic() != null && hardwareInfoDTO.getNic().size() != 0){
+                for(HardWareNic hardWareNic : NicList) {
+                    hardWareNic.setStarttime(hardwareInfoDTO.getStarttime());
+                    for (HardwareNicDTO hardwareNicDTO : hardwareInfoDTO.getNic()) {
+                        hardWareNic.setChecktime(hardwareInfoDTO.getIntime());
+                         if (hardWareNic.getPrepare().equals(hardwareNicDTO.getPort()) && hardWareNic.getNip().equals(hardwareNicDTO.getNip())){
+                             hardWareNic.setNicinout(hardwareNicDTO.getNicinout());
+                             hardWareNic.setNicstatus("healthy");
+                             hardWareNic.setNip(hardwareNicDTO.getNip());
+                             hardWareNic.setTablename("hard_ware_nic_now");
+                             NicMapper.updateByPrimaryKey(hardWareNic);
+                             if (hardWareInfoNow.getNum() == 180){
+                                 hardWareNic.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
+                                 hardWareNic.setTablename("hard_ware_nic");
+                                 NicMapper.insert(hardWareNic);
+                             }
+                             hardWareNic.setNicids("1");
+                         }
+                    }
+                }
+                for(HardWareNic hardWareNic : NicList) {
+                    if (!("1".equals(hardWareNic.getNicids()))){
+                        hardWareNic.setNicstatus("down");
+                        hardWareNic.setNicinout(null);
+                        hardWareNic.setNicids("0");
+                        hardWareNic.setTablename("hard_ware_nic_now");
+                        NicMapper.updateByPrimaryKey(hardWareNic);
+                        hardWareNic.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
+                        hardWareNic.setTablename("hard_ware_nic");
+                        NicMapper.insert(hardWareNic);
+                    }
+                }
+            }else {
+                 //修改所有状态为down
+                for(HardWareNic hardWareNic : NicList) {
+                    hardWareNic.setStarttime(hardwareInfoDTO.getStarttime());
+                    hardWareNic.setNicstatus("down");
+                    hardWareNic.setNicinout(null);
+                    hardWareNic.setTablename("hard_ware_nic_now");
+                    NicMapper.updateByPrimaryKey(hardWareNic);
+                    hardWareNic.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
+                    hardWareNic.setTablename("hard_ware_nic");
+                    NicMapper.insert(hardWareNic);
+                }
+            }
+            if (hardwareInfoDTO.getPid() != null && hardwareInfoDTO.getPid().size() != 0){
+                for(HardWareThread hardWareThread : ThreadList) {
+                    for (HardwareThreadDTO hardwareThreadDTO : hardwareInfoDTO.getPid()) {
+                        hardWareThread.setChecktime(hardwareInfoDTO.getIntime());
+                        if (hardWareThread.getPidpwd().equals(hardwareThreadDTO.getPidpwd())){
+                            hardWareThread.setPidstatus(hardwareThreadDTO.getPidstatus());
+                            hardWareThread.setPidthread(hardwareThreadDTO.getPidthread());
+                            hardWareThread.setPidusememeper(hardwareThreadDTO.getPidusememeper());
+                            hardWareThread.setTablename("hard_ware_thread_now");
+                            ThreadMapper.updateByPrimaryKey(hardWareThread);
+                            if ((!("running".equals(hardwareThreadDTO.getPidstatus()))) || hardWareInfoNow.getNum() == 180){
+                                hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
+                                hardWareThread.setTablename("hard_ware_thread");
+                                ThreadMapper.insert(hardWareThread);
+                            }
+                            hardWareThread.setPids("1");
+                        }
+                    }
+                }
+                for(HardWareThread hardWareThread : ThreadList) {
+                    if (!("1".equals(hardWareThread.getPids()))){
+                        hardWareThread.setPidstatus("down");
+                        hardWareThread.setPidthread(null);
+                        hardWareThread.setPidusememeper(null);
+                        hardWareThread.setPids("0");
+                        hardWareThread.setTablename("hard_ware_thread_now");
+                        ThreadMapper.updateByPrimaryKey(hardWareThread);
+                        hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
+                        hardWareThread.setTablename("hard_ware_thread");
+                        ThreadMapper.insert(hardWareThread);
+                    }
+                }
+            }else{
+                for(HardWareThread hardWareThread : ThreadList) {
+                    hardWareThread.setPidstatus("down");
+                    hardWareThread.setPidthread(null);
+                    hardWareThread.setPidusememeper(null);
+                    hardWareThread.setTablename("hard_ware_thread_now");
+                    ThreadMapper.updateByPrimaryKey(hardWareThread);
+                    hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
+                    hardWareThread.setTablename("hard_ware_thread");
+                    ThreadMapper.insert(hardWareThread);
+                }
+            }
+            hardWareInfoNow.setCreattime(hardwareInfoDTO.getCreattime());
+            if (hardWareInfoNow.getNum() == 180){
+                hardWareInfoNow.setNum(0);
+            }else {
+                hardWareInfoNow.setNum(hardWareInfoNow.getNum() + 1);
+            }
+            InfoNowMapper.updateByPrimaryKeySelective(hardWareInfoNow);
+        return "OK";
     }
 
 }

@@ -3,6 +3,7 @@ package com.ucd.client;
 //import com.netflix.hystrix.util.Exceptions;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareDTO;
+import com.ucd.daocommon.DTO.hardwareDTO.HardwareInfoDTO;
 import com.ucd.daocommon.DTO.operationLogInfoDTO.OperationLogInfoDTO;
 import com.ucd.daocommon.DTO.tdhDsauditDTO.TdhDsauditDTO;
 import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesInfoDTO;
@@ -107,8 +108,11 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/getTdhDssyncInfoByState")
     public  ResultVO getTdhDssyncInfoByState(@RequestParam(value = "state",required = true) Integer state);
 
+//    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/saveHardWareInfo")
+//    public ResultVO saveHardWareInfo(@RequestBody HardwareDTO hardwareDTO );
+
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/saveHardWareInfo")
-    public ResultVO saveHardWareInfo(@RequestBody HardwareDTO hardwareDTO );
+    public ResultVO saveHardWareInfo(@RequestBody HardwareInfoDTO hardwareInfoDTO );
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfo")
     public ResultVO getHardWareInfo(@RequestBody Map<String, Object> models);
@@ -270,7 +274,12 @@ public interface DaoClient {
         }
 
         @Override
-        public ResultVO saveHardWareInfo(HardwareDTO hardwareDTO) { return null; }
+        public ResultVO saveHardWareInfo(HardwareInfoDTO hardwareInfoDTO) {
+            return null;
+        }
+
+//        @Override
+//        public ResultVO saveHardWareInfo(HardwareDTO hardwareDTO) { return null; }
 
         @Override
         public ResultVO getHardWareInfo(Map<String, Object> models) {

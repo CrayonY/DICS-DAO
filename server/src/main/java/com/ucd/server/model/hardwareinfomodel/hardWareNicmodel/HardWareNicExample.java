@@ -1,4 +1,4 @@
-package com.ucd.server.model.hardwareinfomodel;
+package com.ucd.server.model.hardwareinfomodel.hardWareNicmodel;
 
 import lombok.Data;
 
@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Data
-public class HardWareInfoExample {
+public class HardWareNicExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public HardWareInfoExample() {
+    public HardWareNicExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -247,373 +247,143 @@ public class HardWareInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCpuIsNull() {
-            addCriterion("cpu is null");
+        public Criteria andNicinoutIsNull() {
+            addCriterion("nicinout is null");
             return (Criteria) this;
         }
 
-        public Criteria andCpuIsNotNull() {
-            addCriterion("cpu is not null");
+        public Criteria andNicinoutIsNotNull() {
+            addCriterion("nicinout is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCpuEqualTo(Double value) {
-            addCriterion("cpu =", value, "cpu");
+        public Criteria andNicinoutEqualTo(String value) {
+            addCriterion("nicinout =", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuNotEqualTo(Double value) {
-            addCriterion("cpu <>", value, "cpu");
+        public Criteria andNicinoutNotEqualTo(String value) {
+            addCriterion("nicinout <>", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuGreaterThan(Double value) {
-            addCriterion("cpu >", value, "cpu");
+        public Criteria andNicinoutGreaterThan(String value) {
+            addCriterion("nicinout >", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuGreaterThanOrEqualTo(Double value) {
-            addCriterion("cpu >=", value, "cpu");
+        public Criteria andNicinoutGreaterThanOrEqualTo(String value) {
+            addCriterion("nicinout >=", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuLessThan(Double value) {
-            addCriterion("cpu <", value, "cpu");
+        public Criteria andNicinoutLessThan(String value) {
+            addCriterion("nicinout <", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuLessThanOrEqualTo(Double value) {
-            addCriterion("cpu <=", value, "cpu");
+        public Criteria andNicinoutLessThanOrEqualTo(String value) {
+            addCriterion("nicinout <=", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuIn(List<Double> values) {
-            addCriterion("cpu in", values, "cpu");
+        public Criteria andNicinoutLike(String value) {
+            addCriterion("nicinout like", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuNotIn(List<Double> values) {
-            addCriterion("cpu not in", values, "cpu");
+        public Criteria andNicinoutNotLike(String value) {
+            addCriterion("nicinout not like", value, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuBetween(Double value1, Double value2) {
-            addCriterion("cpu between", value1, value2, "cpu");
+        public Criteria andNicinoutIn(List<String> values) {
+            addCriterion("nicinout in", values, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andCpuNotBetween(Double value1, Double value2) {
-            addCriterion("cpu not between", value1, value2, "cpu");
+        public Criteria andNicinoutNotIn(List<String> values) {
+            addCriterion("nicinout not in", values, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuIsNull() {
-            addCriterion("vcpu is null");
+        public Criteria andNicinoutBetween(String value1, String value2) {
+            addCriterion("nicinout between", value1, value2, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuIsNotNull() {
-            addCriterion("vcpu is not null");
+        public Criteria andNicinoutNotBetween(String value1, String value2) {
+            addCriterion("nicinout not between", value1, value2, "nicinout");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuEqualTo(Double value) {
-            addCriterion("vcpu =", value, "vcpu");
+        public Criteria andNicstatusIsNull() {
+            addCriterion("nicstatus is null");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuNotEqualTo(Double value) {
-            addCriterion("vcpu <>", value, "vcpu");
+        public Criteria andNicstatusIsNotNull() {
+            addCriterion("nicstatus is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuGreaterThan(Double value) {
-            addCriterion("vcpu >", value, "vcpu");
+        public Criteria andNicstatusEqualTo(String value) {
+            addCriterion("nicstatus =", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuGreaterThanOrEqualTo(Double value) {
-            addCriterion("vcpu >=", value, "vcpu");
+        public Criteria andNicstatusNotEqualTo(String value) {
+            addCriterion("nicstatus <>", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuLessThan(Double value) {
-            addCriterion("vcpu <", value, "vcpu");
+        public Criteria andNicstatusGreaterThan(String value) {
+            addCriterion("nicstatus >", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuLessThanOrEqualTo(Double value) {
-            addCriterion("vcpu <=", value, "vcpu");
+        public Criteria andNicstatusGreaterThanOrEqualTo(String value) {
+            addCriterion("nicstatus >=", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuIn(List<Double> values) {
-            addCriterion("vcpu in", values, "vcpu");
+        public Criteria andNicstatusLessThan(String value) {
+            addCriterion("nicstatus <", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuNotIn(List<Double> values) {
-            addCriterion("vcpu not in", values, "vcpu");
+        public Criteria andNicstatusLessThanOrEqualTo(String value) {
+            addCriterion("nicstatus <=", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuBetween(Double value1, Double value2) {
-            addCriterion("vcpu between", value1, value2, "vcpu");
+        public Criteria andNicstatusLike(String value) {
+            addCriterion("nicstatus like", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andVcpuNotBetween(Double value1, Double value2) {
-            addCriterion("vcpu not between", value1, value2, "vcpu");
+        public Criteria andNicstatusNotLike(String value) {
+            addCriterion("nicstatus not like", value, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andMemusedIsNull() {
-            addCriterion("memused is null");
+        public Criteria andNicstatusIn(List<String> values) {
+            addCriterion("nicstatus in", values, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andMemusedIsNotNull() {
-            addCriterion("memused is not null");
+        public Criteria andNicstatusNotIn(List<String> values) {
+            addCriterion("nicstatus not in", values, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andMemusedEqualTo(Double value) {
-            addCriterion("memused =", value, "memused");
+        public Criteria andNicstatusBetween(String value1, String value2) {
+            addCriterion("nicstatus between", value1, value2, "nicstatus");
             return (Criteria) this;
         }
 
-        public Criteria andMemusedNotEqualTo(Double value) {
-            addCriterion("memused <>", value, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedGreaterThan(Double value) {
-            addCriterion("memused >", value, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedGreaterThanOrEqualTo(Double value) {
-            addCriterion("memused >=", value, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedLessThan(Double value) {
-            addCriterion("memused <", value, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedLessThanOrEqualTo(Double value) {
-            addCriterion("memused <=", value, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedIn(List<Double> values) {
-            addCriterion("memused in", values, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedNotIn(List<Double> values) {
-            addCriterion("memused not in", values, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedBetween(Double value1, Double value2) {
-            addCriterion("memused between", value1, value2, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedNotBetween(Double value1, Double value2) {
-            addCriterion("memused not between", value1, value2, "memused");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalIsNull() {
-            addCriterion("memtotal is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalIsNotNull() {
-            addCriterion("memtotal is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalEqualTo(Double value) {
-            addCriterion("memtotal =", value, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalNotEqualTo(Double value) {
-            addCriterion("memtotal <>", value, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalGreaterThan(Double value) {
-            addCriterion("memtotal >", value, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalGreaterThanOrEqualTo(Double value) {
-            addCriterion("memtotal >=", value, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalLessThan(Double value) {
-            addCriterion("memtotal <", value, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalLessThanOrEqualTo(Double value) {
-            addCriterion("memtotal <=", value, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalIn(List<Double> values) {
-            addCriterion("memtotal in", values, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalNotIn(List<Double> values) {
-            addCriterion("memtotal not in", values, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalBetween(Double value1, Double value2) {
-            addCriterion("memtotal between", value1, value2, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemtotalNotBetween(Double value1, Double value2) {
-            addCriterion("memtotal not between", value1, value2, "memtotal");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperIsNull() {
-            addCriterion("memusedper is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperIsNotNull() {
-            addCriterion("memusedper is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperEqualTo(Double value) {
-            addCriterion("memusedper =", value, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperNotEqualTo(Double value) {
-            addCriterion("memusedper <>", value, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperGreaterThan(Double value) {
-            addCriterion("memusedper >", value, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperGreaterThanOrEqualTo(Double value) {
-            addCriterion("memusedper >=", value, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperLessThan(Double value) {
-            addCriterion("memusedper <", value, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperLessThanOrEqualTo(Double value) {
-            addCriterion("memusedper <=", value, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperIn(List<Double> values) {
-            addCriterion("memusedper in", values, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperNotIn(List<Double> values) {
-            addCriterion("memusedper not in", values, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperBetween(Double value1, Double value2) {
-            addCriterion("memusedper between", value1, value2, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemusedperNotBetween(Double value1, Double value2) {
-            addCriterion("memusedper not between", value1, value2, "memusedper");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusIsNull() {
-            addCriterion("diskstatus is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusIsNotNull() {
-            addCriterion("diskstatus is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusEqualTo(String value) {
-            addCriterion("diskstatus =", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusNotEqualTo(String value) {
-            addCriterion("diskstatus <>", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusGreaterThan(String value) {
-            addCriterion("diskstatus >", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusGreaterThanOrEqualTo(String value) {
-            addCriterion("diskstatus >=", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusLessThan(String value) {
-            addCriterion("diskstatus <", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusLessThanOrEqualTo(String value) {
-            addCriterion("diskstatus <=", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusLike(String value) {
-            addCriterion("diskstatus like", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusNotLike(String value) {
-            addCriterion("diskstatus not like", value, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusIn(List<String> values) {
-            addCriterion("diskstatus in", values, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusNotIn(List<String> values) {
-            addCriterion("diskstatus not in", values, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusBetween(String value1, String value2) {
-            addCriterion("diskstatus between", value1, value2, "diskstatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDiskstatusNotBetween(String value1, String value2) {
-            addCriterion("diskstatus not between", value1, value2, "diskstatus");
+        public Criteria andNicstatusNotBetween(String value1, String value2) {
+            addCriterion("nicstatus not between", value1, value2, "nicstatus");
             return (Criteria) this;
         }
 
@@ -687,73 +457,73 @@ public class HardWareInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andIntimeIsNull() {
-            addCriterion("intime is null");
+        public Criteria andStarttimeIsNull() {
+            addCriterion("starttime is null");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeIsNotNull() {
-            addCriterion("intime is not null");
+        public Criteria andStarttimeIsNotNull() {
+            addCriterion("starttime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeEqualTo(String value) {
-            addCriterion("intime =", value, "intime");
+        public Criteria andStarttimeEqualTo(String value) {
+            addCriterion("starttime =", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeNotEqualTo(String value) {
-            addCriterion("intime <>", value, "intime");
+        public Criteria andStarttimeNotEqualTo(String value) {
+            addCriterion("starttime <>", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeGreaterThan(String value) {
-            addCriterion("intime >", value, "intime");
+        public Criteria andStarttimeGreaterThan(String value) {
+            addCriterion("starttime >", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeGreaterThanOrEqualTo(String value) {
-            addCriterion("intime >=", value, "intime");
+        public Criteria andStarttimeGreaterThanOrEqualTo(String value) {
+            addCriterion("starttime >=", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeLessThan(String value) {
-            addCriterion("intime <", value, "intime");
+        public Criteria andStarttimeLessThan(String value) {
+            addCriterion("starttime <", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeLessThanOrEqualTo(String value) {
-            addCriterion("intime <=", value, "intime");
+        public Criteria andStarttimeLessThanOrEqualTo(String value) {
+            addCriterion("starttime <=", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeLike(String value) {
-            addCriterion("intime like", value, "intime");
+        public Criteria andStarttimeLike(String value) {
+            addCriterion("starttime like", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeNotLike(String value) {
-            addCriterion("intime not like", value, "intime");
+        public Criteria andStarttimeNotLike(String value) {
+            addCriterion("starttime not like", value, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeIn(List<String> values) {
-            addCriterion("intime in", values, "intime");
+        public Criteria andStarttimeIn(List<String> values) {
+            addCriterion("starttime in", values, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeNotIn(List<String> values) {
-            addCriterion("intime not in", values, "intime");
+        public Criteria andStarttimeNotIn(List<String> values) {
+            addCriterion("starttime not in", values, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeBetween(String value1, String value2) {
-            addCriterion("intime between", value1, value2, "intime");
+        public Criteria andStarttimeBetween(String value1, String value2) {
+            addCriterion("starttime between", value1, value2, "starttime");
             return (Criteria) this;
         }
 
-        public Criteria andIntimeNotBetween(String value1, String value2) {
-            addCriterion("intime not between", value1, value2, "intime");
+        public Criteria andStarttimeNotBetween(String value1, String value2) {
+            addCriterion("starttime not between", value1, value2, "starttime");
             return (Criteria) this;
         }
 
@@ -814,6 +584,216 @@ public class HardWareInfoExample {
 
         public Criteria andCreattimeNotBetween(Date value1, Date value2) {
             addCriterion("creattime not between", value1, value2, "creattime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeIsNull() {
+            addCriterion("checktime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeIsNotNull() {
+            addCriterion("checktime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeEqualTo(String value) {
+            addCriterion("checktime =", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeNotEqualTo(String value) {
+            addCriterion("checktime <>", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeGreaterThan(String value) {
+            addCriterion("checktime >", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeGreaterThanOrEqualTo(String value) {
+            addCriterion("checktime >=", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeLessThan(String value) {
+            addCriterion("checktime <", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeLessThanOrEqualTo(String value) {
+            addCriterion("checktime <=", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeLike(String value) {
+            addCriterion("checktime like", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeNotLike(String value) {
+            addCriterion("checktime not like", value, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeIn(List<String> values) {
+            addCriterion("checktime in", values, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeNotIn(List<String> values) {
+            addCriterion("checktime not in", values, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeBetween(String value1, String value2) {
+            addCriterion("checktime between", value1, value2, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecktimeNotBetween(String value1, String value2) {
+            addCriterion("checktime not between", value1, value2, "checktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareIsNull() {
+            addCriterion("prepare is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareIsNotNull() {
+            addCriterion("prepare is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareEqualTo(String value) {
+            addCriterion("prepare =", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareNotEqualTo(String value) {
+            addCriterion("prepare <>", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareGreaterThan(String value) {
+            addCriterion("prepare >", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareGreaterThanOrEqualTo(String value) {
+            addCriterion("prepare >=", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareLessThan(String value) {
+            addCriterion("prepare <", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareLessThanOrEqualTo(String value) {
+            addCriterion("prepare <=", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareLike(String value) {
+            addCriterion("prepare like", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareNotLike(String value) {
+            addCriterion("prepare not like", value, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareIn(List<String> values) {
+            addCriterion("prepare in", values, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareNotIn(List<String> values) {
+            addCriterion("prepare not in", values, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareBetween(String value1, String value2) {
+            addCriterion("prepare between", value1, value2, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrepareNotBetween(String value1, String value2) {
+            addCriterion("prepare not between", value1, value2, "prepare");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsIsNull() {
+            addCriterion("nicids is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsIsNotNull() {
+            addCriterion("nicids is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsEqualTo(String value) {
+            addCriterion("nicids =", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsNotEqualTo(String value) {
+            addCriterion("nicids <>", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsGreaterThan(String value) {
+            addCriterion("nicids >", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsGreaterThanOrEqualTo(String value) {
+            addCriterion("nicids >=", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsLessThan(String value) {
+            addCriterion("nicids <", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsLessThanOrEqualTo(String value) {
+            addCriterion("nicids <=", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsLike(String value) {
+            addCriterion("nicids like", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsNotLike(String value) {
+            addCriterion("nicids not like", value, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsIn(List<String> values) {
+            addCriterion("nicids in", values, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsNotIn(List<String> values) {
+            addCriterion("nicids not in", values, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsBetween(String value1, String value2) {
+            addCriterion("nicids between", value1, value2, "nicids");
+            return (Criteria) this;
+        }
+
+        public Criteria andNicidsNotBetween(String value1, String value2) {
+            addCriterion("nicids not between", value1, value2, "nicids");
             return (Criteria) this;
         }
     }
