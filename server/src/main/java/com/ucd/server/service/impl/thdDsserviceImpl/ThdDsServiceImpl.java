@@ -118,6 +118,9 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (tdhDsDTO.getState() != null ){
             criteria.andStateEqualTo(tdhDsDTO.getState());
         }
+        if (tdhDsDTO.getAuditStatus() != null ){
+            criteria.andAuditStatusEqualTo(tdhDsDTO.getAuditStatus());
+        }
         if (tdhDsDTO.getType() != null ){
             criteria.andTypeEqualTo(tdhDsDTO.getType());
         }

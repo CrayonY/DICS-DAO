@@ -28,7 +28,15 @@ public class TdhDsMonthsDTO {
 
     private Date auditTime;
 
+    private String auditTimemsF;
+
+    private String auditTimemsL;
+
     private Date syncTime;
+
+    private String syncTimemsF;
+
+    private String syncTimemsL;
 
     private String userCode;
 

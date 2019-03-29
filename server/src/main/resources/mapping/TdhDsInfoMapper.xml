@@ -461,6 +461,21 @@
         <if test="syncTime != null" >
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="auditTimemsF != null and auditTimemsF != ''" >
+            and  audit_time &gt;= #{auditTimemsF,jdbcType=VARCHAR}
+        </if>
+        <if test="auditTimemsL != null and auditTimemsL != ''" >
+            and  audit_time &lt;= #{auditTimemsL,jdbcType=VARCHAR}
+        </if>
+        <if test="syncTime != null" >
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncTimemsF != null and syncTimemsF != ''" >
+            and sync_time &gt;= #{syncTimemsF,jdbcType=VARCHAR}
+        </if>
+        <if test="syncTimemsL != null and syncTimemsL != ''" >
+            and sync_time &lt;= #{syncTimemsL,jdbcType=VARCHAR}
+        </if>
         <if test="userCode != null and userCode != ''" >
             and user_code = #{userCode,jdbcType=VARCHAR}
         </if>
@@ -494,6 +509,21 @@
         </if>
         <if test="syncTime != null" >
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="auditTimemsF != null and auditTimemsF != ''" >
+            and  audit_time &gt;= #{auditTimemsF,jdbcType=VARCHAR}
+        </if>
+        <if test="auditTimemsL != null and auditTimemsL != ''" >
+            and  audit_time &lt;= #{auditTimemsL,jdbcType=VARCHAR}
+        </if>
+        <if test="syncTime != null" >
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncTimemsF != null and syncTimemsF != ''" >
+            and sync_time &gt;= #{syncTimemsF,jdbcType=VARCHAR}
+        </if>
+        <if test="syncTimemsL != null and syncTimemsL != ''" >
+            and sync_time &lt;= #{syncTimemsL,jdbcType=VARCHAR}
         </if>
         <if test="userCode != null and userCode != ''" >
             and user_code = #{userCode,jdbcType=VARCHAR}

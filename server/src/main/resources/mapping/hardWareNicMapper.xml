@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper.HardWareNicMapper">
+  <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="nicinout" jdbcType="VARCHAR" property="nicinout" />
+    <result column="nicstatus" jdbcType="VARCHAR" property="nicstatus" />
+    <result column="nip" jdbcType="VARCHAR" property="nip" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="checktime" jdbcType="VARCHAR" property="checktime" />
+    <result column="prepare" jdbcType="VARCHAR" property="prepare" />
+    <result column="nicids" jdbcType="VARCHAR" property="nicids" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, host, nicinout, nicstatus, nip, starttime, creattime, checktime, prepare, nicids
+  </sql>
+  <select id="selectByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hard_ware_nic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hard_ware_nic
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from hard_ware_nic
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample">
+    delete from hard_ware_nic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic">
+    insert into ${tablename} (id, host, nicinout,
+      nicstatus, nip, starttime, 
+      creattime, checktime, prepare, 
+      nicids)
+    values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{nicinout,jdbcType=VARCHAR}, 
+      #{nicstatus,jdbcType=VARCHAR}, #{nip,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, 
+      #{creattime,jdbcType=TIMESTAMP}, #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, 
+      #{nicids,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic">
+    insert ${tablename}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="host != null">
+        host,
+      </if>
+      <if test="nicinout != null">
+        nicinout,
+      </if>
+      <if test="nicstatus != null">
+        nicstatus,
+      </if>
+      <if test="nip != null">
+        nip,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="creattime != null">
+        creattime,
+      </if>
+      <if test="checktime != null">
+        checktime,
+      </if>
+      <if test="prepare != null">
+        prepare,
+      </if>
+      <if test="nicids != null">
+        nicids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="nicinout != null">
+        #{nicinout,jdbcType=VARCHAR},
+      </if>
+      <if test="nicstatus != null">
+        #{nicstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nip != null">
+        #{nip,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checktime != null">
+        #{checktime,jdbcType=VARCHAR},
+      </if>
+      <if test="prepare != null">
+        #{prepare,jdbcType=VARCHAR},
+      </if>
+      <if test="nicids != null">
+        #{nicids,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample" resultType="java.lang.Integer">
+    select count(*) from hard_ware_nic
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hard_ware_nic
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.host != null">
+        host = #{record.host,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nicinout != null">
+        nicinout = #{record.nicinout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nicstatus != null">
+        nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nip != null">
+        nip = #{record.nip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        starttime = #{record.starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creattime != null">
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checktime != null">
+        checktime = #{record.checktime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prepare != null">
+        prepare = #{record.prepare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nicids != null">
+        nicids = #{record.nicids,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hard_ware_nic
+    set id = #{record.id,jdbcType=VARCHAR},
+      host = #{record.host,jdbcType=VARCHAR},
+      nicinout = #{record.nicinout,jdbcType=VARCHAR},
+      nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
+      nip = #{record.nip,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=VARCHAR},
+      creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      checktime = #{record.checktime,jdbcType=VARCHAR},
+      prepare = #{record.prepare,jdbcType=VARCHAR},
+      nicids = #{record.nicids,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic">
+    update ${tablename}
+    <set>
+      <if test="host != null">
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="nicinout != null">
+        nicinout = #{nicinout,jdbcType=VARCHAR},
+      </if>
+      <if test="nicstatus != null">
+        nicstatus = #{nicstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nip != null">
+        nip = #{nip,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null">
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checktime != null">
+        checktime = #{checktime,jdbcType=VARCHAR},
+      </if>
+      <if test="prepare != null">
+        prepare = #{prepare,jdbcType=VARCHAR},
+      </if>
+      <if test="nicids != null">
+        nicids = #{nicids,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic">
+    update ${tablename}
+    set host = #{host,jdbcType=VARCHAR},
+      nicinout = #{nicinout,jdbcType=VARCHAR},
+      nicstatus = #{nicstatus,jdbcType=VARCHAR},
+      nip = #{nip,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=VARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      checktime = #{checktime,jdbcType=VARCHAR},
+      prepare = #{prepare,jdbcType=VARCHAR},
+      nicids = #{nicids,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByHost" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hard_ware_nic_now
+    where host = #{host,jdbcType=VARCHAR}
+  </select>
+</mapper>

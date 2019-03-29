@@ -26,6 +26,7 @@ public enum ResultExceptEnum {
 	ERROR_HTTP_COOKIE("60001","接口异常,COOKIE不存在！"),
 	ERROR_HTTP_TOKEN("60002","接口异常,TOKEN为空！"),
 	ERROR_HTTP_USER("60003","接口异常,USER为空！"),
+	ERROR_HTTP_HEADER("60004","接口异常,HEADER为空！"),
 	ERROR_POWER_USER("70001","用户没有操作权限！");
 
 	private String code;
