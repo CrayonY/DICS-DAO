@@ -1,5 +1,6 @@
 package com.ucd.server.mapper.hardwareinfomapper;
 
+import com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfo;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfoExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface HardWareInfoMapper {
     int updateByPrimaryKeySelective(HardWareInfo record);
 
     int updateByPrimaryKey(HardWareInfo record);
+
+    long countByDTO(HardwareNowDTO hardwareNowDTO);
 }

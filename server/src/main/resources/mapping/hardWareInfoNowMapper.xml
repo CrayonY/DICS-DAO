@@ -356,4 +356,59 @@
       and intime &lt;= #{endTimems,jdbcType=VARCHAR}
     </if>
   </select>
+
+    <select id="countByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultType="java.lang.Long">
+        select count(*)
+        <include refid="Base_Column_List" />
+        from hard_ware_info_now
+        where 1=1
+        <if test="host != null and host != ''">
+            and host = #{host,jdbcType=VARCHAR}
+        </if>
+        <if test="cpucount != null">
+            and cpucount = #{cpucount,jdbcType=VARCHAR}
+        </if>
+        <if test="cpuusedper != null">
+            and cpuusedper = #{cpuusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="cpustatus != null and cpustatus != ''">
+            and cpustatus = #{cpustatus,jdbcType=VARCHAR}
+        </if>
+        <if test="diskcount != null ">
+            and diskcount = #{diskcount,jdbcType=VARCHAR}
+        </if>
+        <if test="diskusedper != null ">
+            and diskusedper = #{diskusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="diskstatus != null and diskstatus != ''">
+            and diskstatus = #{diskstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="memcount != null ">
+            and memcount = #{memcount,jdbcType=VARCHAR}
+        </if>
+        <if test="memusedper != null">
+            and memusedper = #{memusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="memstatus != null and memstatus != ''">
+            and memstatus = #{memstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="diskcount != null ">
+            and diskcount = #{diskcount,jdbcType=VARCHAR}
+        </if>
+        <if test="diskusedper != null">
+            and diskusedper = #{diskusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="diskstatus != null and diskstatus != ''">
+            and diskstatus = #{diskstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="starttime != null and starttime != ''">
+            and starttime = #{starttime,jdbcType=VARCHAR}
+        </if>
+        <if test="startTimems != null and startTimems != ''">
+            and intime &gt;= #{startTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="endTimems != null and endTimems != ''">
+            and intime &lt;= #{endTimems,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

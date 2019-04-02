@@ -6,6 +6,7 @@ import com.ucd.common.utils.Tools;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareDTO;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareInfoDTO;
+import com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO;
 import com.ucd.server.enums.TdhServiceDaoEnum;
 import com.ucd.server.service.hardwareservice.HardWareService;
 import org.slf4j.Logger;
@@ -80,6 +81,29 @@ public class HardwareController {
 		}
 		logger.info("resultVO:"+resultVO);
 		return resultVO;
+	}
+
+	@PostMapping(value = "/getHardWareInfo")
+	public ResultVO getHardWareInfo(@RequestBody Map<String, Object> models){
+		ResultVO resultVO = new ResultVO();
+		try {
+			PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
+            HardwareNowDTO hardwareNowDTO = Tools.map2obj((Map<String, Object>)models.get("hardwareNowDTO"), HardwareNowDTO.class);
+			logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
+			logger.info("HardwareNowDTO:"+hardwareNowDTO);
+			if(pageView == null){
+				pageView = new PageView();
+			}
+			pageView =hardWareService.getThdServicesDsInfo(pageView,hardwareNowDTO);
+			resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
+			logger.info("resultVO:"+resultVO);
+			return resultVO;
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultVO = ResultVOUtil.error(e);
+			logger.info("resultVO:"+resultVO);
+			return resultVO;
+		}
 	}
 	@GetMapping(value = "/test")
 	public void test(HttpServletRequest req){

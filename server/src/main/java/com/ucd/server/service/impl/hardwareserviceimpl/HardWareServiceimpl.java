@@ -8,6 +8,7 @@ import com.ucd.common.utils.KeyUtil;
 import com.ucd.common.utils.UUIDUtils;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.*;
+import com.ucd.daocommon.VO.hardwareVO.HardwareNowVO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareVO;
 import com.ucd.server.exception.DaoException;
 import com.ucd.server.mapper.hardwareinfomapper.HardWareInfoMapper;
@@ -20,6 +21,7 @@ import com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper.HardWareThr
 import com.ucd.server.model.hardwareinfomodel.HardWareInfo;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfoExample;
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
+import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread;
 import com.ucd.server.service.hardwareservice.HardWareService;
@@ -50,6 +52,7 @@ public class HardWareServiceimpl implements HardWareService {
     public HardWareNicMapper NicMapper;
     @Autowired
     public HardWareThreadMapper ThreadMapper;
+
     private final static Logger logger = LoggerFactory.getLogger(HardWareService.class);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -322,6 +325,25 @@ public class HardWareServiceimpl implements HardWareService {
             }
             InfoNowMapper.updateByPrimaryKeySelective(hardWareInfoNow);
         return "OK";
+    }
+
+    @Override
+    public PageView getThdServicesDsInfo(PageView pageView, HardwareNowDTO hardwareNowDTO) throws Exception {
+        Gson gs = new Gson();
+        List<HardwareNowVO> hardwareNowVOList = new ArrayList<HardwareNowVO>();
+        logger.info("hardwareNowDTO:"+hardwareNowDTO);
+        PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
+        List<HardWareInfoNow> hardWareInfoNowList =  InfoNowMapper.selectByDTO(hardwareNowDTO);
+//        System.out.println("11111:"+tdhDsInfoList.toString());
+        long count = hardWareInfoMapper.countByDTO(hardwareNowDTO);
+        pageView.setTotalrecord(count);
+        for (HardWareInfoNow hardWareInfoNow : hardWareInfoNowList){
+            HardwareNowVO hardwareNowVO = new HardwareNowVO();
+            BeanUtils.copyProperties(hardWareInfoNow, hardwareNowVO);
+            hardwareNowVOList.add(hardwareNowVO);
+        }
+        pageView.setRecords(hardwareNowVOList);
+        return pageView;
     }
 
 }
