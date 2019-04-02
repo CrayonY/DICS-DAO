@@ -6,9 +6,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: root
-#    url: jdbc:mysql://10.66.1.192:3306/clouddemo?characterEncoding=utf-8&useSSL=false
-    url: jdbc:mysql://10.66.1.204:3306/monitordb?characterEncoding=utf-8&useSSL=false
+    password: rootroot
+    url: jdbc:mysql://10.66.1.204:3306/clouddemo?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://localhost:3306/monitordb?characterEncoding=utf-8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 5
@@ -21,7 +21,6 @@ spring:
       validation-query: select 'x'
       test-on-borrow: false
       test-on-return: false
-      exception-sorter: true
       max-pool-prepared-statement-per-connection-size: 20
       filters: stat,wall
       connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
@@ -40,9 +39,9 @@ spring:
 eureka:
   client:
     service-url:
-#      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
-#      defaultZone: http://10.66.1.202:8761/eureka-0.0.1-SNAPSHOT/eureka/,http://10.66.1.203:8761/eureka-0.0.1-SNAPSHOT/eureka/
-      defaultZone: http://10.66.1.192:8761/eureka-0.0.1-SNAPSHOT/eureka/
+#      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://10.66.1.202:8761/eureka-0.0.1-SNAPSHOT/eureka/,http://10.66.1.203:8761/eureka-0.0.1-SNAPSHOT/eureka/
+#      defaultZone: http://10.66.1.192:8761/eureka-0.0.1-SNAPSHOT/eureka/
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
