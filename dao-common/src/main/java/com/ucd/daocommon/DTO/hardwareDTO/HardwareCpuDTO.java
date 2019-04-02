@@ -23,5 +23,9 @@ public class HardwareCpuDTO {
 
     private String nip;
 
+    private String checktimeStart;
+
+    private String checktimeEnd;
+
 
 }

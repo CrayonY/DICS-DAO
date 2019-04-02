@@ -23,4 +23,8 @@ public class HardwareMemDTO {
 
     private String nip;
 
+    private String checktimeStart;
+
+    private String checktimeEnd;
+
 }

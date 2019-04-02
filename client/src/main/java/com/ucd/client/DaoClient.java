@@ -1,8 +1,6 @@
 package com.ucd.client;
 
 //import com.netflix.hystrix.util.Exceptions;
-import com.ucd.common.utils.pager.PageView;
-import com.ucd.daocommon.DTO.hardwareDTO.HardwareDTO;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareInfoDTO;
 import com.ucd.daocommon.DTO.operationLogInfoDTO.OperationLogInfoDTO;
 import com.ucd.daocommon.DTO.tdhDsauditDTO.TdhDsauditDTO;
@@ -14,7 +12,6 @@ import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDssyncDTO;
 import com.ucd.daocommon.DTO.userDTO.UserDTO;
-import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -137,10 +134,18 @@ public interface DaoClient {
     public ResultVO getOperationLogInfo(@RequestBody Map<String, Object> models);
 
 
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardCPUDao/getHardWareCpu")
+    public ResultVO getHardWareCpu(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDiskDao/getHardWareDisk")
+    public ResultVO getHardWareDisk(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardMemDao/getHardWareMEM")
+    public ResultVO getHardWareMEM(@RequestBody Map<String, Object> models);
+
+
     @Component
     static class ProductClientFallback implements DaoClient {
-
-
 
         @Override
         public ResultVO saveThdServicesData(TdhServicesInfoDTO tdhServicesInfoDTO) {
@@ -313,6 +318,21 @@ public interface DaoClient {
 
         @Override
         public ResultVO getOperationLogInfo(Map<String, Object> models) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getHardWareCpu(Map<String, Object> models) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getHardWareDisk(Map<String, Object> models) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getHardWareMEM(Map<String, Object> models) {
             return null;
         }
 

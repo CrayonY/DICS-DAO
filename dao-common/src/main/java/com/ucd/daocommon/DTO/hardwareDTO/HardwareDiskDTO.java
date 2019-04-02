@@ -22,5 +22,9 @@ public class HardwareDiskDTO {
 
     private String prepare;
 
+    private String checktimeStart;
+
+    private String checktimeEnd;
+
 
 }
