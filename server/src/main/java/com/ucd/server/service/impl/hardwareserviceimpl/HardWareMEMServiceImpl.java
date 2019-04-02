@@ -4,16 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.ucd.common.utils.StringTool;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareMemDTO;
+import com.ucd.daocommon.VO.hardwareVO.HardWareMemVO;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareMemmapper.HardWareMemMapper;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMemExample;
 import com.ucd.server.service.hardwareservice.HardWareMEMService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,8 +66,18 @@ public class HardWareMEMServiceImpl implements HardWareMEMService{
             logger.info("hardWareMemList="+hardWareMemList.toString());
             long count = hardWareMemMapper.countByExample(hardWareMemExample);
             pageView.setTotalrecord(count);
-            pageView.setRecords(hardWareMemList);
+
+            List<HardWareMemVO> hardWareMemVOList = new ArrayList<HardWareMemVO>();
+
+            // 数据格式化
+            for (HardWareMem hardWareMem : hardWareMemList) {
+                HardWareMemVO hardWareMemVO = new HardWareMemVO();
+                BeanUtils.copyProperties(hardWareMem, hardWareMemVO);
+                hardWareMemVOList.add(hardWareMemVO);
+            }
+            pageView.setRecords(hardWareMemVOList);
         }
+
         return pageView;
     }
 }

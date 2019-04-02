@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.ucd.common.utils.StringTool;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareDiskDTO;
+import com.ucd.daocommon.VO.hardwareVO.HardWareDiskVO;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareDiskmapper.HardWareDiskMapper;
 import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDisk;
 import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDiskExample;
@@ -11,10 +12,12 @@ import com.ucd.server.service.hardwareservice.HardWareCPUService;
 import com.ucd.server.service.hardwareservice.HardWareDiskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,7 +68,16 @@ public class HardWareDiskServiceImpl implements HardWareDiskService{
             logger.info("hardWareDiskList="+hardWareDiskList.toString());
             long count = hardWareDiskMapper.countByExample(hardWareDiskExample);
             pageView.setTotalrecord(count);
-            pageView.setRecords(hardWareDiskList);
+
+
+            List<HardWareDiskVO> hardWareDiskVOList = new ArrayList<>();
+            // 数据格式化
+            for (HardWareDisk hardWareDisk : hardWareDiskList) {
+                HardWareDiskVO hardWareDiskVO = new HardWareDiskVO();
+                BeanUtils.copyProperties(hardWareDisk, hardWareDiskVO);
+                hardWareDiskVOList.add(hardWareDiskVO);
+            }
+            pageView.setRecords(hardWareDiskVOList);
         }
 
         return pageView;

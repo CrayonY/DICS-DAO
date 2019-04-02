@@ -4,16 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.ucd.common.utils.StringTool;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO;
+import com.ucd.daocommon.VO.hardwareVO.HardWareCpuVO;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareCpumapper.HardWareCpuMapper;
 import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
 import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample;
 import com.ucd.server.service.hardwareservice.HardWareCPUService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;/**/
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,7 +64,16 @@ public class HardWareCPUServiceImpl implements HardWareCPUService{
             logger.info("hardWareCpuList="+hardWareCpuList.toString());
             long count = hardWareCpuMapper.countByExample(hardWareCpuExample);
             pageView.setTotalrecord(count);
-            pageView.setRecords(hardWareCpuList);
+
+            List<HardWareCpuVO> hardWareCpuVOList = new ArrayList<>();
+            // 数据格式化
+            for (HardWareCpu hardWareCpu : hardWareCpuList) {
+                HardWareCpuVO hardWareCpuVO = new HardWareCpuVO();
+                BeanUtils.copyProperties(hardWareCpu, hardWareCpuVO);
+                hardWareCpuVOList.add(hardWareCpuVO);
+            }
+
+            pageView.setRecords(hardWareCpuVOList);
         }
         return pageView;
     }
