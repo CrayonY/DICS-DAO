@@ -57,7 +57,7 @@ public class HardWareDiskServiceImpl implements HardWareDiskService{
             }
 
             if(checktimeEnd != null){
-                criteria.andChecktimeGreaterThanOrEqualTo(checktimeEnd);
+                criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
 
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());

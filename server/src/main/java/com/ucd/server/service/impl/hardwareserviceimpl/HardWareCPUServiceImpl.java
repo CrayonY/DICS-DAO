@@ -54,7 +54,7 @@ public class HardWareCPUServiceImpl implements HardWareCPUService{
             }
 
             if(checktimeEnd != null){
-                criteria.andChecktimeGreaterThanOrEqualTo(checktimeEnd);
+                criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
             List<HardWareCpu> hardWareCpuList =  hardWareCpuMapper.selectByExample(hardWareCpuExample);

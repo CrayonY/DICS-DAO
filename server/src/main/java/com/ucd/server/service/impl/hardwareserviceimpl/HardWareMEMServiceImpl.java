@@ -55,7 +55,7 @@ public class HardWareMEMServiceImpl implements HardWareMEMService{
             }
 
             if(checktimeEnd != null){
-                criteria.andChecktimeGreaterThanOrEqualTo(checktimeEnd);
+                criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
 
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
