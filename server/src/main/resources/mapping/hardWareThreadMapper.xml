@@ -84,7 +84,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from hard_ware_thread
+    from ${tableName}
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -200,7 +200,7 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample" resultType="java.lang.Integer">
-    select count(*) from hard_ware_thread
+    select count(*) from ${tableName}
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

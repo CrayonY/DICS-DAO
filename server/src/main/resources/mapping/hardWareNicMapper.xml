@@ -81,7 +81,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from hard_ware_nic
+    from ${tableName}
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -183,7 +183,7 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample" resultType="java.lang.Integer">
-    select count(*) from hard_ware_nic
+    select count(*) from ${tableName}
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

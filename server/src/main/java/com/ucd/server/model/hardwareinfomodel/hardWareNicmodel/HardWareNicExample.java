@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 @Data
 public class HardWareNicExample {
+    private String tableName;
+
     protected String orderByClause;
 
     protected boolean distinct;

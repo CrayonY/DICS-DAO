@@ -1,11 +1,11 @@
-package com.ucd.daocommon.DTO.hardwareDTO;
+package com.ucd.daocommon.VO.hardwareVO;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class HardwareNicDTO {
+public class HardwareNicVO {
     private String id;
 
     private String host;
@@ -26,11 +26,6 @@ public class HardwareNicDTO {
 
     private String nicids;
 
-    private String checktimeStart;
-
-    private String checktimeEnd;
-
-    private String tableName;
 
 
 

@@ -1,11 +1,11 @@
-package com.ucd.daocommon.DTO.hardwareDTO;
+package com.ucd.daocommon.VO.hardwareVO;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class HardwareThreadDTO {
+public class HardwareThreadVO {
     private String id;
 
     private String host;
@@ -30,11 +30,6 @@ public class HardwareThreadDTO {
 
     private String pids;
 
-    private String checktimeStart;
-
-    private String checktimeEnd;
-
-    private String tableName;
 
 
 }

@@ -143,6 +143,12 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardMemDao/getHardWareMEM")
     public ResultVO getHardWareMEM(@RequestBody Map<String, Object> models);
 
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardNicDao/getHardWareNic")
+    public ResultVO getHardWareNic(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao/getHardWareThread")
+    public ResultVO getHardWareThread(@RequestBody Map<String, Object> models);
+
 
     @Component
     static class ProductClientFallback implements DaoClient {
@@ -333,6 +339,16 @@ public interface DaoClient {
 
         @Override
         public ResultVO getHardWareMEM(Map<String, Object> models) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getHardWareNic(Map<String, Object> models) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getHardWareThread(Map<String, Object> models) {
             return null;
         }
 

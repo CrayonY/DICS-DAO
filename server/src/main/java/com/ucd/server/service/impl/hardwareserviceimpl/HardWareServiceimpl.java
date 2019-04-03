@@ -169,14 +169,6 @@ public class HardWareServiceimpl implements HardWareService {
                 hardWareInfoNow.setCpucount(hardwareInfoDTO.getCpu().getCpucount());
                 hardWareInfoNow.setCpustatus(hardwareInfoDTO.getCpu().getCpustatus());
                 hardWareInfoNow.setCpuusedper(hardwareInfoDTO.getCpu().getCpuusedper());
-                if (!("healthy".equals(hardwareInfoDTO.getCpu().getCpustatus()))){
-                    HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
-                    hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
-                    hardwareCpuDTO.setChecktime(hardwareInfoDTO.getIntime());
-                    hardwareCpuDTO.setCreattime(now);
-                    hardwareCpuDTO.setId(ID);
-                    CpuMapper.insertByDTO(hardwareCpuDTO);
-                }
                 if (hardWareInfoNow.getNum() == 180){
                     HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
                     hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
@@ -184,20 +176,19 @@ public class HardWareServiceimpl implements HardWareService {
                     hardwareCpuDTO.setCreattime(now);
                     hardwareCpuDTO.setId(numID);
                     CpuMapper.insertByDTO(hardwareCpuDTO);
+                }else if (!("healthy".equals(hardwareInfoDTO.getCpu().getCpustatus()))){
+                    HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
+                    hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareCpuDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareCpuDTO.setCreattime(now);
+                    hardwareCpuDTO.setId(ID);
+                    CpuMapper.insertByDTO(hardwareCpuDTO);
                 }
             }
             if (hardwareInfoDTO.getMem() != null){
                 hardWareInfoNow.setMemcount(hardwareInfoDTO.getMem().getMemcount());
                 hardWareInfoNow.setMemstatus(hardwareInfoDTO.getMem().getMemstatus());
                 hardWareInfoNow.setMemusedper(hardwareInfoDTO.getMem().getMemusedper());
-                if (!("healthy".equals(hardwareInfoDTO.getMem().getMemstatus()))){
-                    HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
-                    hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
-                    hardwareMemDTO.setChecktime(hardwareInfoDTO.getIntime());
-                    hardwareMemDTO.setCreattime(now);
-                    hardwareMemDTO.setId(ID);
-                    MemMapper.insertByDTO(hardwareMemDTO);
-                }
                 if (hardWareInfoNow.getNum() == 180){
                     HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
                     hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
@@ -205,26 +196,32 @@ public class HardWareServiceimpl implements HardWareService {
                     hardwareMemDTO.setCreattime(now);
                     hardwareMemDTO.setId(numID);
                     MemMapper.insertByDTO(hardwareMemDTO);
+                }else if (!("healthy".equals(hardwareInfoDTO.getMem().getMemstatus()))){
+                    HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
+                    hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareMemDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareMemDTO.setCreattime(now);
+                    hardwareMemDTO.setId(ID);
+                    MemMapper.insertByDTO(hardwareMemDTO);
                 }
             }
             if (hardwareInfoDTO.getDisk() != null){
                 hardWareInfoNow.setDiskcount(hardwareInfoDTO.getDisk().getDiskcount());
                 hardWareInfoNow.setDiskstatus(hardwareInfoDTO.getDisk().getDiskstatus());
                 hardWareInfoNow.setDiskusedper(hardwareInfoDTO.getDisk().getDiskusedper());
-                if (!("healthy".equals(hardwareInfoDTO.getDisk().getDiskstatus()))){
-                    HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
-                    hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
-                    hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
-                    hardwareDiskDTO.setCreattime(now);
-                    hardwareDiskDTO.setId(ID);
-                    DiskMapper.insertByDTO(hardwareDiskDTO);
-                }
                 if (hardWareInfoNow.getNum() == 180){
                     HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
                     hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
                     hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
                     hardwareDiskDTO.setCreattime(now);
                     hardwareDiskDTO.setId(numID);
+                    DiskMapper.insertByDTO(hardwareDiskDTO);
+                }else if (!("healthy".equals(hardwareInfoDTO.getDisk().getDiskstatus()))){
+                    HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
+                    hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
+                    hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
+                    hardwareDiskDTO.setCreattime(now);
+                    hardwareDiskDTO.setId(ID);
                     DiskMapper.insertByDTO(hardwareDiskDTO);
                 }
             }
