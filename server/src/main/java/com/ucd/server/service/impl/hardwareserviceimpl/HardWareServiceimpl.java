@@ -10,6 +10,7 @@ import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.*;
 import com.ucd.daocommon.VO.hardwareVO.HardwareNowVO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareVO;
+import com.ucd.server.enums.TdhServiceDaoEnum;
 import com.ucd.server.exception.DaoException;
 import com.ucd.server.mapper.hardwareinfomapper.HardWareInfoMapper;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareCpumapper.HardWareCpuMapper;
@@ -158,8 +159,15 @@ public class HardWareServiceimpl implements HardWareService {
         List<HardWareInfoNow> InfoNowList = InfoNowMapper.selectByDTO(hardwareNowDTO);
         List<HardWareNic> NicList = NicMapper.selectByHost(hardwareInfoDTO.getHost());
         List<HardWareThread> ThreadList = ThreadMapper.selectByHost(hardwareInfoDTO.getHost());
+        if (InfoNowList == null || InfoNowList.size() == 0){
+            throw new DaoException(ResultExceptEnum.ERROR_PARAMETER,"InfoNowList为空！");
+        }
+
             //update
             HardWareInfoNow hardWareInfoNow = InfoNowList.get(0);
+        if (hardWareInfoNow == null){
+            throw new DaoException(ResultExceptEnum.ERROR_PARAMETER,"hardWareInfoNow为空！");
+        }
             hardWareInfoNow.setIntime(hardwareInfoDTO.getIntime());
             hardWareInfoNow.setStarttime(hardwareInfoDTO.getStartTimems());
             Date now = new Date();
@@ -315,12 +323,18 @@ public class HardWareServiceimpl implements HardWareService {
                 }
             }
             hardWareInfoNow.setCreattime(hardwareInfoDTO.getCreattime());
-            if (hardWareInfoNow.getNum() == 180){
-                hardWareInfoNow.setNum(0);
-            }else {
-                hardWareInfoNow.setNum(hardWareInfoNow.getNum() + 1);
+            List<HardWareInfoNow> InfoNowList1 = InfoNowMapper.selectByDTO(hardwareNowDTO);
+            if(hardWareInfoNow.getNum() == InfoNowList1.get(0).getNum()){
+                if (hardWareInfoNow.getNum() == 180){
+                    hardWareInfoNow.setNum(0);
+                }else {
+                    hardWareInfoNow.setNum(hardWareInfoNow.getNum() + 1);
+                }
+                InfoNowMapper.updateByPrimaryKeySelective(hardWareInfoNow);
+            }else{
+                throw new DaoException(TdhServiceDaoEnum.NUM_ERROR.getCode(),TdhServiceDaoEnum.NUM_ERROR.getMessage());
             }
-            InfoNowMapper.updateByPrimaryKeySelective(hardWareInfoNow);
+
         return "OK";
     }
 
