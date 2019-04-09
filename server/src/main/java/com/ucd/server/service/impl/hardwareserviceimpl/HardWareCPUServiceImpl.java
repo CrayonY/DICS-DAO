@@ -73,6 +73,7 @@ public class HardWareCPUServiceImpl implements HardWareCPUService{
                 hardWareCpuVOList.add(hardWareCpuVO);
             }
 
+
             pageView.setRecords(hardWareCpuVOList);
         }
         return pageView;

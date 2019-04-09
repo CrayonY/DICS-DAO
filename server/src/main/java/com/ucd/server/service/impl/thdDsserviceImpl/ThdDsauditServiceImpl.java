@@ -53,7 +53,6 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
         TdhDsauditInfo tdhDsauditInfo = new TdhDsauditInfo();
         BeanUtils.copyProperties(tdhDsauditDTO, tdhDsauditInfo);
         tdhDsauditInfo.setId(ID + UUIDUtils.getUUID());
-        System.out.println("111111111111111111111111tdhDsauditInfo:"+tdhDsauditInfo);
         int count = tdhDsauditInfoMapper.insertSelective(tdhDsauditInfo);
         return count;
     }
@@ -134,7 +133,6 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
             BeanUtils.copyProperties(tdhDsauditDTO, tdhDsauditInfo);
             tdhDsauditInfo.setId(ID + UUIDUtils.getUUID());
             tdhDsauditInfo.setCreattime(now);
-            System.out.println("111111111111111111111111tdhDsauditInfo:"+tdhDsauditInfo);
             int count = tdhDsauditInfoMapper.insertSelective(tdhDsauditInfo);
             countNum = countNum + count;
         }
