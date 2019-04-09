@@ -72,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_name, pass_word, user_description, full_name, user_email, groups, roles, 
-    user_locked, type
+    a.id, a.user_name, a.pass_word, a.user_description, a.full_name, a.user_email, a.groups, a.roles,
+    a.user_locked, a.type
   </sql>
   <select id="selectByExample" parameterType="com.ucd.server.model.usermodel.UserExample" resultMap="BaseResultMap">
     select
@@ -82,7 +82,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from user a
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,7 +93,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from user a
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

@@ -160,13 +160,15 @@ public class HardWareServiceimpl implements HardWareService {
         List<HardWareNic> NicList = NicMapper.selectByHost(hardwareInfoDTO.getHost());
         List<HardWareThread> ThreadList = ThreadMapper.selectByHost(hardwareInfoDTO.getHost());
         if (InfoNowList == null || InfoNowList.size() == 0){
-            throw new DaoException(ResultExceptEnum.ERROR_PARAMETER,"InfoNowList为空！");
+            logger.info("异常：e=" + ResultExceptEnum.ERROR_SELECT + ",InfoNowList为空！" );
+            throw new DaoException(ResultExceptEnum.ERROR_SELECT,"InfoNowList为空！");
         }
 
             //update
             HardWareInfoNow hardWareInfoNow = InfoNowList.get(0);
         if (hardWareInfoNow == null){
-            throw new DaoException(ResultExceptEnum.ERROR_PARAMETER,"hardWareInfoNow为空！");
+            logger.info("异常：e=" + ResultExceptEnum.ERROR_SELECT + ",hardWareInfoNow为空！" );
+            throw new DaoException(ResultExceptEnum.ERROR_SELECT,"hardWareInfoNow为空！");
         }
             hardWareInfoNow.setIntime(hardwareInfoDTO.getIntime());
             hardWareInfoNow.setStarttime(hardwareInfoDTO.getStartTimems());
