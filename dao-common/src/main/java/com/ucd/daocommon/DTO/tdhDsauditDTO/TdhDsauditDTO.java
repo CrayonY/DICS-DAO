@@ -40,4 +40,6 @@ public class TdhDsauditDTO {
 
     private Integer type;
 
+    private String centre;
+
 }
