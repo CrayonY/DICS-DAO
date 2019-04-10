@@ -12,6 +12,7 @@ import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDssyncDTO;
 import com.ucd.daocommon.DTO.userDTO.UserDTO;
+import com.ucd.daocommon.VO.thdServicesVO.TdhServicesAVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -149,7 +150,14 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao/getHardWareThread")
     public ResultVO getHardWareThread(@RequestBody Map<String, Object> models);
 
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getThdServicesInfoNow")
+    public TdhServicesAVO getThdServicesInfoNow(@RequestParam(value = "center",required = true) String center);
 
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/updateThdServicesInfoNow")
+    public ResultVO updateThdServicesInfoNow(@RequestBody TdhServicesListDTO tdhServicesListDTO,@RequestParam(value = "num",required = true) String num);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/saveThdServicesInfoNowListData")
+    public  ResultVO saveThdServicesInfoNowListData(@RequestBody TdhServicesListDTO tdhServicesListDTO);
     @Component
     static class ProductClientFallback implements DaoClient {
 
@@ -352,6 +360,19 @@ public interface DaoClient {
             return null;
         }
 
+        @Override
+        public TdhServicesAVO getThdServicesInfoNow(String center) {
+            return null;
+        }
 
+        @Override
+        public ResultVO updateThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO, String num) {
+            return null;
+        }
+
+        @Override
+        public ResultVO saveThdServicesInfoNowListData(TdhServicesListDTO tdhServicesListDTO) {
+            return null;
+        }
     }
 }

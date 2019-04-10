@@ -10,6 +10,7 @@ import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesInfoDTO;
 import com.ucd.common.utils.KeyUtil;
 import com.ucd.common.utils.UUIDUtils;
 import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesListDTO;
+import com.ucd.daocommon.VO.thdServicesVO.TdhServicesAVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesHealthckVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesVO;
 import com.ucd.server.enums.TdhServiceDaoEnum;
@@ -21,16 +22,30 @@ import com.ucd.server.model.tdhservicemodel.TdhServices;
 import com.ucd.server.model.tdhservicemodel.TdhServicesA;
 import com.ucd.server.model.tdhservicemodel.TdhServicesHealthck;
 import com.ucd.server.service.tdhservicesservice.TdhServicesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class ThdServicesServiceImpl implements TdhServicesService {
+
+    private final static Logger logger = LoggerFactory.getLogger(TdhServicesService.class);
+
+
+    private final String TDHA_SERVICES_INFO_NOW = "tdha_services_info_now";
+
+
+    private final String TDHB_SERVICES_INFO_NOW = "tdhb_services_info_now";
+
+
+
 
     @Autowired
     TdhServicesMapper tdhServicesMapper;
@@ -140,6 +155,92 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         }
         pageView.setRecords(tdhServicesVOList);
         return pageView;
+    }
+
+    @Override
+    public TdhServicesAVO getThdServicesInfoNow(String center) {
+
+        TdhServicesA tdhServicesA = new TdhServicesA();
+        if(ObjectUtils.isEmpty(center)){
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        }
+        // 确定表名
+        if (center.equals("A")){
+            tdhServicesA.setTableName(TDHA_SERVICES_INFO_NOW);
+        }
+
+        if (center.equals("B")){
+            tdhServicesA.setTableName(TDHB_SERVICES_INFO_NOW);
+        }
+
+        // 获取信息
+        List<TdhServicesA> tdhServicesAList = tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
+
+        if(tdhServicesAList != null && tdhServicesAList.size()>0){
+            tdhServicesA = tdhServicesAList.get(0);
+        }
+
+        TdhServicesAVO tdhServicesAVO = new TdhServicesAVO();
+        BeanUtils.copyProperties(tdhServicesA, tdhServicesAVO);
+        return tdhServicesAVO;
+    }
+
+    @Override
+    public int updateThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO, String num) {
+
+        int countNum = 0;
+        if (tdhServicesListDTO == null || num == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        }
+        // 获取中心
+        TdhServicesInfoDTO tdhServicesInfoDTO = tdhServicesListDTO.getTdhServicesInfoDTOList().get(0);
+
+        // 获取当前秒数
+        TdhServicesAVO tdhServicesAVO = this.getThdServicesInfoNow(tdhServicesInfoDTO.getCentre());
+
+        // 如果当前秒数不同，则不进行数据修改
+        if (!num.equals(tdhServicesAVO.getHealthChecksId())) {
+            return countNum;
+        }
+
+        // 进行修改操作
+        for(TdhServicesInfoDTO tdhServicesInfoDTO1 :tdhServicesListDTO.getTdhServicesInfoDTOList()){
+            TdhServicesA tdhServicesA = new TdhServicesA();
+            BeanUtils.copyProperties(tdhServicesInfoDTO1, tdhServicesA);
+            if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+            }
+            int count = tdhServicesAMapper.updateByTypeSelective(tdhServicesA);
+            countNum = countNum + count;
+        }
+        // TODO 数据返回不完整时候，需要将不完整数据补充上
+            return countNum;
+
+}
+
+    @Override
+    @Transactional
+    public int saveThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO) throws Exception {
+        if(tdhServicesListDTO == null){
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        }
+        int countNum = 0;
+        for (TdhServicesInfoDTO tdhServicesInfoDTO:tdhServicesListDTO.getTdhServicesInfoDTOList()){
+            if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+            }
+            TdhServicesA tdhServicesA = new TdhServicesA();
+            // 对象转换
+            BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
+            tdhServicesA.setServicesId(KeyUtil.genUniqueKey()+UUIDUtils.getUUID());
+
+            // TODO 判断主键是否重复
+            logger.info("tdhServicesA:"+tdhServicesA);
+            int count = tdhServicesAMapper.insertSelective(tdhServicesA);
+            countNum = countNum + count;
+        }
+
+        return countNum;
     }
 
     private void listModelToVO( List<TdhServicesHealthck> tdhServicesHealthckList,List<TdhServicesHealthckVO> tdhServicesHealthckListVO){

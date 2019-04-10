@@ -263,4 +263,43 @@
       and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
     </if>
   </select>
+  <!--后加根据类型修改实时数据sql-->
+
+
+  <update id="updateByTypeSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
+    update ${tableName}
+    <set >
+      <if test="enableKerberos != null" >
+        enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null" >
+        health = #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="healthChecksId != null" >
+        health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+      </if>
+      <if test="clusterId != null" >
+        cluster_id = #{clusterId,jdbcType=INTEGER},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="busy != null" >
+        busy = #{busy,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastCheck != null" >
+        last_check = #{lastCheck,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where type = #{type,jdbcType=VARCHAR}
+  </update>
 </mapper>
