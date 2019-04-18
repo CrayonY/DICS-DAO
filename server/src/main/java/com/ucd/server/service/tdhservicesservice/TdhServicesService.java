@@ -45,5 +45,7 @@ public interface TdhServicesService {
      */
     int saveThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO) throws Exception;
 
+    PageView getThdServicesListNow(PageView pageView,TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception;
+
 
 }

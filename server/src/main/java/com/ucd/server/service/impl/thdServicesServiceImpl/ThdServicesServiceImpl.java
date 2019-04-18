@@ -10,6 +10,7 @@ import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesInfoDTO;
 import com.ucd.common.utils.KeyUtil;
 import com.ucd.common.utils.UUIDUtils;
 import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesListDTO;
+import com.ucd.daocommon.VO.hardwareVO.HardWareCpuVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesAVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesHealthckVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesVO;
@@ -18,6 +19,7 @@ import com.ucd.server.exception.DaoException;
 import com.ucd.server.mapper.tdhservicesmapper.TdhServicesAMapper;
 import com.ucd.server.mapper.tdhservicesmapper.TdhServicesHealthckMapper;
 import com.ucd.server.mapper.tdhservicesmapper.TdhServicesMapper;
+import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
 import com.ucd.server.model.tdhservicemodel.TdhServices;
 import com.ucd.server.model.tdhservicemodel.TdhServicesA;
 import com.ucd.server.model.tdhservicemodel.TdhServicesHealthck;
@@ -241,6 +243,28 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         }
 
         return countNum;
+    }
+
+    @Override
+    public PageView getThdServicesListNow(PageView pageView, TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
+        if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        }
+
+        List<TdhServicesVO> tdhServicesVOList = new ArrayList<TdhServicesVO>();
+
+        PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
+        TdhServicesA tdhServicesA = new TdhServicesA();
+        BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
+        List<TdhServicesA> tdhServicesAList =   tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
+        logger.info("tdhServicesAList="+tdhServicesAList.toString());
+        for (TdhServicesA thdServicesA : tdhServicesAList){
+            TdhServicesVO thdServicesVO = new TdhServicesVO();
+            BeanUtils.copyProperties(thdServicesA, thdServicesVO);
+            tdhServicesVOList.add(thdServicesVO);
+        }
+        pageView.setRecords(tdhServicesVOList);
+        return pageView;
     }
 
     private void listModelToVO( List<TdhServicesHealthck> tdhServicesHealthckList,List<TdhServicesHealthckVO> tdhServicesHealthckListVO){

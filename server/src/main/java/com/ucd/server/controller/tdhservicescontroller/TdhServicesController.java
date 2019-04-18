@@ -177,4 +177,39 @@ public class TdhServicesController {
             return resultVO;
         }
     }
+
+    /**
+     * @author Crayon
+     * @Description 获取实时数据集合
+     * @date 2019/4/16 4:17 PM
+     * @params [models]
+     * @exception
+     * @return com.ucd.common.VO.ResultVO
+     */
+    @PostMapping(value = "/getThdServicesListNow")
+    public ResultVO getThdServicesListNow(@RequestBody Map<String, Object> models){
+
+        ResultVO resultVO = new ResultVO();
+        try {
+            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"),PageView.class);
+            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesInfoDTO"),TdhServicesInfoDTO.class);
+            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
+            logger.info("tdhServicesInfoDTO:"+tdhServicesInfoDTO);
+            if(pageView == null){
+                pageView = new PageView();
+            }
+            pageView =thdServicesService.getThdServicesListNow(pageView,tdhServicesInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(e);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        }
+
+    }
+
+
 }

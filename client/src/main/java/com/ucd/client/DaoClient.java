@@ -158,6 +158,9 @@ public interface DaoClient {
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/saveThdServicesInfoNowListData")
     public  ResultVO saveThdServicesInfoNowListData(@RequestBody TdhServicesListDTO tdhServicesListDTO);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getThdServicesListNow")
+    public ResultVO getThdServicesListNow(@RequestBody Map<String, Object> models);
     @Component
     static class ProductClientFallback implements DaoClient {
 
@@ -372,6 +375,11 @@ public interface DaoClient {
 
         @Override
         public ResultVO saveThdServicesInfoNowListData(TdhServicesListDTO tdhServicesListDTO) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getThdServicesListNow(Map<String, Object> models) {
             return null;
         }
     }
