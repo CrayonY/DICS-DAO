@@ -161,6 +161,9 @@ public interface DaoClient {
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getThdServicesListNow")
     public ResultVO getThdServicesListNow(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getTdhHealthStatusByTime")
+    public ResultVO getTdhHealthStatusByTime(@RequestBody Map<String, Object> models);
     @Component
     static class ProductClientFallback implements DaoClient {
 
@@ -380,6 +383,11 @@ public interface DaoClient {
 
         @Override
         public ResultVO getThdServicesListNow(Map<String, Object> models) {
+            return null;
+        }
+
+        @Override
+        public ResultVO getTdhHealthStatusByTime(Map<String, Object> models) {
             return null;
         }
     }

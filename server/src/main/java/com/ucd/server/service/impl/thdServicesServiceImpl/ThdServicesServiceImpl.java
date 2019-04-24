@@ -10,16 +10,15 @@ import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesInfoDTO;
 import com.ucd.common.utils.KeyUtil;
 import com.ucd.common.utils.UUIDUtils;
 import com.ucd.daocommon.DTO.tdhServicesDTO.TdhServicesListDTO;
-import com.ucd.daocommon.VO.hardwareVO.HardWareCpuVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesAVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesHealthckVO;
 import com.ucd.daocommon.VO.thdServicesVO.TdhServicesVO;
+import com.ucd.server.constant.TdhServiceConstant;
 import com.ucd.server.enums.TdhServiceDaoEnum;
 import com.ucd.server.exception.DaoException;
 import com.ucd.server.mapper.tdhservicesmapper.TdhServicesAMapper;
 import com.ucd.server.mapper.tdhservicesmapper.TdhServicesHealthckMapper;
 import com.ucd.server.mapper.tdhservicesmapper.TdhServicesMapper;
-import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
 import com.ucd.server.model.tdhservicemodel.TdhServices;
 import com.ucd.server.model.tdhservicemodel.TdhServicesA;
 import com.ucd.server.model.tdhservicemodel.TdhServicesHealthck;
@@ -45,7 +44,6 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
 
     private final String TDHB_SERVICES_INFO_NOW = "tdhb_services_info_now";
-
 
 
 
@@ -247,16 +245,62 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
     @Override
     public PageView getThdServicesListNow(PageView pageView, TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
-        if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
+        if(ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())){
             throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
 
-        List<TdhServicesVO> tdhServicesVOList = new ArrayList<TdhServicesVO>();
+        List<TdhServicesAVO> tdhServicesVOList = new ArrayList<>();
 
         PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
         TdhServicesA tdhServicesA = new TdhServicesA();
         BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
-        List<TdhServicesA> tdhServicesAList =   tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
+        List<TdhServicesA> tdhServicesAList = tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
+        logger.info("tdhServicesAList="+tdhServicesAList.toString());
+        for (TdhServicesA thdServicesA : tdhServicesAList){
+            TdhServicesAVO thdServicesAVO = new TdhServicesAVO();
+            BeanUtils.copyProperties(thdServicesA, thdServicesAVO);
+            tdhServicesVOList.add(thdServicesAVO);
+        }
+        pageView.setRecords(tdhServicesVOList);
+        return pageView;
+    }
+
+    @Override
+    public PageView getTdhHealthStatusByTime(PageView pageView, TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
+        if(ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())){
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        }
+        List<TdhServicesVO> tdhServicesVOList = new ArrayList<>();
+        PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
+        TdhServicesA tdhServicesA = new TdhServicesA();
+        BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
+
+        List<TdhServicesA> tdhServicesAList = new ArrayList<>();
+        /** 如果查看30分钟内 数据*/
+        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_30_MIN){
+            tdhServicesAList =   tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
+        }
+
+        /** 如果查看1小时/2小时内 数据*/
+        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_HOUR){
+            tdhServicesA.setSecondStart(TdhServiceConstant.SECOND_RANGE1);
+            tdhServicesA.setSecondEnd(TdhServiceConstant.SECOND_RANGE2);
+            tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
+        }
+
+        /** 如果查看1天以内 数据*/
+        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_12_HOUR){
+            tdhServicesA.setSecondStart(TdhServiceConstant.SECOND_RANGE3);
+            tdhServicesA.setSecondEnd(TdhServiceConstant.SECOND_RANGE4);
+            tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
+        }
+
+        /** 如果查看1周以内 数据*/
+        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_WEEK){
+            tdhServicesA.setSecondStart(TdhServiceConstant.SECOND_RANGE5);
+            tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
+        }
+
         logger.info("tdhServicesAList="+tdhServicesAList.toString());
         for (TdhServicesA thdServicesA : tdhServicesAList){
             TdhServicesVO thdServicesVO = new TdhServicesVO();

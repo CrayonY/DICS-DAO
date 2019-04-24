@@ -13,10 +13,11 @@
     <result column="busy" property="busy" jdbcType="VARCHAR" />
     <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
     <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
+    <result column="task_time" property="taskTime" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     services_id, enable_kerberos, health, name, health_checks_id,
-    cluster_id, id, type, busy, creattime, last_check
+    cluster_id, id, type, busy, creattime, last_check,task_time
   </sql>
   <select id="selectCountTdhServices" resultType="java.lang.Long" >
     select
@@ -62,6 +63,9 @@
     <if test="stopTime != null and stopTime != ''">
       and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
     </if>
+    <if test="taskTime != null and taskTime != ''">
+      and task_time = #{taskTime,jdbcType=VARCHAR}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
     select 
@@ -84,14 +88,14 @@
     where services_id = #{servicesId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    insert into ${tableName} (services_id, enable_kerberos, health, name, health_checks_id, cluster_id, id, type, busy, creattime, last_check
+    insert into ${tableName} (services_id, enable_kerberos, health, name, health_checks_id, cluster_id, id, type, busy, creattime, last_check,task_time
       )
     values (#{servicesId,jdbcType=VARCHAR}, #{enableKerberos,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR},
       #{healthChecksId,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER},
       #{id,jdbcType=INTEGER},
       #{type,jdbcType=VARCHAR}, #{busy,jdbcType=VARCHAR},
-      #{creattime,jdbcType=TIMESTAMP}, #{lastCheck,jdbcType=VARCHAR}
+      #{creattime,jdbcType=TIMESTAMP}, #{lastCheck,jdbcType=VARCHAR},#{taskTime,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
@@ -130,6 +134,9 @@
       <if test="lastCheck != null" >
         last_check,
       </if>
+      <if test="taskTime != null" >
+        task_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="servicesId != null" >
@@ -164,6 +171,9 @@
       </if>
       <if test="lastCheck != null" >
         #{lastCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="taskTime != null" >
+        #{taskTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -214,6 +224,7 @@
       type = #{type,jdbcType=VARCHAR},
       busy = #{busy,jdbcType=VARCHAR},
       last_check = #{lastCheck,jdbcType=VARCHAR},
+      task_time = #{taskTime,jdbcType=VARCHAR},
       creattime = #{creattime,jdbcType=TIMESTAMP}
     where services_id = #{servicesId,jdbcType=VARCHAR}
   </update>
@@ -262,6 +273,17 @@
     <if test="stopTime != null and stopTime != ''">
       and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
     </if>
+
+    <if test="taskTimeStart != null and taskTimeStart != ''">
+      and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
+    </if>
+    <if test="taskTimeEnd != null and taskTimeEnd != ''">
+      and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
+    </if>
+
+    <if test="taskTime != null and taskTime != ''">
+      and task_time = #{taskTime,jdbcType=VARCHAR}
+    </if>
   </select>
   <!--后加根据类型修改实时数据sql-->
 
@@ -299,7 +321,33 @@
       <if test="lastCheck != null" >
         last_check = #{lastCheck,jdbcType=VARCHAR},
       </if>
+      <if test="taskTime != null" >
+        task_time = #{taskTime,jdbcType=VARCHAR},
+      </if>
     </set>
     where type = #{type,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectTdhServiceHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
+    select
+    services_id, enable_kerberos, health, name, health_checks_id,
+    cluster_id, id, type, busy, creattime, last_check,task_time
+    from ${tableName}
+    WHERE 1=1
+    <if test="taskTimeStart != null and taskTimeStart != ''">
+       and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
+    </if>
+    <if test="taskTimeEnd != null and taskTimeEnd != ''">
+      and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
+    </if>
+
+    <if test="secondStart != null and secondStart != ''">
+      and DATE_FORMAT(task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
+    </if>
+
+    <if test="secondEnd != null and secondEnd != ''">
+      OR DATE_FORMAT(task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
+    </if>
+
+  </select>
 </mapper>

@@ -47,5 +47,8 @@ public interface TdhServicesService {
 
     PageView getThdServicesListNow(PageView pageView,TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception;
 
+    PageView getTdhHealthStatusByTime(PageView pageView,TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception;
+
+
 
 }

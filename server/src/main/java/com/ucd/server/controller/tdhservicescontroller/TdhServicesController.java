@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.Map;
 
 @RestController
@@ -198,7 +199,7 @@ public class TdhServicesController {
             if(pageView == null){
                 pageView = new PageView();
             }
-            pageView =thdServicesService.getThdServicesListNow(pageView,tdhServicesInfoDTO);
+            pageView = thdServicesService.getThdServicesListNow(pageView,tdhServicesInfoDTO);
             resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
             logger.info("resultVO:"+resultVO);
             return resultVO;
@@ -210,6 +211,37 @@ public class TdhServicesController {
         }
 
     }
+
+    @PostMapping(value = "/getTdhHealthStatusByTime")
+    public ResultVO getTdhHealthStatusByTime(@RequestBody Map<String, Object> models){
+        ResultVO resultVO = null;
+        try {
+            // 获取参数
+            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"),PageView.class);
+            Data startTime = Tools.map2obj((Map<String, Object>)models.get("startTime"),Data.class);
+            Data endTime = Tools.map2obj((Map<String, Object>)models.get("startTime"),Data.class);
+            String second = Tools.map2obj((Map<String, Object>)models.get("second"),String.class);
+            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesInfoDTO"),TdhServicesInfoDTO.class);
+            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
+            logger.info("tdhServicesInfoDTO:"+tdhServicesInfoDTO);
+            if(pageView == null){
+                pageView = new PageView();
+            }
+            pageView = thdServicesService.getTdhHealthStatusByTime(pageView,tdhServicesInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(e);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        }
+    }
+
+
+
+
 
 
 }

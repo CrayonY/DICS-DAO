@@ -35,4 +35,18 @@ public class TdhServicesInfoDTO {
     private String stopTime;
     private String centre;
 
+    /** 定时任务执行时间 */
+    private String taskTime;
+
+    private String taskTimeStart;
+
+    private String taskTimeEnd;
+
+    /** 秒数 */
+    private Integer second;
+
+    private String secondStart;
+
+    private String secondEnd;
+
 }
