@@ -330,23 +330,24 @@
 
   <select id="selectTdhServiceHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
     select
-    services_id, enable_kerberos, health, name, health_checks_id,
-    cluster_id, id, type, busy, creattime, last_check,task_time
-    from ${tableName}
-    WHERE 1=1
+    <include refid="Base_Column_List" />
+    from(
+    select <include refid="Base_Column_List" />
+    from ${tableName} where 1=1
     <if test="taskTimeStart != null and taskTimeStart != ''">
-       and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
+      and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
     </if>
     <if test="taskTimeEnd != null and taskTimeEnd != ''">
       and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
     </if>
-
+    ) a
+    WHERE 1=1
     <if test="secondStart != null and secondStart != ''">
-      and DATE_FORMAT(task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
+      and DATE_FORMAT(a.task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
     </if>
 
     <if test="secondEnd != null and secondEnd != ''">
-      OR DATE_FORMAT(task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
+      OR DATE_FORMAT(a.task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
     </if>
 
   </select>

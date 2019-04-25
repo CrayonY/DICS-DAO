@@ -202,7 +202,6 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         if (!num.equals(tdhServicesAVO.getHealthChecksId())) {
             return countNum;
         }
-
         // 进行修改操作
         for(TdhServicesInfoDTO tdhServicesInfoDTO1 :tdhServicesListDTO.getTdhServicesInfoDTOList()){
             TdhServicesA tdhServicesA = new TdhServicesA();
@@ -215,7 +214,6 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         }
         // TODO 数据返回不完整时候，需要将不完整数据补充上
             return countNum;
-
 }
 
     @Override
@@ -270,8 +268,8 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         if(ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())){
             throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
-        List<TdhServicesVO> tdhServicesVOList = new ArrayList<>();
-        PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
+        List<TdhServicesAVO> tdhServicesAVOList = new ArrayList<>();
+        //PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
         TdhServicesA tdhServicesA = new TdhServicesA();
         BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
 
@@ -303,11 +301,16 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
         logger.info("tdhServicesAList="+tdhServicesAList.toString());
         for (TdhServicesA thdServicesA : tdhServicesAList){
-            TdhServicesVO thdServicesVO = new TdhServicesVO();
-            BeanUtils.copyProperties(thdServicesA, thdServicesVO);
-            tdhServicesVOList.add(thdServicesVO);
+            TdhServicesAVO thdServicesAVO = new TdhServicesAVO();
+            BeanUtils.copyProperties(thdServicesA, thdServicesAVO);
+            tdhServicesAVOList.add(thdServicesAVO);
         }
-        pageView.setRecords(tdhServicesVOList);
+
+        // 总条数
+        long count = tdhServicesAVOList.size();
+        pageView.setTotalrecord(count);
+
+        pageView.setRecords(tdhServicesAVOList);
         return pageView;
     }
 
