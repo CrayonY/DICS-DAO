@@ -42,4 +42,32 @@ public class TdhDsDTO {
 
     private String tableNameTotal;
 
+    private Integer syncType;
+
+    private Integer checkStatus;
+
+    private String applyerCode;
+
+    private String auditerCode;
+
+    private String syncerCode;
+
+    private String dataMonth;
+
+    private String pid;
+
+    private String dataTimes;
+
+    private Date auditBegintime;
+
+    private Date syncBegintime;
+
+    private String syncStartTimems;
+
+    private String syncEndTimems;
+
+    private String auditStartTimems;
+
+    private String auditEndTimems;
+
 }

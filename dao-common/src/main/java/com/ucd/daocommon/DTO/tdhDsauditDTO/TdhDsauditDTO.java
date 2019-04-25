@@ -42,4 +42,6 @@ public class TdhDsauditDTO {
 
     private String centre;
 
+    private Integer syncType;
+
 }

@@ -7,6 +7,7 @@ import com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TdhDsInfoMapper {
     int deleteByPrimaryKey(TdhDsInfo record);
@@ -46,4 +47,12 @@ public interface TdhDsInfoMapper {
     int updateTdhDsMonthsInfo(TdhDsMonthsDTO tdhDsMonthsDTO);//按月  按表名修改   审核状态，同步状态
 
     int countTdhDsDataByAuditStatusAndState(TdhDsDTO tdhDsDTO);//根据审核状态，同步状态统计总数
+
+    List<Map<String, Object>> countStateNotSuccess(TdhDsInfo tdhDsInfo);//统计为同步成功的数量
+
+    int updateThdDsInfoCheckStatus(TdhDsInfo tdhDsInfo);//修改状态（0:可见可操作1：不可见不可操作）
+
+    int updateThdDsInfoNotSuccessCheckStatus(TdhDsInfo tdhDsInfo);//给没有同步成功的修改状态（0:可见可操作1：不可见不可操作）
+
+    int updateTdhDsInfo(TdhDsDTO tdhDsDTO);//修改审核状态，同步状态
 }

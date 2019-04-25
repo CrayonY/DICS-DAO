@@ -24,7 +24,7 @@ public class TdhDsMonthsDTO {
 
     private String centre;
 
-    private String startdownTime;
+    private String dataMonth;
 
     private Date auditTime;
 
@@ -43,6 +43,26 @@ public class TdhDsMonthsDTO {
     private String operCode;
 
     private String tableNameTotal;
+
+    private String lastCheck;
+
+    private Integer syncType;
+
+    private Integer checkStatus;
+
+    private String applyerCode;
+
+    private String auditerCode;
+
+    private String syncerCode;
+
+    private String pid;
+
+    private String dataTimes;
+
+    private Date auditBegintime;
+
+    private Date syncBegintime;
 
 
 }

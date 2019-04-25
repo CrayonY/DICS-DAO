@@ -966,6 +966,68 @@ public class TdhDsauditInfoExample {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
+
+
+
+        public Criteria andSyncTypeIsNull() {
+            addCriterion("sync_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeIsNotNull() {
+            addCriterion("sync_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeEqualTo(Integer value) {
+            addCriterion("sync_type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeNotEqualTo(Integer value) {
+            addCriterion("sync_type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeGreaterThan(Integer value) {
+            addCriterion("sync_type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sync_type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeLessThan(Integer value) {
+            addCriterion("sync_type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("sync_type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeIn(List<Integer> values) {
+            addCriterion("sync_type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeNotIn(List<Integer> values) {
+            addCriterion("sync_type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeBetween(Integer value1, Integer value2) {
+            addCriterion("sync_type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andSyncTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -16,10 +16,7 @@ import feign.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,13 +157,13 @@ public class TdhDsController {
         }
     }
 
-    @PostMapping(value = "/updateTdhDsMonthsInfoS")
-    public  ResultVO updateTdhDsMonthsInfoS(@RequestBody Map<String, Object> models) {
-        logger.info("进入updateTdhDsMonthsInfoScontroller啦——————————————");
+    @PostMapping(value = "/updateTdhDsInfoS")
+    public  ResultVO updateTdhDsInfoS(@RequestBody Map<String, Object> models) {
+        logger.info("进入updateTdhDsInfoScontroller啦——————————————");
         ResultVO resultVO = new ResultVO();
         int resultCount ;
         try {
-            resultCount =tdhDsservice.updateTdhDsMonthsInfoS(models);
+            resultCount =tdhDsservice.updateTdhDsInfoS(models);
             resultVO.setData(resultCount);
             resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
             logger.info("resultVO:"+resultVO);
@@ -187,6 +184,25 @@ public class TdhDsController {
         try {
             count = tdhDsservice.countTdhDsDataByAuditStatusAndState(tdhDsDTO);
             resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),count);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(e);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        }
+    }
+
+    @RequestMapping(value="/updateThdDsData",method= RequestMethod.POST)
+    public ResultVO updateThdDsData(@RequestParam(value = "centre",required = true) String centre){
+        logger.info("进入updateThdDsDatacontroller啦——————————————");
+        ResultVO resultVO = new ResultVO();
+        int resultCount ;
+        try {
+            resultCount =tdhDsservice.updateThdDsData(centre);
+            resultVO.setData(resultCount);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
             logger.info("resultVO:"+resultVO);
             return resultVO;
         } catch (Exception e) {

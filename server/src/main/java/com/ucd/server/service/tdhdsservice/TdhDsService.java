@@ -25,7 +25,9 @@ public interface TdhDsService {
 
     List<TdhDsListVO> getTdhDsMonthsInfoS(List<TdhDsMonthsDTO> tdhDsMonthsDTOS) throws Exception;
 
-    int updateTdhDsMonthsInfoS(Map<String, Object> models) throws Exception;
+    int updateTdhDsInfoS(Map<String, Object> models) throws Exception;
 
     int countTdhDsDataByAuditStatusAndState(TdhDsDTO tdhDsDTO) throws Exception;
+
+    int updateThdDsData(String centre) throws Exception;
 }

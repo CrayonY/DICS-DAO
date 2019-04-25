@@ -32,4 +32,6 @@ public class TdhDsauditVO {
 
     private Integer type;
 
+    private Integer syncType;
+
 }

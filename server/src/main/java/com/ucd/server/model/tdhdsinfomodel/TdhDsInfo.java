@@ -37,5 +37,25 @@ public class TdhDsInfo {
 
     private String userCode;
 
+    private String dataMonth;
+
+    private Integer syncType;
+
+    private Integer checkStatus;
+
+    private String applyerCode;
+
+    private String auditerCode;
+
+    private String syncerCode;
+
+    private String pid;
+
+    private String dataTimes;
+
+    private Date auditBegintime;
+
+    private Date syncBegintime;
+
 
     }

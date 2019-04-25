@@ -9,6 +9,7 @@ import com.ucd.common.utils.UUIDUtils;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO;
+import com.ucd.daocommon.DTO.tdhdsDTO.tdhdsListDTO.TdhDsListDTO;
 import com.ucd.daocommon.DTO.tdhdsDTO.tdhdsListDTO.TdhDsMonthsListDTO;
 import com.ucd.daocommon.VO.tdhdsVO.TdhDsVO;
 import com.ucd.daocommon.VO.tdhdsVO.tdhdslistVO.TdhDsListVO;
@@ -18,6 +19,7 @@ import com.ucd.server.mapper.tdhdsinfomapper.TdhDsInfoMapper;
 import com.ucd.server.model.tdhdsinfomodel.TdhDsInfo;
 import com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample;
 import com.ucd.server.service.tdhdsservice.TdhDsService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -27,10 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ThdDsServiceImpl implements TdhDsService {
@@ -40,6 +39,10 @@ public class ThdDsServiceImpl implements TdhDsService {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     DateFormat format = new SimpleDateFormat("yyyyMM");
+
+    DateFormat format1 = new SimpleDateFormat("yyyy-MM");
+
+    Calendar cal = Calendar.getInstance();
 
     @Autowired
     TdhDsInfoMapper tdhDsInfoMapper;
@@ -53,17 +56,16 @@ public class ThdDsServiceImpl implements TdhDsService {
         }
         int countNum = 0;
         String ID = KeyUtil.genUniqueKey();
-        String UUID = UUIDUtils.getUUID();
+        //String UUID = UUIDUtils.getUUID();
         for (TdhDsDTO tdhDsDTO:tdhDsDTOList){
             if(tdhDsDTO.getCentreTableName() == null || "".equals(tdhDsDTO.getCentreTableName())){
                 throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
             }
             TdhDsInfo tdhDsInfo = new TdhDsInfo();
             BeanUtils.copyProperties(tdhDsDTO, tdhDsInfo);
-            //if (tdhDsInfo.getId() == null || "".equals(tdhDsInfo.getId())) {
+            if (tdhDsInfo.getId() == null || "".equals(tdhDsInfo.getId())) {
                 tdhDsInfo.setId(ID + UUIDUtils.getUUID());
-            //}
-            System.out.println("111111111111111111111111tdhDsInfo:"+tdhDsInfo);
+            }
             int count = tdhDsInfoMapper.insertSelective(tdhDsInfo);
             countNum = countNum + count;
         }
@@ -106,6 +108,7 @@ public class ThdDsServiceImpl implements TdhDsService {
         List<TdhDsVO> tdhDsVOList = new ArrayList<TdhDsVO>();
         TdhDsInfoExample tdhDsInfoExample = new TdhDsInfoExample();
         tdhDsInfoExample.setCentreTableName(tdhDsDTO.getCentreTableName());
+        tdhDsInfoExample.setOrderByClause("sync_type DESC,startdown_time ASC");
         logger.info("tdhDsDTO:"+tdhDsDTO);
         TdhDsInfoExample.Criteria criteria = tdhDsInfoExample.createCriteria();
         TdhDsInfoExample.Criteria criteriaOR = tdhDsInfoExample.or();
@@ -133,6 +136,47 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (tdhDsDTO.getStartupTimems() != null && !("".equals(tdhDsDTO.getStartupTimems()))){
             criteria.andStartupTimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getStartupTimems()));
         }
+        if (tdhDsDTO.getSyncType() == 2){
+            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
+        }else if (tdhDsDTO.getSyncType() == 3){
+            criteria.andSyncTypeNotEqualTo(2);
+            if (tdhDsDTO.getCheckStatus() != null){
+                criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
+            }
+        }else{
+            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
+            if (tdhDsDTO.getCheckStatus() != null){
+                criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
+            }
+        }
+        if (tdhDsDTO.getDataMonth() != null && !("".equals(tdhDsDTO.getDataMonth()))){
+            criteria.andDataMonthEqualTo(tdhDsDTO.getDataMonth());
+        }
+        if (tdhDsDTO.getApplyerCode() != null && !("".equals(tdhDsDTO.getApplyerCode()))){
+            criteria.andApplyerCodeLike(tdhDsDTO.getApplyerCode());
+        }
+        if (tdhDsDTO.getAuditerCode() != null && !("".equals(tdhDsDTO.getAuditerCode()))){
+            criteria.andAuditerCodeLike(tdhDsDTO.getAuditerCode());
+        }
+        if (tdhDsDTO.getSyncerCode() != null && !("".equals(tdhDsDTO.getSyncerCode()))){
+            criteria.andSyncerCodeLike(tdhDsDTO.getSyncerCode());
+        }
+        if (tdhDsDTO.getDataTimes() != null && !("".equals(tdhDsDTO.getDataTimes()))){
+            criteria.andDataTimesLike(tdhDsDTO.getDataTimes());
+        }
+        if (tdhDsDTO.getAuditStartTimems() != null && !("".equals(tdhDsDTO.getAuditStartTimems()))){
+            criteria.andAuditTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditStartTimems()));
+        }
+        if (tdhDsDTO.getAuditEndTimems() != null && !("".equals(tdhDsDTO.getAuditEndTimems()))){
+            criteria.andAuditBegintimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditEndTimems()));
+        }
+        if (tdhDsDTO.getSyncStartTimems() != null && !("".equals(tdhDsDTO.getSyncStartTimems()))){
+            criteria.andSyncTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncStartTimems()));
+        }
+        if (tdhDsDTO.getSyncEndTimems() != null && !("".equals(tdhDsDTO.getSyncEndTimems()))){
+            criteria.andSyncBegintimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncEndTimems()));
+        }
+
 //        if (tdhDsDTO.getStartdownTime() != null ){
 //            criteria.andStartdownTimeGreaterThanOrEqualTo(tdhDsDTO.getStartdownTime());
 //        }
@@ -151,7 +195,7 @@ public class ThdDsServiceImpl implements TdhDsService {
             thdDsVO.setCentre(tdhDsDTO.getCentre());
             thdDsVO.setStartdownTimems(tdhDsDTO.getStartdownTimems());
             thdDsVO.setStartupTimems(tdhDsDTO.getStartupTimems());
-            thdDsVO.setTableNameTotal(tdhDsInfo1.getTableName()+format.format(tdhDsInfo1.getStartdownTime()));
+            thdDsVO.setTableNameTotal(tdhDsInfo1.getTableName()+tdhDsInfo1.getDataMonth().replace("-",""));
             tdhDsVOList.add(thdDsVO);
         }
         pageView.setRecords(tdhDsVOList);
@@ -165,7 +209,7 @@ public class ThdDsServiceImpl implements TdhDsService {
         for (TdhDsDTO tdhDsDTO:tdhDsDTOList){
             TdhDsInfo tdhDsInfo = new TdhDsInfo();
             BeanUtils.copyProperties(tdhDsDTO, tdhDsInfo);
-            System.out.println("111111111111111111111111tdhServicesjobInfo:"+tdhDsInfo);
+            logger.info("111111111111111111111111tdhServicesjobInfo:"+tdhDsInfo);
             int count = tdhDsInfoMapper.emptyThdDsData(tdhDsInfo);
             countNum = countNum + count;
         }
@@ -189,7 +233,7 @@ public class ThdDsServiceImpl implements TdhDsService {
                 TdhDsVO tdhDsVO = new TdhDsVO();
                 BeanUtils.copyProperties(tdhDsInfo, tdhDsVO);
                 tdhDsVO.setCentreTableName(tdhDsDTO.getCentreTableName());
-                tdhDsVO.setTableNameTotal(tdhDsInfo.getTableName()+format.format(tdhDsInfo.getStartdownTime()));
+                tdhDsVO.setTableNameTotal(tdhDsInfo.getTableName()+tdhDsInfo1.getDataMonth().replace("-",""));
                 tdhDsVOS.add(tdhDsVO);
                 tdhDsVOList.setTdhDsVOList(tdhDsVOS);
             }
@@ -214,7 +258,7 @@ public class ThdDsServiceImpl implements TdhDsService {
             TdhDsVO thdDsVO = new TdhDsVO();
             BeanUtils.copyProperties(tdhDsInfo, thdDsVO);
             thdDsVO.setCentre(tdhDsMonthsDTO.getCentre());
-            thdDsVO.setTableNameTotal(tdhDsInfo.getTableName()+tdhDsMonthsDTO.getStartdownTime().replace("-",""));
+            thdDsVO.setTableNameTotal(tdhDsInfo.getTableName()+tdhDsMonthsDTO.getDataMonth().replace("-",""));
             tdhDsVOList.add(thdDsVO);
         }
         pageView.setRecords(tdhDsVOList);
@@ -249,20 +293,20 @@ public class ThdDsServiceImpl implements TdhDsService {
 
     @Override
     @Transactional
-    public int updateTdhDsMonthsInfoS(Map<String, Object> models) throws Exception {
+    public int updateTdhDsInfoS(Map<String, Object> models) throws Exception {
         int state = 0;
         int auditStatus = 0;
         int countNum = 0;
-        TdhDsMonthsListDTO tdhDsMonthsListDTO = Tools.map2obj((Map<String, Object>)models.get("tdhDsMonthsListDTO"), TdhDsMonthsListDTO.class);
-        logger.info("tdhDsMonthsListDTO:"+tdhDsMonthsListDTO);
-        List<TdhDsMonthsDTO> tdhDsMonthsDTOS = tdhDsMonthsListDTO.getTdhDsMonthsDTOList();
-        if(tdhDsMonthsDTOS == null || tdhDsMonthsDTOS.size() == 0){
+        TdhDsListDTO tdhDsListDTO = Tools.map2obj((Map<String, Object>)models.get("tdhDsDTOS"), TdhDsListDTO.class);
+        logger.info("tdhDsDTOS:"+tdhDsListDTO);
+        List<TdhDsDTO> tdhDsDTOS = tdhDsListDTO.getTdhDsDTOList();
+        if(tdhDsDTOS == null || tdhDsDTOS.size() == 0){
             throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         if (models.get("userCode") == null || "".equals(models.get("userCode"))) {
-            if (models.get("operCode") == null || "".equals(models.get("operCode"))) {
+//            if (models.get("operCode") == null || "".equals(models.get("operCode"))) {
                 throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
-            }
+//            }
         }
         if (models.get("auditStatus") != null ) {
             auditStatus = Integer.valueOf(String.valueOf(models.get("auditStatus")));
@@ -270,28 +314,35 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (models.get("syncState") != null ) {
             state = Integer.valueOf(String.valueOf(models.get("syncState")));
         }
-        for (TdhDsMonthsDTO tdhDsMonthsDTO:tdhDsMonthsDTOS){
+        for (TdhDsDTO tdhDsDTO:tdhDsDTOS){
             if (models.get("userCode") != null ) {
-                tdhDsMonthsDTO.setUserCode(String.valueOf(models.get("userCode")));
+                tdhDsDTO.setUserCode(String.valueOf(models.get("userCode")));
             }
-            if (models.get("operCode") != null ) {
-                tdhDsMonthsDTO.setOperCode(String.valueOf(models.get("operCode")));
-                tdhDsMonthsDTO.setUserCode(null);
-            }
+//            if (models.get("operCode") != null ) {
+//                tdhDsDTO.setOperCode(String.valueOf(models.get("operCode")));
+//                tdhDsDTO.setUserCode(null);
+//            }
             if (models.get("auditStatus") != null ) {
-                tdhDsMonthsDTO.setAuditStatus(auditStatus);
+                tdhDsDTO.setAuditStatus(auditStatus);
                 if (auditStatus == 3 || auditStatus == 4) {
-                    tdhDsMonthsDTO.setAuditTime(new Date());
+                    tdhDsDTO.setAuditTime(new Date());
+                    tdhDsDTO.setAuditerCode(String.valueOf(models.get("userCode")));
+                }else if (auditStatus == 1){
+                    tdhDsDTO.setAuditBegintime(new Date());
+                    tdhDsDTO.setApplyerCode(String.valueOf(models.get("userCode")));
                 }
             }
             if (models.get("syncState") != null ) {
-                tdhDsMonthsDTO.setState(state);
+                tdhDsDTO.setState(state);
                 if (state == 2 || state == 3) {
-                    tdhDsMonthsDTO.setSyncTime(new Date());
+                    tdhDsDTO.setSyncTime(new Date());
+                }else if (state == 1){
+                    tdhDsDTO.setSyncBegintime(new Date());
+                    tdhDsDTO.setSyncerCode(String.valueOf(models.get("userCode")));
                 }
             }
-            System.out.println("222222222222222222222"+tdhDsMonthsDTO);
-           int count = tdhDsInfoMapper.updateTdhDsMonthsInfo(tdhDsMonthsDTO);
+            logger.info("222222222222222222222"+tdhDsDTO);
+           int count = tdhDsInfoMapper.updateTdhDsInfo(tdhDsDTO);
             countNum = countNum + count;
         }
         return countNum;
@@ -303,5 +354,68 @@ public class ThdDsServiceImpl implements TdhDsService {
             throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
         return tdhDsInfoMapper.countTdhDsDataByAuditStatusAndState(tdhDsDTO);
+    }
+
+    @Override
+    @Transactional
+    public int updateThdDsData(String centre) throws Exception {
+        int count = 0;
+        TdhDsInfo tdhDsInfo = new TdhDsInfo();
+            if ("B".equals(centre)){
+                tdhDsInfo.setCentreTableName("tdhb_ds_info");
+            }else {
+                tdhDsInfo.setCentreTableName("tdha_ds_info");
+            }
+        cal.setTime(new Date());
+        cal.add(Calendar.MONTH, -1);
+        tdhDsInfo.setDataMonth(format1.format(cal.getTime()));
+        logger.info("tdhDsInfo:"+tdhDsInfo);
+        tdhDsInfo.setSyncType(0);//copytable
+        tdhDsInfo.setCheckStatus(0);//可见可操作
+        //查看上个月每张表还有多少copytable没有做完
+        List<Map<String,Object>> tdhDsInfoCountMapList = tdhDsInfoMapper.countStateNotSuccess(tdhDsInfo);
+        tdhDsInfo.setCheckStatus(1);//不可见不可操作
+        List<String> tableNameList = new ArrayList<String>();
+        logger.info("tdhDsInfoCountMapList:"+tdhDsInfoCountMapList);
+        for (Map<String,Object> tdhDsInfoCountMap : tdhDsInfoCountMapList){
+            logger.info("tdhDsInfoCountMap:"+tdhDsInfoCountMap);
+            if (Integer.valueOf(tdhDsInfoCountMap.get("count").toString()) > 1){
+                tdhDsInfo.setTableName(tdhDsInfoCountMap.get("tableName").toString());
+                tableNameList.add(tdhDsInfoCountMap.get("tableName").toString());
+//                给copytable方式没有同步成功的修改状态（0:可见可操作1：不可见不可操作）
+                count += tdhDsInfoMapper.updateThdDsInfoNotSuccessCheckStatus(tdhDsInfo);
+            }
+        }
+        //根据筛选出来的表名，添加一条snapshot类型的数据（将未进行copytable的时间段  结合起来）
+        Date now = new Date();
+        for (String tablename : tableNameList) {
+            List<String> datatimeslist = new ArrayList<String>();
+            tdhDsInfo.setTableName(tablename);
+            tdhDsInfo.setSyncType(2);//total
+            tdhDsInfo.setCheckStatus(null);
+            List<TdhDsInfo> tdhDsInfoTotalList =  tdhDsInfoMapper.selectTdhServicesDsInfoByDTO(tdhDsInfo);
+            for (TdhDsInfo tdhDsInfoTotal : tdhDsInfoTotalList){
+                tdhDsInfo.setPid(tdhDsInfoTotal.getId());
+                tdhDsInfo.setSyncType(0);//copytable
+                tdhDsInfo.setCheckStatus(1);//不可见不可操作
+                List<TdhDsInfo> tdhDsInfoCopyList =  tdhDsInfoMapper.selectTdhServicesDsInfoByDTO(tdhDsInfo);
+                if (!(null == tdhDsInfoCopyList || tdhDsInfoCopyList.size() ==0)){
+                    datatimeslist.add(sdf.format(tdhDsInfoCopyList.get(0).getStartdownTime())+"-"+sdf.format(tdhDsInfoCopyList.get(tdhDsInfoCopyList.size()-1).getStartupTime()));
+                }
+            }
+            tdhDsInfo.setDataTimes(StringUtils.strip(datatimeslist.toString(),"[]"));
+            tdhDsInfo.setSyncType(1);//snapshot
+            tdhDsInfo.setCheckStatus(0);//可见可操作
+            tdhDsInfo.setId(KeyUtil.genUniqueKey() + UUIDUtils.getUUID());
+            tdhDsInfo.setPid(null);
+            tdhDsInfo.setCreattime(now);
+            tdhDsInfo.setType(0);
+            count += tdhDsInfoMapper.insertSelective(tdhDsInfo);
+            tdhDsInfo.setDataTimes(null);
+            tdhDsInfo.setId(null);
+            tdhDsInfo.setCreattime(null);
+            tdhDsInfo.setType(null);
+        }
+        return count;
     }
 }
