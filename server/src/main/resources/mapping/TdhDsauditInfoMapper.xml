@@ -16,6 +16,8 @@
     <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="sync_type" property="syncType" jdbcType="INTEGER" />
+    <result column="data_times" property="dataTimes" jdbcType="VARCHAR" />
+    <result column="data_day" property="dataDay" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, table_name, creattime, audit_status, audit_notes, audit_time, auditer_code, applyer_code, 
-    apply_time, applysync_time, table_nameall, last_check, type, sync_type
+    apply_time, applysync_time, table_nameall, last_check, type, sync_type, data_times, data_day
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhDsauditInfomodel.TdhDsauditInfoExample" >
     select
@@ -115,12 +117,12 @@
       audit_status, audit_notes, audit_time, 
       auditer_code, applyer_code, apply_time, 
       applysync_time, table_nameall, last_check, 
-      type, sync_type)
+      type, sync_type, data_times, data_day)
     values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
       #{auditStatus,jdbcType=INTEGER}, #{auditNotes,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
       #{auditerCode,jdbcType=VARCHAR}, #{applyerCode,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, 
       #{applysyncTime,jdbcType=VARCHAR}, #{tableNameall,jdbcType=VARCHAR}, #{lastCheck,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER},#{syncType,jdbcType=INTEGER})
+      #{type,jdbcType=INTEGER},#{syncType,jdbcType=INTEGER},#{dataTimes,jdbcType=VARCHAR}, #{dataDay,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.tdhDsauditInfomodel.TdhDsauditInfo" >
     insert into tdha_dsaudit_info
@@ -167,6 +169,12 @@
       <if test="syncType != null" >
         sync_type,
       </if>
+      <if test="dataTimes != null" >
+        data_times,
+      </if>
+      <if test="dataDay != null" >
+        data_day,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -210,6 +218,12 @@
       </if>
       <if test="syncType != null" >
         #{syncType,jdbcType=INTEGER},
+      </if>
+      <if test="dataTimes != null" >
+        #{dataTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="dataDay != null" >
+        #{dataDay,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -264,6 +278,12 @@
       <if test="record.syncType != null" >
         sync_type = #{record.syncType,jdbcType=INTEGER},
       </if>
+      <if test="record.dataTimes != null" >
+        data_times = #{record.dataTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataDay != null" >
+        data_day = #{record.dataDay,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -284,7 +304,9 @@
       table_nameall = #{record.tableNameall,jdbcType=VARCHAR},
       last_check = #{record.lastCheck,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=INTEGER},
-      sync_type = #{record.syncType,jdbcType=INTEGER}
+      sync_type = #{record.syncType,jdbcType=INTEGER},
+    data_times = #{record.dataTimes,jdbcType=VARCHAR},
+    data_day = #{record.dataDay,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -331,6 +353,12 @@
       <if test="syncType != null" >
         sync_type = #{syncType,jdbcType=INTEGER},
       </if>
+      <if test="dataTimes != null" >
+        data_times = #{dataTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="dataDay != null" >
+        data_day = #{dataDay,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -348,7 +376,9 @@
       table_nameall = #{tableNameall,jdbcType=VARCHAR},
       last_check = #{lastCheck,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      sync_type = #{syncType,jdbcType=INTEGER}
+      sync_type = #{syncType,jdbcType=INTEGER},
+      data_times = #{dataTimes,jdbcType=VARCHAR},
+      data_day = #{dataDay,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="countTdhDsauditDataoByAuditStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer" >

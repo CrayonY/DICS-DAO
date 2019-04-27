@@ -44,4 +44,8 @@ public class TdhDsauditDTO {
 
     private Integer syncType;
 
+    private String dataTimes;
+
+    private String dataDay;
+
 }

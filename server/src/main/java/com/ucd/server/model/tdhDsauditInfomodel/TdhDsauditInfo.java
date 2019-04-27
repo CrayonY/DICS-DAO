@@ -33,5 +33,9 @@ public class TdhDsauditInfo {
 
     private Integer syncType;
 
+    private String dataTimes;
+
+    private String dataDay;
+
 
 }
