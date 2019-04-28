@@ -108,7 +108,7 @@ public class ThdDsServiceImpl implements TdhDsService {
         List<TdhDsVO> tdhDsVOList = new ArrayList<TdhDsVO>();
         TdhDsInfoExample tdhDsInfoExample = new TdhDsInfoExample();
         tdhDsInfoExample.setCentreTableName(tdhDsDTO.getCentreTableName());
-        tdhDsInfoExample.setOrderByClause("sync_type DESC,startdown_time ASC");
+        tdhDsInfoExample.setOrderByClause("state DESC,sync_type DESC,startdown_time ASC");
         logger.info("tdhDsDTO:"+tdhDsDTO);
         TdhDsInfoExample.Criteria criteria = tdhDsInfoExample.createCriteria();
         TdhDsInfoExample.Criteria criteriaOR = tdhDsInfoExample.or();
@@ -228,7 +228,7 @@ public class ThdDsServiceImpl implements TdhDsService {
             List<TdhDsVO> tdhDsVOS = new ArrayList<TdhDsVO>();
             TdhDsInfo tdhDsInfo1 = new TdhDsInfo();
             BeanUtils.copyProperties(tdhDsDTO, tdhDsInfo1);
-            List<TdhDsInfo> tdhDsInfoList =  tdhDsInfoMapper.selectTdhDsInfo(tdhDsInfo1);//全部数据
+            List<TdhDsInfo> tdhDsInfoList =  tdhDsInfoMapper.selectTdhServicesDsInfoByDTO(tdhDsInfo1);//全部数据
             for (TdhDsInfo tdhDsInfo:tdhDsInfoList){
                 TdhDsVO tdhDsVO = new TdhDsVO();
                 BeanUtils.copyProperties(tdhDsInfo, tdhDsVO);

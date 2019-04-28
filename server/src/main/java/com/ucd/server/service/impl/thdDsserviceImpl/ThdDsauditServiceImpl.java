@@ -126,7 +126,6 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
         }
         int countNum = 0;
         String ID = KeyUtil.genUniqueKey();
-        String UUID = UUIDUtils.getUUID();
         Date now = new Date();
         for (TdhDsauditDTO tdhDsauditDTO:tdhDsauditDTOList){
             TdhDsauditInfo tdhDsauditInfo = new TdhDsauditInfo();
