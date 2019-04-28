@@ -556,9 +556,9 @@
       <if test="pid != null" >
          and pid = #{pid,jdbcType=VARCHAR}
       </if>
-      <if test="dataTimes != null" >
-         and data_times = #{dataTimes,jdbcType=VARCHAR}
-      </if>
+      <!--<if test="dataTimes != null" >-->
+         <!--and data_times = #{dataTimes,jdbcType=VARCHAR}-->
+      <!--</if>-->
       <if test="auditBegintime != null" >
          and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
       </if>
@@ -874,7 +874,7 @@
         <if test="syncType != null" >
             and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-        <if test="dataDay != null" >
+        <if test="dataDay != null and dataDay != ''" >
             AND date_format(startdown_time,'%Y-%m-%d') = #{dataDay,jdbcType=VARCHAR}
         </if>
         <!--<if test="auditBegintime != null" >-->
