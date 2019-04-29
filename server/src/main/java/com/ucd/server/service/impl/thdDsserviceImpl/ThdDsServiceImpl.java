@@ -233,7 +233,7 @@ public class ThdDsServiceImpl implements TdhDsService {
                 TdhDsVO tdhDsVO = new TdhDsVO();
                 BeanUtils.copyProperties(tdhDsInfo, tdhDsVO);
                 tdhDsVO.setCentreTableName(tdhDsDTO.getCentreTableName());
-                tdhDsVO.setTableNameTotal(tdhDsInfo.getTableName()+tdhDsInfo1.getDataMonth().replace("-",""));
+                tdhDsVO.setTableNameTotal(tdhDsInfo.getTableName()+tdhDsInfo.getDataMonth().replace("-",""));
                 tdhDsVOS.add(tdhDsVO);
                 tdhDsVOList.setTdhDsVOList(tdhDsVOS);
             }
