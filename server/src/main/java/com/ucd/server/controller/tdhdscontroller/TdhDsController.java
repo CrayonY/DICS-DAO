@@ -78,7 +78,6 @@ public class TdhDsController {
             return resultVO;
         }
     }
-
     @PostMapping(value = "/emptyThdDsListData")
     public  ResultVO emptyThdDsListData(@RequestBody List<TdhDsDTO> tdhDsDTOList) {
         int resultCount ;
@@ -139,23 +138,23 @@ public class TdhDsController {
         }
     }
 
-    @PostMapping(value = "/getTdhDsMonthsInfoS")
-    public  ResultVO getTdhDsMonthsInfoS(@RequestBody List<TdhDsMonthsDTO> tdhDsMonthsDTOS) {
-        logger.info("进入controller啦——————————————");
-        List<TdhDsListVO> tdhServicesJobListVOS = new ArrayList<TdhDsListVO>();
-        ResultVO resultVO = new ResultVO();
-        try {
-            tdhServicesJobListVOS = tdhDsservice.getTdhDsMonthsInfoS(tdhDsMonthsDTOS);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhServicesJobListVOS);
-            logger.info("resultVO:"+resultVO);
-            return resultVO;
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
-            return resultVO;
-        }
-    }
+//    @PostMapping(value = "/getTdhDsMonthsInfoS")
+//    public  ResultVO getTdhDsMonthsInfoS(@RequestBody List<TdhDsMonthsDTO> tdhDsMonthsDTOS) {
+//        logger.info("进入controller啦——————————————");
+//        List<TdhDsListVO> tdhServicesJobListVOS = new ArrayList<TdhDsListVO>();
+//        ResultVO resultVO = new ResultVO();
+//        try {
+//            tdhServicesJobListVOS = tdhDsservice.getTdhDsMonthsInfoS(tdhDsMonthsDTOS);
+//            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhServicesJobListVOS);
+//            logger.info("resultVO:"+resultVO);
+//            return resultVO;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            resultVO = ResultVOUtil.error(e);
+//            logger.info("resultVO:"+resultVO);
+//            return resultVO;
+//        }
+//    }
 
     @PostMapping(value = "/updateTdhDsInfoS")
     public  ResultVO updateTdhDsInfoS(@RequestBody Map<String, Object> models) {

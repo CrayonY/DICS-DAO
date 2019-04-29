@@ -173,7 +173,7 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
             }
             TdhDsauditInfo tdhDsauditInfo = new TdhDsauditInfo();
             BeanUtils.copyProperties(tdhDsauditDTO, tdhDsauditInfo);
-            if (tdhDsauditInfo.getAuditStatus() == 1 || tdhDsauditInfo.getAuditStatus() == 2) {
+            if (tdhDsauditInfo.getAuditStatus() == 3 || tdhDsauditInfo.getAuditStatus() == 4) {
                 tdhDsauditInfo.setAuditTime(new Date());
             }
             int count = tdhDsauditInfoMapper.updateByPrimaryKeySelective(tdhDsauditInfo);

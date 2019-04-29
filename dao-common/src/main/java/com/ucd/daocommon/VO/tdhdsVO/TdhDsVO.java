@@ -62,4 +62,6 @@ public class TdhDsVO {
 
     private Date syncBegintime;
 
+    private String dataDay;
+
 }
