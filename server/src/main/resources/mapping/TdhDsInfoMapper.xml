@@ -532,9 +532,9 @@
       <if test="syncTime != null" >
          and sync_time = #{syncTime,jdbcType=TIMESTAMP}
       </if>
-      <if test="userCode != null and userCode != ''" >
-         and user_code = #{userCode,jdbcType=VARCHAR}
-      </if>
+      <!--<if test="userCode != null and userCode != ''" >-->
+         <!--and user_code = #{userCode,jdbcType=VARCHAR}-->
+      <!--</if>-->
       <if test="dataMonth != null and dataMonth != ''" >
           and data_month = #{dataMonth,jdbcType=VARCHAR}
       </if>
