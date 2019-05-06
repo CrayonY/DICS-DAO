@@ -42,6 +42,8 @@ public class ThdDsServiceImpl implements TdhDsService {
 
     DateFormat format1 = new SimpleDateFormat("yyyy-MM");
 
+    public DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+
     Calendar cal = Calendar.getInstance();
 
     @Autowired
@@ -232,6 +234,9 @@ public class ThdDsServiceImpl implements TdhDsService {
             for (TdhDsInfo tdhDsInfo:tdhDsInfoList){
                 TdhDsVO tdhDsVO = new TdhDsVO();
                 BeanUtils.copyProperties(tdhDsInfo, tdhDsVO);
+                if(tdhDsInfo.getSyncType() == 0){
+                    tdhDsVO.setDataDay(format2.format(tdhDsInfo.getStartdownTime()));
+                }
                 tdhDsVO.setCentreTableName(tdhDsDTO.getCentreTableName());
                 tdhDsVO.setTableNameTotal(tdhDsInfo.getTableName()+tdhDsInfo.getDataMonth().replace("-",""));
                 tdhDsVOS.add(tdhDsVO);
@@ -314,6 +319,7 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (models.get("syncState") != null ) {
             state = Integer.valueOf(String.valueOf(models.get("syncState")));
         }
+        TdhDsDTO tdhDsDTOtatol = new TdhDsDTO();
         for (TdhDsDTO tdhDsDTO:tdhDsDTOS){
             if (models.get("userCode") != null ) {
                 tdhDsDTO.setUserCode(String.valueOf(models.get("userCode")));
@@ -334,7 +340,7 @@ public class ThdDsServiceImpl implements TdhDsService {
             }
             if (models.get("syncState") != null ) {
                 tdhDsDTO.setState(state);
-                if (state == 2 || state == 3) {
+                if (state == 2) {
                     tdhDsDTO.setSyncTime(new Date());
                 }else if (state == 1){
                     tdhDsDTO.setSyncBegintime(new Date());
@@ -344,6 +350,35 @@ public class ThdDsServiceImpl implements TdhDsService {
             logger.info("222222222222222222222"+tdhDsDTO);
            int count = tdhDsInfoMapper.updateTdhDsInfo(tdhDsDTO);
             countNum = countNum + count;
+            if (models.get("syncState") != null ) {
+                tdhDsDTO.setState(state);
+                if (state == 3) {
+                    tdhDsDTO.setSyncTime(new Date());
+                    tdhDsDTO.setUserCode("("+tdhDsDTO+")");
+                    countNum = countNum + tdhDsInfoMapper.updateTdhDsInfoFail(tdhDsDTO);
+                }
+            }
+
+            if (state == 2){
+                if (tdhDsDTO.getSyncType() == 0) {//copytable   如果同一个pid中状态都是已同步，则说明整个任务都完成了
+                    long countUnSync = tdhDsInfoMapper.countUnSyncbyPID(tdhDsDTO);
+                    if (countUnSync == 0){
+                        tdhDsDTOtatol.setCentreTableName(tdhDsDTO.getCentreTableName());
+                        tdhDsDTOtatol.setId(tdhDsDTO.getPid());
+                        tdhDsDTOtatol.setState(state);
+                        countNum = countNum + tdhDsInfoMapper.updateTdhDsInfo(tdhDsDTOtatol);
+                    }
+                }else if (tdhDsDTO.getSyncType() == 1){//snapshot   表明整个月的a表数据都已经同步，那这个月的所有a表任务都完成了
+                    tdhDsDTOtatol.setCentreTableName(tdhDsDTO.getCentreTableName());
+                    tdhDsDTOtatol.setTableNameTotal(tdhDsDTO.getTableNameTotal());
+                    tdhDsDTOtatol.setTableName(tdhDsDTO.getTableName());
+                    tdhDsDTOtatol.setDataMonth(tdhDsDTO.getDataMonth());
+                    tdhDsDTOtatol.setSyncType(2);
+                    tdhDsDTOtatol.setSyncTime(tdhDsDTO.getSyncTime());
+                    tdhDsDTOtatol.setState(state);
+                    countNum = countNum + tdhDsInfoMapper.updateTdhDsInfo(tdhDsDTOtatol);
+                }
+            }
         }
         return countNum;
     }
@@ -417,5 +452,114 @@ public class ThdDsServiceImpl implements TdhDsService {
             tdhDsInfo.setType(null);
         }
         return count;
+    }
+
+    @Override
+    public List<TdhDsVO> getThdDsData(TdhDsDTO tdhDsDTO) throws Exception {
+        Gson gs = new Gson();
+        List<TdhDsVO> tdhDsVOList = new ArrayList<TdhDsVO>();
+        TdhDsInfoExample tdhDsInfoExample = new TdhDsInfoExample();
+        tdhDsInfoExample.setCentreTableName(tdhDsDTO.getCentreTableName());
+        tdhDsInfoExample.setOrderByClause("state DESC,sync_type DESC,startdown_time ASC");
+        logger.info("tdhDsDTO:"+tdhDsDTO);
+        TdhDsInfoExample.Criteria criteria = tdhDsInfoExample.createCriteria();
+        TdhDsInfoExample.Criteria criteriaOR = tdhDsInfoExample.or();
+        if (tdhDsDTO.getId() != null && !("".equals(tdhDsDTO.getId()))){
+            criteria.andIdLike("%"+tdhDsDTO.getId()+"%");
+        }
+        if (tdhDsDTO.getTableName() != null && !("".equals(tdhDsDTO.getTableName()))){
+            criteria.andTableNameLike("%"+tdhDsDTO.getTableName()+"%");
+        }
+        if (tdhDsDTO.getState() != null ){
+            criteria.andStateEqualTo(tdhDsDTO.getState());
+        }
+        if (tdhDsDTO.getAuditStatus() != null ){
+            criteria.andAuditStatusEqualTo(tdhDsDTO.getAuditStatus());
+        }
+        if (tdhDsDTO.getType() != null ){
+            criteria.andTypeEqualTo(tdhDsDTO.getType());
+        }
+        if (tdhDsDTO.getCreattime() != null ){
+            criteria.andCreattimeEqualTo(tdhDsDTO.getCreattime());
+        }
+        if (tdhDsDTO.getStartdownTimems() != null && !("".equals(tdhDsDTO.getStartdownTimems()))){
+            criteria.andStartdownTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getStartdownTimems()));
+        }
+        if (tdhDsDTO.getStartupTimems() != null && !("".equals(tdhDsDTO.getStartupTimems()))){
+            criteria.andStartupTimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getStartupTimems()));
+        }
+//        if (tdhDsDTO.getSyncType() == 2){
+//            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
+//        }else if (tdhDsDTO.getSyncType() == 3){
+//            criteria.andSyncTypeNotEqualTo(2);
+//            if (tdhDsDTO.getCheckStatus() != null){
+//                criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
+//            }
+//        }else{
+//            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
+//            if (tdhDsDTO.getCheckStatus() != null){
+//                criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
+//            }
+//        }
+        if (tdhDsDTO.getDataMonth() != null && !("".equals(tdhDsDTO.getDataMonth()))){
+            criteria.andDataMonthEqualTo(tdhDsDTO.getDataMonth());
+        }
+        if (tdhDsDTO.getApplyerCode() != null && !("".equals(tdhDsDTO.getApplyerCode()))){
+            criteria.andApplyerCodeLike(tdhDsDTO.getApplyerCode());
+        }
+        if (tdhDsDTO.getAuditerCode() != null && !("".equals(tdhDsDTO.getAuditerCode()))){
+            criteria.andAuditerCodeLike(tdhDsDTO.getAuditerCode());
+        }
+        if (tdhDsDTO.getSyncerCode() != null && !("".equals(tdhDsDTO.getSyncerCode()))){
+            criteria.andSyncerCodeLike(tdhDsDTO.getSyncerCode());
+        }
+        if (tdhDsDTO.getDataTimes() != null && !("".equals(tdhDsDTO.getDataTimes()))){
+            criteria.andDataTimesLike(tdhDsDTO.getDataTimes());
+        }
+        if (tdhDsDTO.getAuditStartTimems() != null && !("".equals(tdhDsDTO.getAuditStartTimems()))){
+            criteria.andAuditTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditStartTimems()));
+        }
+        if (tdhDsDTO.getAuditEndTimems() != null && !("".equals(tdhDsDTO.getAuditEndTimems()))){
+            criteria.andAuditBegintimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditEndTimems()));
+        }
+        if (tdhDsDTO.getSyncStartTimems() != null && !("".equals(tdhDsDTO.getSyncStartTimems()))){
+            criteria.andSyncTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncStartTimems()));
+        }
+        if (tdhDsDTO.getSyncEndTimems() != null && !("".equals(tdhDsDTO.getSyncEndTimems()))){
+            criteria.andSyncBegintimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncEndTimems()));
+        }
+
+
+        List<TdhDsInfo> tdhDsInfoList =  tdhDsInfoMapper.selectByExample(tdhDsInfoExample);
+//        System.out.println("11111:"+tdhDsInfoList.toString());
+        for (TdhDsInfo tdhDsInfo1 : tdhDsInfoList){
+            TdhDsVO thdDsVO = new TdhDsVO();
+            BeanUtils.copyProperties(tdhDsInfo1, thdDsVO);
+            thdDsVO.setCentre(tdhDsDTO.getCentre());
+            thdDsVO.setStartdownTimems(tdhDsDTO.getStartdownTimems());
+            thdDsVO.setStartupTimems(tdhDsDTO.getStartupTimems());
+            thdDsVO.setTableNameTotal(tdhDsInfo1.getTableName()+tdhDsInfo1.getDataMonth().replace("-",""));
+            tdhDsVOList.add(thdDsVO);
+        }
+        return tdhDsVOList;
+    }
+
+    @Override
+    public int updateTdhDsInfoByIds(List<TdhDsDTO> tdhDsDTOList) throws Exception {
+        if(tdhDsDTOList == null || tdhDsDTOList.size() == 0){
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        }
+        int countNum = 0;
+        for (TdhDsDTO tdhDsDTO:tdhDsDTOList){
+            if(tdhDsDTO.getCentreTableName() == null || "".equals(tdhDsDTO.getCentreTableName())){
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+            }
+            TdhDsInfo tdhDsInfo = new TdhDsInfo();
+            BeanUtils.copyProperties(tdhDsDTO, tdhDsInfo);
+            int count = tdhDsInfoMapper.updateByPrimaryKeySelective(tdhDsInfo);
+            countNum = countNum + count;
+        }
+
+        return countNum;
     }
 }

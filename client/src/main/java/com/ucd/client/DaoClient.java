@@ -64,6 +64,9 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getThdDsListDataS")
     public  ResultVO getThdDsListDataS(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getThdDsListData")
+    public  ResultVO getThdDsListData(@RequestBody TdhDsDTO tdhDsDTO);
+
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsMonthsInfo")
     public ResultVO getTdhDsMonthsInfo(@RequestBody Map<String, Object> models);
 
@@ -167,6 +170,9 @@ public interface DaoClient {
 
     @RequestMapping(value="/server-0.0.1-SNAPSHOT/TdhDSDao/updateThdDsData",method= RequestMethod.POST)
     public ResultVO updateThdDsData(@RequestParam(value = "centre",required = true) String centre);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/updateTdhDsInfoByIds")
+    public  ResultVO updateTdhDsInfoByIds(@RequestBody List<TdhDsDTO> tdhDsDTOList);
     @Component
     static class ProductClientFallback implements DaoClient {
 
@@ -230,6 +236,11 @@ public interface DaoClient {
 
         @Override
         public ResultVO getThdDsListDataS(List<TdhDsDTO> tdhDsDTOList) { return null; }
+
+        @Override
+        public ResultVO getThdDsListData(TdhDsDTO tdhDsDTO) {
+            return null;
+        }
 
         @Override
         public ResultVO getTdhDsMonthsInfo(Map<String, Object> models) {
@@ -396,6 +407,11 @@ public interface DaoClient {
 
         @Override
         public ResultVO updateThdDsData(String centre) {
+            return null;
+        }
+
+        @Override
+        public ResultVO updateTdhDsInfoByIds(List<TdhDsDTO> tdhDsDTOList) {
             return null;
         }
     }

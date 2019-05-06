@@ -55,4 +55,8 @@ public interface TdhDsInfoMapper {
     int updateThdDsInfoNotSuccessCheckStatus(TdhDsInfo tdhDsInfo);//给没有同步成功的修改状态（0:可见可操作1：不可见不可操作）
 
     int updateTdhDsInfo(TdhDsDTO tdhDsDTO);//修改审核状态，同步状态
+
+    int updateTdhDsInfoFail(TdhDsDTO tdhDsDTO);//将所有进行中的同步 全部转为失败
+
+    long countUnSyncbyPID(TdhDsDTO tdhDsDTO);//按照指定pid查看未完成的数量
 }

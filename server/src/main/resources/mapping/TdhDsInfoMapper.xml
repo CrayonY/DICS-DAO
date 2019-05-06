@@ -830,12 +830,12 @@
             <!--<if test="operCode != null" >-->
                 <!--user_code = concat_ws(',',user_code,#{operCode,jdbcType=VARCHAR}),-->
             <!--</if>-->
-            <if test="dataMonth != null" >
-            data_month = #{dataMonth,jdbcType=VARCHAR},
-        </if>
-        <if test="syncType != null" >
-            sync_type = #{syncType,jdbcType=INTEGER},
-        </if>
+            <!--<if test="dataMonth != null" >-->
+            <!--data_month = #{dataMonth,jdbcType=VARCHAR},-->
+        <!--</if>-->
+        <!--<if test="syncType != null" >-->
+            <!--sync_type = #{syncType,jdbcType=INTEGER},-->
+        <!--</if>-->
         <if test="checkStatus != null" >
             check_status = #{checkStatus,jdbcType=INTEGER},
         </if>
@@ -883,6 +883,24 @@
         <!--<if test="syncBegintime != null" >-->
             <!--and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}-->
         <!--</if>-->
+    </update>
+
+
+    <update id="updateTdhDsInfoFail" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
+        update ${centreTableName}
+        <set >
+            <if test="state != null" >
+                state = #{state,jdbcType=INTEGER},
+            </if>
+
+            <if test="syncTime != null" >
+                sync_time = #{syncTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCode != null and userCode != ''" >
+                user_code = concat_ws(',',user_code,#{userCode,jdbcType=VARCHAR}),
+            </if>
+        </set>
+        WHERE 1=1 and state = 1
     </update>
 
     <select id="countTdhDsDataByAuditStatusAndState" resultType="java.lang.Integer" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO" >
@@ -1122,5 +1140,13 @@
             and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
         </if>
     </update>
+
+    <select id="countUnSyncbyPID" resultType="java.lang.Long" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO" >
+        select count(*)
+        FROM ${centreTableName}
+        WHERE 1=1
+        AND pid = #{pid,jdbcType=VARCHAR}
+        AND state &lt;&gt; 2
+    </select>
 
 </mapper>
