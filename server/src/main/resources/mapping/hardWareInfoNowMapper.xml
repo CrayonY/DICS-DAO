@@ -52,6 +52,35 @@
       </foreach>
     </where>
   </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List">
     id, host, num, nip, intime, creattime, cpucount, cpuusedper, cpustatus, diskcount, 
     diskusedper, diskstatus, memcount, memusedper, memstatus, nicinout, nicstatus, nicids, 
@@ -411,4 +440,126 @@
             and intime &lt;= #{endTimems,jdbcType=VARCHAR}
         </if>
     </select>
+
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from hard_ware_info_now
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+
+  </select>
+
+  <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample" resultType="java.lang.Integer" >
+    select count(*) from hard_ware_info_now
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hard_ware_info_now
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.host != null" >
+        host = #{record.host,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.nip != null" >
+        nip = #{record.nip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intime != null" >
+        intime = #{record.intime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creattime != null" >
+        creattime = #{record.creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cpucount != null" >
+        cpucount = #{record.cpucount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpuusedper != null" >
+        cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpustatus != null" >
+        cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diskcount != null" >
+        diskcount = #{record.diskcount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskusedper != null" >
+        diskusedper = #{record.diskusedper,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskstatus != null" >
+        diskstatus = #{record.diskstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memcount != null" >
+        memcount = #{record.memcount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memusedper != null" >
+        memusedper = #{record.memusedper,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memstatus != null" >
+        memstatus = #{record.memstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nicinout != null" >
+        nicinout = #{record.nicinout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nicstatus != null" >
+        nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nicids != null" >
+        nicids = #{record.nicids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pids != null" >
+        pids = #{record.pids,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+  <update id="updateByExample" parameterType="map" >
+    update hard_ware_info_now
+    set id = #{record.id,jdbcType=VARCHAR},
+    host = #{record.host,jdbcType=VARCHAR},
+    num = #{record.num,jdbcType=INTEGER},
+    nip = #{record.nip,jdbcType=VARCHAR},
+    intime = #{record.intime,jdbcType=VARCHAR},
+    creattime = #{record.creattime,jdbcType=TIMESTAMP},
+    cpucount = #{record.cpucount,jdbcType=DOUBLE},
+    cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
+    cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
+    diskcount = #{record.diskcount,jdbcType=DOUBLE},
+    diskusedper = #{record.diskusedper,jdbcType=DOUBLE},
+    diskstatus = #{record.diskstatus,jdbcType=VARCHAR},
+    memcount = #{record.memcount,jdbcType=DOUBLE},
+    memusedper = #{record.memusedper,jdbcType=DOUBLE},
+    memstatus = #{record.memstatus,jdbcType=VARCHAR},
+    nicinout = #{record.nicinout,jdbcType=VARCHAR},
+    nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
+    nicids = #{record.nicids,jdbcType=VARCHAR},
+    pids = #{record.pids,jdbcType=VARCHAR},
+    starttime = #{record.starttime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
 </mapper>

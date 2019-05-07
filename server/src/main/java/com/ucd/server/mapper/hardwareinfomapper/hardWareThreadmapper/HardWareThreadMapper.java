@@ -30,4 +30,6 @@ public interface HardWareThreadMapper {
     int updateByPrimaryKey(HardWareThread record);
 
     List<HardWareThread> selectByHost(String host);
+
+    List<HardWareThread> selectHardWareHealthStatusByTime(HardWareThread hardWareThread);
 }

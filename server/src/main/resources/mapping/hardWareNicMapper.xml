@@ -295,4 +295,34 @@
     from hard_ware_nic_now
     where host = #{host,jdbcType=VARCHAR}
   </select>
+
+
+  <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic" >
+    select
+    <include refid="Base_Column_List" />
+    from(
+    select <include refid="Base_Column_List" />
+    from hard_ware_nic where 1=1
+    <if test="host != null" >
+      AND host = #{host,jdbcType=VARCHAR}
+    </if>
+    <if test="checktimeStart != null and checktimeStart != ''">
+      and checktime &gt;= #{checktimeStart,jdbcType=VARCHAR}
+    </if>
+    <if test="checktimeEnd != null and checktimeEnd != ''">
+      and checktime &lt;= #{checktimeEnd,jdbcType=VARCHAR}
+    </if>
+    ) a
+    WHERE 1=1
+    <if test="secondStart != null and secondStart != ''">
+      and DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
+    </if>
+
+    <if test="secondEnd != null and secondEnd != ''">
+      OR DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
+    </if>
+
+  </select>
+
+
 </mapper>

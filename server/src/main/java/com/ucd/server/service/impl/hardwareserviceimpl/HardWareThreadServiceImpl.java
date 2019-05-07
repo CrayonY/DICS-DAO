@@ -1,8 +1,11 @@
 package com.ucd.server.service.impl.hardwareserviceimpl;
 
 import com.github.pagehelper.PageHelper;
+import com.ucd.common.VO.ResultVO;
+import com.ucd.common.result.ApiResultType;
 import com.ucd.common.utils.StringTool;
 import com.ucd.common.utils.pager.PageView;
+import com.ucd.daocommon.DTO.hardwareDTO.HardwareNicDTO;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareThreadDTO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareNicVO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareThreadVO;
@@ -80,5 +83,31 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
             pageView.setRecords(hardWareThreadList);
         }
         return pageView;
+    }
+
+    @Override
+    public ResultVO<?> getHardWareThreadNow(String host) {
+        List<HardWareThread> hardWareThreadList = new ArrayList<>();
+        List<HardwareThreadVO> hardwareThreadVOList = new ArrayList<>();
+        try{
+            HardWareThreadExample hardWareThreadExample = new HardWareThreadExample();
+            hardWareThreadExample.createCriteria().andHostEqualTo(host);
+            hardWareThreadExample.setTableName("hard_ware_thread");
+
+            // 获取信息
+            hardWareThreadList = hardWareThreadMapper.selectByExample(hardWareThreadExample);
+
+            for (HardWareThread hardWareThread : hardWareThreadList){
+                HardwareThreadVO hardwareThreadVO = new HardwareThreadVO();
+                BeanUtils.copyProperties(hardWareThread, hardwareThreadVO);
+                hardwareThreadVOList.add(hardwareThreadVO);
+            }
+            return ResultVO.SUCC(ApiResultType.SUCCESS.code,ApiResultType.SUCCESS.message,hardwareThreadVOList);
+
+        }catch (Exception e){
+            logger.error("硬件进行查询异常：", e);
+            return ResultVO.FAIL(hardWareThreadList).initErrCodeAndMsg(ApiResultType.SYS_ERROR.code,
+                    ApiResultType.SYS_ERROR.message);
+        }
     }
 }

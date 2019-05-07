@@ -173,7 +173,20 @@ public interface DaoClient {
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/updateTdhDsInfoByIds")
     public  ResultVO updateTdhDsInfoByIds(@RequestBody List<TdhDsDTO> tdhDsDTOList);
-    @Component
+
+    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardNicDao/getHardWareNicNow",method= RequestMethod.POST)
+    ResultVO<?> getHardWareNicNow(@RequestParam(value = "host",required = true) String host);
+
+    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfoListNow",method= RequestMethod.POST)
+    ResultVO<?> getHardWareInfoListNow(@RequestParam(value = "host",required = true) String host);
+
+    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardThreadDao/getHardWareThreadNow",method= RequestMethod.POST)
+    ResultVO<?> getHardWareThreadNow(@RequestParam(value = "host",required = true) String host);
+
+    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardDao/getHardWareStatusByTime",method= RequestMethod.POST)
+    ResultVO<?> getHardWareStatusByTime(@RequestBody Map<String, Object> models);
+
+     @Component
     static class ProductClientFallback implements DaoClient {
 
         @Override
@@ -414,5 +427,25 @@ public interface DaoClient {
         public ResultVO updateTdhDsInfoByIds(List<TdhDsDTO> tdhDsDTOList) {
             return null;
         }
-    }
+
+        @Override
+        public ResultVO<?> getHardWareNicNow(String host) {
+            return null;
+        }
+
+        @Override
+        public ResultVO<?> getHardWareInfoListNow(String host) {
+            return null;
+        }
+
+        @Override
+        public ResultVO<?> getHardWareThreadNow(String host) {
+            return null;
+        }
+
+         @Override
+         public ResultVO<?> getHardWareStatusByTime(Map<String, Object> models) {
+             return null;
+         }
+     }
 }

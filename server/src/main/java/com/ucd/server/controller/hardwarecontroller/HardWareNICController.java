@@ -1,11 +1,14 @@
 package com.ucd.server.controller.hardwarecontroller;
 
 import com.ucd.common.VO.ResultVO;
+import com.ucd.common.result.ApiResultType;
 import com.ucd.common.utils.ResultVOUtil;
 import com.ucd.common.utils.Tools;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareNicDTO;
 import com.ucd.server.enums.TdhServiceDaoEnum;
+import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
+import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.service.hardwareservice.HardWareNICService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,14 +36,6 @@ public class HardWareNICController {
      */
     private final static Logger logger = LoggerFactory.getLogger(HardWareNICController.class);
 
-    /**
-     * @author Crayon
-     * @Description 获取硬件NIC信息
-     * @date 2019/3/29 5:00 PM
-     * @params [hardwareNicDTO]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO
-     */
     @PostMapping(value = "/getHardWareNic")
     public ResultVO getHardWareNic(@RequestBody Map<String, Object> models){
 
@@ -64,4 +61,22 @@ public class HardWareNICController {
             return resultVO;
         }
     }
+
+
+
+    /**
+     * @author Crayon
+     * @Description 获取硬件NIC实时数据信息
+     * @date 2019/4/29 3:54 PM
+     * @params [host]
+     * @exception
+     * @return com.ucd.common.VO.ResultVO<?>
+     */
+    @PostMapping(value = "/getHardWareNicNow")
+    public ResultVO<?> getHardWareNicNow(String host){
+
+      return hardWareNICService.getHardWareNICNow(host);
+    }
+
+
 }

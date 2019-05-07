@@ -23,5 +23,15 @@ public class HardWareCpu {
 
     private String nip;
 
+    private String checktimeStart;
+
+    private String checktimeEnd;
+
+    /** 秒数 */
+    private Integer second;
+
+    private String secondStart;
+
+    private String secondEnd;
 
 }

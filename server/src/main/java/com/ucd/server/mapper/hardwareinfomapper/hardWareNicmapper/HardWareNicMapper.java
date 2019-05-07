@@ -3,6 +3,7 @@ package com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper;
 
 import java.util.List;
 
+import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,7 @@ public interface HardWareNicMapper {
     int updateByPrimaryKey(HardWareNic record);
 
     List<HardWareNic> selectByHost(String host);
+
+    List<HardWareNic> selectHardWareHealthStatusByTime(HardWareNic hardWareNic);
+
 }

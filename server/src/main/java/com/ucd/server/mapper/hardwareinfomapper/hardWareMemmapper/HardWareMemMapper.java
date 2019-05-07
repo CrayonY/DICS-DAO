@@ -1,6 +1,7 @@
 package com.ucd.server.mapper.hardwareinfomapper.hardWareMemmapper;
 
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareMemDTO;
+import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDisk;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMemExample;
 import java.util.List;
@@ -30,4 +31,7 @@ public interface HardWareMemMapper {
     int updateByPrimaryKey(HardWareMem record);
 
     int insertByDTO(HardwareMemDTO hardwareMemDTO);
+
+    List<HardWareMem> selectHardWareHealthStatusByTime(HardWareMem hardWareMem);
+
 }

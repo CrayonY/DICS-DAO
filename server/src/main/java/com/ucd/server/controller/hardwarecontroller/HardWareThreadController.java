@@ -31,14 +31,6 @@ public class HardWareThreadController {
      */
     private final static Logger logger = LoggerFactory.getLogger(HardWareThreadController.class);
 
-    /**
-     * @author Crayon
-     * @Description 获取硬件NIC信息
-     * @date 2019/3/29 5:00 PM
-     * @params [hardwareNicDTO]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO
-     */
     @PostMapping(value = "/getHardWareThread")
     public ResultVO getHardWareThread(@RequestBody Map<String, Object> models){
 
@@ -64,4 +56,19 @@ public class HardWareThreadController {
             return resultVO;
         }
     }
+
+    /**
+     * @author Crayon
+     * @Description 查看硬件Pid信息
+     * @date 2019/4/29 4:11 PM
+     * @params [host]
+     * @exception
+     * @return com.ucd.common.VO.ResultVO<?>
+     */
+    @PostMapping(value = "/getHardWareThreadNow")
+    public ResultVO<?> getHardWareThreadNow(String host){
+        return hardWareThreadService.getHardWareThreadNow(host);
+    }
+
+
 }

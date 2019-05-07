@@ -212,15 +212,13 @@ public class TdhServicesController {
 
     }
 
+
     @PostMapping(value = "/getTdhHealthStatusByTime")
     public ResultVO getTdhHealthStatusByTime(@RequestBody Map<String, Object> models){
         ResultVO resultVO = null;
         try {
             // 获取参数
             PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"),PageView.class);
-            Data startTime = Tools.map2obj((Map<String, Object>)models.get("startTime"),Data.class);
-            Data endTime = Tools.map2obj((Map<String, Object>)models.get("startTime"),Data.class);
-            String second = Tools.map2obj((Map<String, Object>)models.get("second"),String.class);
             TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesInfoDTO"),TdhServicesInfoDTO.class);
             logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
             logger.info("tdhServicesInfoDTO:"+tdhServicesInfoDTO);

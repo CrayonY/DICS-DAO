@@ -36,5 +36,13 @@ public class HardwareThreadDTO {
 
     private String tableName;
 
+    /** 秒数 */
+    private Integer second;
+
+    private String secondStart;
+
+    private String secondEnd;
+
+
 
 }

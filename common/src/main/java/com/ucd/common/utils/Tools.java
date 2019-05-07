@@ -36,6 +36,12 @@ public final class Tools {
 		return JSON.parseObject(JSON.toJSONString(map), clazz);
 	}
 
+
+	public static <T> T map2Listobj(Map<?, ?> map, Class<T> clazz) throws Exception {
+		String str = JSON.toJSONString(map);
+		return JSON.parseObject(str,clazz);
+	}
+
 //	public static <T> String listPageToJson(PageView<T> page) {
 //		Map<String, Object> result = new HashMap<String, Object>();
 //		result.put("success", page.isSuccess());

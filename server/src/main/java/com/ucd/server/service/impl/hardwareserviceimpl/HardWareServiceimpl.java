@@ -3,13 +3,14 @@ package com.ucd.server.service.impl.hardwareserviceimpl;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ucd.common.enums.HardWareTypeEnum;
 import com.ucd.common.enums.ResultExceptEnum;
 import com.ucd.common.utils.KeyUtil;
 import com.ucd.common.utils.UUIDUtils;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.*;
-import com.ucd.daocommon.VO.hardwareVO.HardwareNowVO;
-import com.ucd.daocommon.VO.hardwareVO.HardwareVO;
+import com.ucd.daocommon.VO.hardwareVO.*;
+import com.ucd.server.constant.TdhServiceConstant;
 import com.ucd.server.enums.TdhServiceDaoEnum;
 import com.ucd.server.exception.DaoException;
 import com.ucd.server.mapper.hardwareinfomapper.HardWareInfoMapper;
@@ -21,10 +22,14 @@ import com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper.HardWareNicMap
 import com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper.HardWareThreadMapper;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfo;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfoExample;
+import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
+import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDisk;
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample;
+import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread;
+import com.ucd.server.model.tdhservicemodel.TdhServicesA;
 import com.ucd.server.service.hardwareservice.HardWareService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +58,9 @@ public class HardWareServiceimpl implements HardWareService {
     public HardWareNicMapper NicMapper;
     @Autowired
     public HardWareThreadMapper ThreadMapper;
+
+    @Autowired
+    public HardWareInfoNowMapper hardWareInfoNowMapper;
 
     private final static Logger logger = LoggerFactory.getLogger(HardWareService.class);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -357,6 +365,224 @@ public class HardWareServiceimpl implements HardWareService {
         }
         pageView.setRecords(hardwareNowVOList);
         return pageView;
+    }
+
+    @Override
+    public List<HardwareNowVO> getHardWareInfoListNow(String host){
+
+        List<HardwareNowVO> hardWareNowVOList = new ArrayList<>();
+        HardWareInfoNowExample hardWareInfoNowExample = new HardWareInfoNowExample();
+        hardWareInfoNowExample.createCriteria().andHostEqualTo(host);
+        List<HardWareInfoNow> hardWareInfoNowList = hardWareInfoNowMapper.selectByExample(hardWareInfoNowExample);
+
+        for (HardWareInfoNow hardWareInfoNow : hardWareInfoNowList){
+            HardwareNowVO hardwareNowVO = new HardwareNowVO();
+            BeanUtils.copyProperties(hardWareInfoNow, hardwareNowVO);
+            hardWareNowVOList.add(hardwareNowVO);
+        }
+        return hardWareNowVOList;
+    }
+
+    @Override
+    public PageView getHardWareStatusByTime(String type,HardwareCpuDTO hardwareCpuDTO) {
+
+        PageView pageView = new PageView();
+        /** 如果查看1小时/2小时内 数据*/
+        if(hardwareCpuDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_HOUR){
+            hardwareCpuDTO.setSecondStart(TdhServiceConstant.SECOND_RANGE1);
+            hardwareCpuDTO.setSecondEnd(TdhServiceConstant.SECOND_RANGE2);
+        }
+
+        /** 如果查看1天以内 数据*/
+        if(hardwareCpuDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_12_HOUR){
+            hardwareCpuDTO.setSecondStart(TdhServiceConstant.SECOND_RANGE3);
+            hardwareCpuDTO.setSecondEnd(TdhServiceConstant.SECOND_RANGE4);
+        }
+
+        /** 如果查看1周以内 数据*/
+        if(hardwareCpuDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_WEEK){
+            hardwareCpuDTO.setSecondStart(TdhServiceConstant.SECOND_RANGE5);
+        }
+
+
+        // 查看硬件CPU状态信息
+        if(HardWareTypeEnum.CPU.getValue().equals(type)){
+            List<HardWareCpuVO> getCpuList = this.getCpuList(hardwareCpuDTO);
+            pageView.setRecords(getCpuList);
+        }
+
+        if(HardWareTypeEnum.DISK.getValue().equals(type)){
+            List<HardWareDiskVO> getDiskList = this.getDiskList(hardwareCpuDTO);
+            pageView.setRecords(getDiskList);
+        }
+
+        if(HardWareTypeEnum.MEM.getValue().equals(type)){
+            List<HardWareMemVO> hardWareMemVOList = this.getMEMList(hardwareCpuDTO);
+            pageView.setRecords(hardWareMemVOList);
+        }
+
+        if(HardWareTypeEnum.NIC.getValue().equals(type)){
+            List<HardwareNicVO> hardwareNicVOList = this.getNicList(hardwareCpuDTO);
+            pageView.setRecords(hardwareNicVOList);
+        }
+
+        if(HardWareTypeEnum.THREAD.getValue().equals(type)){
+            List<HardwareThreadVO> hardwareThreadVOList = this.getThreadList(hardwareCpuDTO);
+            pageView.setRecords(hardwareThreadVOList);
+        }
+
+        return pageView;
+    }
+
+
+    /**
+     * 获取CPU信息
+     * @param hardwareCpuDTO
+     * @return
+     */
+    List<HardWareCpuVO> getCpuList(HardwareCpuDTO hardwareCpuDTO){
+        List<HardWareCpuVO> hardWareCpuVOList = new ArrayList<>();
+        List<HardWareCpu> hardWareCpuList = new ArrayList<>();
+        HardWareCpu hardWareCpu = new HardWareCpu();
+        BeanUtils.copyProperties(hardwareCpuDTO, hardWareCpu);
+        hardWareCpuList = CpuMapper.selectHardWareHealthStatusByTime(hardWareCpu);
+
+        for (HardWareCpu hardWareCpu1 : hardWareCpuList){
+            HardWareCpuVO hardWareCpuVO = new HardWareCpuVO();
+            BeanUtils.copyProperties(hardWareCpu1, hardWareCpuVO);
+            hardWareCpuVOList.add(hardWareCpuVO);
+        }
+        return hardWareCpuVOList;
+    }
+
+
+    /**
+     * 获取DISK信息
+     * @param hardwareCpuDTO
+     * @return
+     */
+    List<HardWareDiskVO> getDiskList(HardwareCpuDTO hardwareCpuDTO){
+        List<HardWareDiskVO> hardWareDiskVOList = new ArrayList<>();
+        List<HardWareDisk> hardWareDiskList = new ArrayList<>();
+        HardwareDiskDTO hardwareDiskDTO = new HardwareDiskDTO();
+        hardwareDiskDTO.setChecktimeStart(hardwareCpuDTO.getChecktimeStart());
+        hardwareDiskDTO.setChecktimeEnd(hardwareCpuDTO.getChecktimeEnd());
+        hardwareDiskDTO.setHost(hardwareCpuDTO.getHost());
+        hardwareDiskDTO.setSecond(hardwareCpuDTO.getSecond());
+        hardwareDiskDTO.setSecondStart(hardwareCpuDTO.getSecondStart());
+        hardwareDiskDTO.setSecondEnd(hardwareCpuDTO.getSecondEnd());
+        HardWareDisk hardWareDisk = new HardWareDisk();
+        BeanUtils.copyProperties(hardwareDiskDTO, hardWareDisk);
+        // 获取信息
+        hardWareDiskList = DiskMapper.selectHardWareHealthStatusByTime(hardWareDisk);
+
+        for(HardWareDisk hardWareDisk1 : hardWareDiskList){
+            HardWareDiskVO hardWareDiskVO = new HardWareDiskVO();
+            BeanUtils.copyProperties(hardWareDisk1, hardWareDiskVO);
+            hardWareDiskVOList.add(hardWareDiskVO);
+        }
+        return hardWareDiskVOList;
+    }
+
+    /**
+     * 获取内存
+     * @param hardwareCpuDTO
+     * @return
+     */
+    List<HardWareMemVO> getMEMList(HardwareCpuDTO hardwareCpuDTO){
+
+        List<HardWareMemVO> hardWareMemVOList = new ArrayList<>();
+        List<HardWareMem> hardWareMemList = new ArrayList<>();
+        HardwareMemDTO hardwareMemDTO = new HardwareMemDTO();
+        hardwareMemDTO.setChecktimeStart(hardwareCpuDTO.getChecktimeStart());
+        hardwareMemDTO.setChecktimeEnd(hardwareCpuDTO.getChecktimeEnd());
+        hardwareMemDTO.setHost(hardwareCpuDTO.getHost());
+        hardwareMemDTO.setSecond(hardwareCpuDTO.getSecond());
+        hardwareMemDTO.setSecondStart(hardwareCpuDTO.getSecondStart());
+        hardwareMemDTO.setSecondEnd(hardwareCpuDTO.getSecondEnd());
+
+        HardWareMem hardWareMem = new HardWareMem();
+        BeanUtils.copyProperties(hardwareMemDTO, hardWareMem);
+
+        hardWareMemList = MemMapper.selectHardWareHealthStatusByTime(hardWareMem);
+
+        for (HardWareMem hardWareMem1 : hardWareMemList){
+            HardWareMemVO hardWareMemVO = new HardWareMemVO();
+            BeanUtils.copyProperties(hardWareMem1,hardWareMemVO);
+            hardWareMemVOList.add(hardWareMemVO);
+        }
+        return hardWareMemVOList;
+    }
+
+
+    /**
+     * 获取硬件网络信息
+     * @param hardwareCpuDTO
+     * @return
+     */
+    List<HardwareNicVO> getNicList(HardwareCpuDTO hardwareCpuDTO){
+        List<HardwareNicVO> hardwareNicVOList = new ArrayList<>();
+        List<HardWareNic> hardWareNicList = new ArrayList<>();
+        HardwareNicDTO hardwareNicDTO = new HardwareNicDTO();
+        hardwareNicDTO.setChecktimeStart(hardwareCpuDTO.getChecktimeStart());
+
+        hardwareNicDTO.setChecktimeEnd(hardwareCpuDTO.getChecktimeEnd());
+
+        hardwareNicDTO.setHost(hardwareCpuDTO.getHost());
+
+        hardwareNicDTO.setSecond(hardwareCpuDTO.getSecond());
+
+        hardwareNicDTO.setSecondStart(hardwareCpuDTO.getSecondStart());
+
+        hardwareNicDTO.setSecondEnd(hardwareCpuDTO.getSecondEnd());
+
+        HardWareNic hardWareNic = new HardWareNic();
+        BeanUtils.copyProperties(hardwareNicDTO, hardWareNic);
+
+        hardWareNicList = NicMapper.selectHardWareHealthStatusByTime(hardWareNic);
+
+        for (HardWareNic hardWareNic1 : hardWareNicList){
+            HardwareNicVO hardwareNicVO = new HardwareNicVO();
+            BeanUtils.copyProperties(hardWareNic1,hardwareNicVO);
+            hardwareNicVOList.add(hardwareNicVO);
+        }
+        return hardwareNicVOList;
+    }
+
+
+    /**
+     * 获取进程数据
+     * @param hardwareCpuDTO
+     * @return
+     */
+    List<HardwareThreadVO> getThreadList(HardwareCpuDTO hardwareCpuDTO){
+        List<HardwareThreadVO> hardwareThreadVOList = new ArrayList<>();
+        List<HardWareThread> hardWareThreadList = new ArrayList<>();
+        HardwareThreadDTO hardwareThreadDTO = new HardwareThreadDTO();
+        hardwareThreadDTO.setChecktimeStart(hardwareCpuDTO.getChecktimeStart());
+
+        hardwareThreadDTO.setChecktimeEnd(hardwareCpuDTO.getChecktimeEnd());
+
+        hardwareThreadDTO.setHost(hardwareCpuDTO.getHost());
+
+        hardwareThreadDTO.setSecond(hardwareCpuDTO.getSecond());
+
+        hardwareThreadDTO.setSecondStart(hardwareCpuDTO.getSecondStart());
+
+        hardwareThreadDTO.setSecondEnd(hardwareCpuDTO.getSecondEnd());
+
+        HardWareThread hardWareThread = new HardWareThread();
+        BeanUtils.copyProperties(hardwareThreadDTO, hardWareThread);
+
+        // 获取进程数据
+        hardWareThreadList = ThreadMapper.selectHardWareHealthStatusByTime(hardWareThread);
+
+        for (HardWareThread hardWareThread1 : hardWareThreadList){
+            HardwareThreadVO hardwareThreadVO = new HardwareThreadVO();
+            BeanUtils.copyProperties(hardWareThread1,hardwareThreadVO);
+            hardwareThreadVOList.add(hardwareThreadVO);
+        }
+        return hardwareThreadVOList;
     }
 
 }

@@ -7,7 +7,7 @@ import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoN
 
 import java.util.List;
 
-public interface HardWareInfoNowMapper {
+public interface HardWareInfoNowMapper{
     int deleteByExample(HardWareInfoNowExample example);
 
     int deleteByPrimaryKey(String id);
@@ -23,4 +23,15 @@ public interface HardWareInfoNowMapper {
     int updateByPrimaryKey(HardWareInfoNow record);
 
     List<HardWareInfoNow> selectByDTO(HardwareNowDTO hardwareNowDTO);
+
+    int countByExample(HardWareInfoNowExample example);
+
+    HardWareInfoNow selectOnlyOneByExample(HardWareInfoNowExample example);
+
+    List<HardWareInfoNow> selectByExample(HardWareInfoNowExample example);
+
+    int updateByExampleSelective(HardWareInfoNow record, HardWareInfoNowExample example);
+
+    int updateByExample(HardWareInfoNow record, HardWareInfoNowExample example);
+
 }

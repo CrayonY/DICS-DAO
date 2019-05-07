@@ -17,7 +17,7 @@ public class ResultVOUtil {
     }
 
 
-    public  static ResultVO error(Exception e){
+    public static ResultVO error(Exception e){
 
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(ResultEnum.RESULT_FAIL.getCode());
