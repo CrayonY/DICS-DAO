@@ -1,6 +1,7 @@
 package com.ucd.common.VO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ucd.common.enums.ResultEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -59,6 +60,7 @@ public class ResultVO<T> implements Serializable {
     }
 
     public static <T> ResultVO<T> FAIL(T data) {
+
         ResultVO<T> result = new ResultVO<T>();
         result.setData(data);
         return result;
@@ -105,6 +107,7 @@ public class ResultVO<T> implements Serializable {
     public static <T> ResultVO<T> FAIL(String code, String msg, T data) {
         ResultVO<T> result = ResultVO.Builder.FAIL();
         result.initErrCodeAndMsg(code, msg);
+        result.setSuccess(Boolean.valueOf(ResultEnum.RESULT_SUCCESS.getCode().equals(code)));
         result.setData(data);
         return result;
     }
@@ -115,6 +118,7 @@ public class ResultVO<T> implements Serializable {
 
     public static <T> ResultVO<T> SUCC(String code, String msg, T data) {
         ResultVO<T> result = ResultVO.Builder.SUCC();
+        result.setSuccess(ResultEnum.RESULT_SUCCESS.getCode().equals(code));
         result.setCode(code);
         result.setMsg(msg);
         result.setData(data);

@@ -93,7 +93,7 @@ public class HardWareNICServiceImpl implements HardWareNICService {
         try{
             HardWareNicExample hardWareNicExample = new HardWareNicExample();
             hardWareNicExample.createCriteria().andHostEqualTo(host);
-            hardWareNicExample.setTableName("hard_ware_nic");
+            hardWareNicExample.setTableName("hard_ware_nic_now");
             // 获取信息
             hardWareNicList = hardWareNicMapper.selectByExample(hardWareNicExample);
 
@@ -106,8 +106,8 @@ public class HardWareNICServiceImpl implements HardWareNICService {
 
         }catch (Exception e){
             logger.error("硬件NIC实时数据查询异常：", e);
-            return ResultVO.FAIL(hardwareNicVOList).initErrCodeAndMsg(ApiResultType.SYS_ERROR.code,
-                    ApiResultType.SYS_ERROR.message);
+            return ResultVO.FAIL(ApiResultType.SYS_ERROR.code,
+                    ApiResultType.SYS_ERROR.message,hardwareNicVOList);
         }
     }
 }

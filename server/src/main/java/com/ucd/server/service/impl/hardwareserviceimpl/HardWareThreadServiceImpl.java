@@ -92,7 +92,7 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
         try{
             HardWareThreadExample hardWareThreadExample = new HardWareThreadExample();
             hardWareThreadExample.createCriteria().andHostEqualTo(host);
-            hardWareThreadExample.setTableName("hard_ware_thread");
+            hardWareThreadExample.setTableName("hard_ware_thread_now");
 
             // 获取信息
             hardWareThreadList = hardWareThreadMapper.selectByExample(hardWareThreadExample);
@@ -106,8 +106,9 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
 
         }catch (Exception e){
             logger.error("硬件进行查询异常：", e);
-            return ResultVO.FAIL(hardWareThreadList).initErrCodeAndMsg(ApiResultType.SYS_ERROR.code,
-                    ApiResultType.SYS_ERROR.message);
+            return ResultVO.FAIL(ApiResultType.SYS_ERROR.code,
+                    ApiResultType.SYS_ERROR.message,hardwareThreadVOList);
+
         }
     }
 }

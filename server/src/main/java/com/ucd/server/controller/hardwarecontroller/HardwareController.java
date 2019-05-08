@@ -164,8 +164,8 @@ public class HardwareController {
 			return resultVO;
 		} catch (Exception e) {
 			logger.error("根据时间区间查看硬件状态：", e);
-			return ResultVO.FAIL(pageView).initErrCodeAndMsg(ApiResultType.SYS_ERROR.getCode(),
-					ApiResultType.SYS_ERROR.getMessage());
+			return ResultVO.FAIL(ApiResultType.SYS_ERROR.code,
+					ApiResultType.SYS_ERROR.message,pageView);
 		}
 	}
 	@GetMapping(value = "/test")
