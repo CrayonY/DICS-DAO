@@ -481,6 +481,7 @@ public class HardWareServiceimpl implements HardWareService {
             BeanUtils.copyProperties(hardWareDisk1, hardWareDiskVO);
             hardWareDiskVOList.add(hardWareDiskVO);
         }
+
         return hardWareDiskVOList;
     }
 

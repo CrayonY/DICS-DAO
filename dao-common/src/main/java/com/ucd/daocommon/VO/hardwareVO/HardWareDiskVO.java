@@ -1,10 +1,14 @@
 package com.ucd.daocommon.VO.hardwareVO;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
  * Created by crayon on 2019/4/2.
  */
+
+@Data
 public class HardWareDiskVO {
     private String id;
 
