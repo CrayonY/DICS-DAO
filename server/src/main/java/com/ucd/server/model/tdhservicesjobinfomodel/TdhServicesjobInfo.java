@@ -47,5 +47,7 @@ public class TdhServicesjobInfo {
 
     private Date creattime;
 
+    private Date healthtime;
+
 
 }

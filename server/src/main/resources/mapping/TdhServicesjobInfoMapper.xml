@@ -22,6 +22,7 @@
     <result column="num_failed_stages" jdbcType="INTEGER" property="numFailedStages" />
     <result column="table_name" jdbcType="VARCHAR" property="tableName" />
     <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="healthtime" jdbcType="TIMESTAMP" property="healthtime" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -84,7 +85,7 @@
   <sql id="Base_Column_List">
     id, job_id, user_name, name, scheduling_pool, description, submission_time, stage_ids, 
     status, num_tasks, num_active_tasks, num_completed_tasks, num_skipped_tasks, num_failed_tasks, 
-    num_active_stages, num_completed_stages, num_skipped_stages, num_failed_stages,table_name, creattime
+    num_active_stages, num_completed_stages, num_skipped_stages, num_failed_stages,table_name, creattime, healthtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" resultMap="BaseResultMap">
     select 
@@ -108,14 +109,14 @@
       num_tasks, num_active_tasks, num_completed_tasks, 
       num_skipped_tasks, num_failed_tasks, num_active_stages, 
       num_completed_stages, num_skipped_stages, num_failed_stages, table_name,
-      creattime)
+      creattime, healthtime)
     values (#{id,jdbcType=VARCHAR}, #{jobId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{schedulingPool,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{submissionTime,jdbcType=VARCHAR}, #{stageIds,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{numTasks,jdbcType=INTEGER}, #{numActiveTasks,jdbcType=INTEGER}, #{numCompletedTasks,jdbcType=INTEGER}, 
       #{numSkippedTasks,jdbcType=INTEGER}, #{numFailedTasks,jdbcType=INTEGER}, #{numActiveStages,jdbcType=INTEGER}, 
       #{numCompletedStages,jdbcType=INTEGER}, #{numSkippedStages,jdbcType=INTEGER}, #{numFailedStages,jdbcType=INTEGER}, 
-      #{table_name,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP})
+      #{table_name,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{healthtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
     insert into ${centreTableName}
@@ -180,6 +181,9 @@
       <if test="creattime != null">
         creattime,
       </if>
+      <if test="healthtime != null">
+      healthtime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -241,6 +245,9 @@
       </if>
       <if test="creattime != null">
         #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="healthtime != null">
+        #{healthtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -304,8 +311,14 @@
       <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="healthtime != null">
+        healthtime = #{healthtime,jdbcType=TIMESTAMP},
+      </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where 1 = 1
+    <if test="jobId != null">
+    and id = #{id,jdbcType=VARCHAR}
+    </if>
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
     update ${centreTableName}
@@ -327,7 +340,8 @@
       num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER},
       num_failed_stages = #{numFailedStages,jdbcType=INTEGER},
       table_name = #{tableName,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP}
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      healthtime = #{healthtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="emptyThdServicesjobData" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
@@ -395,6 +409,9 @@
     <if test="creattime != null">
       and creattime = #{creattime,jdbcType=TIMESTAMP}
     </if>
+    <if test="healthtime != null">
+      and healthtime = #{healthtime,jdbcType=TIMESTAMP}
+    </if>
   </select>
   <select id="selectCountTdhServicesjob" resultType="java.lang.Long" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" >
     select
@@ -457,6 +474,9 @@
     </if>
     <if test="creattime != null">
       and creattime = #{creattime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="healthtime != null">
+      and healthtime = #{healthtime,jdbcType=TIMESTAMP}
     </if>
   </select>
 
@@ -553,6 +573,9 @@
       <if test="record.creattime != null" >
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.healthtime != null">
+       healthtime = #{record.healthtime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -580,7 +603,8 @@
     num_skipped_stages = #{record.numSkippedStages,jdbcType=INTEGER},
     num_failed_stages = #{record.numFailedStages,jdbcType=INTEGER},
     table_name = #{record.tableName,jdbcType=VARCHAR},
-    creattime = #{record.creattime,jdbcType=TIMESTAMP}
+    creattime = #{record.creattime,jdbcType=TIMESTAMP},
+    healthtime = #{record.healthtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

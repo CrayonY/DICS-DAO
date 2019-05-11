@@ -31,5 +31,6 @@ public class TdhServicesJobDTO {
     private String startTime;
     private String stopTime;
     private String centre;
+    private Date healthtime;
 
 }

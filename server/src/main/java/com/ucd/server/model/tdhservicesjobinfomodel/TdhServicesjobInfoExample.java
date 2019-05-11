@@ -1398,6 +1398,69 @@ public class TdhServicesjobInfoExample {
             addCriterion("creattime not between", value1, value2, "creattime");
             return (Criteria) this;
         }
+
+
+
+
+        public Criteria andHealthtimeIsNull() {
+            addCriterion("healthtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeIsNotNull() {
+            addCriterion("healthtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeEqualTo(Date value) {
+            addCriterion("healthtime =", value, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeNotEqualTo(Date value) {
+            addCriterion("healthtime <>", value, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeGreaterThan(Date value) {
+            addCriterion("healthtime >", value, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("healthtime >=", value, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeLessThan(Date value) {
+            addCriterion("healthtime <", value, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeLessThanOrEqualTo(Date value) {
+            addCriterion("healthtime <=", value, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeIn(List<Date> values) {
+            addCriterion("healthtime in", values, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeNotIn(List<Date> values) {
+            addCriterion("healthtime not in", values, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeBetween(Date value1, Date value2) {
+            addCriterion("healthtime between", value1, value2, "healthtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andHealthtimeNotBetween(Date value1, Date value2) {
+            addCriterion("healthtime not between", value1, value2, "healthtime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

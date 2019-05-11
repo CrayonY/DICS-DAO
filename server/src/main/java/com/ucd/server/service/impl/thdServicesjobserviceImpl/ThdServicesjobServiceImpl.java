@@ -81,8 +81,10 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
 
             TdhServicesjobInfo tdhServicesjobInfo = new TdhServicesjobInfo();
             BeanUtils.copyProperties(tdhServicesJobDTO, tdhServicesjobInfo);
-            tdhServicesjobInfo.setStageIds(tdhServicesJobDTO.getStageIds().toString());
-            System.out.println("111111111111111111111111tdhServicesjobInfo:"+tdhServicesjobInfo);
+            if (tdhServicesJobDTO.getStageIds() != null){
+                tdhServicesjobInfo.setStageIds(tdhServicesJobDTO.getStageIds().toString());
+            }
+            logger.info("111111111111111111111111tdhServicesjobInfo:"+tdhServicesjobInfo);
             int count = tdhServicesjobInfoMapper.updateByPrimaryKeySelective(tdhServicesjobInfo);
             countNum = countNum + count;
         }
@@ -178,6 +180,9 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
         }
         if (tdhServicesJobDTO.getStopTime() != null && !("".equals(tdhServicesJobDTO.getStopTime()))){
             criteria.andCreattimeLessThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStopTime()));
+        }
+        if (tdhServicesJobDTO.getTableName() != null && !("".equals(tdhServicesJobDTO.getTableName()))){
+            criteria.andTableNameLike("%"+tdhServicesJobDTO.getTableName()+"%");
         }
 
 
