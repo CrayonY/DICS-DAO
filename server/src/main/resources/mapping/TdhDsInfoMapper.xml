@@ -25,6 +25,7 @@
       <result column="data_times" property="dataTimes" jdbcType="VARCHAR" />
       <result column="audit_begintime" property="auditBegintime" jdbcType="TIMESTAMP" />
       <result column="sync_begintime" property="syncBegintime" jdbcType="TIMESTAMP" />
+      <result column="table_nametotal" property="tableNameTotal" jdbcType="VARCHAR" />
   </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -89,7 +90,7 @@
     <sql id="Base_Column_List" >
     id, table_name, state, startdown_time, startup_time, creattime, audit_status, audit_notes,
     last_check, type, audit_time, sync_time, user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code,
-    pid, data_times, audit_begintime, sync_begintime
+    pid, data_times, audit_begintime, sync_begintime, table_nametotal
   </sql>
 
     <select id="countByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" resultType="java.lang.Integer" >
@@ -191,6 +192,9 @@
             <if test="record.syncBegintime != null" >
                 sync_begintime = #{record.syncBegintime,jdbcType=TIMESTAMP},
             </if>
+            <if test="tableNameTotal != null" >
+                table_nametotal = #{tableNameTotal,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -220,7 +224,8 @@
         pid = #{record.pid,jdbcType=VARCHAR},
         data_times = #{record.dataTimes,jdbcType=VARCHAR},
         audit_begintime = #{record.auditBegintime,jdbcType=TIMESTAMP},
-        sync_begintime = #{record.syncBegintime,jdbcType=TIMESTAMP}
+        sync_begintime = #{record.syncBegintime,jdbcType=TIMESTAMP},
+        table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -242,11 +247,11 @@
   </delete>
   <insert id="insert" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
     insert into ${centreTableName} (id, table_name, state,
-      startdown_time, startup_time, creattime, type, audit_time, sync_time, user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code, pid, data_times, audit_begintime, sync_begintime)
+      startdown_time, startup_time, creattime, type, audit_time, sync_time, user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code, pid, data_times, audit_begintime, sync_begintime, table_nametotal)
     values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{startdownTime,jdbcType=TIMESTAMP}, #{startupTime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER},#{auditTime,jdbcType=TIMESTAMP},#{syncTime,jdbcType=TIMESTAMP},#{userCode,jdbcType=VARCHAR},
       #{dataMonth,jdbcType=VARCHAR},#{syncType,jdbcType=INTEGER},#{checkStatus,jdbcType=INTEGER},#{record.applyerCode,jdbcType=VARCHAR},auditer_code = #{auditerCode,jdbcType=VARCHAR},syncer_code = #{syncerCode,jdbcType=VARCHAR},
-      #{pid,jdbcType=VARCHAR},#{dataTimes,jdbcType=VARCHAR},#{auditBegintime,jdbcType=TIMESTAMP},#{syncBegintime,jdbcType=TIMESTAMP})
+      #{pid,jdbcType=VARCHAR},#{dataTimes,jdbcType=VARCHAR},#{auditBegintime,jdbcType=TIMESTAMP},#{syncBegintime,jdbcType=TIMESTAMP}, #{tableNameTotal,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
     insert into ${centreTableName}
@@ -320,6 +325,9 @@
         <if test="syncBegintime != null" >
             sync_begintime,
         </if>
+        <if test="tableNameTotal != null" >
+            table_nametotal,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -390,6 +398,9 @@
         </if>
         <if test="syncBegintime != null" >
             #{syncBegintime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="tableNameTotal != null" >
+           #{tableNameTotal,jdbcType=VARCHAR},
         </if>
     </trim>
   </insert>
@@ -462,6 +473,9 @@
         <if test="syncBegintime != null" >
             sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
         </if>
+        <if test="tableNameTotal != null" >
+            table_nametotal = #{tableNameTotal,jdbcType=VARCHAR},
+        </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -488,7 +502,8 @@
       pid = #{pid,jdbcType=VARCHAR},
       data_times = #{dataTimes,jdbcType=VARCHAR},
       audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
-      sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
+      sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
+      table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectTdhServicesDsInfoByDTO" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
@@ -565,6 +580,9 @@
       <if test="syncBegintime != null" >
          and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
       </if>
+      <if test="tableNameTotal != null" >
+         and table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
+      </if>
       order by startdown_time
   </select>
   <select id="selectCountTdhServicesDs" resultType="java.lang.Long" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
@@ -640,6 +658,9 @@
       </if>
       <if test="syncBegintime != null" >
           and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="tableNameTotal != null" >
+         and table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
       </if>
   </select>
 

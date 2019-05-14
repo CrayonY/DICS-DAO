@@ -1600,6 +1600,77 @@ public class TdhDsInfoExample {
             addCriterion("sync_begintime not between", value1, value2, "syncBegintime");
             return (Criteria) this;
         }
+
+
+        public Criteria andTableNameTotalIsNull() {
+            addCriterion("table_nametotal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalIsNotNull() {
+            addCriterion("table_nametotal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalEqualTo(String value) {
+            addCriterion("table_nametotal =", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalNotEqualTo(String value) {
+            addCriterion("table_nametotal <>", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalGreaterThan(String value) {
+            addCriterion("table_nametotal >", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalGreaterThanOrEqualTo(String value) {
+            addCriterion("table_nametotal >=", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalLessThan(String value) {
+            addCriterion("table_nametotal <", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalLessThanOrEqualTo(String value) {
+            addCriterion("table_nametotal <=", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalLike(String value) {
+            addCriterion("table_nametotal like", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalNotLike(String value) {
+            addCriterion("table_nametotal not like", value, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalIn(List<String> values) {
+            addCriterion("table_nametotal in", values, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalNotIn(List<String> values) {
+            addCriterion("table_nametotal not in", values, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalBetween(String value1, String value2) {
+            addCriterion("table_nametotal between", value1, value2, "TableNameTotal");
+            return (Criteria) this;
+        }
+
+        public Criteria andTableNameTotalNotBetween(String value1, String value2) {
+            addCriterion("table_nametotal not between", value1, value2, "TableNameTotal");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

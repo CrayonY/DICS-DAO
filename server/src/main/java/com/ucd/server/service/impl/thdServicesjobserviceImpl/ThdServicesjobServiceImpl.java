@@ -176,10 +176,10 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
             criteria.andCreattimeEqualTo(tdhServicesJobDTO.getCreattime());
         }
         if (tdhServicesJobDTO.getStartTime() != null && !("".equals(tdhServicesJobDTO.getStartTime()))){
-            criteria.andCreattimeGreaterThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStartTime()));
+            criteria.andHealthtimeLessThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStartTime()));
         }
         if (tdhServicesJobDTO.getStopTime() != null && !("".equals(tdhServicesJobDTO.getStopTime()))){
-            criteria.andCreattimeLessThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStopTime()));
+            criteria.andHealthtimeGreaterThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStopTime()));
         }
         if (tdhServicesJobDTO.getTableName() != null && !("".equals(tdhServicesJobDTO.getTableName()))){
             criteria.andTableNameLike("%"+tdhServicesJobDTO.getTableName()+"%");

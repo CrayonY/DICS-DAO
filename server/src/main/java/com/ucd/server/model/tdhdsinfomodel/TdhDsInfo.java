@@ -57,5 +57,7 @@ public class TdhDsInfo {
 
     private Date syncBegintime;
 
+    private String tableNameTotal;
+
 
     }

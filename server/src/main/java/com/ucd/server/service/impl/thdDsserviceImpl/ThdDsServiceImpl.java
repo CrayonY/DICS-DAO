@@ -120,6 +120,9 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (tdhDsDTO.getTableName() != null && !("".equals(tdhDsDTO.getTableName()))){
             criteria.andTableNameLike("%"+tdhDsDTO.getTableName()+"%");
         }
+        if (tdhDsDTO.getTableNameTotal() != null && !("".equals(tdhDsDTO.getTableNameTotal()))){
+            criteria.andTableNameTotalLike("%"+tdhDsDTO.getTableNameTotal()+"%");
+        }
         if (tdhDsDTO.getState() != null ){
             criteria.andStateEqualTo(tdhDsDTO.getState());
         }
