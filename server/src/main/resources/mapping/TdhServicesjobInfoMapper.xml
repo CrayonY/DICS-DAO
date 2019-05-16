@@ -316,7 +316,7 @@
       </if>
     </set>
     where 1 = 1
-    <if test="jobId != null">
+    <if test="id != null">
     and id = #{id,jdbcType=VARCHAR}
     </if>
   </update>

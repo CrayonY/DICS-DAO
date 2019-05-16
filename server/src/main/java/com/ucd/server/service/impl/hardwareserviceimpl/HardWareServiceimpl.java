@@ -298,7 +298,7 @@ public class HardWareServiceimpl implements HardWareService {
                             hardWareThread.setPidusememeper(hardwareThreadDTO.getPidusememeper());
                             hardWareThread.setTablename("hard_ware_thread_now");
                             ThreadMapper.updateByPrimaryKey(hardWareThread);
-                            if ((!("running".equals(hardwareThreadDTO.getPidstatus()))) || hardWareInfoNow.getNum() == 180){
+                            if ((("zombie".equals(hardwareThreadDTO.getPidstatus()))) || hardWareInfoNow.getNum() == 180){
                                 hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
                                 hardWareThread.setTablename("hard_ware_thread");
                                 ThreadMapper.insert(hardWareThread);

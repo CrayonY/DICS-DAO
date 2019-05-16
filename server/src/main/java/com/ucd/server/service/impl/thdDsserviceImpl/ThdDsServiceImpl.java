@@ -141,15 +141,15 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (tdhDsDTO.getStartupTimems() != null && !("".equals(tdhDsDTO.getStartupTimems()))){
             criteria.andStartupTimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getStartupTimems()));
         }
-        if (tdhDsDTO.getSyncType() == 2){
-            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
-        }else if (tdhDsDTO.getSyncType() == 3){
+        if(tdhDsDTO.getSyncType() == null){
             criteria.andSyncTypeNotEqualTo(2);
             if (tdhDsDTO.getCheckStatus() != null){
                 criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
             }
-        }else{
+        }else if (tdhDsDTO.getSyncType() == 2){
             criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
+        }else if (tdhDsDTO.getSyncType() == 3){
+            criteria.andSyncTypeNotEqualTo(2);
             if (tdhDsDTO.getCheckStatus() != null){
                 criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
             }
@@ -357,7 +357,7 @@ public class ThdDsServiceImpl implements TdhDsService {
                 tdhDsDTO.setState(state);
                 if (state == 3) {
                     tdhDsDTO.setSyncTime(new Date());
-                    tdhDsDTO.setUserCode("("+tdhDsDTO+")");
+                    tdhDsDTO.setUserCode("("+tdhDsDTO.getUserCode()+")");
                     countNum = countNum + tdhDsInfoMapper.updateTdhDsInfoFail(tdhDsDTO);
                 }
             }
@@ -439,6 +439,9 @@ public class ThdDsServiceImpl implements TdhDsService {
                 List<TdhDsInfo> tdhDsInfoCopyList =  tdhDsInfoMapper.selectTdhServicesDsInfoByDTO(tdhDsInfo);
                 if (!(null == tdhDsInfoCopyList || tdhDsInfoCopyList.size() ==0)){
                     datatimeslist.add(sdf.format(tdhDsInfoCopyList.get(0).getStartdownTime())+"-"+sdf.format(tdhDsInfoCopyList.get(tdhDsInfoCopyList.size()-1).getStartupTime()));
+                }
+                if(tdhDsInfo.getTableNameTotal() == null || "".equals(tdhDsInfo.getTableNameTotal())){
+                    tdhDsInfo.setTableNameTotal(tdhDsInfoTotal.getTableNameTotal());
                 }
             }
             tdhDsInfo.setDataTimes(StringUtils.strip(datatimeslist.toString(),"[]"));
