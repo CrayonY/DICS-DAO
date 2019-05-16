@@ -39,6 +39,6 @@
         <!--<table tableName="hard_ware_info" domainObjectName="HardWareInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
         <!--<table tableName="tdha_servicesjob_info" domainObjectName="TdhServicesjobInfo1" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
         <!--<table tableName="tdha_dsaudit_info" domainObjectName="TdhDsauditInfo" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>-->
-        <table tableName="hard_ware_nic" domainObjectName="HardWareNic" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
+        <table tableName="tb_user" domainObjectName="TbUser" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true"></table>
     </context>
 </generatorConfiguration>
