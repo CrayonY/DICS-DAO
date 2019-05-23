@@ -231,7 +231,7 @@ public class TdhDsController {
      * @author gongweimin
      * @Description        
      * @date 2019/5/5 16:34 
-     * @params [models]
+     * @params [models]updateTdhDsInfoByIds
      * @exception  
      * @return com.ucd.common.VO.ResultVO  
      */

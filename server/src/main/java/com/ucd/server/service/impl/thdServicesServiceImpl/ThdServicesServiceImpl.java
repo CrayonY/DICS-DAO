@@ -219,6 +219,7 @@ public class ThdServicesServiceImpl implements TdhServicesService {
     @Override
     @Transactional
     public int saveThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO) throws Exception {
+        logger.info("tdhServicesListDTO:"+tdhServicesListDTO.toString());
         if(tdhServicesListDTO == null){
             throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }

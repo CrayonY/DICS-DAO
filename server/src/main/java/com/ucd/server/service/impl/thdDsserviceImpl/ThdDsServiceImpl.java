@@ -494,6 +494,12 @@ public class ThdDsServiceImpl implements TdhDsService {
         if (tdhDsDTO.getStartupTimems() != null && !("".equals(tdhDsDTO.getStartupTimems()))){
             criteria.andStartupTimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getStartupTimems()));
         }
+        if (tdhDsDTO.getSyncType() != null ){
+            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
+        }
+        if (tdhDsDTO.getCheckStatus() != null){
+            criteria.andCheckStatusEqualTo(tdhDsDTO.getCheckStatus());
+        }
 //        if (tdhDsDTO.getSyncType() == 2){
 //            criteria.andSyncTypeEqualTo(tdhDsDTO.getSyncType());
 //        }else if (tdhDsDTO.getSyncType() == 3){

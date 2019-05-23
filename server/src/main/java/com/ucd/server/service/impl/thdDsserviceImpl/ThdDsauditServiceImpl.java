@@ -69,6 +69,7 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
         logger.info("tdhDsauditDTO:"+tdhDsauditDTO);
         TdhDsauditInfoExample.Criteria criteria = tdhDsauditInfoExample.createCriteria();
         TdhDsauditInfoExample.Criteria criteriaOR = tdhDsauditInfoExample.or();
+        tdhDsauditInfoExample.setOrderByClause("audit_time DESC,apply_time ASC");
         if (tdhDsauditDTO.getId() != null && !("".equals(tdhDsauditDTO.getId()))){
             criteria.andIdLike("%"+tdhDsauditDTO.getId()+"%");
         }
