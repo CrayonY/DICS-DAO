@@ -170,16 +170,16 @@ public class ThdDsServiceImpl implements TdhDsService {
             criteria.andDataTimesLike(tdhDsDTO.getDataTimes());
         }
         if (tdhDsDTO.getAuditStartTimems() != null && !("".equals(tdhDsDTO.getAuditStartTimems()))){
-            criteria.andAuditTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditStartTimems()));
+            criteria.andAuditBegintimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditStartTimems()));
         }
         if (tdhDsDTO.getAuditEndTimems() != null && !("".equals(tdhDsDTO.getAuditEndTimems()))){
-            criteria.andAuditBegintimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditEndTimems()));
+            criteria.andAuditTimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getAuditEndTimems()));
         }
         if (tdhDsDTO.getSyncStartTimems() != null && !("".equals(tdhDsDTO.getSyncStartTimems()))){
-            criteria.andSyncTimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncStartTimems()));
+            criteria.andSyncBegintimeGreaterThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncStartTimems()));
         }
         if (tdhDsDTO.getSyncEndTimems() != null && !("".equals(tdhDsDTO.getSyncEndTimems()))){
-            criteria.andSyncBegintimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncEndTimems()));
+            criteria.andSyncTimeLessThanOrEqualTo(sdf.parse(tdhDsDTO.getSyncEndTimems()));
         }
 
 //        if (tdhDsDTO.getStartdownTime() != null ){
