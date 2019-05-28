@@ -50,7 +50,6 @@ public class TdhServicesInfoDTO {
     private String secondEnd;
 
     /** 健康时间时间 */
-    private String healthyTime;
-
+    private Date healthyTime;
 
 }
