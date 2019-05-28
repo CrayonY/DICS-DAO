@@ -54,7 +54,7 @@ public class TdhServicesAVO {
 
     private String secondEnd;
 
-    /** 定时任务执行时间 */
+    /** 健康时间时间 */
     private String healthyTime;
 
 
