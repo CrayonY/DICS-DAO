@@ -14,10 +14,12 @@
     <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
     <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
     <result column="task_time" property="taskTime" jdbcType="VARCHAR" />
+    <result column="healthy_time" property="healthyTime" jdbcType="TIMESTAMP" />
+
   </resultMap>
   <sql id="Base_Column_List" >
     services_id, enable_kerberos, health, name, health_checks_id,
-    cluster_id, id, type, busy, creattime, last_check,task_time
+    cluster_id, id, type, busy, creattime, last_check,task_time,healthy_time
   </sql>
   <select id="selectCountTdhServices" resultType="java.lang.Long" >
     select
@@ -66,6 +68,9 @@
     <if test="taskTime != null and taskTime != ''">
       and task_time = #{taskTime,jdbcType=VARCHAR}
     </if>
+    <if test="healthyTime != null and healthyTime != ''">
+      and healthy_time = #{healthyTime,jdbcType=TIMESTAMP}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
     select 
@@ -88,14 +93,14 @@
     where services_id = #{servicesId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    insert into ${tableName} (services_id, enable_kerberos, health, name, health_checks_id, cluster_id, id, type, busy, creattime, last_check,task_time
+    insert into ${tableName} (services_id, enable_kerberos, health, name, health_checks_id, cluster_id, id, type, busy, creattime, last_check,task_time,healthy_time
       )
     values (#{servicesId,jdbcType=VARCHAR}, #{enableKerberos,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR},
       #{healthChecksId,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER},
       #{id,jdbcType=INTEGER},
       #{type,jdbcType=VARCHAR}, #{busy,jdbcType=VARCHAR},
-      #{creattime,jdbcType=TIMESTAMP}, #{lastCheck,jdbcType=VARCHAR},#{taskTime,jdbcType=VARCHAR}
+      #{creattime,jdbcType=TIMESTAMP}, #{lastCheck,jdbcType=VARCHAR},#{taskTime,jdbcType=VARCHAR},#{healthyTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
@@ -137,6 +142,9 @@
       <if test="taskTime != null" >
         task_time,
       </if>
+      <if test="healthyTime != null" >
+        healthy_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="servicesId != null" >
@@ -175,6 +183,9 @@
       <if test="taskTime != null" >
         #{taskTime,jdbcType=VARCHAR},
       </if>
+      <if test="healthyTime != null" >
+        #{healthyTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
@@ -210,6 +221,13 @@
       <if test="lastCheck != null" >
         last_check = #{lastCheck,jdbcType=VARCHAR},
       </if>
+
+      <if test="taskTime != null" >
+        task_time = #{taskTime,jdbcType=VARCHAR},
+      </if>
+      <if test="healthyTime != null" >
+        health_time = #{healthyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where services_id = #{servicesId,jdbcType=VARCHAR}
   </update>
@@ -225,7 +243,8 @@
       busy = #{busy,jdbcType=VARCHAR},
       last_check = #{lastCheck,jdbcType=VARCHAR},
       task_time = #{taskTime,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP}
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      health_time = #{healthyTime,jdbcType=TIMESTAMP}
     where services_id = #{servicesId,jdbcType=VARCHAR}
   </update>
 
@@ -284,6 +303,10 @@
     <if test="taskTime != null and taskTime != ''">
       and task_time = #{taskTime,jdbcType=VARCHAR}
     </if>
+
+    <if test="healthTime != null and healthTime != ''">
+      and health_time = #{taskTime,jdbcType=TIMESTAMP}
+    </if>
   </select>
   <!--后加根据类型修改实时数据sql-->
 
@@ -323,6 +346,9 @@
       </if>
       <if test="taskTime != null" >
         task_time = #{taskTime,jdbcType=VARCHAR},
+      </if>
+      <if test="healthyTime != null" >
+        healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where type = #{type,jdbcType=VARCHAR}

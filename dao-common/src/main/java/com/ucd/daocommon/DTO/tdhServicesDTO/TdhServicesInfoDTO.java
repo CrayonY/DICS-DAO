@@ -49,4 +49,8 @@ public class TdhServicesInfoDTO {
 
     private String secondEnd;
 
+    /** 定时任务执行时间 */
+    private String healthyTime;
+
+
 }
