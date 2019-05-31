@@ -26,6 +26,8 @@ public interface TdhServicesAMapper {
 
     //List<Map<String, String>> selectTdhServicesByParame();//tdh_services与tdh_services_healthck   联合查询
 
+    int updateByNameSelective(TdhServicesA record);
+
     int updateByTypeSelective(TdhServicesA record);
 
     /**

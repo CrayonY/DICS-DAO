@@ -209,7 +209,7 @@ public class ThdServicesServiceImpl implements TdhServicesService {
             if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
                 throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
             }
-            int count = tdhServicesAMapper.updateByTypeSelective(tdhServicesA);
+            int count = tdhServicesAMapper.updateByNameSelective(tdhServicesA);
             countNum = countNum + count;
         }
         // TODO 数据返回不完整时候，需要将不完整数据补充上

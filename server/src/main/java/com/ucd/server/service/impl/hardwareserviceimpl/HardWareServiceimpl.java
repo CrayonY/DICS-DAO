@@ -296,6 +296,7 @@ public class HardWareServiceimpl implements HardWareService {
                             hardWareThread.setPidstatus(hardwareThreadDTO.getPidstatus());
                             hardWareThread.setPidthread(hardwareThreadDTO.getPidthread());
                             hardWareThread.setPidusememeper(hardwareThreadDTO.getPidusememeper());
+                            hardWareThread.setPid(hardwareThreadDTO.getPid());
                             hardWareThread.setTablename("hard_ware_thread_now");
                             ThreadMapper.updateByPrimaryKey(hardWareThread);
                             if ((("zombie".equals(hardwareThreadDTO.getPidstatus()))) || hardWareInfoNow.getNum() == 180){
@@ -334,7 +335,9 @@ public class HardWareServiceimpl implements HardWareService {
             }
             hardWareInfoNow.setCreattime(hardwareInfoDTO.getCreattime());
             List<HardWareInfoNow> InfoNowList1 = InfoNowMapper.selectByDTO(hardwareNowDTO);
-            if(hardWareInfoNow.getNum() == InfoNowList1.get(0).getNum()){
+
+
+            if(hardWareInfoNow.getNum().intValue() == InfoNowList1.get(0).getNum().intValue()){
                 if (hardWareInfoNow.getNum() == 180){
                     hardWareInfoNow.setNum(0);
                 }else {
