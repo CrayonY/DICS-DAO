@@ -226,7 +226,7 @@
         task_time = #{taskTime,jdbcType=VARCHAR},
       </if>
       <if test="healthyTime != null" >
-        health_time = #{healthyTime,jdbcType=TIMESTAMP},
+        healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where services_id = #{servicesId,jdbcType=VARCHAR}
@@ -244,7 +244,7 @@
       last_check = #{lastCheck,jdbcType=VARCHAR},
       task_time = #{taskTime,jdbcType=VARCHAR},
       creattime = #{creattime,jdbcType=TIMESTAMP},
-      health_time = #{healthyTime,jdbcType=TIMESTAMP}
+      healthy_time = #{healthyTime,jdbcType=TIMESTAMP}
     where services_id = #{servicesId,jdbcType=VARCHAR}
   </update>
 
@@ -304,8 +304,8 @@
       and task_time = #{taskTime,jdbcType=VARCHAR}
     </if>
 
-    <if test="healthTime != null and healthTime != ''">
-      and health_time = #{taskTime,jdbcType=TIMESTAMP}
+    <if test="healthyTime != null and healthyTime != ''">
+      and healthy_time = #{taskTime,jdbcType=TIMESTAMP}
     </if>
   </select>
   <!--后加根据类型修改实时数据sql-->
