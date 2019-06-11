@@ -357,8 +357,12 @@ public class ThdDsServiceImpl implements TdhDsService {
                 tdhDsDTO.setState(state);
                 if (state == 3) {
                     tdhDsDTO.setSyncTime(new Date());
-                    tdhDsDTO.setUserCode("("+tdhDsDTO.getUserCode()+")");
-                    countNum = countNum + tdhDsInfoMapper.updateTdhDsInfoFail(tdhDsDTO);
+                    tdhDsDTO.setUserCode("(" + tdhDsDTO.getUserCode() + ")");
+                    if("1".equals(tdhDsDTO.getDataMonth())) {
+                        countNum = countNum + tdhDsInfoMapper.updateTdhDsInfoFail(tdhDsDTO);
+                    }else{
+                        countNum = countNum + tdhDsInfoMapper.updateTdhDsInfo(tdhDsDTO);
+                    }
                 }
             }
 

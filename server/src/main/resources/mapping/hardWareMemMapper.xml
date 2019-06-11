@@ -339,10 +339,14 @@
 
   <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem" >
     select
-    <include refid="Base_Column_List" />
+    <!--<include refid="Base_Column_List" />-->
+    a.host,a.checktime,a.memcount,a.memusedper,a.memstatus,a.creattime
     from(
-    select <include refid="Base_Column_List" />
-    from hard_ware_mem where 1=1
+    select
+    <!--<include refid="Base_Column_List" />-->
+    host,checktime,memcount,memusedper,memstatus,creattime
+    from hard_ware_mem force index(host_checktime_index)
+    where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>

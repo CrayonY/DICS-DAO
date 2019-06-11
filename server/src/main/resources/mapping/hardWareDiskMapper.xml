@@ -317,10 +317,14 @@
 
   <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDisk" >
     select
-    <include refid="Base_Column_List" />
+    <!--<include refid="Base_Column_List" />-->
+    a.host,a.checktime,a.diskcount,a.diskusedper,a.diskstatus,a.creattime
     from(
-    select <include refid="Base_Column_List" />
-    from hard_ware_disk where 1=1
+    select
+    <!--<include refid="Base_Column_List" />-->
+    host,checktime,diskcount,diskusedper,diskstatus,creattime
+    from hard_ware_disk force index(host_checktime_index)
+    where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>
