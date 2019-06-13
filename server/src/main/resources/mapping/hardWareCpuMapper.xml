@@ -337,10 +337,15 @@
 
   <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
     select
-    <include refid="Base_Column_List" />
+   <!-- <include refid="Base_Column_List" />-->
+    a.id,a.host,a.cpucount,a.cpuusedper,a.cpustatus,a.creattime,a.checktime,a.prepare,a.nip
     from(
-    select <include refid="Base_Column_List" />
-    from hard_ware_cpu where 1=1
+    select
+<!--
+    <include refid="Base_Column_List" />
+-->
+    id,host,cpucount,cpuusedper,cpustatus,creattime,checktime,prepare,nip
+    from hard_ware_cpu force index(host_checktime_index) where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>
