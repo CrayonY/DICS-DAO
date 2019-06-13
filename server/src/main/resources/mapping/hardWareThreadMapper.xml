@@ -332,10 +332,12 @@
 
   <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread" >
     select
-    <include refid="Base_Column_List" />
+    a.id,a.host,a.pidname,a.pidusememeper,a.pidstatus,a.pidpwd,a.pidthread,a.pid,a.creattime,a.checktime,a.prepare,a.pids
     from(
-    select <include refid="Base_Column_List" />
-    from hard_ware_thread where 1=1
+    select
+    id,host,pidname,pidusememeper,pidstatus,pidpwd,pidthread,pid,creattime,checktime,prepare,pids
+
+    from hard_ware_thread  force index(host_checktime_index) where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>

@@ -299,10 +299,11 @@
 
   <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic" >
     select
-    <include refid="Base_Column_List" />
-    from(
-    select <include refid="Base_Column_List" />
-    from hard_ware_nic where 1=1
+    a.id,a.host,a.nicinout,a.nicstatus,a.nip,a.starttime,a.creattime,a.checktime,a.prepare,a.nicids
+   from(
+    select
+    id,host,nicinout,nicstatus,nip,starttime,creattime,checktime,prepare,nicids
+    from hard_ware_nic force index(host_checktime_index) where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>
