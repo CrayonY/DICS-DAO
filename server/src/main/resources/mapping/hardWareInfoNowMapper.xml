@@ -562,4 +562,11 @@
     </if>
   </update>
 
+
+  <select id="getHardWareHostList" resultType="java.util.HashMap">
+    select
+    host
+    from hard_ware_info_now
+  </select>
+
 </mapper>

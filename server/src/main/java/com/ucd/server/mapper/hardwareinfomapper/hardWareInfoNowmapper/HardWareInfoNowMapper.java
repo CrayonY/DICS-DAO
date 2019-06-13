@@ -6,6 +6,7 @@ import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoN
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample;
 
 import java.util.List;
+import java.util.Map;
 
 public interface HardWareInfoNowMapper{
     int deleteByExample(HardWareInfoNowExample example);
@@ -34,4 +35,5 @@ public interface HardWareInfoNowMapper{
 
     int updateByExample(HardWareInfoNow record, HardWareInfoNowExample example);
 
+    List<Map<String, String>> getHardWareHostList();
 }

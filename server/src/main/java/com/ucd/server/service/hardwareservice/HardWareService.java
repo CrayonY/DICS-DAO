@@ -1,5 +1,6 @@
 package com.ucd.server.service.hardwareservice;
 
+import com.ucd.common.VO.ResultVO;
 import com.ucd.common.utils.pager.PageView;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareDTO;
@@ -8,6 +9,7 @@ import com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareNowVO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface HardWareService {
     public String saveHardWareInfo(HardwareDTO hardwareDTO) throws Exception;
@@ -37,4 +39,14 @@ public interface HardWareService {
      * @return com.ucd.common.utils.pager.PageView  
      */
     PageView getHardWareStatusByTime(String type,HardwareCpuDTO hardwareCpuDTO);
+
+    /**
+     * @author gongweimin
+     * @Description 获取所有硬件host
+     * @date 2019/6/12 10:35 
+     * @params []
+     * @exception  
+     * @return java.util.List<java.util.Map<java.lang.String,java.lang.String>>  
+     */
+    List<Map<String, String>> getHardWareHostList()throws Exception;
 }

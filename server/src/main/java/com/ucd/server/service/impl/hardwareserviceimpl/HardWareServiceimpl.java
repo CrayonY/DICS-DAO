@@ -3,6 +3,7 @@ package com.ucd.server.service.impl.hardwareserviceimpl;
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ucd.common.VO.ResultVO;
 import com.ucd.common.enums.HardWareTypeEnum;
 import com.ucd.common.enums.ResultExceptEnum;
 import com.ucd.common.utils.KeyUtil;
@@ -42,6 +43,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class HardWareServiceimpl implements HardWareService {
     @Autowired
@@ -435,6 +438,13 @@ public class HardWareServiceimpl implements HardWareService {
         }
 
         return pageView;
+    }
+
+    @Override
+    public  List<Map<String, String>> getHardWareHostList() throws Exception {
+        ResultVO resultVO = new ResultVO();
+        List<Map<String,String>> hostList = hardWareInfoNowMapper.getHardWareHostList();
+        return hostList;
     }
 
 

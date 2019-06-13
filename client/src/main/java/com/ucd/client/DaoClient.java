@@ -118,6 +118,9 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfo")
     public ResultVO getHardWareInfo(@RequestBody Map<String, Object> models);
 
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareHostList")
+    public ResultVO getHardWareHostList();
+
     @RequestMapping(value="/server-0.0.1-SNAPSHOT/User/validateUser",method= RequestMethod.POST)
     public ResultVO userValidate(@RequestParam(value = "username",required = true) String username,
                                  @RequestParam(value = "password",required = true)String password);
@@ -338,7 +341,12 @@ public interface DaoClient {
             return null;
         }
 
-        @Override
+         @Override
+         public ResultVO getHardWareHostList() {
+             return null;
+         }
+
+         @Override
         public ResultVO userValidate(String username, String password) {
             return null;
         }

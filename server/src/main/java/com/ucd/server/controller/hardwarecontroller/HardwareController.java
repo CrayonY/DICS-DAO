@@ -168,6 +168,29 @@ public class HardwareController {
 					ApiResultType.SYS_ERROR.message,pageView);
 		}
 	}
+
+    /***
+     * @author gongweimin
+     * @Description 获取所有硬件host
+     * @date 2019/6/12 10:16
+     * @params [host]
+     * @exception
+     * @return com.ucd.common.VO.ResultVO<java.util.Map<java.lang.String,java.lang.Object>>
+     */
+    @PostMapping(value = "/getHardWareHostList")
+    public ResultVO getHardWareHostList(){
+        ResultVO resultVO = new ResultVO();
+        try {
+            List<Map<String, String>> hostList = hardWareService.getHardWareHostList();
+            resultVO = ResultVO.SUCC(ApiResultType.SUCCESS.getCode(),ApiResultType.SUCCESS.getMessage(),hostList);
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(e);
+            logger.info("resultVO:"+resultVO);
+            return resultVO;
+        }
+    }
 	@GetMapping(value = "/test")
 	public void test(HttpServletRequest req){
 		logger.info("++++++++++++++++test:");
