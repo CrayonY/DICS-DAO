@@ -34,7 +34,8 @@ public class HardwareThreadDTO {
 
     private String checktimeEnd;
 
-    private String tableName;
+    /** 表名 */
+    private String tablename;
 
     /** 秒数 */
     private Integer second;

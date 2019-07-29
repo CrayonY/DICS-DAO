@@ -11,6 +11,7 @@
     <result column="checktime" property="checktime" jdbcType="VARCHAR" />
     <result column="prepare" property="prepare" jdbcType="VARCHAR" />
     <result column="nip" property="nip" jdbcType="VARCHAR" />
+    <result column="cputemp" property="cputemp" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, host, cpucount, cpuusedper, cpustatus, creattime, checktime, prepare, nip
+    id, host, cpucount, cpuusedper, cpustatus, creattime, checktime, prepare, nip, cputemp
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample" >
     select
@@ -80,7 +81,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from hard_ware_cpu
+    from ${tablename}
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -107,11 +108,11 @@
   <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
     insert into hard_ware_cpu (id, host, cpucount, 
       cpuusedper, cpustatus, creattime, 
-      checktime, prepare, nip
+      checktime, prepare, nip, cputemp
       )
     values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{cpucount,jdbcType=DOUBLE}, 
       #{cpuusedper,jdbcType=DOUBLE}, #{cpustatus,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
-      #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, #{nip,jdbcType=VARCHAR}
+      #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, #{nip,jdbcType=VARCHAR}, #{cputemp,jdbcType=DOUBLE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
@@ -144,6 +145,9 @@
       <if test="nip != null" >
         nip,
       </if>
+      <if test="cputemp != null" >
+        cputemp,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -173,10 +177,13 @@
       <if test="nip != null" >
         #{nip,jdbcType=VARCHAR},
       </if>
+      <if test="cputemp != null" >
+        #{cputemp,jdbcType=DOUBLE},
+      </if>
     </trim>
   </insert>
   <insert id="insertByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO" >
-    insert into hard_ware_cpu
+    insert into ${tablename}
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -205,6 +212,9 @@
       <if test="nip != null" >
         nip,
       </if>
+      <if test="cputemp != null" >
+        cputemp,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -233,6 +243,9 @@
       </if>
       <if test="nip != null" >
         #{nip,jdbcType=VARCHAR},
+      </if>
+      <if test="cputemp != null" >
+        #{cputemp,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -272,6 +285,9 @@
       <if test="record.nip != null" >
         nip = #{record.nip,jdbcType=VARCHAR},
       </if>
+      <if test="record.cputemp != null" >
+        cputemp = #{record.cputemp,jdbcType=DOUBLE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -287,7 +303,8 @@
       creattime = #{record.creattime,jdbcType=TIMESTAMP},
       checktime = #{record.checktime,jdbcType=VARCHAR},
       prepare = #{record.prepare,jdbcType=VARCHAR},
-      nip = #{record.nip,jdbcType=VARCHAR}
+      nip = #{record.nip,jdbcType=VARCHAR},
+      cputemp = #{record.cputemp,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -319,6 +336,9 @@
       <if test="nip != null" >
         nip = #{nip,jdbcType=VARCHAR},
       </if>
+      <if test="cputemp != null" >
+        cputemp = #{cputemp,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -331,21 +351,22 @@
       creattime = #{creattime,jdbcType=TIMESTAMP},
       checktime = #{checktime,jdbcType=VARCHAR},
       prepare = #{prepare,jdbcType=VARCHAR},
-      nip = #{nip,jdbcType=VARCHAR}
+      nip = #{nip,jdbcType=VARCHAR},
+      cputemp = #{cputemp,jdbcType=DOUBLE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
   <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
     select
    <!-- <include refid="Base_Column_List" />-->
-    a.id,a.host,a.cpucount,a.cpuusedper,a.cpustatus,a.creattime,a.checktime,a.prepare,a.nip
+    a.id,a.host,a.cpucount,a.cpuusedper,a.cpustatus,a.creattime,a.checktime,a.prepare,a.nip,a.cputemp
     from(
     select
 <!--
     <include refid="Base_Column_List" />
 -->
-    id,host,cpucount,cpuusedper,cpustatus,creattime,checktime,prepare,nip
-    from hard_ware_cpu force index(host_checktime_index) where 1=1
+    id,host,cpucount,cpuusedper,cpustatus,creattime,checktime,prepare,nip,cputemp
+    from ${tablename} force index(host_checktime_index) where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>

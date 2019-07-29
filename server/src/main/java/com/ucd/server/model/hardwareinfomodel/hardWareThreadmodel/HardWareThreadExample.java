@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.List;
 @Data
 public class HardWareThreadExample {
-    private String tableName;
+
+    protected String tablename;
 
     protected String orderByClause;
 

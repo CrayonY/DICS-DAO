@@ -1,4 +1,4 @@
-package com.ucd.server.service.impl.hardwareserviceimpl;
+package com.ucd.server.service.impl.hardwareservice2impl;
 
 import com.github.pagehelper.PageHelper;
 import com.ucd.common.utils.StringTool;
@@ -8,7 +8,7 @@ import com.ucd.daocommon.VO.hardwareVO.HardWareMemVO;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareMemmapper.HardWareMemMapper;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMemExample;
-import com.ucd.server.service.hardwareservice.HardWareMEMService;
+import com.ucd.server.service.hardwareservice2.HardWareMEMService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by crayon on 2019/3/30.
+ * Created by gwm on 2019/3/30.
  */
 @Service
-public class HardWareMEMServiceImpl implements HardWareMEMService{
+public class HardWareMEMService2Impl implements HardWareMEMService2 {
 
-    private final static Logger logger = LoggerFactory.getLogger(HardWareMEMService.class);
+    private final static Logger logger = LoggerFactory.getLogger(HardWareMEMService2.class);
 
     @Autowired
     public HardWareMemMapper hardWareMemMapper;
@@ -60,7 +60,7 @@ public class HardWareMEMServiceImpl implements HardWareMEMService{
             if(checktimeEnd != null){
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
-            hardWareMemExample.setTablename("hard_ware_mem");
+            hardWareMemExample.setTablename("hard_ware_mem2");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
             List<HardWareMem> hardWareMemList =  hardWareMemMapper.selectByExample(hardWareMemExample);
             logger.info("hardWareMemList="+hardWareMemList.toString());

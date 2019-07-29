@@ -26,6 +26,14 @@ public class HardwareNicVO {
 
     private String nicids;
 
+    private String nicin;
+
+    private String nicout;
+
+    private String nicinnow;
+
+    private String nicoutnow;
+
 
 
 

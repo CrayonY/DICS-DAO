@@ -32,4 +32,7 @@ public class HardWareDisk {
 
     private String secondEnd;
 
+    /** 表名 */
+    private String tablename;
+
 }

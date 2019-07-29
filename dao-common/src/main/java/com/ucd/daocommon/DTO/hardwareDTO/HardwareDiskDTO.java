@@ -32,5 +32,8 @@ public class HardwareDiskDTO {
 
     private String secondEnd;
 
+    /** 表名 */
+    private String tablename;
+
 
 }

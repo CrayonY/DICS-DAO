@@ -1,23 +1,16 @@
-package com.ucd.server.service.impl.hardwareserviceimpl;
+package com.ucd.server.service.impl.hardwareservice2impl;
 
 import com.github.pagehelper.PageHelper;
 import com.ucd.common.VO.ResultVO;
 import com.ucd.common.result.ApiResultType;
 import com.ucd.common.utils.StringTool;
 import com.ucd.common.utils.pager.PageView;
-import com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO;
-import com.ucd.daocommon.DTO.hardwareDTO.HardwareInfoDTO;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareNicDTO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareNicVO;
-import com.ucd.daocommon.VO.hardwareVO.HardwareNowVO;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper.HardWareNicMapper;
-import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
-import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample;
-import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
-import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample;
-import com.ucd.server.service.hardwareservice.HardWareNICService;
+import com.ucd.server.service.hardwareservice2.HardWareNICService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -29,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by crayon on 2019/3/30.
+ * Created by gwm on 2019/3/30.
  */
 @Service
-public class HardWareNICServiceImpl implements HardWareNICService {
+public class HardWareNICService2Impl implements HardWareNICService2 {
     @Autowired
     public HardWareNicMapper hardWareNicMapper;
 
-    private final static Logger logger = LoggerFactory.getLogger(HardWareNICService.class);
+    private final static Logger logger = LoggerFactory.getLogger(HardWareNICService2.class);
 
 
     @Override
@@ -71,7 +64,7 @@ public class HardWareNICServiceImpl implements HardWareNICService {
             if(checktimeEnd != null){
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
-            hardWareNicExample.setTablename("hard_ware_nic");
+            hardWareNicExample.setTablename("hard_ware_nic2");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
             List<HardWareNic> hardWareNicList =  hardWareNicMapper.selectByExample(hardWareNicExample);
             logger.info("hardWareNicList="+hardWareNicList.toString());
@@ -94,7 +87,7 @@ public class HardWareNICServiceImpl implements HardWareNICService {
         try{
             HardWareNicExample hardWareNicExample = new HardWareNicExample();
             hardWareNicExample.createCriteria().andHostEqualTo(host);
-            hardWareNicExample.setTablename("hard_ware_nic_now");
+            hardWareNicExample.setTablename("hard_ware_nic_now2");
             // 获取信息
             hardWareNicList = hardWareNicMapper.selectByExample(hardWareNicExample);
 

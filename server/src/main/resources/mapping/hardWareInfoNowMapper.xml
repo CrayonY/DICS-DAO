@@ -22,6 +22,7 @@
     <result column="nicids" jdbcType="VARCHAR" property="nicids" />
     <result column="pids" jdbcType="VARCHAR" property="pids" />
     <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="cputemp" property="cputemp" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,12 +85,12 @@
   <sql id="Base_Column_List">
     id, host, num, nip, intime, creattime, cpucount, cpuusedper, cpustatus, diskcount, 
     diskusedper, diskstatus, memcount, memusedper, memstatus, nicinout, nicstatus, nicids, 
-    pids, starttime
+    pids, starttime, cputemp
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from hard_ware_info_now
+    from ${tablename}
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -103,23 +104,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    insert into hard_ware_info_now (id, host, num, 
+    insert into ${tablename} (id, host, num,
       nip, intime, creattime, 
       cpucount, cpuusedper, cpustatus, 
       diskcount, diskusedper, diskstatus, 
       memcount, memusedper, memstatus, 
       nicinout, nicstatus, nicids, 
-      pids, starttime)
+      pids, starttime, cputemp)
     values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
       #{nip,jdbcType=VARCHAR}, #{intime,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
       #{cpucount,jdbcType=DOUBLE}, #{cpuusedper,jdbcType=DOUBLE}, #{cpustatus,jdbcType=VARCHAR}, 
       #{diskcount,jdbcType=DOUBLE}, #{diskusedper,jdbcType=DOUBLE}, #{diskstatus,jdbcType=VARCHAR}, 
       #{memcount,jdbcType=DOUBLE}, #{memusedper,jdbcType=DOUBLE}, #{memstatus,jdbcType=VARCHAR}, 
       #{nicinout,jdbcType=VARCHAR}, #{nicstatus,jdbcType=VARCHAR}, #{nicids,jdbcType=VARCHAR}, 
-      #{pids,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR})
+      #{pids,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR},#{cputemp,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    insert into hard_ware_info_now
+    insert into ${tablename}
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -180,6 +181,9 @@
       </if>
       <if test="starttime != null">
         starttime,
+      </if>
+      <if test="cputemp != null">
+        cputemp,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -243,10 +247,13 @@
       <if test="starttime != null">
         #{starttime,jdbcType=VARCHAR},
       </if>
+      <if test="cputemp != null">
+        #{cputemp,jdbcType=DOUBLE},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    update hard_ware_info_now
+    update ${tablename}
     <set>
       <if test="host != null">
         host = #{host,jdbcType=VARCHAR},
@@ -305,11 +312,14 @@
       <if test="starttime != null">
         starttime = #{starttime,jdbcType=VARCHAR},
       </if>
+      <if test="cputemp != null">
+        cputemp = #{cputemp,jdbcType=DOUBLE},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    update hard_ware_info_now
+    update ${tablename}
     set host = #{host,jdbcType=VARCHAR},
       num = #{num,jdbcType=INTEGER},
       nip = #{nip,jdbcType=VARCHAR},
@@ -328,13 +338,14 @@
       nicstatus = #{nicstatus,jdbcType=VARCHAR},
       nicids = #{nicids,jdbcType=VARCHAR},
       pids = #{pids,jdbcType=VARCHAR},
-      starttime = #{starttime,jdbcType=VARCHAR}
+      starttime = #{starttime,jdbcType=VARCHAR},
+      cputemp = #{cputemp,jdbcType=DOUBLE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from hard_ware_info_now
+    from ${tablename}
     where 1=1
     <if test="host != null and host != ''">
       and host = #{host,jdbcType=VARCHAR}
@@ -384,51 +395,45 @@
     <if test="endTimems != null and endTimems != ''">
       and intime &lt;= #{endTimems,jdbcType=VARCHAR}
     </if>
+    <if test="cputemp != null">
+      and cputemp = #{cputemp,jdbcType=VARCHAR}
+    </if>
   </select>
 
     <select id="countByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultType="java.lang.Long">
         select count(*)
         <include refid="Base_Column_List" />
-        from hard_ware_info_now
+        from ${tablename}
         where 1=1
         <if test="host != null and host != ''">
             and host = #{host,jdbcType=VARCHAR}
         </if>
         <if test="cpucount != null">
-            and cpucount = #{cpucount,jdbcType=VARCHAR}
+            and cpucount = #{cpucount,jdbcType=DOUBLE}
         </if>
         <if test="cpuusedper != null">
-            and cpuusedper = #{cpuusedper,jdbcType=VARCHAR}
+            and cpuusedper = #{cpuusedper,jdbcType=DOUBLE}
         </if>
         <if test="cpustatus != null and cpustatus != ''">
             and cpustatus = #{cpustatus,jdbcType=VARCHAR}
         </if>
         <if test="diskcount != null ">
-            and diskcount = #{diskcount,jdbcType=VARCHAR}
+            and diskcount = #{diskcount,jdbcType=DOUBLE}
         </if>
         <if test="diskusedper != null ">
-            and diskusedper = #{diskusedper,jdbcType=VARCHAR}
+            and diskusedper = #{diskusedper,jdbcType=DOUBLE}
         </if>
         <if test="diskstatus != null and diskstatus != ''">
             and diskstatus = #{diskstatus,jdbcType=VARCHAR}
         </if>
         <if test="memcount != null ">
-            and memcount = #{memcount,jdbcType=VARCHAR}
+            and memcount = #{memcount,jdbcType=DOUBLE}
         </if>
         <if test="memusedper != null">
-            and memusedper = #{memusedper,jdbcType=VARCHAR}
+            and memusedper = #{memusedper,jdbcType=DOUBLE}
         </if>
         <if test="memstatus != null and memstatus != ''">
             and memstatus = #{memstatus,jdbcType=VARCHAR}
-        </if>
-        <if test="diskcount != null ">
-            and diskcount = #{diskcount,jdbcType=VARCHAR}
-        </if>
-        <if test="diskusedper != null">
-            and diskusedper = #{diskusedper,jdbcType=VARCHAR}
-        </if>
-        <if test="diskstatus != null and diskstatus != ''">
-            and diskstatus = #{diskstatus,jdbcType=VARCHAR}
         </if>
         <if test="starttime != null and starttime != ''">
             and starttime = #{starttime,jdbcType=VARCHAR}
@@ -439,6 +444,9 @@
         <if test="endTimems != null and endTimems != ''">
             and intime &lt;= #{endTimems,jdbcType=VARCHAR}
         </if>
+      <if test="cputemp != null">
+        and cputemp = #{cputemp,jdbcType=DOUBLE}
+      </if>
     </select>
 
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample" >
@@ -448,7 +456,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from hard_ware_info_now
+    from ${tablename}
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -466,7 +474,7 @@
   </select>
 
   <update id="updateByExampleSelective" parameterType="map" >
-    update hard_ware_info_now
+    update ${tablename}
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
@@ -528,6 +536,9 @@
       <if test="record.starttime != null" >
         starttime = #{record.starttime,jdbcType=VARCHAR},
       </if>
+      <if test="record.cputemp != null" >
+        cputemp = #{record.cputemp,jdbcType=DOUBLE},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -536,7 +547,7 @@
 
 
   <update id="updateByExample" parameterType="map" >
-    update hard_ware_info_now
+    update ${tablename}
     set id = #{record.id,jdbcType=VARCHAR},
     host = #{record.host,jdbcType=VARCHAR},
     num = #{record.num,jdbcType=INTEGER},
@@ -563,10 +574,10 @@
   </update>
 
 
-  <select id="getHardWareHostList" resultType="java.util.HashMap">
+  <select id="getHardWareHostList" resultType="java.util.HashMap" parameterType="java.lang.String">
     select
     host
-    from hard_ware_info_now
+    from ${tablename}
   </select>
 
 </mapper>

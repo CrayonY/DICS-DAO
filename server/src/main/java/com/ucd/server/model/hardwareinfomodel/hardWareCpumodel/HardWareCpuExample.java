@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 @Data
 public class HardWareCpuExample {
+
+    protected String tablename;
     protected String orderByClause;
 
     protected boolean distinct;
@@ -706,6 +708,71 @@ public class HardWareCpuExample {
             addCriterion("nip not between", value1, value2, "nip");
             return (Criteria) this;
         }
+
+
+
+
+        public Criteria andCputempIsNull() {
+            addCriterion("cputemp is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempIsNotNull() {
+            addCriterion("cputemp is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempEqualTo(Double value) {
+            addCriterion("cputemp =", value, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempNotEqualTo(Double value) {
+            addCriterion("cputemp <>", value, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempGreaterThan(Double value) {
+            addCriterion("cputemp >", value, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempGreaterThanOrEqualTo(Double value) {
+            addCriterion("cputemp >=", value, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempLessThan(Double value) {
+            addCriterion("cputemp <", value, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempLessThanOrEqualTo(Double value) {
+            addCriterion("cputemp <=", value, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempIn(List<Double> values) {
+            addCriterion("cputemp in", values, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempNotIn(List<Double> values) {
+            addCriterion("cputemp not in", values, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempBetween(Double value1, Double value2) {
+            addCriterion("cputemp between", value1, value2, "cputemp");
+            return (Criteria) this;
+        }
+
+        public Criteria andCputempNotBetween(Double value1, Double value2) {
+            addCriterion("cputemp not between", value1, value2, "cputemp");
+            return (Criteria) this;
+        }
+
+
     }
 
     public static class Criteria extends GeneratedCriteria {

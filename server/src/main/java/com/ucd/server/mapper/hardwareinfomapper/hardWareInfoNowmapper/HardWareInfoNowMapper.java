@@ -4,6 +4,7 @@ package com.ucd.server.mapper.hardwareinfomapper.hardWareInfoNowmapper;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO;
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -35,5 +36,5 @@ public interface HardWareInfoNowMapper{
 
     int updateByExample(HardWareInfoNow record, HardWareInfoNowExample example);
 
-    List<Map<String, String>> getHardWareHostList();
+    List<Map<String, String>> getHardWareHostList(@Param(value = "tablename") String tablename);
 }

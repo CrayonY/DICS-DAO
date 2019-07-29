@@ -27,6 +27,14 @@ public class HardWareNic {
 
     private String tablename;
 
+    private String nicin;
+
+    private String nicout;
+
+    private String nicinnow;
+
+    private String nicoutnow;
+
     private String checktimeStart;
 
     private String checktimeEnd;
@@ -37,6 +45,8 @@ public class HardWareNic {
     private String secondStart;
 
     private String secondEnd;
+
+
 
 
 }

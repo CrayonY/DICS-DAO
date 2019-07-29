@@ -3,6 +3,7 @@ package com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper;
 
 import java.util.List;
 
+import com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO;
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample;
@@ -31,7 +32,7 @@ public interface HardWareNicMapper {
 
     int updateByPrimaryKey(HardWareNic record);
 
-    List<HardWareNic> selectByHost(String host);
+    List<HardWareNic> selectByHost(HardwareNowDTO hardwareNowDTO);
 
     List<HardWareNic> selectHardWareHealthStatusByTime(HardWareNic hardWareNic);
 

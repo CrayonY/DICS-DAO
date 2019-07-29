@@ -30,7 +30,16 @@ public class HardwareNicDTO {
 
     private String checktimeEnd;
 
-    private String tableName;
+    /** 表名 */
+    private String tablename;
+
+    private String nicin;
+
+    private String nicout;
+
+    private String nicinnow;
+
+    private String nicoutnow;
 
     /** 秒数 */
     private Integer second;

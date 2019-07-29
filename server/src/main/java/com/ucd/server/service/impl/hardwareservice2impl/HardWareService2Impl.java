@@ -1,8 +1,7 @@
-package com.ucd.server.service.impl.hardwareserviceimpl;
+package com.ucd.server.service.impl.hardwareservice2impl;
 
 import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ucd.common.VO.ResultVO;
 import com.ucd.common.enums.HardWareTypeEnum;
 import com.ucd.common.enums.ResultExceptEnum;
@@ -22,7 +21,6 @@ import com.ucd.server.mapper.hardwareinfomapper.hardWareMemmapper.HardWareMemMap
 import com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper.HardWareNicMapper;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper.HardWareThreadMapper;
 import com.ucd.server.model.hardwareinfomodel.HardWareInfo;
-import com.ucd.server.model.hardwareinfomodel.HardWareInfoExample;
 import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
 import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDisk;
 import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow;
@@ -30,8 +28,7 @@ import com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoN
 import com.ucd.server.model.hardwareinfomodel.hardWareMemmodel.HardWareMem;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread;
-import com.ucd.server.model.tdhservicemodel.TdhServicesA;
-import com.ucd.server.service.hardwareservice.HardWareService;
+import com.ucd.server.service.hardwareservice2.HardWareService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -46,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class HardWareServiceimpl implements HardWareService {
+public class HardWareService2Impl implements HardWareService2 {
     @Autowired
     public HardWareInfoMapper hardWareInfoMapper;
     @Autowired
@@ -65,7 +62,7 @@ public class HardWareServiceimpl implements HardWareService {
     @Autowired
     public HardWareInfoNowMapper hardWareInfoNowMapper;
 
-    private final static Logger logger = LoggerFactory.getLogger(HardWareService.class);
+    private final static Logger logger = LoggerFactory.getLogger(HardWareService2.class);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
@@ -88,10 +85,11 @@ public class HardWareServiceimpl implements HardWareService {
         count = hardWareInfoMapper.insertSelective(hardWareInfo);
         return String.valueOf(count);
     }
-//已失效
+
+    //已失效
     @Override
     public PageView getThdServicesDsInfo(PageView pageView, HardwareDTO hardwareDTO) throws Exception {
-//
+
 //        Gson gs = new Gson();
 //        List<HardwareVO> hardwareVOList = new ArrayList<HardwareVO>();
 //        HardWareInfoExample hardWareInfoExample = new HardWareInfoExample();
@@ -167,11 +165,11 @@ public class HardWareServiceimpl implements HardWareService {
     public String saveHardWareInfo(HardwareInfoDTO hardwareInfoDTO) throws Exception {
         HardwareNowDTO hardwareNowDTO = new HardwareNowDTO();
         hardwareNowDTO.setHost(hardwareInfoDTO.getHost());
-        hardwareNowDTO.setTablename("hard_ware_nic_now");
+        hardwareNowDTO.setTablename("hard_ware_nic_now2");
         List<HardWareNic> NicList = NicMapper.selectByHost(hardwareNowDTO);
-        hardwareNowDTO.setTablename("hard_ware_thread_now");
+        hardwareNowDTO.setTablename("hard_ware_thread_now2");
         List<HardWareThread> ThreadList = ThreadMapper.selectByHost(hardwareNowDTO);
-        hardwareNowDTO.setTablename("hard_ware_info_now");
+        hardwareNowDTO.setTablename("hard_ware_info_now2");
         List<HardWareInfoNow> InfoNowList = InfoNowMapper.selectByDTO(hardwareNowDTO);
         if (InfoNowList == null || InfoNowList.size() == 0){
             logger.info("异常：e=" + ResultExceptEnum.ERROR_SELECT + ",InfoNowList为空！" );
@@ -181,12 +179,12 @@ public class HardWareServiceimpl implements HardWareService {
             //update
             HardWareInfoNow hardWareInfoNow = InfoNowList.get(0);
         if (hardWareInfoNow == null){
-            logger.info("异常：e=" + ResultExceptEnum.ERROR_SELECT + ",hardWareInfoNow为空！" );
-            throw new DaoException(ResultExceptEnum.ERROR_SELECT,"hardWareInfoNow为空！");
+            logger.info("异常：e=" + ResultExceptEnum.ERROR_SELECT + ",hardWareInfoNow2为空！" );
+            throw new DaoException(ResultExceptEnum.ERROR_SELECT,"hardWareInfoNow2为空！");
         }
             hardWareInfoNow.setIntime(hardwareInfoDTO.getIntime());
             hardWareInfoNow.setStarttime(hardwareInfoDTO.getStartTimems());
-            hardWareInfoNow.setTablename("hard_ware_info_now");
+            hardWareInfoNow.setTablename("hard_ware_info_now2");
             Date now = new Date();
             String ID = KeyUtil.genUniqueKey()+ UUIDUtils.getUUID();
             String numID = ID+100;
@@ -195,67 +193,40 @@ public class HardWareServiceimpl implements HardWareService {
                 hardWareInfoNow.setCpustatus(hardwareInfoDTO.getCpu().getCpustatus());
                 hardWareInfoNow.setCpuusedper(hardwareInfoDTO.getCpu().getCpuusedper());
                 hardWareInfoNow.setCputemp(hardwareInfoDTO.getCpu().getCputemp());
-                if (hardWareInfoNow.getNum() == 180){
+                //添加CPU
                     HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
                     hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
                     hardwareCpuDTO.setChecktime(hardwareInfoDTO.getIntime());
                     hardwareCpuDTO.setCreattime(now);
                     hardwareCpuDTO.setId(numID);
-                    hardwareCpuDTO.setTablename("hard_ware_cpu");
+                    hardwareCpuDTO.setTablename("hard_ware_cpu2");
                     CpuMapper.insertByDTO(hardwareCpuDTO);
-                }else if (!("healthy".equals(hardwareInfoDTO.getCpu().getCpustatus()))){
-                    HardwareCpuDTO hardwareCpuDTO = hardwareInfoDTO.getCpu();
-                    hardwareCpuDTO.setHost(hardwareInfoDTO.getHost());
-                    hardwareCpuDTO.setChecktime(hardwareInfoDTO.getIntime());
-                    hardwareCpuDTO.setCreattime(now);
-                    hardwareCpuDTO.setId(ID);
-                    hardwareCpuDTO.setTablename("hard_ware_cpu");
-                    CpuMapper.insertByDTO(hardwareCpuDTO);
-                }
             }
             if (hardwareInfoDTO.getMem() != null){
                 hardWareInfoNow.setMemcount(hardwareInfoDTO.getMem().getMemcount());
                 hardWareInfoNow.setMemstatus(hardwareInfoDTO.getMem().getMemstatus());
                 hardWareInfoNow.setMemusedper(hardwareInfoDTO.getMem().getMemusedper());
-                if (hardWareInfoNow.getNum() == 180){
+                //添加MEM
                     HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
                     hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
                     hardwareMemDTO.setChecktime(hardwareInfoDTO.getIntime());
                     hardwareMemDTO.setCreattime(now);
                     hardwareMemDTO.setId(numID);
-                    hardwareMemDTO.setTablename("hard_ware_mem");
+                    hardwareMemDTO.setTablename("hard_ware_mem2");
                     MemMapper.insertByDTO(hardwareMemDTO);
-                }else if (!("healthy".equals(hardwareInfoDTO.getMem().getMemstatus()))){
-                    HardwareMemDTO hardwareMemDTO = hardwareInfoDTO.getMem();
-                    hardwareMemDTO.setHost(hardwareInfoDTO.getHost());
-                    hardwareMemDTO.setChecktime(hardwareInfoDTO.getIntime());
-                    hardwareMemDTO.setCreattime(now);
-                    hardwareMemDTO.setId(ID);
-                    hardwareMemDTO.setTablename("hard_ware_mem");
-                    MemMapper.insertByDTO(hardwareMemDTO);
-                }
             }
             if (hardwareInfoDTO.getDisk() != null){
                 hardWareInfoNow.setDiskcount(hardwareInfoDTO.getDisk().getDiskcount());
                 hardWareInfoNow.setDiskstatus(hardwareInfoDTO.getDisk().getDiskstatus());
                 hardWareInfoNow.setDiskusedper(hardwareInfoDTO.getDisk().getDiskusedper());
-                if (hardWareInfoNow.getNum() == 180){
+                //添加DISK
                     HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
                     hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
                     hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
                     hardwareDiskDTO.setCreattime(now);
                     hardwareDiskDTO.setId(numID);
-                    hardwareDiskDTO.setTablename("hard_ware_disk");
+                    hardwareDiskDTO.setTablename("hard_ware_disk2");
                     DiskMapper.insertByDTO(hardwareDiskDTO);
-                }else if (!("healthy".equals(hardwareInfoDTO.getDisk().getDiskstatus()))){
-                    HardwareDiskDTO hardwareDiskDTO = hardwareInfoDTO.getDisk();
-                    hardwareDiskDTO.setHost(hardwareInfoDTO.getHost());
-                    hardwareDiskDTO.setChecktime(hardwareInfoDTO.getIntime());
-                    hardwareDiskDTO.setCreattime(now);
-                    hardwareDiskDTO.setId(ID);
-                    hardwareDiskDTO.setTablename("hard_ware_disk");
-                    DiskMapper.insertByDTO(hardwareDiskDTO);
-                }
             }
             if (hardwareInfoDTO.getNic() != null && hardwareInfoDTO.getNic().size() != 0){
                 for(HardWareNic hardWareNic : NicList) {
@@ -266,15 +237,14 @@ public class HardWareServiceimpl implements HardWareService {
                              hardWareNic.setNicinout(hardwareNicDTO.getNicinout());
                              hardWareNic.setNicstatus("healthy");
                              hardWareNic.setNip(hardwareNicDTO.getNip());
-                             hardWareNic.setTablename("hard_ware_nic_now");
+                             hardWareNic.setTablename("hard_ware_nic_now2");
                              hardWareNic.setNicin(hardwareNicDTO.getNicin());
                              hardWareNic.setNicout(hardwareNicDTO.getNicout());
                              NicMapper.updateByPrimaryKey(hardWareNic);
-                             if (hardWareInfoNow.getNum() == 180){
+                             //添加NIC
                                  hardWareNic.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
-                                 hardWareNic.setTablename("hard_ware_nic");
+                                 hardWareNic.setTablename("hard_ware_nic2");
                                  NicMapper.insert(hardWareNic);
-                             }
                              hardWareNic.setNicids("1");
                          }
                     }
@@ -284,10 +254,10 @@ public class HardWareServiceimpl implements HardWareService {
                         hardWareNic.setNicstatus("down");
                         hardWareNic.setNicinout(null);
                         hardWareNic.setNicids("0");
-                        hardWareNic.setTablename("hard_ware_nic_now");
+                        hardWareNic.setTablename("hard_ware_nic_now2");
                         NicMapper.updateByPrimaryKey(hardWareNic);
                         hardWareNic.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
-                        hardWareNic.setTablename("hard_ware_nic");
+                        hardWareNic.setTablename("hard_ware_nic2");
                         NicMapper.insert(hardWareNic);
                     }
                 }
@@ -297,10 +267,10 @@ public class HardWareServiceimpl implements HardWareService {
                     hardWareNic.setStarttime(hardwareInfoDTO.getStarttime());
                     hardWareNic.setNicstatus("down");
                     hardWareNic.setNicinout(null);
-                    hardWareNic.setTablename("hard_ware_nic_now");
+                    hardWareNic.setTablename("hard_ware_nic_now2");
                     NicMapper.updateByPrimaryKey(hardWareNic);
                     hardWareNic.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
-                    hardWareNic.setTablename("hard_ware_nic");
+                    hardWareNic.setTablename("hard_ware_nic2");
                     NicMapper.insert(hardWareNic);
                 }
             }
@@ -313,13 +283,12 @@ public class HardWareServiceimpl implements HardWareService {
                             hardWareThread.setPidthread(hardwareThreadDTO.getPidthread());
                             hardWareThread.setPidusememeper(hardwareThreadDTO.getPidusememeper());
                             hardWareThread.setPid(hardwareThreadDTO.getPid());
-                            hardWareThread.setTablename("hard_ware_thread_now");
+                            hardWareThread.setTablename("hard_ware_thread_now2");
                             ThreadMapper.updateByPrimaryKey(hardWareThread);
-                            if ((("zombie".equals(hardwareThreadDTO.getPidstatus()))) || hardWareInfoNow.getNum() == 180){
+                            //添加THREAD
                                 hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
-                                hardWareThread.setTablename("hard_ware_thread");
+                                hardWareThread.setTablename("hard_ware_thread2");
                                 ThreadMapper.insert(hardWareThread);
-                            }
                             hardWareThread.setPids("1");
                         }
                     }
@@ -330,10 +299,10 @@ public class HardWareServiceimpl implements HardWareService {
                         hardWareThread.setPidthread(null);
                         hardWareThread.setPidusememeper(null);
                         hardWareThread.setPids("0");
-                        hardWareThread.setTablename("hard_ware_thread_now");
+                        hardWareThread.setTablename("hard_ware_thread_now2");
                         ThreadMapper.updateByPrimaryKey(hardWareThread);
                         hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
-                        hardWareThread.setTablename("hard_ware_thread");
+                        hardWareThread.setTablename("hard_ware_thread2");
                         ThreadMapper.insert(hardWareThread);
                     }
                 }
@@ -342,10 +311,10 @@ public class HardWareServiceimpl implements HardWareService {
                     hardWareThread.setPidstatus("down");
                     hardWareThread.setPidthread(null);
                     hardWareThread.setPidusememeper(null);
-                    hardWareThread.setTablename("hard_ware_thread_now");
+                    hardWareThread.setTablename("hard_ware_thread_now2");
                     ThreadMapper.updateByPrimaryKey(hardWareThread);
                     hardWareThread.setId(KeyUtil.genUniqueKey()+ UUIDUtils.getUUID());
-                    hardWareThread.setTablename("hard_ware_thread");
+                    hardWareThread.setTablename("hard_ware_thread2");
                     ThreadMapper.insert(hardWareThread);
                 }
             }
@@ -392,7 +361,7 @@ public class HardWareServiceimpl implements HardWareService {
         List<HardwareNowVO> hardWareNowVOList = new ArrayList<>();
         HardWareInfoNowExample hardWareInfoNowExample = new HardWareInfoNowExample();
         hardWareInfoNowExample.createCriteria().andHostEqualTo(host);
-        hardWareInfoNowExample.setTablename("hard_ware_info_now");
+        hardWareInfoNowExample.setTablename("hard_ware_info_now2");
         List<HardWareInfoNow> hardWareInfoNowList = hardWareInfoNowMapper.selectByExample(hardWareInfoNowExample);
 
         for (HardWareInfoNow hardWareInfoNow : hardWareInfoNowList){
@@ -457,7 +426,7 @@ public class HardWareServiceimpl implements HardWareService {
     @Override
     public  List<Map<String, String>> getHardWareHostList() throws Exception {
         ResultVO resultVO = new ResultVO();
-        String tablename = "hard_ware_info_now";
+        String tablename = "hard_ware_info_now2";
         List<Map<String,String>> hostList = hardWareInfoNowMapper.getHardWareHostList(tablename);
         return hostList;
     }
@@ -473,7 +442,7 @@ public class HardWareServiceimpl implements HardWareService {
         List<HardWareCpu> hardWareCpuList = new ArrayList<>();
         HardWareCpu hardWareCpu = new HardWareCpu();
         BeanUtils.copyProperties(hardwareCpuDTO, hardWareCpu);
-        hardWareCpu.setTablename("hard_ware_cpu");
+        hardWareCpu.setTablename("hard_ware_cpu2");
         hardWareCpuList = CpuMapper.selectHardWareHealthStatusByTime(hardWareCpu);
 
         for (HardWareCpu hardWareCpu1 : hardWareCpuList){
@@ -502,7 +471,7 @@ public class HardWareServiceimpl implements HardWareService {
         hardwareDiskDTO.setSecondEnd(hardwareCpuDTO.getSecondEnd());
         HardWareDisk hardWareDisk = new HardWareDisk();
         BeanUtils.copyProperties(hardwareDiskDTO, hardWareDisk);
-        hardWareDisk.setTablename("hard_ware_disk");
+        hardWareDisk.setTablename("hard_ware_disk2");
         // 获取信息
         hardWareDiskList = DiskMapper.selectHardWareHealthStatusByTime(hardWareDisk);
 
@@ -534,8 +503,7 @@ public class HardWareServiceimpl implements HardWareService {
 
         HardWareMem hardWareMem = new HardWareMem();
         BeanUtils.copyProperties(hardwareMemDTO, hardWareMem);
-        hardWareMem.setTablename("hard_ware_mem");
-
+        hardWareMem.setTablename("hard_ware_mem2");
         hardWareMemList = MemMapper.selectHardWareHealthStatusByTime(hardWareMem);
 
         for (HardWareMem hardWareMem1 : hardWareMemList){
@@ -570,7 +538,7 @@ public class HardWareServiceimpl implements HardWareService {
 
         HardWareNic hardWareNic = new HardWareNic();
         BeanUtils.copyProperties(hardwareNicDTO, hardWareNic);
-        hardWareNic.setTablename("hard_ware_nic");
+        hardWareNic.setTablename("hard_ware_nic2");
         hardWareNicList = NicMapper.selectHardWareHealthStatusByTime(hardWareNic);
 
         for (HardWareNic hardWareNic1 : hardWareNicList){
@@ -605,7 +573,7 @@ public class HardWareServiceimpl implements HardWareService {
 
         HardWareThread hardWareThread = new HardWareThread();
         BeanUtils.copyProperties(hardwareThreadDTO, hardWareThread);
-        hardWareThread.setTablename("hard_ware_thread");
+        hardWareThread.setTablename("hard_ware_thread2");
         // 获取进程数据
         hardWareThreadList = ThreadMapper.selectHardWareHealthStatusByTime(hardWareThread);
 

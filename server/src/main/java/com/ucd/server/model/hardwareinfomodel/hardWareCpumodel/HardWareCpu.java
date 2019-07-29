@@ -27,11 +27,16 @@ public class HardWareCpu {
 
     private String checktimeEnd;
 
+    private Double cputemp;
+
     /** 秒数 */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
+
+    /** 表名 */
+    private String tablename;
 
 }

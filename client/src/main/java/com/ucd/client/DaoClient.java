@@ -189,6 +189,47 @@ public interface DaoClient {
     @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardDao/getHardWareStatusByTime",method= RequestMethod.POST)
     ResultVO<?> getHardWareStatusByTime(@RequestBody Map<String, Object> models);
 
+
+
+    /*
+    硬件监测第二套
+    */
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/saveHardWareInfo2")
+    public ResultVO saveHardWareInfo2(@RequestBody HardwareInfoDTO hardwareInfoDTO );
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareInfo2")
+    public ResultVO getHardWareInfo2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareInfoListNow2")
+    public ResultVO<?> getHardWareInfoListNow2(@RequestParam(value = "host",required = true) String host);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareStatusByTime2")
+    public ResultVO<?> getHardWareStatusByTime2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareHostList2")
+    public ResultVO getHardWareHostList2();
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardCPUDao2/getHardWareCpu2")
+    public ResultVO getHardWareCpu2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDiskDao2/getHardWareDisk2")
+    public ResultVO getHardWareDisk2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardMemDao2/getHardWareMEM2")
+    public ResultVO getHardWareMEM2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardNicDao2/getHardWareNic2")
+    public ResultVO getHardWareNic2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardNicDao2/getHardWareNicNow2")
+    public ResultVO<?> getHardWareNicNow2(@RequestParam(value = "host",required = true) String host);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao2/getHardWareThread2")
+    public ResultVO getHardWareThread2(@RequestBody Map<String, Object> models);
+
+    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao2/getHardWareThreadNow2")
+    public ResultVO<?> getHardWareThreadNow2(@RequestParam(value = "host",required = true) String host);
+
      @Component
     static class ProductClientFallback implements DaoClient {
 
@@ -453,6 +494,66 @@ public interface DaoClient {
 
          @Override
          public ResultVO<?> getHardWareStatusByTime(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO saveHardWareInfo2(HardwareInfoDTO hardwareInfoDTO) {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareInfo2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO<?> getHardWareInfoListNow2(String host) {
+             return null;
+         }
+
+         @Override
+         public ResultVO<?> getHardWareStatusByTime2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareHostList2() {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareCpu2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareDisk2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareMEM2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareNic2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO<?> getHardWareNicNow2(String host) {
+             return null;
+         }
+
+         @Override
+         public ResultVO getHardWareThread2(Map<String, Object> models) {
+             return null;
+         }
+
+         @Override
+         public ResultVO<?> getHardWareThreadNow2(String host) {
              return null;
          }
      }

@@ -52,4 +52,5 @@ public class HardwareNowVO {
 
     private String endTimems;
 
+    private Double cputemp;
 }

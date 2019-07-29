@@ -34,4 +34,6 @@ public class HardwareVO {
 
     private String startupTimems;
 
+    private Double cputemp;
+
 }

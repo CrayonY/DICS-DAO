@@ -84,7 +84,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from ${tableName}
+    from ${tablename}
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -200,7 +200,7 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample" resultType="java.lang.Integer">
-    select count(*) from ${tableName}
+    select count(*) from ${tablename}
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -321,10 +321,10 @@
       pids = #{pids,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByHost" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByHost" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from hard_ware_thread_now
+    from ${tablename}
     where host = #{host,jdbcType=VARCHAR}
   </select>
 
@@ -337,7 +337,7 @@
     select
     id,host,pidname,pidusememeper,pidstatus,pidpwd,pidthread,pid,creattime,checktime,prepare,pids
 
-    from hard_ware_thread  force index(host_checktime_index) where 1=1
+    from ${tablename}  force index(host_checktime_index) where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}
     </if>

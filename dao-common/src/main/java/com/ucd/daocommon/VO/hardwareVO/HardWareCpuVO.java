@@ -32,5 +32,5 @@ public class HardWareCpuVO {
 
     private String checktimeEnd;
 
-
+    private Double cputemp;
 }

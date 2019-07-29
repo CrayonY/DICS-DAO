@@ -79,7 +79,7 @@
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from hard_ware_disk
+    from ${tablename}
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -168,7 +168,7 @@
   </insert>
 
   <insert id="insertByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareDiskDTO" >
-    insert into hard_ware_disk
+    insert into ${tablename}
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -323,7 +323,7 @@
     select
     <!--<include refid="Base_Column_List" />-->
     host,checktime,diskcount,diskusedper,diskstatus,creattime
-    from hard_ware_disk force index(host_checktime_index)
+    from ${tablename} force index(host_checktime_index)
     where 1=1
     <if test="host != null" >
       AND host = #{host,jdbcType=VARCHAR}

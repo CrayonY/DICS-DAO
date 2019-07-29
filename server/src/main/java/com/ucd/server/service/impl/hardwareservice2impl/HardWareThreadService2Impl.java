@@ -1,22 +1,16 @@
-package com.ucd.server.service.impl.hardwareserviceimpl;
+package com.ucd.server.service.impl.hardwareservice2impl;
 
 import com.github.pagehelper.PageHelper;
 import com.ucd.common.VO.ResultVO;
 import com.ucd.common.result.ApiResultType;
 import com.ucd.common.utils.StringTool;
 import com.ucd.common.utils.pager.PageView;
-import com.ucd.daocommon.DTO.hardwareDTO.HardwareNicDTO;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareThreadDTO;
-import com.ucd.daocommon.VO.hardwareVO.HardwareNicVO;
 import com.ucd.daocommon.VO.hardwareVO.HardwareThreadVO;
-import com.ucd.server.mapper.hardwareinfomapper.hardWareNicmapper.HardWareNicMapper;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper.HardWareThreadMapper;
-import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
-import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNicExample;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample;
-import com.ucd.server.service.hardwareservice.HardWareNICService;
-import com.ucd.server.service.hardwareservice.HardWareThreadService;
+import com.ucd.server.service.hardwareservice2.HardWareThreadService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -28,14 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by crayon on 2019/3/30.
+ * Created by gwm on 2019/3/30.
  */
 @Service
-public class HardWareThreadServiceImpl implements HardWareThreadService {
+public class HardWareThreadService2Impl implements HardWareThreadService2 {
     @Autowired
     public HardWareThreadMapper hardWareThreadMapper;
 
-    private final static Logger logger = LoggerFactory.getLogger(HardWareThreadService.class);
+    private final static Logger logger = LoggerFactory.getLogger(HardWareThreadService2.class);
 
 
     @Override
@@ -70,7 +64,7 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
             if(checktimeEnd != null){
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
-            hardWareThreadExample.setTablename("hard_ware_thread");
+            hardWareThreadExample.setTablename("hard_ware_thread2");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
             List<HardWareThread> hardWareThreadList =  hardWareThreadMapper.selectByExample(hardWareThreadExample);
             logger.info("hardWareThreadList="+hardWareThreadList.toString());
@@ -93,7 +87,7 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
         try{
             HardWareThreadExample hardWareThreadExample = new HardWareThreadExample();
             hardWareThreadExample.createCriteria().andHostEqualTo(host);
-            hardWareThreadExample.setTablename("hard_ware_thread_now");
+            hardWareThreadExample.setTablename("hard_ware_thread_now2");
 
             // 获取信息
             hardWareThreadList = hardWareThreadMapper.selectByExample(hardWareThreadExample);

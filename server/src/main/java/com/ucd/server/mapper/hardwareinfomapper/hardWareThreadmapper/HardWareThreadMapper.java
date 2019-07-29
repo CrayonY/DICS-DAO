@@ -1,5 +1,6 @@
 package com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper;
 
+import com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO;
 import com.ucd.server.model.hardwareinfomodel.hardWareNicmodel.HardWareNic;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread;
 import com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample;
@@ -29,7 +30,7 @@ public interface HardWareThreadMapper {
 
     int updateByPrimaryKey(HardWareThread record);
 
-    List<HardWareThread> selectByHost(String host);
+    List<HardWareThread> selectByHost(HardwareNowDTO hardwareNowDTO);
 
     List<HardWareThread> selectHardWareHealthStatusByTime(HardWareThread hardWareThread);
 }

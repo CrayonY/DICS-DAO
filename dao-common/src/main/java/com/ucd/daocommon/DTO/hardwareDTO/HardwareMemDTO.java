@@ -33,5 +33,8 @@ public class HardwareMemDTO {
 
     private String secondEnd;
 
+    /** 表名 */
+    private String tablename;
+
 
 }

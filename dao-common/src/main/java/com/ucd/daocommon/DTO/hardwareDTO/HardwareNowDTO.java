@@ -54,4 +54,8 @@ public class HardwareNowDTO {
 
     private String endTimems;
 
+    private Double cputemp;
+
+    private  String tablename;
+
 }

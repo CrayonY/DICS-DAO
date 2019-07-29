@@ -49,6 +49,10 @@ public class HardWareInfoNow {
 
     private String stopTimems;
 
+    private Double cputemp;
+
+    /** 表名 */
+    private String tablename;
 
 
 }

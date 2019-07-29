@@ -186,6 +186,7 @@ public class ThdServicesServiceImpl implements TdhServicesService {
     }
 
     @Override
+    @Transactional
     public int updateThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO, String num) {
 
         int countNum = 0;

@@ -1,4 +1,4 @@
-package com.ucd.server.service.impl.hardwareserviceimpl;
+package com.ucd.server.service.impl.hardwareservice2impl;
 
 import com.github.pagehelper.PageHelper;
 import com.ucd.common.utils.StringTool;
@@ -8,8 +8,8 @@ import com.ucd.daocommon.VO.hardwareVO.HardWareDiskVO;
 import com.ucd.server.mapper.hardwareinfomapper.hardWareDiskmapper.HardWareDiskMapper;
 import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDisk;
 import com.ucd.server.model.hardwareinfomodel.hardWareDiskmodel.HardWareDiskExample;
-import com.ucd.server.service.hardwareservice.HardWareCPUService;
-import com.ucd.server.service.hardwareservice.HardWareDiskService;
+import com.ucd.server.service.hardwareservice2.HardWareCPUService2;
+import com.ucd.server.service.hardwareservice2.HardWareDiskService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by crayon on 2019/3/30.
+ * Created by gwm on 2019/3/30.
  */
 @Service
-public class HardWareDiskServiceImpl implements HardWareDiskService{
-    private final static Logger logger = LoggerFactory.getLogger(HardWareCPUService.class);
+public class HardWareDiskService2Impl implements HardWareDiskService2 {
+    private final static Logger logger = LoggerFactory.getLogger(HardWareCPUService2.class);
 
     @Autowired
     private HardWareDiskMapper hardWareDiskMapper;
@@ -62,7 +62,7 @@ public class HardWareDiskServiceImpl implements HardWareDiskService{
             if(checktimeEnd != null){
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
-            hardWareDiskExample.setTablename("hard_ware_disk");
+            hardWareDiskExample.setTablename("hard_ware_disk2");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
             List<HardWareDisk> hardWareDiskList =  hardWareDiskMapper.selectByExample(hardWareDiskExample);
             logger.info("hardWareDiskList="+hardWareDiskList.toString());
