@@ -54,6 +54,7 @@ public class OperationLogInfoServiceimpl implements OperationLogInfoService {
         OperationLogInfoExample operationLogInfoExample = new OperationLogInfoExample();
         logger.info("operationLogInfoDTO:"+operationLogInfoDTO);
         OperationLogInfoExample.Criteria criteria = operationLogInfoExample.createCriteria();
+        operationLogInfoExample.setOrderByClause("creattime DESC");
         OperationLogInfoExample.Criteria criteriaOR = operationLogInfoExample.or();
         if (operationLogInfoDTO != null){
             if (operationLogInfoDTO.getUserCode() != null && !("".equals(operationLogInfoDTO.getUserCode()))){
