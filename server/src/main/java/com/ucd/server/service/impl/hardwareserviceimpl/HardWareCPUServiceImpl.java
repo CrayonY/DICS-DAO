@@ -23,7 +23,7 @@ import java.util.List;
  * Created by crayon on 2019/3/30.
  */
 @Service
-public class HardWareCPUServiceImpl implements HardWareCPUService{
+public class HardWareCPUServiceImpl implements HardWareCPUService {
     @Autowired
     public HardWareCpuMapper hardWareCpuMapper;
 
@@ -33,21 +33,21 @@ public class HardWareCPUServiceImpl implements HardWareCPUService{
     public PageView getHardWareCPU(PageView pageView, HardwareCpuDTO hardwareCpuDTO) throws Exception {
 
         HardWareCpuExample hardWareCpuExample = new HardWareCpuExample();
-        logger.info("hardwareDTO:"+hardwareCpuDTO.toString());
+        logger.info("hardwareDTO:" + hardwareCpuDTO.toString());
         HardWareCpuExample.Criteria criteria = hardWareCpuExample.createCriteria();
 
         // 关键字查询 host
-        if(hardwareCpuDTO != null){
+        if (hardwareCpuDTO != null) {
 
             // 格式化
             String checkTimeStart = (String) StringTool.parsentObjectNull(hardwareCpuDTO.getChecktimeStart());
-            String  checktimeEnd = (String) StringTool.parsentObjectNull(hardwareCpuDTO.getChecktimeEnd());
+            String checktimeEnd = (String) StringTool.parsentObjectNull(hardwareCpuDTO.getChecktimeEnd());
 
-            if(!ObjectUtils.isEmpty(hardwareCpuDTO.getHost())){
-                criteria.andHostLike("%"+hardwareCpuDTO.getHost()+"%");
+            if (!ObjectUtils.isEmpty(hardwareCpuDTO.getHost())) {
+                criteria.andHostLike("%" + hardwareCpuDTO.getHost() + "%");
             }
 
-            if(!ObjectUtils.isEmpty(hardwareCpuDTO.getCpustatus())){
+            if (!ObjectUtils.isEmpty(hardwareCpuDTO.getCpustatus())) {
                 criteria.andCpustatusEqualTo(hardwareCpuDTO.getCpustatus());
             }
 
@@ -56,13 +56,13 @@ public class HardWareCPUServiceImpl implements HardWareCPUService{
                 criteria.andChecktimeGreaterThanOrEqualTo(checkTimeStart);
             }
 
-            if(checktimeEnd != null){
+            if (checktimeEnd != null) {
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
             hardWareCpuExample.setTablename("hard_ware_cpu");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-            List<HardWareCpu> hardWareCpuList =  hardWareCpuMapper.selectByExample(hardWareCpuExample);
-            logger.info("hardWareCpuList="+hardWareCpuList.toString());
+            List<HardWareCpu> hardWareCpuList = hardWareCpuMapper.selectByExample(hardWareCpuExample);
+            logger.info("hardWareCpuList=" + hardWareCpuList.toString());
             long count = hardWareCpuMapper.countByExample(hardWareCpuExample);
             pageView.setTotalrecord(count);
 

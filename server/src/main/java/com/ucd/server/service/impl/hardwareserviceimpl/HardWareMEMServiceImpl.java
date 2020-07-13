@@ -23,7 +23,7 @@ import java.util.List;
  * Created by crayon on 2019/3/30.
  */
 @Service
-public class HardWareMEMServiceImpl implements HardWareMEMService{
+public class HardWareMEMServiceImpl implements HardWareMEMService {
 
     private final static Logger logger = LoggerFactory.getLogger(HardWareMEMService.class);
 
@@ -34,21 +34,21 @@ public class HardWareMEMServiceImpl implements HardWareMEMService{
     public PageView getHardWareMEM(PageView pageView, HardwareMemDTO hardwareMemDTO) throws Exception {
         HardWareMemExample hardWareMemExample = new HardWareMemExample();
         HardWareMemExample.Criteria criteria = hardWareMemExample.createCriteria();
-        logger.info("hardwareMemDTO:"+hardwareMemDTO.toString());
+        logger.info("hardwareMemDTO:" + hardwareMemDTO.toString());
         // 关键字查询 host
 
         if (hardwareMemDTO != null) {
 
             // 格式化
             String checkTimeStart = (String) StringTool.parsentObjectNull(hardwareMemDTO.getChecktimeStart());
-            String  checktimeEnd = (String) StringTool.parsentObjectNull(hardwareMemDTO.getChecktimeEnd());
+            String checktimeEnd = (String) StringTool.parsentObjectNull(hardwareMemDTO.getChecktimeEnd());
 
-            if(!ObjectUtils.isEmpty(hardwareMemDTO.getHost())){
-                criteria.andHostLike("%"+hardwareMemDTO.getHost()+"%");
+            if (!ObjectUtils.isEmpty(hardwareMemDTO.getHost())) {
+                criteria.andHostLike("%" + hardwareMemDTO.getHost() + "%");
             }
 
             // 状态
-            if(!ObjectUtils.isEmpty(hardwareMemDTO.getMemstatus())){
+            if (!ObjectUtils.isEmpty(hardwareMemDTO.getMemstatus())) {
                 criteria.andMemstatusEqualTo(hardwareMemDTO.getMemstatus());
             }
 
@@ -57,13 +57,13 @@ public class HardWareMEMServiceImpl implements HardWareMEMService{
                 criteria.andChecktimeGreaterThanOrEqualTo(checkTimeStart);
             }
 
-            if(checktimeEnd != null){
+            if (checktimeEnd != null) {
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
             hardWareMemExample.setTablename("hard_ware_mem");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-            List<HardWareMem> hardWareMemList =  hardWareMemMapper.selectByExample(hardWareMemExample);
-            logger.info("hardWareMemList="+hardWareMemList.toString());
+            List<HardWareMem> hardWareMemList = hardWareMemMapper.selectByExample(hardWareMemExample);
+            logger.info("hardWareMemList=" + hardWareMemList.toString());
             long count = hardWareMemMapper.countByExample(hardWareMemExample);
             pageView.setTotalrecord(count);
 
