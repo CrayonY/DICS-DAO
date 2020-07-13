@@ -24,7 +24,7 @@ import java.util.List;
  * Created by crayon on 2019/3/30.
  */
 @Service
-public class HardWareDiskServiceImpl implements HardWareDiskService{
+public class HardWareDiskServiceImpl implements HardWareDiskService {
     private final static Logger logger = LoggerFactory.getLogger(HardWareCPUService.class);
 
     @Autowired
@@ -39,9 +39,9 @@ public class HardWareDiskServiceImpl implements HardWareDiskService{
         // 搜索
         if (hardwareDiskDTO != null) {
 
-             // 格式化
-             String checkTimeStart = (String) StringTool.parsentObjectNull(hardwareDiskDTO.getChecktimeStart());
-             String  checktimeEnd = (String) StringTool.parsentObjectNull(hardwareDiskDTO.getChecktimeEnd());
+            // 格式化
+            String checkTimeStart = (String) StringTool.parsentObjectNull(hardwareDiskDTO.getChecktimeStart());
+            String checktimeEnd = (String) StringTool.parsentObjectNull(hardwareDiskDTO.getChecktimeEnd());
 
 
             // 关键字
@@ -59,13 +59,13 @@ public class HardWareDiskServiceImpl implements HardWareDiskService{
                 criteria.andChecktimeGreaterThanOrEqualTo(checkTimeStart);
             }
 
-            if(checktimeEnd != null){
+            if (checktimeEnd != null) {
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
             hardWareDiskExample.setTablename("hard_ware_disk");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-            List<HardWareDisk> hardWareDiskList =  hardWareDiskMapper.selectByExample(hardWareDiskExample);
-            logger.info("hardWareDiskList="+hardWareDiskList.toString());
+            List<HardWareDisk> hardWareDiskList = hardWareDiskMapper.selectByExample(hardWareDiskExample);
+            logger.info("hardWareDiskList=" + hardWareDiskList.toString());
             long count = hardWareDiskMapper.countByExample(hardWareDiskExample);
             pageView.setTotalrecord(count);
 

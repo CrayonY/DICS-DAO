@@ -10,22 +10,22 @@ import com.ucd.daocommon.DTO.hardwareDTO.HardwareNicDTO;
 public interface HardWareNICService2 {
 
     /**
+     * @return com.ucd.common.utils.pager.PageView
+     * @throws
      * @author Crayon
-     * @Description  获取硬件NIC数据
+     * @Description 获取硬件NIC数据
      * @date 2019/3/30 10:29 AM
      * @params [pageView, hardwareNICDTO]
-     * @exception
-     * @return com.ucd.common.utils.pager.PageView
      */
     PageView getHardWareNIC(PageView pageView, HardwareNicDTO hardwareNicDTO) throws Exception;
 
     /**
+     * @return java.util.List<com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow>
+     * @throws
      * @author Crayon
      * @Description 查看硬件NIC实时数据信息
      * @date 2019/4/29 3:38 PM
      * @params [host]
-     * @exception
-     * @return java.util.List<com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow>
      */
     ResultVO<?> getHardWareNICNow(String host);
 }

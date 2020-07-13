@@ -1,297 +1,300 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucd.server.mapper.usermapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.usermodel.User">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
-    <result column="user_description" jdbcType="VARCHAR" property="userDescription" />
-    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
-    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
-    <result column="groups" jdbcType="VARCHAR" property="groups" />
-    <result column="roles" jdbcType="VARCHAR" property="roles" />
-    <result column="user_locked" jdbcType="VARCHAR" property="userLocked" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.usermodel.User">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="pass_word" jdbcType="VARCHAR" property="passWord"/>
+        <result column="user_description" jdbcType="VARCHAR" property="userDescription"/>
+        <result column="full_name" jdbcType="VARCHAR" property="fullName"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
+        <result column="groups" jdbcType="VARCHAR" property="groups"/>
+        <result column="roles" jdbcType="VARCHAR" property="roles"/>
+        <result column="user_locked" jdbcType="VARCHAR" property="userLocked"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        a.id, a.user_name, a.pass_word, a.user_description, a.full_name, a.user_email, a.groups, a.roles,
+        a.user_locked, a.type
+    </sql>
+    <select id="selectByExample" parameterType="com.ucd.server.model.usermodel.UserExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    a.id, a.user_name, a.pass_word, a.user_description, a.full_name, a.user_email, a.groups, a.roles,
-    a.user_locked, a.type
-  </sql>
-  <select id="selectByExample" parameterType="com.ucd.server.model.usermodel.UserExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from user a
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user a
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from user
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ucd.server.model.usermodel.UserExample">
-    delete from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.usermodel.User">
-    insert into user (id, user_name, pass_word, 
-      user_description, full_name, user_email, 
-      groups, roles, user_locked, 
-      type)
-    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
-      #{userDescription,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{groups,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, #{userLocked,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.usermodel.User">
-    insert into user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="passWord != null">
-        pass_word,
-      </if>
-      <if test="userDescription != null">
-        user_description,
-      </if>
-      <if test="fullName != null">
-        full_name,
-      </if>
-      <if test="userEmail != null">
-        user_email,
-      </if>
-      <if test="groups != null">
-        groups,
-      </if>
-      <if test="roles != null">
-        roles,
-      </if>
-      <if test="userLocked != null">
-        user_locked,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="passWord != null">
-        #{passWord,jdbcType=VARCHAR},
-      </if>
-      <if test="userDescription != null">
-        #{userDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="fullName != null">
-        #{fullName,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null">
-        #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="groups != null">
-        #{groups,jdbcType=VARCHAR},
-      </if>
-      <if test="roles != null">
-        #{roles,jdbcType=VARCHAR},
-      </if>
-      <if test="userLocked != null">
-        #{userLocked,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ucd.server.model.usermodel.UserExample" resultType="java.lang.Integer">
-    select count(*) from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update user
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userName != null">
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from user a
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user a
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from user
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.ucd.server.model.usermodel.UserExample">
+        delete from user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.usermodel.User">
+        insert into user (id, user_name, pass_word,
+        user_description, full_name, user_email,
+        groups, roles, user_locked,
+        type)
+        values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR},
+        #{userDescription,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR},
+        #{groups,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, #{userLocked,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ucd.server.model.usermodel.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="passWord != null">
+                pass_word,
+            </if>
+            <if test="userDescription != null">
+                user_description,
+            </if>
+            <if test="fullName != null">
+                full_name,
+            </if>
+            <if test="userEmail != null">
+                user_email,
+            </if>
+            <if test="groups != null">
+                groups,
+            </if>
+            <if test="roles != null">
+                roles,
+            </if>
+            <if test="userLocked != null">
+                user_locked,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="passWord != null">
+                #{passWord,jdbcType=VARCHAR},
+            </if>
+            <if test="userDescription != null">
+                #{userDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="groups != null">
+                #{groups,jdbcType=VARCHAR},
+            </if>
+            <if test="roles != null">
+                #{roles,jdbcType=VARCHAR},
+            </if>
+            <if test="userLocked != null">
+                #{userLocked,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ucd.server.model.usermodel.UserExample"
+            resultType="java.lang.Integer">
+        select count(*) from user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update user
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.passWord != null">
+                pass_word = #{record.passWord,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userDescription != null">
+                user_description = #{record.userDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fullName != null">
+                full_name = #{record.fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userEmail != null">
+                user_email = #{record.userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.groups != null">
+                groups = #{record.groups,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roles != null">
+                roles = #{record.roles,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userLocked != null">
+                user_locked = #{record.userLocked,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update user
+        set id = #{record.id,jdbcType=VARCHAR},
         user_name = #{record.userName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.passWord != null">
         pass_word = #{record.passWord,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userDescription != null">
         user_description = #{record.userDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fullName != null">
         full_name = #{record.fullName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userEmail != null">
         user_email = #{record.userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="record.groups != null">
         groups = #{record.groups,jdbcType=VARCHAR},
-      </if>
-      <if test="record.roles != null">
         roles = #{record.roles,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userLocked != null">
         user_locked = #{record.userLocked,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update user
-    set id = #{record.id,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      pass_word = #{record.passWord,jdbcType=VARCHAR},
-      user_description = #{record.userDescription,jdbcType=VARCHAR},
-      full_name = #{record.fullName,jdbcType=VARCHAR},
-      user_email = #{record.userEmail,jdbcType=VARCHAR},
-      groups = #{record.groups,jdbcType=VARCHAR},
-      roles = #{record.roles,jdbcType=VARCHAR},
-      user_locked = #{record.userLocked,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.usermodel.User">
-    update user
-    <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="passWord != null">
+        type = #{record.type,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.usermodel.User">
+        update user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="passWord != null">
+                pass_word = #{passWord,jdbcType=VARCHAR},
+            </if>
+            <if test="userDescription != null">
+                user_description = #{userDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                full_name = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                user_email = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="groups != null">
+                groups = #{groups,jdbcType=VARCHAR},
+            </if>
+            <if test="roles != null">
+                roles = #{roles,jdbcType=VARCHAR},
+            </if>
+            <if test="userLocked != null">
+                user_locked = #{userLocked,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.usermodel.User">
+        update user
+        set user_name = #{userName,jdbcType=VARCHAR},
         pass_word = #{passWord,jdbcType=VARCHAR},
-      </if>
-      <if test="userDescription != null">
         user_description = #{userDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="fullName != null">
         full_name = #{fullName,jdbcType=VARCHAR},
-      </if>
-      <if test="userEmail != null">
         user_email = #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="groups != null">
         groups = #{groups,jdbcType=VARCHAR},
-      </if>
-      <if test="roles != null">
         roles = #{roles,jdbcType=VARCHAR},
-      </if>
-      <if test="userLocked != null">
         user_locked = #{userLocked,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.usermodel.User">
-    update user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      pass_word = #{passWord,jdbcType=VARCHAR},
-      user_description = #{userDescription,jdbcType=VARCHAR},
-      full_name = #{fullName,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR},
-      groups = #{groups,jdbcType=VARCHAR},
-      roles = #{roles,jdbcType=VARCHAR},
-      user_locked = #{userLocked,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="emptyUserInfo" >
-    truncate table user
-</update>
+        type = #{type,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="emptyUserInfo">
+        truncate table user
+    </update>
 
 
 </mapper>

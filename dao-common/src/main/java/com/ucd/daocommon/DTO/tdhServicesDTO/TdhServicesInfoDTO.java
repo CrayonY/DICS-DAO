@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class TdhServicesInfoDTO {
     private String tableName;
-//    private String servicesId;
+    //    private String servicesId;
     private String enableKerberos;
     private String health;
     private String monitored;
@@ -35,21 +35,27 @@ public class TdhServicesInfoDTO {
     private String stopTime;
     private String centre;
 
-    /** 定时任务执行时间 */
+    /**
+     * 定时任务执行时间
+     */
     private String taskTime;
 
     private String taskTimeStart;
 
     private String taskTimeEnd;
 
-    /** 秒数 */
+    /**
+     * 秒数
+     */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
 
-    /** 健康时间时间 */
+    /**
+     * 健康时间时间
+     */
     private Date healthyTime;
 
 }

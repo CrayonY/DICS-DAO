@@ -119,22 +119,22 @@ public class ThdDssyncServiceImpl implements TdhDssyncService {
 
     @Override
     public int saveTdhDssyncData(List<TdhDssyncDTO> tdhDssyncDTOList) throws Exception {
-        if(tdhDssyncDTOList == null || tdhDssyncDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDssyncDTOList == null || tdhDssyncDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         int countNum = 0;
         String ID = KeyUtil.genUniqueKey();
         String UUID = UUIDUtils.getUUID();
         Date now = new Date();
-        for (TdhDssyncDTO tdhDssyncDTO:tdhDssyncDTOList){
+        for (TdhDssyncDTO tdhDssyncDTO : tdhDssyncDTOList) {
             TdhDssyncInfo tdhDssyncInfo = new TdhDssyncInfo();
             BeanUtils.copyProperties(tdhDssyncDTO, tdhDssyncInfo);
-            if(tdhDssyncInfo.getId() == null || "".equals(tdhDssyncInfo.getId())){
+            if (tdhDssyncInfo.getId() == null || "".equals(tdhDssyncInfo.getId())) {
                 tdhDssyncInfo.setId(ID + UUIDUtils.getUUID());
             }
 
             tdhDssyncInfo.setCreattime(now);
-            System.out.println("111111111111111111111111tdhDssyncInfo:"+tdhDssyncInfo);
+            System.out.println("111111111111111111111111tdhDssyncInfo:" + tdhDssyncInfo);
             int count = tdhDssyncInfoMapper.insertSelective(tdhDssyncInfo);
             countNum = countNum + count;
         }
@@ -143,11 +143,11 @@ public class ThdDssyncServiceImpl implements TdhDssyncService {
 
     @Override
     public int updateTdhDssyncData(TdhDssyncDTO tdhDssyncDTO) throws Exception {
-        if (tdhDssyncDTO == null){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDssyncDTO == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
-        if (tdhDssyncDTO.getId() == null || "".equals(tdhDssyncDTO.getId())){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDssyncDTO.getId() == null || "".equals(tdhDssyncDTO.getId())) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         TdhDssyncInfo tdhDssyncInfo = new TdhDssyncInfo();
         BeanUtils.copyProperties(tdhDssyncDTO, tdhDssyncInfo);
@@ -157,11 +157,11 @@ public class ThdDssyncServiceImpl implements TdhDssyncService {
 
     @Override
     public TdhDssyncVO getTdhDssyncInfoById(TdhDssyncDTO tdhDssyncDTO) throws Exception {
-        if (tdhDssyncDTO == null){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDssyncDTO == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
-        if (tdhDssyncDTO.getId() == null || "".equals(tdhDssyncDTO.getId())){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDssyncDTO.getId() == null || "".equals(tdhDssyncDTO.getId())) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         TdhDssyncInfo tdhDssyncInfo = tdhDssyncInfoMapper.selectByPrimaryKey(tdhDssyncDTO.getId());
         TdhDssyncVO tdhDssyncVO = new TdhDssyncVO();
@@ -171,8 +171,8 @@ public class ThdDssyncServiceImpl implements TdhDssyncService {
 
     @Override
     public List<TdhDssyncVO> getTdhDssyncInfoByState(Integer state) throws Exception {
-        if (state == null){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (state == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         List<TdhDssyncInfo> tdhDssyncInfos = tdhDssyncInfoMapper.selectByState(state);
         List<TdhDssyncVO> tdhDssyncVOList = new ArrayList<TdhDssyncVO>();

@@ -1,408 +1,415 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucd.server.mapper.hardwareinfomapper.hardWareInfoNowmapper.HardWareInfoNowMapper">
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="host" jdbcType="VARCHAR" property="host" />
-    <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="nip" jdbcType="VARCHAR" property="nip" />
-    <result column="intime" jdbcType="VARCHAR" property="intime" />
-    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
-    <result column="cpucount" jdbcType="DOUBLE" property="cpucount" />
-    <result column="cpuusedper" jdbcType="DOUBLE" property="cpuusedper" />
-    <result column="cpustatus" jdbcType="VARCHAR" property="cpustatus" />
-    <result column="diskcount" jdbcType="DOUBLE" property="diskcount" />
-    <result column="diskusedper" jdbcType="DOUBLE" property="diskusedper" />
-    <result column="diskstatus" jdbcType="VARCHAR" property="diskstatus" />
-    <result column="memcount" jdbcType="DOUBLE" property="memcount" />
-    <result column="memusedper" jdbcType="DOUBLE" property="memusedper" />
-    <result column="memstatus" jdbcType="VARCHAR" property="memstatus" />
-    <result column="nicinout" jdbcType="VARCHAR" property="nicinout" />
-    <result column="nicstatus" jdbcType="VARCHAR" property="nicstatus" />
-    <result column="nicids" jdbcType="VARCHAR" property="nicids" />
-    <result column="pids" jdbcType="VARCHAR" property="pids" />
-    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
-    <result column="cputemp" property="cputemp" jdbcType="DOUBLE" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="host" jdbcType="VARCHAR" property="host"/>
+        <result column="num" jdbcType="INTEGER" property="num"/>
+        <result column="nip" jdbcType="VARCHAR" property="nip"/>
+        <result column="intime" jdbcType="VARCHAR" property="intime"/>
+        <result column="creattime" jdbcType="TIMESTAMP" property="creattime"/>
+        <result column="cpucount" jdbcType="DOUBLE" property="cpucount"/>
+        <result column="cpuusedper" jdbcType="DOUBLE" property="cpuusedper"/>
+        <result column="cpustatus" jdbcType="VARCHAR" property="cpustatus"/>
+        <result column="diskcount" jdbcType="DOUBLE" property="diskcount"/>
+        <result column="diskusedper" jdbcType="DOUBLE" property="diskusedper"/>
+        <result column="diskstatus" jdbcType="VARCHAR" property="diskstatus"/>
+        <result column="memcount" jdbcType="DOUBLE" property="memcount"/>
+        <result column="memusedper" jdbcType="DOUBLE" property="memusedper"/>
+        <result column="memstatus" jdbcType="VARCHAR" property="memstatus"/>
+        <result column="nicinout" jdbcType="VARCHAR" property="nicinout"/>
+        <result column="nicstatus" jdbcType="VARCHAR" property="nicstatus"/>
+        <result column="nicids" jdbcType="VARCHAR" property="nicids"/>
+        <result column="pids" jdbcType="VARCHAR" property="pids"/>
+        <result column="starttime" jdbcType="VARCHAR" property="starttime"/>
+        <result column="cputemp" property="cputemp" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, host, num, nip, intime, creattime, cpucount, cpuusedper, cpustatus, diskcount,
+        diskusedper, diskstatus, memcount, memusedper, memstatus, nicinout, nicstatus, nicids,
+        pids, starttime, cputemp
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tablename}
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from hard_ware_info_now
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample">
+        delete from hard_ware_info_now
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, host, num, nip, intime, creattime, cpucount, cpuusedper, cpustatus, diskcount, 
-    diskusedper, diskstatus, memcount, memusedper, memstatus, nicinout, nicstatus, nicids, 
-    pids, starttime, cputemp
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from ${tablename}
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from hard_ware_info_now
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample">
-    delete from hard_ware_info_now
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    insert into ${tablename} (id, host, num,
-      nip, intime, creattime, 
-      cpucount, cpuusedper, cpustatus, 
-      diskcount, diskusedper, diskstatus, 
-      memcount, memusedper, memstatus, 
-      nicinout, nicstatus, nicids, 
-      pids, starttime, cputemp)
-    values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
-      #{nip,jdbcType=VARCHAR}, #{intime,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
-      #{cpucount,jdbcType=DOUBLE}, #{cpuusedper,jdbcType=DOUBLE}, #{cpustatus,jdbcType=VARCHAR}, 
-      #{diskcount,jdbcType=DOUBLE}, #{diskusedper,jdbcType=DOUBLE}, #{diskstatus,jdbcType=VARCHAR}, 
-      #{memcount,jdbcType=DOUBLE}, #{memusedper,jdbcType=DOUBLE}, #{memstatus,jdbcType=VARCHAR}, 
-      #{nicinout,jdbcType=VARCHAR}, #{nicstatus,jdbcType=VARCHAR}, #{nicids,jdbcType=VARCHAR}, 
-      #{pids,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR},#{cputemp,jdbcType=DOUBLE})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    insert into ${tablename}
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="host != null">
-        host,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-      <if test="nip != null">
-        nip,
-      </if>
-      <if test="intime != null">
-        intime,
-      </if>
-      <if test="creattime != null">
-        creattime,
-      </if>
-      <if test="cpucount != null">
-        cpucount,
-      </if>
-      <if test="cpuusedper != null">
-        cpuusedper,
-      </if>
-      <if test="cpustatus != null">
-        cpustatus,
-      </if>
-      <if test="diskcount != null">
-        diskcount,
-      </if>
-      <if test="diskusedper != null">
-        diskusedper,
-      </if>
-      <if test="diskstatus != null">
-        diskstatus,
-      </if>
-      <if test="memcount != null">
-        memcount,
-      </if>
-      <if test="memusedper != null">
-        memusedper,
-      </if>
-      <if test="memstatus != null">
-        memstatus,
-      </if>
-      <if test="nicinout != null">
-        nicinout,
-      </if>
-      <if test="nicstatus != null">
-        nicstatus,
-      </if>
-      <if test="nicids != null">
-        nicids,
-      </if>
-      <if test="pids != null">
-        pids,
-      </if>
-      <if test="starttime != null">
-        starttime,
-      </if>
-      <if test="cputemp != null">
-        cputemp,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="host != null">
-        #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=INTEGER},
-      </if>
-      <if test="nip != null">
-        #{nip,jdbcType=VARCHAR},
-      </if>
-      <if test="intime != null">
-        #{intime,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null">
-        #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cpucount != null">
-        #{cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuusedper != null">
-        #{cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="cpustatus != null">
-        #{cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="diskcount != null">
-        #{diskcount,jdbcType=DOUBLE},
-      </if>
-      <if test="diskusedper != null">
-        #{diskusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="diskstatus != null">
-        #{diskstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="memcount != null">
-        #{memcount,jdbcType=DOUBLE},
-      </if>
-      <if test="memusedper != null">
-        #{memusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="memstatus != null">
-        #{memstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="nicinout != null">
-        #{nicinout,jdbcType=VARCHAR},
-      </if>
-      <if test="nicstatus != null">
-        #{nicstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="nicids != null">
-        #{nicids,jdbcType=VARCHAR},
-      </if>
-      <if test="pids != null">
-        #{pids,jdbcType=VARCHAR},
-      </if>
-      <if test="starttime != null">
-        #{starttime,jdbcType=VARCHAR},
-      </if>
-      <if test="cputemp != null">
-        #{cputemp,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    update ${tablename}
-    <set>
-      <if test="host != null">
-        host = #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="num != null">
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
+        insert into ${tablename} (id, host, num,
+        nip, intime, creattime,
+        cpucount, cpuusedper, cpustatus,
+        diskcount, diskusedper, diskstatus,
+        memcount, memusedper, memstatus,
+        nicinout, nicstatus, nicids,
+        pids, starttime, cputemp)
+        values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},
+        #{nip,jdbcType=VARCHAR}, #{intime,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP},
+        #{cpucount,jdbcType=DOUBLE}, #{cpuusedper,jdbcType=DOUBLE}, #{cpustatus,jdbcType=VARCHAR},
+        #{diskcount,jdbcType=DOUBLE}, #{diskusedper,jdbcType=DOUBLE}, #{diskstatus,jdbcType=VARCHAR},
+        #{memcount,jdbcType=DOUBLE}, #{memusedper,jdbcType=DOUBLE}, #{memstatus,jdbcType=VARCHAR},
+        #{nicinout,jdbcType=VARCHAR}, #{nicstatus,jdbcType=VARCHAR}, #{nicids,jdbcType=VARCHAR},
+        #{pids,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR},#{cputemp,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
+        insert into ${tablename}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="host != null">
+                host,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="nip != null">
+                nip,
+            </if>
+            <if test="intime != null">
+                intime,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="cpucount != null">
+                cpucount,
+            </if>
+            <if test="cpuusedper != null">
+                cpuusedper,
+            </if>
+            <if test="cpustatus != null">
+                cpustatus,
+            </if>
+            <if test="diskcount != null">
+                diskcount,
+            </if>
+            <if test="diskusedper != null">
+                diskusedper,
+            </if>
+            <if test="diskstatus != null">
+                diskstatus,
+            </if>
+            <if test="memcount != null">
+                memcount,
+            </if>
+            <if test="memusedper != null">
+                memusedper,
+            </if>
+            <if test="memstatus != null">
+                memstatus,
+            </if>
+            <if test="nicinout != null">
+                nicinout,
+            </if>
+            <if test="nicstatus != null">
+                nicstatus,
+            </if>
+            <if test="nicids != null">
+                nicids,
+            </if>
+            <if test="pids != null">
+                pids,
+            </if>
+            <if test="starttime != null">
+                starttime,
+            </if>
+            <if test="cputemp != null">
+                cputemp,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="nip != null">
+                #{nip,jdbcType=VARCHAR},
+            </if>
+            <if test="intime != null">
+                #{intime,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cpucount != null">
+                #{cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuusedper != null">
+                #{cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="cpustatus != null">
+                #{cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="diskcount != null">
+                #{diskcount,jdbcType=DOUBLE},
+            </if>
+            <if test="diskusedper != null">
+                #{diskusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="diskstatus != null">
+                #{diskstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="memcount != null">
+                #{memcount,jdbcType=DOUBLE},
+            </if>
+            <if test="memusedper != null">
+                #{memusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="memstatus != null">
+                #{memstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="nicinout != null">
+                #{nicinout,jdbcType=VARCHAR},
+            </if>
+            <if test="nicstatus != null">
+                #{nicstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="nicids != null">
+                #{nicids,jdbcType=VARCHAR},
+            </if>
+            <if test="pids != null">
+                #{pids,jdbcType=VARCHAR},
+            </if>
+            <if test="starttime != null">
+                #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="cputemp != null">
+                #{cputemp,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
+        update ${tablename}
+        <set>
+            <if test="host != null">
+                host = #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="num != null">
+                num = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="nip != null">
+                nip = #{nip,jdbcType=VARCHAR},
+            </if>
+            <if test="intime != null">
+                intime = #{intime,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cpucount != null">
+                cpucount = #{cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuusedper != null">
+                cpuusedper = #{cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="cpustatus != null">
+                cpustatus = #{cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="diskcount != null">
+                diskcount = #{diskcount,jdbcType=DOUBLE},
+            </if>
+            <if test="diskusedper != null">
+                diskusedper = #{diskusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="diskstatus != null">
+                diskstatus = #{diskstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="memcount != null">
+                memcount = #{memcount,jdbcType=DOUBLE},
+            </if>
+            <if test="memusedper != null">
+                memusedper = #{memusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="memstatus != null">
+                memstatus = #{memstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="nicinout != null">
+                nicinout = #{nicinout,jdbcType=VARCHAR},
+            </if>
+            <if test="nicstatus != null">
+                nicstatus = #{nicstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="nicids != null">
+                nicids = #{nicids,jdbcType=VARCHAR},
+            </if>
+            <if test="pids != null">
+                pids = #{pids,jdbcType=VARCHAR},
+            </if>
+            <if test="starttime != null">
+                starttime = #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="cputemp != null">
+                cputemp = #{cputemp,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
+        update ${tablename}
+        set host = #{host,jdbcType=VARCHAR},
         num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="nip != null">
         nip = #{nip,jdbcType=VARCHAR},
-      </if>
-      <if test="intime != null">
         intime = #{intime,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cpucount != null">
         cpucount = #{cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuusedper != null">
         cpuusedper = #{cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="cpustatus != null">
         cpustatus = #{cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="diskcount != null">
         diskcount = #{diskcount,jdbcType=DOUBLE},
-      </if>
-      <if test="diskusedper != null">
         diskusedper = #{diskusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="diskstatus != null">
         diskstatus = #{diskstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="memcount != null">
         memcount = #{memcount,jdbcType=DOUBLE},
-      </if>
-      <if test="memusedper != null">
         memusedper = #{memusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="memstatus != null">
         memstatus = #{memstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="nicinout != null">
         nicinout = #{nicinout,jdbcType=VARCHAR},
-      </if>
-      <if test="nicstatus != null">
         nicstatus = #{nicstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="nicids != null">
         nicids = #{nicids,jdbcType=VARCHAR},
-      </if>
-      <if test="pids != null">
         pids = #{pids,jdbcType=VARCHAR},
-      </if>
-      <if test="starttime != null">
         starttime = #{starttime,jdbcType=VARCHAR},
-      </if>
-      <if test="cputemp != null">
-        cputemp = #{cputemp,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow">
-    update ${tablename}
-    set host = #{host,jdbcType=VARCHAR},
-      num = #{num,jdbcType=INTEGER},
-      nip = #{nip,jdbcType=VARCHAR},
-      intime = #{intime,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP},
-      cpucount = #{cpucount,jdbcType=DOUBLE},
-      cpuusedper = #{cpuusedper,jdbcType=DOUBLE},
-      cpustatus = #{cpustatus,jdbcType=VARCHAR},
-      diskcount = #{diskcount,jdbcType=DOUBLE},
-      diskusedper = #{diskusedper,jdbcType=DOUBLE},
-      diskstatus = #{diskstatus,jdbcType=VARCHAR},
-      memcount = #{memcount,jdbcType=DOUBLE},
-      memusedper = #{memusedper,jdbcType=DOUBLE},
-      memstatus = #{memstatus,jdbcType=VARCHAR},
-      nicinout = #{nicinout,jdbcType=VARCHAR},
-      nicstatus = #{nicstatus,jdbcType=VARCHAR},
-      nicids = #{nicids,jdbcType=VARCHAR},
-      pids = #{pids,jdbcType=VARCHAR},
-      starttime = #{starttime,jdbcType=VARCHAR},
-      cputemp = #{cputemp,jdbcType=DOUBLE}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from ${tablename}
-    where 1=1
-    <if test="host != null and host != ''">
-      and host = #{host,jdbcType=VARCHAR}
-    </if>
-    <if test="cpucount != null">
-      and cpucount = #{cpucount,jdbcType=VARCHAR}
-    </if>
-    <if test="cpuusedper != null">
-      and cpuusedper = #{cpuusedper,jdbcType=VARCHAR}
-    </if>
-    <if test="cpustatus != null and cpustatus != ''">
-      and cpustatus = #{cpustatus,jdbcType=VARCHAR}
-    </if>
-    <if test="diskcount != null ">
-      and diskcount = #{diskcount,jdbcType=VARCHAR}
-    </if>
-    <if test="diskusedper != null ">
-      and diskusedper = #{diskusedper,jdbcType=VARCHAR}
-    </if>
-    <if test="diskstatus != null and diskstatus != ''">
-      and diskstatus = #{diskstatus,jdbcType=VARCHAR}
-    </if>
-    <if test="memcount != null ">
-      and memcount = #{memcount,jdbcType=VARCHAR}
-    </if>
-    <if test="memusedper != null">
-      and memusedper = #{memusedper,jdbcType=VARCHAR}
-    </if>
-    <if test="memstatus != null and memstatus != ''">
-      and memstatus = #{memstatus,jdbcType=VARCHAR}
-    </if>
-    <if test="diskcount != null ">
-      and diskcount = #{diskcount,jdbcType=VARCHAR}
-    </if>
-    <if test="diskusedper != null">
-      and diskusedper = #{diskusedper,jdbcType=VARCHAR}
-    </if>
-    <if test="diskstatus != null and diskstatus != ''">
-      and diskstatus = #{diskstatus,jdbcType=VARCHAR}
-    </if>
-    <if test="starttime != null and starttime != ''">
-      and starttime = #{starttime,jdbcType=VARCHAR}
-    </if>
-    <if test="startTimems != null and startTimems != ''">
-      and intime &gt;= #{startTimems,jdbcType=VARCHAR}
-    </if>
-    <if test="endTimems != null and endTimems != ''">
-      and intime &lt;= #{endTimems,jdbcType=VARCHAR}
-    </if>
-    <if test="cputemp != null">
-      and cputemp = #{cputemp,jdbcType=VARCHAR}
-    </if>
-  </select>
+        cputemp = #{cputemp,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tablename}
+        where 1=1
+        <if test="host != null and host != ''">
+            and host = #{host,jdbcType=VARCHAR}
+        </if>
+        <if test="cpucount != null">
+            and cpucount = #{cpucount,jdbcType=VARCHAR}
+        </if>
+        <if test="cpuusedper != null">
+            and cpuusedper = #{cpuusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="cpustatus != null and cpustatus != ''">
+            and cpustatus = #{cpustatus,jdbcType=VARCHAR}
+        </if>
+        <if test="diskcount != null ">
+            and diskcount = #{diskcount,jdbcType=VARCHAR}
+        </if>
+        <if test="diskusedper != null ">
+            and diskusedper = #{diskusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="diskstatus != null and diskstatus != ''">
+            and diskstatus = #{diskstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="memcount != null ">
+            and memcount = #{memcount,jdbcType=VARCHAR}
+        </if>
+        <if test="memusedper != null">
+            and memusedper = #{memusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="memstatus != null and memstatus != ''">
+            and memstatus = #{memstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="diskcount != null ">
+            and diskcount = #{diskcount,jdbcType=VARCHAR}
+        </if>
+        <if test="diskusedper != null">
+            and diskusedper = #{diskusedper,jdbcType=VARCHAR}
+        </if>
+        <if test="diskstatus != null and diskstatus != ''">
+            and diskstatus = #{diskstatus,jdbcType=VARCHAR}
+        </if>
+        <if test="starttime != null and starttime != ''">
+            and starttime = #{starttime,jdbcType=VARCHAR}
+        </if>
+        <if test="startTimems != null and startTimems != ''">
+            and intime &gt;= #{startTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="endTimems != null and endTimems != ''">
+            and intime &lt;= #{endTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="cputemp != null">
+            and cputemp = #{cputemp,jdbcType=VARCHAR}
+        </if>
+    </select>
 
-    <select id="countByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultType="java.lang.Long">
+    <select id="countByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO"
+            resultType="java.lang.Long">
         select count(*)
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from ${tablename}
         where 1=1
         <if test="host != null and host != ''">
@@ -444,140 +451,143 @@
         <if test="endTimems != null and endTimems != ''">
             and intime &lt;= #{endTimems,jdbcType=VARCHAR}
         </if>
-      <if test="cputemp != null">
-        and cputemp = #{cputemp,jdbcType=DOUBLE}
-      </if>
+        <if test="cputemp != null">
+            and cputemp = #{cputemp,jdbcType=DOUBLE}
+        </if>
     </select>
 
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from ${tablename}
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from ${tablename}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
 
-  </select>
+    </select>
 
-  <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample" resultType="java.lang.Integer" >
-    select count(*) from hard_ware_info_now
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+    <select id="countByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNowExample"
+            resultType="java.lang.Integer">
+        select count(*) from hard_ware_info_now
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
 
-  <update id="updateByExampleSelective" parameterType="map" >
-    update ${tablename}
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.host != null" >
+    <update id="updateByExampleSelective" parameterType="map">
+        update ${tablename}
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.host != null">
+                host = #{record.host,jdbcType=VARCHAR},
+            </if>
+            <if test="record.num != null">
+                num = #{record.num,jdbcType=INTEGER},
+            </if>
+            <if test="record.nip != null">
+                nip = #{record.nip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.intime != null">
+                intime = #{record.intime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creattime != null">
+                creattime = #{record.creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.cpucount != null">
+                cpucount = #{record.cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuusedper != null">
+                cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpustatus != null">
+                cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.diskcount != null">
+                diskcount = #{record.diskcount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.diskusedper != null">
+                diskusedper = #{record.diskusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="record.diskstatus != null">
+                diskstatus = #{record.diskstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memcount != null">
+                memcount = #{record.memcount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.memusedper != null">
+                memusedper = #{record.memusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="record.memstatus != null">
+                memstatus = #{record.memstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nicinout != null">
+                nicinout = #{record.nicinout,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nicstatus != null">
+                nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nicids != null">
+                nicids = #{record.nicids,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pids != null">
+                pids = #{record.pids,jdbcType=VARCHAR},
+            </if>
+            <if test="record.starttime != null">
+                starttime = #{record.starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cputemp != null">
+                cputemp = #{record.cputemp,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+
+    <update id="updateByExample" parameterType="map">
+        update ${tablename}
+        set id = #{record.id,jdbcType=VARCHAR},
         host = #{record.host,jdbcType=VARCHAR},
-      </if>
-      <if test="record.num != null" >
         num = #{record.num,jdbcType=INTEGER},
-      </if>
-      <if test="record.nip != null" >
         nip = #{record.nip,jdbcType=VARCHAR},
-      </if>
-      <if test="record.intime != null" >
         intime = #{record.intime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.creattime != null" >
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.cpucount != null" >
         cpucount = #{record.cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuusedper != null" >
         cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpustatus != null" >
         cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.diskcount != null" >
         diskcount = #{record.diskcount,jdbcType=DOUBLE},
-      </if>
-      <if test="record.diskusedper != null" >
         diskusedper = #{record.diskusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="record.diskstatus != null" >
         diskstatus = #{record.diskstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.memcount != null" >
         memcount = #{record.memcount,jdbcType=DOUBLE},
-      </if>
-      <if test="record.memusedper != null" >
         memusedper = #{record.memusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="record.memstatus != null" >
         memstatus = #{record.memstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nicinout != null" >
         nicinout = #{record.nicinout,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nicstatus != null" >
         nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nicids != null" >
         nicids = #{record.nicids,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pids != null" >
         pids = #{record.pids,jdbcType=VARCHAR},
-      </if>
-      <if test="record.starttime != null" >
-        starttime = #{record.starttime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cputemp != null" >
-        cputemp = #{record.cputemp,jdbcType=DOUBLE},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+        starttime = #{record.starttime,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
 
 
-  <update id="updateByExample" parameterType="map" >
-    update ${tablename}
-    set id = #{record.id,jdbcType=VARCHAR},
-    host = #{record.host,jdbcType=VARCHAR},
-    num = #{record.num,jdbcType=INTEGER},
-    nip = #{record.nip,jdbcType=VARCHAR},
-    intime = #{record.intime,jdbcType=VARCHAR},
-    creattime = #{record.creattime,jdbcType=TIMESTAMP},
-    cpucount = #{record.cpucount,jdbcType=DOUBLE},
-    cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
-    cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
-    diskcount = #{record.diskcount,jdbcType=DOUBLE},
-    diskusedper = #{record.diskusedper,jdbcType=DOUBLE},
-    diskstatus = #{record.diskstatus,jdbcType=VARCHAR},
-    memcount = #{record.memcount,jdbcType=DOUBLE},
-    memusedper = #{record.memusedper,jdbcType=DOUBLE},
-    memstatus = #{record.memstatus,jdbcType=VARCHAR},
-    nicinout = #{record.nicinout,jdbcType=VARCHAR},
-    nicstatus = #{record.nicstatus,jdbcType=VARCHAR},
-    nicids = #{record.nicids,jdbcType=VARCHAR},
-    pids = #{record.pids,jdbcType=VARCHAR},
-    starttime = #{record.starttime,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-
-
-  <select id="getHardWareHostList" resultType="java.util.HashMap" parameterType="java.lang.String">
-    select
-    host
-    from ${tablename}
-  </select>
+    <select id="getHardWareHostList" resultType="java.util.HashMap" parameterType="java.lang.String">
+        select
+        host
+        from ${tablename}
+    </select>
 
 </mapper>

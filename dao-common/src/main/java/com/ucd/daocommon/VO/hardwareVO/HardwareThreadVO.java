@@ -31,5 +31,4 @@ public class HardwareThreadVO {
     private String pids;
 
 
-
 }

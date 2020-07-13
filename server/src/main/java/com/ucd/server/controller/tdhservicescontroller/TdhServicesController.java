@@ -30,183 +30,182 @@ public class TdhServicesController {
     private final static Logger logger = LoggerFactory.getLogger(TdhServicesController.class);
 
     @PostMapping(value = "/saveThdServicesData")
-    public  ResultVO saveThdServicesData(@RequestBody TdhServicesInfoDTO tdhServicesInfoDTO) {
+    public ResultVO saveThdServicesData(@RequestBody TdhServicesInfoDTO tdhServicesInfoDTO) {
         logger.info("进入controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
             resultCount = thdServicesService.saveThdServicesData(tdhServicesInfoDTO);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/saveThdServicesListData")
-    public  ResultVO saveThdServicesListData(@RequestBody TdhServicesListDTO tdhServicesListDTO) {
+    public ResultVO saveThdServicesListData(@RequestBody TdhServicesListDTO tdhServicesListDTO) {
         logger.info("进入controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
             resultCount = thdServicesService.saveThdServicesData(tdhServicesListDTO);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/getThdServicesInfo")
 //    public ResultVO getThdServicesInfo(@RequestBody PageView pageView,@RequestBody TdhServicesInfoDTO tdhServicesInfoDTO){
-    public ResultVO getThdServicesInfo(@RequestBody Map<String, Object> models){
+    public ResultVO getThdServicesInfo(@RequestBody Map<String, Object> models) {
         ResultVO resultVO = new ResultVO();
         try {
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"),PageView.class);
-            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesInfoDTO"),TdhServicesInfoDTO.class);
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("tdhServicesInfoDTO:"+tdhServicesInfoDTO);
-            if(pageView == null){
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>) models.get("tdhServicesInfoDTO"), TdhServicesInfoDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("tdhServicesInfoDTO:" + tdhServicesInfoDTO);
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView =thdServicesService.getThdServicesInfo(pageView,tdhServicesInfoDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = thdServicesService.getThdServicesInfo(pageView, tdhServicesInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     /**
+     * @return com.ucd.server.model.tdhservicemodel.TdhServicesA
+     * @throws
      * @author Crayon
-     * @Description  根据不同中心获取不同实时信息
+     * @Description 根据不同中心获取不同实时信息
      * @date 2019/4/8 3:19 PM
      * @params [center]
-     * @exception
-     * @return com.ucd.server.model.tdhservicemodel.TdhServicesA
      */
     @PostMapping(value = "/getThdServicesInfoNow")
-    public TdhServicesAVO getThdServicesInfoNow(@RequestParam(value = "center",required = true) String center) {
+    public TdhServicesAVO getThdServicesInfoNow(@RequestParam(value = "center", required = true) String center) {
         logger.info("进入controller啦——————————————");
         ResultVO resultVO;
         TdhServicesAVO tdhServicesAVO = null;
         try {
             // 获取信息
-            tdhServicesAVO  = thdServicesService.getThdServicesInfoNow(center);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhServicesAVO);
-            logger.info("resultVO:"+resultVO);
+            tdhServicesAVO = thdServicesService.getThdServicesInfoNow(center);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), tdhServicesAVO);
+            logger.info("resultVO:" + resultVO);
             return tdhServicesAVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return tdhServicesAVO;
         }
     }
 
 
-
     /**
+     * @return com.ucd.common.VO.ResultVO
+     * @throws
      * @author Crayon
      * @Description 修改服务实时数值
      * @date 2019/4/9 3:18 PM
      * @params [tdhServicesListDTO]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO
      */
     @PostMapping(value = "/updateThdServicesInfoNow")
-    public ResultVO updateThdServicesInfoNow(@RequestBody TdhServicesListDTO tdhServicesListDTO,String num) {
+    public ResultVO updateThdServicesInfoNow(@RequestBody TdhServicesListDTO tdhServicesListDTO, String num) {
         logger.info("进入controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
-            resultCount = thdServicesService.updateThdServicesInfoNow(tdhServicesListDTO,num);
+            resultCount = thdServicesService.updateThdServicesInfoNow(tdhServicesListDTO, num);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
 
     /**
+     * @return com.ucd.common.VO.ResultVO
+     * @throws
      * @author Crayon
      * @Description 保存服务实时数据
      * @date 2019/4/10 3:29 PM
      * @params [tdhServicesListDTO]
-     * @exception  
-     * @return com.ucd.common.VO.ResultVO  
      */
     @PostMapping(value = "/saveThdServicesInfoNowListData")
-    public  ResultVO saveThdServicesInfoNowListData(@RequestBody TdhServicesListDTO tdhServicesListDTO) {
+    public ResultVO saveThdServicesInfoNowListData(@RequestBody TdhServicesListDTO tdhServicesListDTO) {
         logger.info("进入controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
             resultCount = thdServicesService.saveThdServicesInfoNow(tdhServicesListDTO);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     /**
+     * @return com.ucd.common.VO.ResultVO
+     * @throws
      * @author Crayon
      * @Description 获取实时数据集合
      * @date 2019/4/16 4:17 PM
      * @params [models]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO
      */
     @PostMapping(value = "/getThdServicesListNow")
-    public ResultVO getThdServicesListNow(@RequestBody Map<String, Object> models){
+    public ResultVO getThdServicesListNow(@RequestBody Map<String, Object> models) {
 
         ResultVO resultVO = new ResultVO();
         try {
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"),PageView.class);
-            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesInfoDTO"),TdhServicesInfoDTO.class);
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("tdhServicesInfoDTO:"+tdhServicesInfoDTO);
-            if(pageView == null){
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>) models.get("tdhServicesInfoDTO"), TdhServicesInfoDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("tdhServicesInfoDTO:" + tdhServicesInfoDTO);
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView = thdServicesService.getThdServicesListNow(pageView,tdhServicesInfoDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = thdServicesService.getThdServicesListNow(pageView, tdhServicesInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
 
@@ -214,32 +213,28 @@ public class TdhServicesController {
 
 
     @PostMapping(value = "/getTdhHealthStatusByTime")
-    public ResultVO getTdhHealthStatusByTime(@RequestBody Map<String, Object> models){
+    public ResultVO getTdhHealthStatusByTime(@RequestBody Map<String, Object> models) {
         ResultVO resultVO = null;
         try {
             // 获取参数
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"),PageView.class);
-            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesInfoDTO"),TdhServicesInfoDTO.class);
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("tdhServicesInfoDTO:"+tdhServicesInfoDTO);
-            if(pageView == null){
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            TdhServicesInfoDTO tdhServicesInfoDTO = Tools.map2obj((Map<String, Object>) models.get("tdhServicesInfoDTO"), TdhServicesInfoDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("tdhServicesInfoDTO:" + tdhServicesInfoDTO);
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView = thdServicesService.getTdhHealthStatusByTime(pageView,tdhServicesInfoDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = thdServicesService.getTdhHealthStatusByTime(pageView, tdhServicesInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
-
-
-
-
 
 
 }

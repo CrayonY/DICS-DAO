@@ -34,122 +34,121 @@ public class TdhServicesjobController {
     private final static Logger logger = LoggerFactory.getLogger(TdhServicesjobController.class);
 
 
-
     @PostMapping(value = "/saveThdServicesjobListData")
-    public  ResultVO saveThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
+    public ResultVO saveThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
         logger.info("进入saveThdServicesjobListData controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
             resultCount = tdhServicesjobservice.saveThdServicesjobData(tdhServicesJobDTOList);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/updateThdServicesjobListData")
-    public  ResultVO updateThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
+    public ResultVO updateThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
         logger.info("进入controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
             resultCount = tdhServicesjobservice.updateThdServicesjobData(tdhServicesJobDTOList);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/getThdServicesjobListData")
-    public  ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO) {
+    public ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO) {
         logger.info("进入controller啦——————————————");
         List<TdhServicesJobVO> tdhServicesjobVOList = new ArrayList<TdhServicesJobVO>();
         ResultVO resultVO = new ResultVO();
         try {
             tdhServicesjobVOList = tdhServicesjobservice.getThdServicesjobListData(tdhServicesJobDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhServicesjobVOList);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), tdhServicesjobVOList);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/getThdServicesjobListDataS")
-    public  ResultVO getThdServicesjobListDataS(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
+    public ResultVO getThdServicesjobListDataS(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
         logger.info("进入controller啦——————————————");
         List<TdhServicesJobListVO> tdhServicesJobListVOS = new ArrayList<TdhServicesJobListVO>();
         ResultVO resultVO = new ResultVO();
         try {
             tdhServicesJobListVOS = tdhServicesjobservice.getThdServicesjobListDataS(tdhServicesJobDTOList);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhServicesJobListVOS);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), tdhServicesJobListVOS);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/getThdServicesjobData")
-    public ResultVO getThdServicesjobData(@RequestBody Map<String, Object> models){
+    public ResultVO getThdServicesjobData(@RequestBody Map<String, Object> models) {
         ResultVO resultVO = new ResultVO();
         try {
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-            TdhServicesJobDTO tdhServicesJobDTO = Tools.map2obj((Map<String, Object>)models.get("tdhServicesJobDTO"),TdhServicesJobDTO.class);
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("TdhServicesJobDTO:"+tdhServicesJobDTO);
-            if(pageView == null){
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            TdhServicesJobDTO tdhServicesJobDTO = Tools.map2obj((Map<String, Object>) models.get("tdhServicesJobDTO"), TdhServicesJobDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("TdhServicesJobDTO:" + tdhServicesJobDTO);
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView =tdhServicesjobservice.getThdServicesjobData(pageView,tdhServicesJobDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = tdhServicesjobservice.getThdServicesjobData(pageView, tdhServicesJobDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/emptyThdServicesjobListData")
-    public  ResultVO emptyThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
+    public ResultVO emptyThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList) {
         logger.info("emptyThdServicesjobListData——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
 
         try {
             resultCount = tdhServicesjobservice.emptyThdServicesjobData(tdhServicesJobDTOList);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }

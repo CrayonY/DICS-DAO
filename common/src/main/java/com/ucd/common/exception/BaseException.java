@@ -9,19 +9,19 @@ public class BaseException extends RuntimeException {
 
     private String message;
 
-    public BaseException(String code, String message){
+    public BaseException(String code, String message) {
         super(message);
         this.code = code;
     }
 
-    public BaseException(ResultExceptEnum resultEnum){
+    public BaseException(ResultExceptEnum resultEnum) {
         super(resultEnum.getMessage());
         this.code = resultEnum.getCode();
 
     }
 
-    public BaseException(ResultExceptEnum resultEnum, String message){
-        super(resultEnum.getMessage()+","+message);
+    public BaseException(ResultExceptEnum resultEnum, String message) {
+        super(resultEnum.getMessage() + "," + message);
         this.code = resultEnum.getCode();
 
     }

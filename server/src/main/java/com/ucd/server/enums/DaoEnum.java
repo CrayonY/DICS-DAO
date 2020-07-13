@@ -4,9 +4,10 @@ import lombok.Getter;
 
 /**
  * 异常枚举类
- * <p>Title: ExceptionEnum</p>  
- * @author  lx  
- * @date    
+ * <p>Title: ExceptionEnum</p>
+ *
+ * @author lx
+ * @date
  */
 @Getter
 public enum DaoEnum {

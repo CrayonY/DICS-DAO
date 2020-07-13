@@ -32,39 +32,36 @@ public class HardWareDiskController {
     private final static Logger logger = LoggerFactory.getLogger(HardWareDiskController.class);
 
     /**
+     * @return com.ucd.common.VO.ResultVO
+     * @throws
      * @author Crayon
      * @Description 获取硬件磁盘信息
-     * @date 2019/3/30 11:04 AM 
+     * @date 2019/3/30 11:04 AM
      * @params [models]
-     * @exception  
-     * @return com.ucd.common.VO.ResultVO  
      */
     @PostMapping(value = "/getHardWareDisk")
-    public ResultVO getHardWareDisk(@RequestBody Map<String, Object> models){
+    public ResultVO getHardWareDisk(@RequestBody Map<String, Object> models) {
         ResultVO resultVO = null;
-        try{
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-            HardwareDiskDTO hardWareDiskDTO = Tools.map2obj((Map<String, Object>)models.get("hardwareDiskDTO"),HardwareDiskDTO.class);
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("hardWareDiskDTO:"+hardWareDiskDTO);
-            if(pageView == null){
+        try {
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            HardwareDiskDTO hardWareDiskDTO = Tools.map2obj((Map<String, Object>) models.get("hardwareDiskDTO"), HardwareDiskDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("hardWareDiskDTO:" + hardWareDiskDTO);
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView =hardWareDiskService.getHardWareDisk(pageView,hardWareDiskDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = hardWareDiskService.getHardWareDisk(pageView, hardWareDiskDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
             logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
-
-
-
 
 
 }

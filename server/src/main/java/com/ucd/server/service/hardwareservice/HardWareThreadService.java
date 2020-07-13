@@ -10,22 +10,22 @@ import com.ucd.daocommon.DTO.hardwareDTO.HardwareThreadDTO;
 public interface HardWareThreadService {
 
     /**
+     * @return com.ucd.common.utils.pager.PageView
+     * @throws
      * @author Crayon
-     * @Description  获取硬件Thread数据
+     * @Description 获取硬件Thread数据
      * @date 2019/3/30 10:29 AM
      * @params [pageView, hardwareThreadDTO]
-     * @exception
-     * @return com.ucd.common.utils.pager.PageView
      */
     PageView getHardWareThread(PageView pageView, HardwareThreadDTO hardwareThreadDTO) throws Exception;
-    
+
     /**
+     * @return com.ucd.common.VO.ResultVO<?>
+     * @throws
      * @author Crayon
      * @Description 查看进程当前实时状态
-     * @date 2019/4/29 4:12 PM 
+     * @date 2019/4/29 4:12 PM
      * @params [host]
-     * @exception  
-     * @return com.ucd.common.VO.ResultVO<?>  
      */
     ResultVO<?> getHardWareThreadNow(String host);
 

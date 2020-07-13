@@ -3,6 +3,7 @@ package com.ucd.server.model.hardwareinfomodel.hardWareCpumodel;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class HardWareCpu {
     private String id;
@@ -29,14 +30,18 @@ public class HardWareCpu {
 
     private Double cputemp;
 
-    /** 秒数 */
+    /**
+     * 秒数
+     */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
 
-    /** 表名 */
+    /**
+     * 表名
+     */
     private String tablename;
 
 }

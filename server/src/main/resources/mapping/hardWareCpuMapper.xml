@@ -1,391 +1,399 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ucd.server.mapper.hardwareinfomapper.hardWareCpumapper.HardWareCpuMapper" >
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="host" property="host" jdbcType="VARCHAR" />
-    <result column="cpucount" property="cpucount" jdbcType="DOUBLE" />
-    <result column="cpuusedper" property="cpuusedper" jdbcType="DOUBLE" />
-    <result column="cpustatus" property="cpustatus" jdbcType="VARCHAR" />
-    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
-    <result column="checktime" property="checktime" jdbcType="VARCHAR" />
-    <result column="prepare" property="prepare" jdbcType="VARCHAR" />
-    <result column="nip" property="nip" jdbcType="VARCHAR" />
-    <result column="cputemp" property="cputemp" jdbcType="DOUBLE" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.ucd.server.mapper.hardwareinfomapper.hardWareCpumapper.HardWareCpuMapper">
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="host" property="host" jdbcType="VARCHAR"/>
+        <result column="cpucount" property="cpucount" jdbcType="DOUBLE"/>
+        <result column="cpuusedper" property="cpuusedper" jdbcType="DOUBLE"/>
+        <result column="cpustatus" property="cpustatus" jdbcType="VARCHAR"/>
+        <result column="creattime" property="creattime" jdbcType="TIMESTAMP"/>
+        <result column="checktime" property="checktime" jdbcType="VARCHAR"/>
+        <result column="prepare" property="prepare" jdbcType="VARCHAR"/>
+        <result column="nip" property="nip" jdbcType="VARCHAR"/>
+        <result column="cputemp" property="cputemp" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, host, cpucount, cpuusedper, cpustatus, creattime, checktime, prepare, nip, cputemp
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, host, cpucount, cpuusedper, cpustatus, creattime, checktime, prepare, nip, cputemp
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from ${tablename}
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from hard_ware_cpu
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from hard_ware_cpu
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample" >
-    delete from hard_ware_cpu
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
-    insert into hard_ware_cpu (id, host, cpucount, 
-      cpuusedper, cpustatus, creattime, 
-      checktime, prepare, nip, cputemp
-      )
-    values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{cpucount,jdbcType=DOUBLE}, 
-      #{cpuusedper,jdbcType=DOUBLE}, #{cpustatus,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
-      #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, #{nip,jdbcType=VARCHAR}, #{cputemp,jdbcType=DOUBLE}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
-    insert into hard_ware_cpu
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="host != null" >
-        host,
-      </if>
-      <if test="cpucount != null" >
-        cpucount,
-      </if>
-      <if test="cpuusedper != null" >
-        cpuusedper,
-      </if>
-      <if test="cpustatus != null" >
-        cpustatus,
-      </if>
-      <if test="creattime != null" >
-        creattime,
-      </if>
-      <if test="checktime != null" >
-        checktime,
-      </if>
-      <if test="prepare != null" >
-        prepare,
-      </if>
-      <if test="nip != null" >
-        nip,
-      </if>
-      <if test="cputemp != null" >
-        cputemp,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="host != null" >
-        #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="cpucount != null" >
-        #{cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuusedper != null" >
-        #{cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="cpustatus != null" >
-        #{cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
-        #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checktime != null" >
-        #{checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="prepare != null" >
-        #{prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="nip != null" >
-        #{nip,jdbcType=VARCHAR},
-      </if>
-      <if test="cputemp != null" >
-        #{cputemp,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <insert id="insertByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO" >
-    insert into ${tablename}
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="host != null" >
-        host,
-      </if>
-      <if test="cpucount != null" >
-        cpucount,
-      </if>
-      <if test="cpuusedper != null" >
-        cpuusedper,
-      </if>
-      <if test="cpustatus != null" >
-        cpustatus,
-      </if>
-      <if test="creattime != null" >
-        creattime,
-      </if>
-      <if test="checktime != null" >
-        checktime,
-      </if>
-      <if test="prepare != null" >
-        prepare,
-      </if>
-      <if test="nip != null" >
-        nip,
-      </if>
-      <if test="cputemp != null" >
-        cputemp,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="host != null" >
-        #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="cpucount != null" >
-        #{cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuusedper != null" >
-        #{cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="cpustatus != null" >
-        #{cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
-        #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checktime != null" >
-        #{checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="prepare != null" >
-        #{prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="nip != null" >
-        #{nip,jdbcType=VARCHAR},
-      </if>
-      <if test="cputemp != null" >
-        #{cputemp,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample" resultType="java.lang.Integer" >
-    select count(*) from hard_ware_cpu
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update hard_ware_cpu
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.host != null" >
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from ${tablename}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from hard_ware_cpu
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from hard_ware_cpu
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample">
+        delete from hard_ware_cpu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu">
+        insert into hard_ware_cpu (id, host, cpucount,
+        cpuusedper, cpustatus, creattime,
+        checktime, prepare, nip, cputemp
+        )
+        values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{cpucount,jdbcType=DOUBLE},
+        #{cpuusedper,jdbcType=DOUBLE}, #{cpustatus,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP},
+        #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, #{nip,jdbcType=VARCHAR}, #{cputemp,jdbcType=DOUBLE}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu">
+        insert into hard_ware_cpu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="host != null">
+                host,
+            </if>
+            <if test="cpucount != null">
+                cpucount,
+            </if>
+            <if test="cpuusedper != null">
+                cpuusedper,
+            </if>
+            <if test="cpustatus != null">
+                cpustatus,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="checktime != null">
+                checktime,
+            </if>
+            <if test="prepare != null">
+                prepare,
+            </if>
+            <if test="nip != null">
+                nip,
+            </if>
+            <if test="cputemp != null">
+                cputemp,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="cpucount != null">
+                #{cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuusedper != null">
+                #{cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="cpustatus != null">
+                #{cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                #{checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="prepare != null">
+                #{prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="nip != null">
+                #{nip,jdbcType=VARCHAR},
+            </if>
+            <if test="cputemp != null">
+                #{cputemp,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertByDTO" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO">
+        insert into ${tablename}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="host != null">
+                host,
+            </if>
+            <if test="cpucount != null">
+                cpucount,
+            </if>
+            <if test="cpuusedper != null">
+                cpuusedper,
+            </if>
+            <if test="cpustatus != null">
+                cpustatus,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="checktime != null">
+                checktime,
+            </if>
+            <if test="prepare != null">
+                prepare,
+            </if>
+            <if test="nip != null">
+                nip,
+            </if>
+            <if test="cputemp != null">
+                cputemp,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="cpucount != null">
+                #{cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuusedper != null">
+                #{cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="cpustatus != null">
+                #{cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                #{checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="prepare != null">
+                #{prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="nip != null">
+                #{nip,jdbcType=VARCHAR},
+            </if>
+            <if test="cputemp != null">
+                #{cputemp,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample"
+            resultType="java.lang.Integer">
+        select count(*) from hard_ware_cpu
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update hard_ware_cpu
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.host != null">
+                host = #{record.host,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cpucount != null">
+                cpucount = #{record.cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuusedper != null">
+                cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpustatus != null">
+                cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creattime != null">
+                creattime = #{record.creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.checktime != null">
+                checktime = #{record.checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.prepare != null">
+                prepare = #{record.prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nip != null">
+                nip = #{record.nip,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cputemp != null">
+                cputemp = #{record.cputemp,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update hard_ware_cpu
+        set id = #{record.id,jdbcType=VARCHAR},
         host = #{record.host,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cpucount != null" >
         cpucount = #{record.cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuusedper != null" >
         cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpustatus != null" >
         cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.creattime != null" >
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.checktime != null" >
         checktime = #{record.checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.prepare != null" >
         prepare = #{record.prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nip != null" >
         nip = #{record.nip,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cputemp != null" >
-        cputemp = #{record.cputemp,jdbcType=DOUBLE},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update hard_ware_cpu
-    set id = #{record.id,jdbcType=VARCHAR},
-      host = #{record.host,jdbcType=VARCHAR},
-      cpucount = #{record.cpucount,jdbcType=DOUBLE},
-      cpuusedper = #{record.cpuusedper,jdbcType=DOUBLE},
-      cpustatus = #{record.cpustatus,jdbcType=VARCHAR},
-      creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      checktime = #{record.checktime,jdbcType=VARCHAR},
-      prepare = #{record.prepare,jdbcType=VARCHAR},
-      nip = #{record.nip,jdbcType=VARCHAR},
-      cputemp = #{record.cputemp,jdbcType=DOUBLE}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
-    update hard_ware_cpu
-    <set >
-      <if test="host != null" >
-        host = #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="cpucount != null" >
+        cputemp = #{record.cputemp,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu">
+        update hard_ware_cpu
+        <set>
+            <if test="host != null">
+                host = #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="cpucount != null">
+                cpucount = #{cpucount,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuusedper != null">
+                cpuusedper = #{cpuusedper,jdbcType=DOUBLE},
+            </if>
+            <if test="cpustatus != null">
+                cpustatus = #{cpustatus,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                checktime = #{checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="prepare != null">
+                prepare = #{prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="nip != null">
+                nip = #{nip,jdbcType=VARCHAR},
+            </if>
+            <if test="cputemp != null">
+                cputemp = #{cputemp,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu">
+        update hard_ware_cpu
+        set host = #{host,jdbcType=VARCHAR},
         cpucount = #{cpucount,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuusedper != null" >
         cpuusedper = #{cpuusedper,jdbcType=DOUBLE},
-      </if>
-      <if test="cpustatus != null" >
         cpustatus = #{cpustatus,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
         creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checktime != null" >
         checktime = #{checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="prepare != null" >
         prepare = #{prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="nip != null" >
         nip = #{nip,jdbcType=VARCHAR},
-      </if>
-      <if test="cputemp != null" >
-        cputemp = #{cputemp,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
-    update hard_ware_cpu
-    set host = #{host,jdbcType=VARCHAR},
-      cpucount = #{cpucount,jdbcType=DOUBLE},
-      cpuusedper = #{cpuusedper,jdbcType=DOUBLE},
-      cpustatus = #{cpustatus,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP},
-      checktime = #{checktime,jdbcType=VARCHAR},
-      prepare = #{prepare,jdbcType=VARCHAR},
-      nip = #{nip,jdbcType=VARCHAR},
-      cputemp = #{cputemp,jdbcType=DOUBLE}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        cputemp = #{cputemp,jdbcType=DOUBLE}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
-  <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu" >
-    select
-   <!-- <include refid="Base_Column_List" />-->
-    a.id,a.host,a.cpucount,a.cpuusedper,a.cpustatus,a.creattime,a.checktime,a.prepare,a.nip,a.cputemp
-    from(
-    select
-<!--
-    <include refid="Base_Column_List" />
--->
-    id,host,cpucount,cpuusedper,cpustatus,creattime,checktime,prepare,nip,cputemp
-    from ${tablename} force index(host_checktime_index) where 1=1
-    <if test="host != null" >
-      AND host = #{host,jdbcType=VARCHAR}
-    </if>
-    <if test="checktimeStart != null and checktimeStart != ''">
-      and checktime &gt;= #{checktimeStart,jdbcType=VARCHAR}
-    </if>
-    <if test="checktimeEnd != null and checktimeEnd != ''">
-      and checktime &lt;= #{checktimeEnd,jdbcType=VARCHAR}
-    </if>
-    ) a
-    WHERE 1=1
-    <if test="secondStart != null and secondStart != ''">
-      and DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
-    </if>
+    <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu">
+        select
+        <!-- <include refid="Base_Column_List" />-->
+        a.id,a.host,a.cpucount,a.cpuusedper,a.cpustatus,a.creattime,a.checktime,a.prepare,a.nip,a.cputemp
+        from(
+        select
+        <!--
+            <include refid="Base_Column_List" />
+        -->
+        id,host,cpucount,cpuusedper,cpustatus,creattime,checktime,prepare,nip,cputemp
+        from ${tablename} force index(host_checktime_index) where 1=1
+        <if test="host != null">
+            AND host = #{host,jdbcType=VARCHAR}
+        </if>
+        <if test="checktimeStart != null and checktimeStart != ''">
+            and checktime &gt;= #{checktimeStart,jdbcType=VARCHAR}
+        </if>
+        <if test="checktimeEnd != null and checktimeEnd != ''">
+            and checktime &lt;= #{checktimeEnd,jdbcType=VARCHAR}
+        </if>
+        ) a
+        WHERE 1=1
+        <if test="secondStart != null and secondStart != ''">
+            and DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
+        </if>
 
-    <if test="secondEnd != null and secondEnd != ''">
-      OR DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
-    </if>
+        <if test="secondEnd != null and secondEnd != ''">
+            OR DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
+        </if>
 
-  </select>
+    </select>
 
 </mapper>

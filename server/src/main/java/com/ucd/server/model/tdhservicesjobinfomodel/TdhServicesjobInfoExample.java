@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Data
 public class TdhServicesjobInfoExample {
     protected String orderByClause;
@@ -1398,8 +1399,6 @@ public class TdhServicesjobInfoExample {
             addCriterion("creattime not between", value1, value2, "creattime");
             return (Criteria) this;
         }
-
-
 
 
         public Criteria andHealthtimeIsNull() {

@@ -3,6 +3,7 @@ package com.ucd.server.mapper.hardwareinfomapper.hardWareCpumapper;
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO;
 import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu;
 import com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpuExample;
+
 import java.util.List;
 
 import com.ucd.server.model.tdhservicemodel.TdhServicesA;
@@ -34,12 +35,12 @@ public interface HardWareCpuMapper {
     int insertByDTO(HardwareCpuDTO hardwareCpuDTO);
 
     /**
+     * @return java.util.List<com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu>
+     * @throws
      * @author Crayon
-     * @Description  根据时间区间查看硬件状态
+     * @Description 根据时间区间查看硬件状态
      * @date 2019/5/5 3:52 PM
      * @params [hardWareCpu]
-     * @exception
-     * @return java.util.List<com.ucd.server.model.hardwareinfomodel.hardWareCpumodel.HardWareCpu>
      */
     List<HardWareCpu> selectHardWareHealthStatusByTime(HardWareCpu hardWareCpu);
 }

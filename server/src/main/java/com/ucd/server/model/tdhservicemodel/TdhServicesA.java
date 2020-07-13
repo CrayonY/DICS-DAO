@@ -34,7 +34,9 @@ public class TdhServicesA {
 
     private String stopTime;
 
-    /** 定时任务执行时间 */
+    /**
+     * 定时任务执行时间
+     */
     private String taskTime;
 
 
@@ -42,14 +44,18 @@ public class TdhServicesA {
 
     private String taskTimeEnd;
 
-    /** 秒数 */
+    /**
+     * 秒数
+     */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
 
-    /** 健康时间时间 */
+    /**
+     * 健康时间时间
+     */
     private Date healthyTime;
 
 }

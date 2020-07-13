@@ -11,12 +11,12 @@ public class ResultVO<T> implements Serializable {
     /**
      * 错误码 0成功 非0具体错误原因
      */
-    private  String code;
+    private String code;
 
     /**
      * 状态
      */
-    private  Boolean success;
+    private Boolean success;
 
     /**
      * 提示信息

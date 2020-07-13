@@ -3,6 +3,7 @@ package com.ucd.server.model.tdhservicesjobinfomodel;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class TdhServicesjobInfo {
     private String id;

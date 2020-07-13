@@ -3,6 +3,7 @@ package com.ucd.server.model.tdhdsinfomodel;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class TdhDsInfo {
     private String id;
@@ -60,4 +61,4 @@ public class TdhDsInfo {
     private String tableNameTotal;
 
 
-    }
+}

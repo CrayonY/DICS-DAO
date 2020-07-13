@@ -31,7 +31,6 @@ public class TdhDssyncController {
     private final static Logger logger = LoggerFactory.getLogger(TdhDssyncController.class);
 
 
-
 //    @PostMapping(value = "/saveTdhDssyncInfo")
 //    public  ResultVO saveTdhDssyncInfo(@RequestBody TdhDssyncDTO tdhDssyncDTO) {
 //        logger.info("进入controller啦——————————————");
@@ -52,75 +51,75 @@ public class TdhDssyncController {
 //    }
 
     @PostMapping(value = "/saveTdhDssyncData")
-    public  ResultVO saveTdhDssyncData(@RequestBody List<TdhDssyncDTO> tdhDssyncDTOList) {
+    public ResultVO saveTdhDssyncData(@RequestBody List<TdhDssyncDTO> tdhDssyncDTOList) {
         logger.info("进入controller啦——————————————");
-        int resultCount ;
+        int resultCount;
         ResultVO resultVO = new ResultVO();
         try {
             resultCount = tdhDssyncService.saveTdhDssyncData(tdhDssyncDTOList);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/updateTdhDssyncData")
-    public  ResultVO updateTdhDssyncData(@RequestBody TdhDssyncDTO tdhDssyncDTO) {
+    public ResultVO updateTdhDssyncData(@RequestBody TdhDssyncDTO tdhDssyncDTO) {
         logger.info("进入controller啦——————————————");
         ResultVO resultVO = new ResultVO();
-        int resultCount ;
+        int resultCount;
         try {
             resultCount = tdhDssyncService.updateTdhDssyncData(tdhDssyncDTO);
             resultVO.setData(resultCount);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),resultCount);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), resultCount);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/getTdhDssyncInfoById")
-    public  ResultVO getTdhDssyncInfoById(@RequestBody TdhDssyncDTO tdhDssyncDTO) {
+    public ResultVO getTdhDssyncInfoById(@RequestBody TdhDssyncDTO tdhDssyncDTO) {
         logger.info("进入controller啦——————————————");
         TdhDssyncVO tdhDssyncVO = new TdhDssyncVO();
         ResultVO resultVO = new ResultVO();
         try {
             tdhDssyncVO = tdhDssyncService.getTdhDssyncInfoById(tdhDssyncDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhDssyncVO);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), tdhDssyncVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     @PostMapping(value = "/getTdhDssyncInfoByState")
-    public  ResultVO getTdhDssyncInfoByState(@RequestParam(value = "state",required = true) Integer state) {
+    public ResultVO getTdhDssyncInfoByState(@RequestParam(value = "state", required = true) Integer state) {
         logger.info("进入controller啦——————————————");
         List<TdhDssyncVO> tdhDssyncVOS = new ArrayList<TdhDssyncVO>();
         ResultVO resultVO = new ResultVO();
         try {
             tdhDssyncVOS = tdhDssyncService.getTdhDssyncInfoByState(state);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),tdhDssyncVOS);
-            logger.info("resultVO:"+resultVO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), tdhDssyncVOS);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }

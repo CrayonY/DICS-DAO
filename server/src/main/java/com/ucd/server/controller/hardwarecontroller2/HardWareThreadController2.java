@@ -32,41 +32,41 @@ public class HardWareThreadController2 {
     private final static Logger logger = LoggerFactory.getLogger(HardWareThreadController2.class);
 
     @PostMapping(value = "/getHardWareThread2")
-    public ResultVO getHardWareThread2(@RequestBody Map<String, Object> models){
+    public ResultVO getHardWareThread2(@RequestBody Map<String, Object> models) {
 
         ResultVO resultVO;
         try {
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-            HardwareThreadDTO hardwareThreadDTO = Tools.map2obj((Map<String, Object>)models.get("hardwareThreadDTO"), HardwareThreadDTO.class);
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            HardwareThreadDTO hardwareThreadDTO = Tools.map2obj((Map<String, Object>) models.get("hardwareThreadDTO"), HardwareThreadDTO.class);
 
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("hardwareThreadDTO:"+hardwareThreadDTO);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("hardwareThreadDTO:" + hardwareThreadDTO);
 
-            if(pageView == null){
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView = hardWareThreadService2.getHardWareThread(pageView,hardwareThreadDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = hardWareThreadService2.getHardWareThread(pageView, hardwareThreadDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
     /**
+     * @return com.ucd.common.VO.ResultVO<?>
+     * @throws
      * @author gwm
      * @Description 查看硬件Pid信息
      * @date 2019/4/29 4:11 PM
      * @params [host]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO<?>
      */
     @PostMapping(value = "/getHardWareThreadNow2")
-    public ResultVO<?> getHardWareThreadNow2(String host){
+    public ResultVO<?> getHardWareThreadNow2(String host) {
         return hardWareThreadService2.getHardWareThreadNow(host);
     }
 

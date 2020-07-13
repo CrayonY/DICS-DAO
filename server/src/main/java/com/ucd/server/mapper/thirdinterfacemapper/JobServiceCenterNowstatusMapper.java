@@ -2,7 +2,9 @@ package com.ucd.server.mapper.thirdinterfacemapper;
 
 import com.ucd.server.model.thirdinterfacemodel.JobServiceCenterNowstatus;
 import com.ucd.server.model.thirdinterfacemodel.JobServiceCenterNowstatusExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface JobServiceCenterNowstatusMapper {

@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserExtendsMapper {
 
-    User getUserByName(@Param("username")String username);
+    User getUserByName(@Param("username") String username);
 
 }

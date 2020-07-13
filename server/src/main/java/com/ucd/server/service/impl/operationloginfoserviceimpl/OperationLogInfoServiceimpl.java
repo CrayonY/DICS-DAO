@@ -35,13 +35,13 @@ public class OperationLogInfoServiceimpl implements OperationLogInfoService {
     @Override
     @Transactional
     public String saveOperationLogInfo(OperationLogInfoDTO operationLogInfoDTO) throws Exception {
-        if(operationLogInfoDTO == null){
+        if (operationLogInfoDTO == null) {
             throw new DaoException(ResultExceptEnum.ERROR_PARAMETER);
         }
         OperationLogInfo operationLogInfo = new OperationLogInfo();
         BeanUtils.copyProperties(operationLogInfoDTO, operationLogInfo);
         String ID = KeyUtil.genUniqueKey();
-        operationLogInfo.setId(ID+ UUIDUtils.getUUID());
+        operationLogInfo.setId(ID + UUIDUtils.getUUID());
         int count = 0;
         count = operationLogInfoMapper.insertSelective(operationLogInfo);
         return String.valueOf(count);
@@ -52,30 +52,30 @@ public class OperationLogInfoServiceimpl implements OperationLogInfoService {
         Gson gs = new Gson();
         List<OperationLogInfoVO> operationLogInfoVOList = new ArrayList<OperationLogInfoVO>();
         OperationLogInfoExample operationLogInfoExample = new OperationLogInfoExample();
-        logger.info("operationLogInfoDTO:"+operationLogInfoDTO);
+        logger.info("operationLogInfoDTO:" + operationLogInfoDTO);
         OperationLogInfoExample.Criteria criteria = operationLogInfoExample.createCriteria();
         operationLogInfoExample.setOrderByClause("creattime DESC");
         OperationLogInfoExample.Criteria criteriaOR = operationLogInfoExample.or();
-        if (operationLogInfoDTO != null){
-            if (operationLogInfoDTO.getUserCode() != null && !("".equals(operationLogInfoDTO.getUserCode()))){
-                criteria.andUserCodeLike("%"+operationLogInfoDTO.getUserCode()+"%");
+        if (operationLogInfoDTO != null) {
+            if (operationLogInfoDTO.getUserCode() != null && !("".equals(operationLogInfoDTO.getUserCode()))) {
+                criteria.andUserCodeLike("%" + operationLogInfoDTO.getUserCode() + "%");
             }
-            if (operationLogInfoDTO.getValue() != null  && !("".equals(operationLogInfoDTO.getValue()))){
-                criteria.andValueLike("%"+operationLogInfoDTO.getValue()+"%");
+            if (operationLogInfoDTO.getValue() != null && !("".equals(operationLogInfoDTO.getValue()))) {
+                criteria.andValueLike("%" + operationLogInfoDTO.getValue() + "%");
             }
 
-            if (operationLogInfoDTO.getCreattimemsF() != null && !("".equals(operationLogInfoDTO.getCreattimemsF()))){
+            if (operationLogInfoDTO.getCreattimemsF() != null && !("".equals(operationLogInfoDTO.getCreattimemsF()))) {
                 criteria.andCreattimeGreaterThanOrEqualTo(sdf.parse(operationLogInfoDTO.getCreattimemsF()));
             }
-            if (operationLogInfoDTO.getCreattimemsL() != null && !("".equals(operationLogInfoDTO.getCreattimemsL()))){
+            if (operationLogInfoDTO.getCreattimemsL() != null && !("".equals(operationLogInfoDTO.getCreattimemsL()))) {
                 criteria.andCreattimeLessThanOrEqualTo(sdf.parse(operationLogInfoDTO.getCreattimemsL()));
             }
         }
         PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-        List<OperationLogInfo> OperationLogInfoList =  operationLogInfoMapper.selectByExample(operationLogInfoExample);
+        List<OperationLogInfo> OperationLogInfoList = operationLogInfoMapper.selectByExample(operationLogInfoExample);
         long count = operationLogInfoMapper.countByExample(operationLogInfoExample);
         pageView.setTotalrecord(count);
-        for (OperationLogInfo operationLogInfo : OperationLogInfoList){
+        for (OperationLogInfo operationLogInfo : OperationLogInfoList) {
             OperationLogInfoVO operationLogInfoVO = new OperationLogInfoVO();
             BeanUtils.copyProperties(operationLogInfo, operationLogInfoVO);
             operationLogInfoVOList.add(operationLogInfoVO);

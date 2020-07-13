@@ -2,7 +2,9 @@ package com.ucd.server.mapper.tdhDssyncInfomapper;
 
 import com.ucd.server.model.tdhDssyncInfomodel.TdhDssyncInfo;
 import com.ucd.server.model.tdhDssyncInfomodel.TdhDssyncInfoExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TdhDssyncInfoMapper {

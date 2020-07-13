@@ -21,32 +21,32 @@ public interface HardWareService {
     PageView getThdServicesDsInfo(PageView pageView, HardwareNowDTO hardwareNowDTO) throws Exception;
 
     /**
+     * @return java.util.List<com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow>
+     * @throws
      * @author Crayon
      * @Description 获取CPU、MEM、DISK实时硬件信息
      * @date 2019/4/29 3:33 PM
      * @params [host]
-     * @exception
-     * @return java.util.List<com.ucd.server.model.hardwareinfomodel.hardWareInfoNowmodel.HardWareInfoNow>
      */
     List<HardwareNowVO> getHardWareInfoListNow(String host) throws Exception;
 
     /**
+     * @return com.ucd.common.utils.pager.PageView
+     * @throws
      * @author Crayon
-     * @Description 根据时间区间查看硬件状态       
+     * @Description 根据时间区间查看硬件状态
      * @date 2019/5/5 4:03 PM
      * @params [type, hardwareCpuDTO]
-     * @exception  
-     * @return com.ucd.common.utils.pager.PageView  
      */
-    PageView getHardWareStatusByTime(String type,HardwareCpuDTO hardwareCpuDTO);
+    PageView getHardWareStatusByTime(String type, HardwareCpuDTO hardwareCpuDTO);
 
     /**
+     * @return java.util.List<java.util.Map < java.lang.String, java.lang.String>>
+     * @throws
      * @author gongweimin
      * @Description 获取所有硬件host
-     * @date 2019/6/12 10:35 
+     * @date 2019/6/12 10:35
      * @params []
-     * @exception  
-     * @return java.util.List<java.util.Map<java.lang.String,java.lang.String>>  
      */
-    List<Map<String, String>> getHardWareHostList()throws Exception;
+    List<Map<String, String>> getHardWareHostList() throws Exception;
 }

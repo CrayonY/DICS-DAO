@@ -9,38 +9,39 @@ import com.alibaba.fastjson.JSON;
 
 public final class Tools {
 
-	private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
-	public static String toJson(Object obj) {
-		try {
-			return objectMapper.writeValueAsString(obj);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    public static String toJson(Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public static <T> T jsonToObject(String str, Class<T> T) {
-		try {
-			return objectMapper.readValue(str, T);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public static <T> Map<String, Object> json2map(String jsonStr)     throws Exception {
-		return JSON.parseObject(jsonStr, Map.class);
-	}
+    public static <T> T jsonToObject(String str, Class<T> T) {
+        try {
+            return objectMapper.readValue(str, T);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public static <T> T map2obj(Map<?, ?> map, Class<T> clazz) throws Exception {
-		return JSON.parseObject(JSON.toJSONString(map), clazz);
-	}
+    public static <T> Map<String, Object> json2map(String jsonStr) throws Exception {
+        return JSON.parseObject(jsonStr, Map.class);
+    }
+
+    public static <T> T map2obj(Map<?, ?> map, Class<T> clazz) throws Exception {
+        return JSON.parseObject(JSON.toJSONString(map), clazz);
+    }
 
 
-	public static <T> T map2Listobj(Map<?, ?> map, Class<T> clazz) throws Exception {
-		String str = JSON.toJSONString(map);
-		return JSON.parseObject(str,clazz);
-	}
+    public static <T> T map2Listobj(Map<?, ?> map, Class<T> clazz) throws Exception {
+        String str = JSON.toJSONString(map);
+        return JSON.parseObject(str, clazz);
+    }
 
 //	public static <T> String listPageToJson(PageView<T> page) {
 //		Map<String, Object> result = new HashMap<String, Object>();

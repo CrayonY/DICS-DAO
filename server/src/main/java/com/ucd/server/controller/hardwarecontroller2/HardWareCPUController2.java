@@ -32,35 +32,35 @@ public class HardWareCPUController2 {
     private final static Logger logger = LoggerFactory.getLogger(HardWareCPUController2.class);
 
     /**
+     * @return com.ucd.common.VO.ResultVO
+     * @throws
      * @author gwm
      * @Description 获取硬件CPU信息
      * @date 2019/3/29 5:00 PM
      * @params [hardwareCpuDTO]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO
      */
     @PostMapping(value = "/getHardWareCpu2")
-    public ResultVO getHardWareCpu2(@RequestBody Map<String, Object> models){
+    public ResultVO getHardWareCpu2(@RequestBody Map<String, Object> models) {
 
         ResultVO resultVO;
         try {
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-            HardwareCpuDTO hardwareCpuDTO = Tools.map2obj((Map<String, Object>)models.get("hardwareCpuDTO"),HardwareCpuDTO.class);
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            HardwareCpuDTO hardwareCpuDTO = Tools.map2obj((Map<String, Object>) models.get("hardwareCpuDTO"), HardwareCpuDTO.class);
 
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("hardwareCpuDTO:"+hardwareCpuDTO);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("hardwareCpuDTO:" + hardwareCpuDTO);
 
-            if(pageView == null){
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView = hardWareCPUService2.getHardWareCPU(pageView,hardwareCpuDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = hardWareCPUService2.getHardWareCPU(pageView, hardwareCpuDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }

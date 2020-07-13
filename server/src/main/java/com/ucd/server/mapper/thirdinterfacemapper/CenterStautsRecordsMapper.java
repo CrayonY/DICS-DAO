@@ -2,7 +2,9 @@ package com.ucd.server.mapper.thirdinterfacemapper;
 
 import com.ucd.server.model.thirdinterfacemodel.CenterStautsRecords;
 import com.ucd.server.model.thirdinterfacemodel.CenterStautsRecordsExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CenterStautsRecordsMapper {

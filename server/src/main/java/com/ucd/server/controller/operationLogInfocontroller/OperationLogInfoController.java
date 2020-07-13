@@ -24,51 +24,51 @@ import java.util.Map;
 @RequestMapping("/operationDao")
 public class OperationLogInfoController {
 
-	@Autowired
-	private OperationLogInfoService operationLogInfoService;
-	/**
-	 * 引入日志，注意都是"org.slf4j"包下
-	 */
-	private final static Logger logger = LoggerFactory.getLogger(OperationLogInfoController.class);
+    @Autowired
+    private OperationLogInfoService operationLogInfoService;
+    /**
+     * 引入日志，注意都是"org.slf4j"包下
+     */
+    private final static Logger logger = LoggerFactory.getLogger(OperationLogInfoController.class);
 
 
-	@PostMapping(value = "/saveOperationLogInfo")
-	public ResultVO saveOperationLogInfo(@RequestBody OperationLogInfoDTO operationLogInfoDTO){
-		ResultVO resultVO = new ResultVO();
-		logger.info("接受参数1："+operationLogInfoDTO);
+    @PostMapping(value = "/saveOperationLogInfo")
+    public ResultVO saveOperationLogInfo(@RequestBody OperationLogInfoDTO operationLogInfoDTO) {
+        ResultVO resultVO = new ResultVO();
+        logger.info("接受参数1：" + operationLogInfoDTO);
         try {
-		    String result = operationLogInfoService.saveOperationLogInfo(operationLogInfoDTO);
-		    resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),result);
+            String result = operationLogInfoService.saveOperationLogInfo(operationLogInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), result);
         } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
         }
-		logger.info("resultVO:"+resultVO);
-		return resultVO;
-	}
+        logger.info("resultVO:" + resultVO);
+        return resultVO;
+    }
 
-	@PostMapping(value = "/getOperationLogInfo")
-	public ResultVO getOperationLogInfo(@RequestBody Map<String, Object> models){
-		ResultVO resultVO = new ResultVO();
-		try {
-			PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-			OperationLogInfoDTO operationLogInfoDTO = Tools.map2obj((Map<String, Object>)models.get("operationLogInfoDTO"),OperationLogInfoDTO.class);
-			logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-			logger.info("OperationLogInfoDTO:"+operationLogInfoDTO);
-			if(pageView == null){
-				pageView = new PageView();
-			}
-			pageView =operationLogInfoService.getOperationLogInfo(pageView,operationLogInfoDTO);
-			resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-			logger.info("resultVO:"+resultVO);
-			return resultVO;
-		} catch (Exception e) {
-			e.printStackTrace();
-			resultVO = ResultVOUtil.error(e);
-			logger.info("resultVO:"+resultVO);
-			return resultVO;
-		}
-	}
+    @PostMapping(value = "/getOperationLogInfo")
+    public ResultVO getOperationLogInfo(@RequestBody Map<String, Object> models) {
+        ResultVO resultVO = new ResultVO();
+        try {
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            OperationLogInfoDTO operationLogInfoDTO = Tools.map2obj((Map<String, Object>) models.get("operationLogInfoDTO"), OperationLogInfoDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("OperationLogInfoDTO:" + operationLogInfoDTO);
+            if (pageView == null) {
+                pageView = new PageView();
+            }
+            pageView = operationLogInfoService.getOperationLogInfo(pageView, operationLogInfoDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVOUtil.error(e);
+            logger.info("resultVO:" + resultVO);
+            return resultVO;
+        }
+    }
 
 
 }

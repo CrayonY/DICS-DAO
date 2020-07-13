@@ -9,12 +9,12 @@ import com.ucd.daocommon.DTO.hardwareDTO.HardwareDiskDTO;
 public interface HardWareDiskService2 {
 
     /**
+     * @return com.ucd.common.utils.pager.PageView
+     * @throws
      * @author Crayon
-     * @Description 获取硬件磁盘数据       
+     * @Description 获取硬件磁盘数据
      * @date 2019/3/30 10:35 AM
      * @params [pageView, hardwareDiskDTO]
-     * @exception  
-     * @return com.ucd.common.utils.pager.PageView  
      */
     PageView getHardWareDisk(PageView pageView, HardwareDiskDTO hardwareDiskDTO) throws Exception;
 

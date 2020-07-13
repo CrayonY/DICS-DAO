@@ -1,427 +1,432 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ucd.server.mapper.tdhservicesmapper.TdhServicesAMapper" >
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    <id column="services_id" property="servicesId" jdbcType="VARCHAR" />
-    <result column="enable_kerberos" property="enableKerberos" jdbcType="VARCHAR" />
-    <result column="health" property="health" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="health_checks_id" property="healthChecksId" jdbcType="VARCHAR" />
-    <result column="cluster_id" property="clusterId" jdbcType="INTEGER" />
-    <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="busy" property="busy" jdbcType="VARCHAR" />
-    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
-    <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
-    <result column="task_time" property="taskTime" jdbcType="VARCHAR" />
-    <result column="healthy_time" property="healthyTime" jdbcType="TIMESTAMP" />
+<mapper namespace="com.ucd.server.mapper.tdhservicesmapper.TdhServicesAMapper">
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        <id column="services_id" property="servicesId" jdbcType="VARCHAR"/>
+        <result column="enable_kerberos" property="enableKerberos" jdbcType="VARCHAR"/>
+        <result column="health" property="health" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="health_checks_id" property="healthChecksId" jdbcType="VARCHAR"/>
+        <result column="cluster_id" property="clusterId" jdbcType="INTEGER"/>
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="busy" property="busy" jdbcType="VARCHAR"/>
+        <result column="creattime" property="creattime" jdbcType="TIMESTAMP"/>
+        <result column="last_check" property="lastCheck" jdbcType="VARCHAR"/>
+        <result column="task_time" property="taskTime" jdbcType="VARCHAR"/>
+        <result column="healthy_time" property="healthyTime" jdbcType="TIMESTAMP"/>
 
-  </resultMap>
-  <sql id="Base_Column_List" >
-    services_id, enable_kerberos, health, name, health_checks_id,
-    cluster_id, id, type, busy, creattime, last_check,task_time,healthy_time
-  </sql>
-  <select id="selectCountTdhServices" resultType="java.lang.Long" >
-    select
-    count(*)
-    from ${tableName}
-    where 1=1
-    <if test="enableKerberos != null and enableKerberos != ''">
-      and enable_kerberos = #{enableKerberos,jdbcType=VARCHAR}
-    </if>
-    <if test="health != null and health != ''">
-      and health = #{health,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null and name != ''">
-      and name = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="healthChecksId != null and healthChecksId != ''">
-      and health_checks_id = #{healthChecksId,jdbcType=VARCHAR}
-    </if>
-    <if test="clusterId != null and clusterId != ''">
-      and cluster_id = #{clusterId,jdbcType=INTEGER}
-    </if>
-    <if test="id != null and id != ''">
-      and id = #{id,jdbcType=INTEGER}
-    </if>
-    <if test="type != null and type != ''">
-      and type = #{type,jdbcType=VARCHAR}
-    </if>
-    <if test="busy != null and busy != ''">
-      and busy = #{busy,jdbcType=VARCHAR}
-    </if>
-    <if test="lastCheck != null and lastCheck != ''">
-      and last_check = #{lastCheck,jdbcType=VARCHAR}
-    </if>
-    <if test="creattime != null and creattime != ''">
-      and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="servicesId != null and servicesId != ''">
-      and services_id = #{servicesId,jdbcType=VARCHAR}
-    </if>
-    <if test="startTime != null and startTime != ''">
-      and last_check &gt;= #{startTime,jdbcType=VARCHAR}
-    </if>
-    <if test="stopTime != null and stopTime != ''">
-      and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
-    </if>
-    <if test="taskTime != null and taskTime != ''">
-      and task_time = #{taskTime,jdbcType=VARCHAR}
-    </if>
-    <if test="healthyTime != null and healthyTime != ''">
-      and healthy_time = #{healthyTime,jdbcType=TIMESTAMP}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    select 
-    <include refid="Base_Column_List" />
-    from ${tableName}
-    where services_id = #{servicesId,jdbcType=VARCHAR}
-  </select>
-  <!--<select id="selectTdhServicesInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
+    </resultMap>
+    <sql id="Base_Column_List">
+        services_id, enable_kerberos, health, name, health_checks_id,
+        cluster_id, id, type, busy, creattime, last_check,task_time,healthy_time
+    </sql>
+    <select id="selectCountTdhServices" resultType="java.lang.Long">
+        select
+        count(*)
+        from ${tableName}
+        where 1=1
+        <if test="enableKerberos != null and enableKerberos != ''">
+            and enable_kerberos = #{enableKerberos,jdbcType=VARCHAR}
+        </if>
+        <if test="health != null and health != ''">
+            and health = #{health,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="healthChecksId != null and healthChecksId != ''">
+            and health_checks_id = #{healthChecksId,jdbcType=VARCHAR}
+        </if>
+        <if test="clusterId != null and clusterId != ''">
+            and cluster_id = #{clusterId,jdbcType=INTEGER}
+        </if>
+        <if test="id != null and id != ''">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="busy != null and busy != ''">
+            and busy = #{busy,jdbcType=VARCHAR}
+        </if>
+        <if test="lastCheck != null and lastCheck != ''">
+            and last_check = #{lastCheck,jdbcType=VARCHAR}
+        </if>
+        <if test="creattime != null and creattime != ''">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="servicesId != null and servicesId != ''">
+            and services_id = #{servicesId,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and last_check &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test="stopTime != null and stopTime != ''">
+            and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
+        </if>
+        <if test="taskTime != null and taskTime != ''">
+            and task_time = #{taskTime,jdbcType=VARCHAR}
+        </if>
+        <if test="healthyTime != null and healthyTime != ''">
+            and healthy_time = #{healthyTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where services_id = #{servicesId,jdbcType=VARCHAR}
+    </select>
+    <!--<select id="selectTdhServicesInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
     <!--select-->
     <!--<include refid="Base_Column_List" />-->
     <!--from tdh_services-->
-  <!--</select>-->
-  <!--<select id="selectTdhServicesByParame" resultMap="java.util.HashMap" parameterType="java.lang.String" >-->
+    <!--</select>-->
+    <!--<select id="selectTdhServicesByParame" resultMap="java.util.HashMap" parameterType="java.lang.String" >-->
     <!--select-->
     <!--<include refid="Base_Column_List" />-->
     <!--from tdh_services-->
-  <!--</select>-->
-  <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    delete from ${tableName}
-    where services_id = #{servicesId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    insert into ${tableName} (services_id, enable_kerberos, health, name, health_checks_id, cluster_id, id, type, busy, creattime, last_check,task_time,healthy_time
-      )
-    values (#{servicesId,jdbcType=VARCHAR}, #{enableKerberos,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR},
-      #{healthChecksId,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER},
-      #{id,jdbcType=INTEGER},
-      #{type,jdbcType=VARCHAR}, #{busy,jdbcType=VARCHAR},
-      #{creattime,jdbcType=TIMESTAMP}, #{lastCheck,jdbcType=VARCHAR},#{taskTime,jdbcType=VARCHAR},#{healthyTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    insert into ${tableName}
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="servicesId != null" >
-        services_id,
-      </if>
-      <if test="enableKerberos != null" >
-        enable_kerberos,
-      </if>
-      <if test="health != null" >
-        health,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="healthChecksId != null" >
-        health_checks_id,
-      </if>
-      <if test="clusterId != null" >
-        cluster_id,
-      </if>
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="busy != null" >
-        busy,
-      </if>
-      <if test="creattime != null" >
-        creattime,
-      </if>
-      <if test="lastCheck != null" >
-        last_check,
-      </if>
-      <if test="taskTime != null" >
-        task_time,
-      </if>
-      <if test="healthyTime != null" >
-        healthy_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="servicesId != null" >
-        #{servicesId,jdbcType=VARCHAR},
-      </if>
-      <if test="enableKerberos != null" >
-        #{enableKerberos,jdbcType=VARCHAR},
-      </if>
-      <if test="health != null" >
-        #{health,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
+    <!--</select>-->
+    <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        delete from ${tableName}
+        where services_id = #{servicesId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        insert into ${tableName} (services_id, enable_kerberos, health, name, health_checks_id, cluster_id, id, type,
+        busy, creattime, last_check,task_time,healthy_time
+        )
+        values (#{servicesId,jdbcType=VARCHAR}, #{enableKerberos,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR},
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="healthChecksId != null" >
-        #{healthChecksId,jdbcType=VARCHAR},
-      </if>
-      <if test="clusterId != null" >
-        #{clusterId,jdbcType=INTEGER},
-      </if>
-      <if test="id != null" >
+        #{healthChecksId,jdbcType=VARCHAR}, #{clusterId,jdbcType=INTEGER},
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="busy != null" >
-        #{busy,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
+        #{type,jdbcType=VARCHAR}, #{busy,jdbcType=VARCHAR},
         #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastCheck != null" >
-        #{lastCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="taskTime != null" >
-        #{taskTime,jdbcType=VARCHAR},
-      </if>
-      <if test="healthyTime != null" >
-        #{healthyTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    update ${tableName}
-    <set >
-      <if test="enableKerberos != null" >
-        enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
-      </if>
-      <if test="health != null" >
+        #{lastCheck,jdbcType=VARCHAR},#{taskTime,jdbcType=VARCHAR},#{healthyTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="servicesId != null">
+                services_id,
+            </if>
+            <if test="enableKerberos != null">
+                enable_kerberos,
+            </if>
+            <if test="health != null">
+                health,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="healthChecksId != null">
+                health_checks_id,
+            </if>
+            <if test="clusterId != null">
+                cluster_id,
+            </if>
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="busy != null">
+                busy,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="lastCheck != null">
+                last_check,
+            </if>
+            <if test="taskTime != null">
+                task_time,
+            </if>
+            <if test="healthyTime != null">
+                healthy_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="servicesId != null">
+                #{servicesId,jdbcType=VARCHAR},
+            </if>
+            <if test="enableKerberos != null">
+                #{enableKerberos,jdbcType=VARCHAR},
+            </if>
+            <if test="health != null">
+                #{health,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="healthChecksId != null">
+                #{healthChecksId,jdbcType=VARCHAR},
+            </if>
+            <if test="clusterId != null">
+                #{clusterId,jdbcType=INTEGER},
+            </if>
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="busy != null">
+                #{busy,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastCheck != null">
+                #{lastCheck,jdbcType=VARCHAR},
+            </if>
+            <if test="taskTime != null">
+                #{taskTime,jdbcType=VARCHAR},
+            </if>
+            <if test="healthyTime != null">
+                #{healthyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        update ${tableName}
+        <set>
+            <if test="enableKerberos != null">
+                enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
+            </if>
+            <if test="health != null">
+                health = #{health,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="healthChecksId != null">
+                health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+            </if>
+            <if test="clusterId != null">
+                cluster_id = #{clusterId,jdbcType=INTEGER},
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="busy != null">
+                busy = #{busy,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastCheck != null">
+                last_check = #{lastCheck,jdbcType=VARCHAR},
+            </if>
+
+            <if test="taskTime != null">
+                task_time = #{taskTime,jdbcType=VARCHAR},
+            </if>
+            <if test="healthyTime != null">
+                healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where services_id = #{servicesId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        update ${tableName}
+        set enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
         health = #{health,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="healthChecksId != null" >
         health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
-      </if>
-      <if test="clusterId != null" >
         cluster_id = #{clusterId,jdbcType=INTEGER},
-      </if>
-      <if test="id != null" >
         id = #{id,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="busy != null" >
         busy = #{busy,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
-        creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastCheck != null" >
         last_check = #{lastCheck,jdbcType=VARCHAR},
-      </if>
-
-      <if test="taskTime != null" >
         task_time = #{taskTime,jdbcType=VARCHAR},
-      </if>
-      <if test="healthyTime != null" >
-        healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where services_id = #{servicesId,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    update ${tableName}
-    set enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
-      health = #{health,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
-      cluster_id = #{clusterId,jdbcType=INTEGER},
-      id = #{id,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR},
-      busy = #{busy,jdbcType=VARCHAR},
-      last_check = #{lastCheck,jdbcType=VARCHAR},
-      task_time = #{taskTime,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP},
-      healthy_time = #{healthyTime,jdbcType=TIMESTAMP}
-    where services_id = #{servicesId,jdbcType=VARCHAR}
-  </update>
-
-  <select id="selectTdhServicesInfoByDTO" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    select
-    <include refid="Base_Column_List" />
-    from ${tableName}
-    where 1=1
-    <if test="enableKerberos != null and enableKerberos != ''">
-      and enable_kerberos = #{enableKerberos,jdbcType=VARCHAR}
-    </if>
-    <if test="health != null and health != ''">
-      and health = #{health,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null and name != ''">
-      and name = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="healthChecksId != null and healthChecksId != ''">
-      and health_checks_id = #{healthChecksId,jdbcType=VARCHAR}
-    </if>
-    <if test="clusterId != null and clusterId != ''">
-      and cluster_id = #{clusterId,jdbcType=INTEGER}
-    </if>
-    <if test="id != null and id != ''">
-      and id = #{id,jdbcType=INTEGER}
-    </if>
-    <if test="type != null and type != ''">
-      and type = #{type,jdbcType=VARCHAR}
-    </if>
-    <if test="busy != null and busy != ''">
-      and busy = #{busy,jdbcType=VARCHAR}
-    </if>
-    <!--<if test="lastCheck != null and lastCheck != ''">-->
-      <!--and last_check = #{lastCheck,jdbcType=VARCHAR}-->
-    <!--</if>-->
-    <if test="creattime != null and creattime != ''">
-      and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="servicesId != null and servicesId != ''">
-      and services_id = #{servicesId,jdbcType=VARCHAR}
-    </if>
-    <if test="startTime != null and startTime != ''">
-      and last_check &gt;= #{startTime,jdbcType=VARCHAR}
-    </if>
-    <if test="stopTime != null and stopTime != ''">
-      and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
-    </if>
-
-    <if test="taskTimeStart != null and taskTimeStart != ''">
-      and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
-    </if>
-    <if test="taskTimeEnd != null and taskTimeEnd != ''">
-      and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
-    </if>
-
-    <if test="taskTime != null and taskTime != ''">
-      and task_time = #{taskTime,jdbcType=VARCHAR}
-    </if>
-
-    <if test="healthyTime != null and healthyTime != ''">
-      and healthy_time = #{taskTime,jdbcType=TIMESTAMP}
-    </if>
-  </select>
-  <!--后加根据类型修改实时数据sql-->
-
-
-  <update id="updateByTypeSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    update ${tableName}
-    <set >
-      <if test="enableKerberos != null" >
-        enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
-      </if>
-      <if test="health != null" >
-        health = #{health,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="healthChecksId != null" >
-        health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
-      </if>
-      <if test="clusterId != null" >
-        cluster_id = #{clusterId,jdbcType=INTEGER},
-      </if>
-      <if test="id != null" >
-        id = #{id,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="busy != null" >
-        busy = #{busy,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
         creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastCheck != null" >
-        last_check = #{lastCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="taskTime != null" >
-        task_time = #{taskTime,jdbcType=VARCHAR},
-      </if>
-      <if test="healthyTime != null" >
-        healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where type = #{type,jdbcType=VARCHAR}
-  </update>
+        healthy_time = #{healthyTime,jdbcType=TIMESTAMP}
+        where services_id = #{servicesId,jdbcType=VARCHAR}
+    </update>
 
-  <update id="updateByNameSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    update ${tableName}
-    <set >
-      <if test="enableKerberos != null" >
-        enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
-      </if>
-      <if test="health != null" >
-        health = #{health,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="healthChecksId != null" >
-        health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
-      </if>
-      <if test="clusterId != null" >
-        cluster_id = #{clusterId,jdbcType=INTEGER},
-      </if>
-      <if test="id != null" >
-        id = #{id,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="busy != null" >
-        busy = #{busy,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null" >
-        creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastCheck != null" >
-        last_check = #{lastCheck,jdbcType=VARCHAR},
-      </if>
-      <if test="taskTime != null" >
-        task_time = #{taskTime,jdbcType=VARCHAR},
-      </if>
-      <if test="healthyTime != null" >
-        healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where name = #{name,jdbcType=VARCHAR}
-  </update>
+    <select id="selectTdhServicesInfoByDTO" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where 1=1
+        <if test="enableKerberos != null and enableKerberos != ''">
+            and enable_kerberos = #{enableKerberos,jdbcType=VARCHAR}
+        </if>
+        <if test="health != null and health != ''">
+            and health = #{health,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="healthChecksId != null and healthChecksId != ''">
+            and health_checks_id = #{healthChecksId,jdbcType=VARCHAR}
+        </if>
+        <if test="clusterId != null and clusterId != ''">
+            and cluster_id = #{clusterId,jdbcType=INTEGER}
+        </if>
+        <if test="id != null and id != ''">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="busy != null and busy != ''">
+            and busy = #{busy,jdbcType=VARCHAR}
+        </if>
+        <!--<if test="lastCheck != null and lastCheck != ''">-->
+        <!--and last_check = #{lastCheck,jdbcType=VARCHAR}-->
+        <!--</if>-->
+        <if test="creattime != null and creattime != ''">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="servicesId != null and servicesId != ''">
+            and services_id = #{servicesId,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and last_check &gt;= #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test="stopTime != null and stopTime != ''">
+            and last_check &lt;= #{stopTime,jdbcType=VARCHAR}
+        </if>
 
-  <select id="selectTdhServiceHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA" >
-    select
-    <!--<include refid="Base_Column_List" />-->
-    a.task_time,a.health,a.name,a.type,a.busy
-    from(
-    select
-    <!--<include refid="Base_Column_List" />-->
-    task_time,health,name,type,busy
-    from ${tableName} force index(task_time_index)
-    where 1=1
-    <if test="taskTimeStart != null and taskTimeStart != ''">
-      and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
-    </if>
-    <if test="taskTimeEnd != null and taskTimeEnd != ''">
-      and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
-    </if>
-    ) a
-    WHERE 1=1
-    <if test="secondStart != null and secondStart != ''">
-      and DATE_FORMAT(a.task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
-    </if>
+        <if test="taskTimeStart != null and taskTimeStart != ''">
+            and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
+        </if>
+        <if test="taskTimeEnd != null and taskTimeEnd != ''">
+            and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
+        </if>
 
-    <if test="secondEnd != null and secondEnd != ''">
-      OR DATE_FORMAT(a.task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
-    </if>
+        <if test="taskTime != null and taskTime != ''">
+            and task_time = #{taskTime,jdbcType=VARCHAR}
+        </if>
 
-  </select>
+        <if test="healthyTime != null and healthyTime != ''">
+            and healthy_time = #{taskTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+    <!--后加根据类型修改实时数据sql-->
+
+
+    <update id="updateByTypeSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        update ${tableName}
+        <set>
+            <if test="enableKerberos != null">
+                enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
+            </if>
+            <if test="health != null">
+                health = #{health,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="healthChecksId != null">
+                health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+            </if>
+            <if test="clusterId != null">
+                cluster_id = #{clusterId,jdbcType=INTEGER},
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="busy != null">
+                busy = #{busy,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastCheck != null">
+                last_check = #{lastCheck,jdbcType=VARCHAR},
+            </if>
+            <if test="taskTime != null">
+                task_time = #{taskTime,jdbcType=VARCHAR},
+            </if>
+            <if test="healthyTime != null">
+                healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where type = #{type,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByNameSelective" parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        update ${tableName}
+        <set>
+            <if test="enableKerberos != null">
+                enable_kerberos = #{enableKerberos,jdbcType=VARCHAR},
+            </if>
+            <if test="health != null">
+                health = #{health,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="healthChecksId != null">
+                health_checks_id = #{healthChecksId,jdbcType=VARCHAR},
+            </if>
+            <if test="clusterId != null">
+                cluster_id = #{clusterId,jdbcType=INTEGER},
+            </if>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="busy != null">
+                busy = #{busy,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastCheck != null">
+                last_check = #{lastCheck,jdbcType=VARCHAR},
+            </if>
+            <if test="taskTime != null">
+                task_time = #{taskTime,jdbcType=VARCHAR},
+            </if>
+            <if test="healthyTime != null">
+                healthy_time = #{healthyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where name = #{name,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectTdhServiceHealthStatusByTime" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhservicemodel.TdhServicesA">
+        select
+        <!--<include refid="Base_Column_List" />-->
+        a.task_time,a.health,a.name,a.type,a.busy
+        from(
+        select
+        <!--<include refid="Base_Column_List" />-->
+        task_time,health,name,type,busy
+        from ${tableName} force index(task_time_index)
+        where 1=1
+        <if test="taskTimeStart != null and taskTimeStart != ''">
+            and task_time &gt;= #{taskTimeStart,jdbcType=VARCHAR}
+        </if>
+        <if test="taskTimeEnd != null and taskTimeEnd != ''">
+            and task_time &lt;= #{taskTimeEnd,jdbcType=VARCHAR}
+        </if>
+        ) a
+        WHERE 1=1
+        <if test="secondStart != null and secondStart != ''">
+            and DATE_FORMAT(a.task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
+        </if>
+
+        <if test="secondEnd != null and secondEnd != ''">
+            OR DATE_FORMAT(a.task_time,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
+        </if>
+
+    </select>
 </mapper>

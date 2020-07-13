@@ -56,6 +56,6 @@ public class HardwareNowDTO {
 
     private Double cputemp;
 
-    private  String tablename;
+    private String tablename;
 
 }

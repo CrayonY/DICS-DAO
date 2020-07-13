@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ucd.server.mapper.tdhdsinfomapper.TdhDsInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-      <id column="id" property="id" jdbcType="VARCHAR" />
-      <result column="table_name" property="tableName" jdbcType="VARCHAR" />
-      <result column="state" property="state" jdbcType="INTEGER" />
-      <result column="startdown_time" property="startdownTime" jdbcType="TIMESTAMP" />
-      <result column="startup_time" property="startupTime" jdbcType="TIMESTAMP" />
-      <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
-      <result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
-      <result column="audit_notes" property="auditNotes" jdbcType="VARCHAR" />
-      <result column="last_check" property="lastCheck" jdbcType="VARCHAR" />
-      <result column="type" property="type" jdbcType="INTEGER" />
-      <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
-      <result column="sync_time" property="syncTime" jdbcType="TIMESTAMP" />
-      <result column="user_code" property="userCode" jdbcType="VARCHAR" />
-      <result column="data_month" property="dataMonth" jdbcType="VARCHAR" />
-      <result column="sync_type" property="syncType" jdbcType="INTEGER" />
-      <result column="check_status" property="checkStatus" jdbcType="INTEGER" />
-      <result column="applyer_code" property="applyerCode" jdbcType="VARCHAR" />
-      <result column="auditer_code" property="auditerCode" jdbcType="VARCHAR" />
-      <result column="syncer_code" property="syncerCode" jdbcType="VARCHAR" />
-      <result column="pid" property="pid" jdbcType="VARCHAR" />
-      <result column="data_times" property="dataTimes" jdbcType="VARCHAR" />
-      <result column="audit_begintime" property="auditBegintime" jdbcType="TIMESTAMP" />
-      <result column="sync_begintime" property="syncBegintime" jdbcType="TIMESTAMP" />
-      <result column="table_nametotal" property="tableNameTotal" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.ucd.server.mapper.tdhdsinfomapper.TdhDsInfoMapper">
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="table_name" property="tableName" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="INTEGER"/>
+        <result column="startdown_time" property="startdownTime" jdbcType="TIMESTAMP"/>
+        <result column="startup_time" property="startupTime" jdbcType="TIMESTAMP"/>
+        <result column="creattime" property="creattime" jdbcType="TIMESTAMP"/>
+        <result column="audit_status" property="auditStatus" jdbcType="INTEGER"/>
+        <result column="audit_notes" property="auditNotes" jdbcType="VARCHAR"/>
+        <result column="last_check" property="lastCheck" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP"/>
+        <result column="sync_time" property="syncTime" jdbcType="TIMESTAMP"/>
+        <result column="user_code" property="userCode" jdbcType="VARCHAR"/>
+        <result column="data_month" property="dataMonth" jdbcType="VARCHAR"/>
+        <result column="sync_type" property="syncType" jdbcType="INTEGER"/>
+        <result column="check_status" property="checkStatus" jdbcType="INTEGER"/>
+        <result column="applyer_code" property="applyerCode" jdbcType="VARCHAR"/>
+        <result column="auditer_code" property="auditerCode" jdbcType="VARCHAR"/>
+        <result column="syncer_code" property="syncerCode" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="VARCHAR"/>
+        <result column="data_times" property="dataTimes" jdbcType="VARCHAR"/>
+        <result column="audit_begintime" property="auditBegintime" jdbcType="TIMESTAMP"/>
+        <result column="sync_begintime" property="syncBegintime" jdbcType="TIMESTAMP"/>
+        <result column="table_nametotal" property="tableNameTotal" jdbcType="VARCHAR"/>
+    </resultMap>
 
-    <sql id="Example_Where_Clause" >
-        <where >
-            <foreach collection="oredCriteria" item="criteria" separator="or" >
-                <if test="criteria.valid" >
-                    <trim prefix="(" suffix=")" prefixOverrides="and" >
-                        <foreach collection="criteria.criteria" item="criterion" >
-                            <choose >
-                                <when test="criterion.noValue" >
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
                                     and ${criterion.condition}
                                 </when>
-                                <when test="criterion.singleValue" >
+                                <when test="criterion.singleValue">
                                     and ${criterion.condition} #{criterion.value}
                                 </when>
-                                <when test="criterion.betweenValue" >
+                                <when test="criterion.betweenValue">
                                     and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                                 </when>
-                                <when test="criterion.listValue" >
+                                <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -57,25 +58,26 @@
             </foreach>
         </where>
     </sql>
-    <sql id="Update_By_Example_Where_Clause" >
-        <where >
-            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-                <if test="criteria.valid" >
-                    <trim prefix="(" suffix=")" prefixOverrides="and" >
-                        <foreach collection="criteria.criteria" item="criterion" >
-                            <choose >
-                                <when test="criterion.noValue" >
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
                                     and ${criterion.condition}
                                 </when>
-                                <when test="criterion.singleValue" >
+                                <when test="criterion.singleValue">
                                     and ${criterion.condition} #{criterion.value}
                                 </when>
-                                <when test="criterion.betweenValue" >
+                                <when test="criterion.betweenValue">
                                     and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                                 </when>
-                                <when test="criterion.listValue" >
+                                <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -87,121 +89,124 @@
         </where>
     </sql>
 
-    <sql id="Base_Column_List" >
-    id, table_name, state, startdown_time, startup_time, creattime, audit_status, audit_notes,
-    last_check, type, audit_time, sync_time, user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code,
-    pid, data_times, audit_begintime, sync_begintime, table_nametotal
-  </sql>
+    <sql id="Base_Column_List">
+        id, table_name, state, startdown_time, startup_time, creattime, audit_status, audit_notes,
+        last_check, type, audit_time, sync_time, user_code, data_month, sync_type, check_status, applyer_code,
+        auditer_code, syncer_code,
+        pid, data_times, audit_begintime, sync_begintime, table_nametotal
+    </sql>
 
-    <select id="countByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" resultType="java.lang.Integer" >
+    <select id="countByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample"
+            resultType="java.lang.Integer">
         select count(*) from ${centreTableName}
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
     </select>
 
-    <delete id="deleteByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" >
+    <delete id="deleteByExample" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample">
         delete from ${centreTableName}
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
     </delete>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample" >
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfoExample">
         select
-        <if test="distinct" >
+        <if test="distinct">
             distinct
         </if>
         'true' as QUERYID,
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from ${centreTableName}
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-        <if test="orderByClause != null" >
+        <if test="orderByClause != null">
             order by ${orderByClause}
         </if>
     </select>
 
-    <update id="updateByExampleSelective" parameterType="map" >
+    <update id="updateByExampleSelective" parameterType="map">
         update ${centreTableName}
-        <set >
-            <if test="tableName != null" >
+        <set>
+            <if test="tableName != null">
                 table_name = #{tableName,jdbcType=VARCHAR},
             </if>
-            <if test="state != null" >
+            <if test="state != null">
                 state = #{state,jdbcType=INTEGER},
             </if>
-            <if test="startdownTime != null" >
+            <if test="startdownTime != null">
                 startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="startupTime != null" >
+            <if test="startupTime != null">
                 startup_time = #{startupTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="creattime != null" >
+            <if test="creattime != null">
                 creattime = #{creattime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.auditStatus != null" >
+            <if test="record.auditStatus != null">
                 audit_status = #{record.auditStatus,jdbcType=INTEGER},
             </if>
-            <if test="record.auditNotes != null" >
+            <if test="record.auditNotes != null">
                 audit_notes = #{record.auditNotes,jdbcType=VARCHAR},
             </if>
-            <if test="record.lastCheck != null" >
+            <if test="record.lastCheck != null">
                 last_check = #{record.lastCheck,jdbcType=VARCHAR},
             </if>
-            <if test="type != null" >
+            <if test="type != null">
                 type = #{type,jdbcType=INTEGER},
             </if>
-            <if test="auditTime != null" >
+            <if test="auditTime != null">
                 audit_time = #{auditTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="syncTime != null" >
+            <if test="syncTime != null">
                 sync_time = #{syncTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.userCode != null" >
+            <if test="record.userCode != null">
                 user_code = #{record.userCode,jdbcType=VARCHAR},
             </if>
-            <if test="record.dataMonth != null" >
+            <if test="record.dataMonth != null">
                 data_month = #{record.dataMonth,jdbcType=VARCHAR},
             </if>
-            <if test="record.syncType != null" >
+            <if test="record.syncType != null">
                 sync_type = #{record.syncType,jdbcType=INTEGER},
             </if>
-            <if test="record.checkStatus != null" >
+            <if test="record.checkStatus != null">
                 check_status = #{record.checkStatus,jdbcType=INTEGER},
             </if>
-            <if test="record.applyerCode != null" >
+            <if test="record.applyerCode != null">
                 applyer_code = #{record.applyerCode,jdbcType=VARCHAR},
             </if>
-            <if test="record.auditerCode != null" >
+            <if test="record.auditerCode != null">
                 auditer_code = #{record.auditerCode,jdbcType=VARCHAR},
             </if>
-            <if test="record.syncerCode != null" >
+            <if test="record.syncerCode != null">
                 syncer_code = #{record.syncerCode,jdbcType=VARCHAR},
             </if>
-            <if test="record.pid != null" >
+            <if test="record.pid != null">
                 pid = #{record.pid,jdbcType=VARCHAR},
             </if>
-            <if test="record.dataTimes != null" >
+            <if test="record.dataTimes != null">
                 data_times = #{record.dataTimes,jdbcType=VARCHAR},
             </if>
-            <if test="record.auditBegintime != null" >
+            <if test="record.auditBegintime != null">
                 audit_begintime = #{record.auditBegintime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.syncBegintime != null" >
+            <if test="record.syncBegintime != null">
                 sync_begintime = #{record.syncBegintime,jdbcType=TIMESTAMP},
             </if>
-            <if test="tableNameTotal != null" >
+            <if test="tableNameTotal != null">
                 table_nametotal = #{tableNameTotal,jdbcType=VARCHAR},
             </if>
         </set>
-        <if test="_parameter != null" >
-            <include refid="Update_By_Example_Where_Clause" />
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
 
-    <update id="updateByExample" parameterType="map" >
+    <update id="updateByExample" parameterType="map">
         update ${centreTableName}
         set table_name = #{tableName,jdbcType=VARCHAR},
         state = #{record.state,jdbcType=INTEGER},
@@ -226,450 +231,461 @@
         audit_begintime = #{record.auditBegintime,jdbcType=TIMESTAMP},
         sync_begintime = #{record.syncBegintime,jdbcType=TIMESTAMP},
         table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
-        <if test="_parameter != null" >
-            <include refid="Update_By_Example_Where_Clause" />
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    select 
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <select id="selectTdhDsInfo" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    select
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    delete from ${centreTableName}
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    insert into ${centreTableName} (id, table_name, state,
-      startdown_time, startup_time, creattime, type, audit_time, sync_time, user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code, pid, data_times, audit_begintime, sync_begintime, table_nametotal)
-    values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
-      #{startdownTime,jdbcType=TIMESTAMP}, #{startupTime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER},#{auditTime,jdbcType=TIMESTAMP},#{syncTime,jdbcType=TIMESTAMP},#{userCode,jdbcType=VARCHAR},
-      #{dataMonth,jdbcType=VARCHAR},#{syncType,jdbcType=INTEGER},#{checkStatus,jdbcType=INTEGER},#{record.applyerCode,jdbcType=VARCHAR},auditer_code = #{auditerCode,jdbcType=VARCHAR},syncer_code = #{syncerCode,jdbcType=VARCHAR},
-      #{pid,jdbcType=VARCHAR},#{dataTimes,jdbcType=VARCHAR},#{auditBegintime,jdbcType=TIMESTAMP},#{syncBegintime,jdbcType=TIMESTAMP}, #{tableNameTotal,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    insert into ${centreTableName}
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="tableName != null" >
-        table_name,
-      </if>
-      <if test="state != null" >
-        state,
-      </if>
-      <if test="startdownTime != null" >
-        startdown_time,
-      </if>
-      <if test="startupTime != null" >
-        startup_time,
-      </if>
-      <if test="creattime != null" >
-        creattime,
-      </if>
-        <if test="auditStatus != null" >
-            audit_status,
-        </if>
-        <if test="auditNotes != null" >
-            audit_notes,
-        </if>
-        <if test="lastCheck != null" >
-            last_check,
-        </if>
-      <if test="type != null" >
-        type,
-      </if>
-        <if test="auditTime != null" >
-            audit_time,
-        </if>
-        <if test="syncTime != null" >
-            sync_time,
-        </if>
-        <if test="userCode != null" >
-            user_code,
-        </if>
-        <if test="dataMonth != null" >
-            data_month,
-        </if>
-        <if test="syncType != null" >
-            sync_type,
-        </if>
-        <if test="checkStatus != null" >
-            check_status,
-        </if>
-        <if test="applyerCode != null" >
-            applyer_code,
-        </if>
-        <if test="auditerCode != null" >
-            auditer_code,
-        </if>
-        <if test="syncerCode != null" >
-            syncer_code,
-        </if>
-        <if test="pid != null" >
-            pid,
-        </if>
-        <if test="dataTimes != null" >
-            data_times,
-        </if>
-        <if test="auditBegintime != null" >
-            audit_begintime,
-        </if>
-        <if test="syncBegintime != null" >
-            sync_begintime,
-        </if>
-        <if test="tableNameTotal != null" >
-            table_nametotal,
-        </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="tableName != null" >
-        #{tableName,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null" >
-        #{state,jdbcType=INTEGER},
-      </if>
-      <if test="startdownTime != null" >
-        #{startdownTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="startupTime != null" >
-        #{startupTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creattime != null" >
-        #{creattime,jdbcType=TIMESTAMP},
-      </if>
-        <if test="auditStatus != null" >
-            #{auditStatus,jdbcType=INTEGER},
-        </if>
-        <if test="auditNotes != null" >
-            #{auditNotes,jdbcType=VARCHAR},
-        </if>
-        <if test="lastCheck != null" >
-            #{lastCheck,jdbcType=VARCHAR},
-        </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-        <if test="auditTime != null" >
-            #{auditTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="syncTime != null" >
-            #{syncTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="userCode != null" >
-            #{userCode,jdbcType=VARCHAR},
-        </if>
-        <if test="dataMonth != null" >
-            #{dataMonth,jdbcType=VARCHAR},
-        </if>
-        <if test="syncType != null" >
-            #{syncType,jdbcType=INTEGER},
-        </if>
-        <if test="checkStatus != null" >
-            #{checkStatus,jdbcType=INTEGER},
-        </if>
-        <if test="applyerCode != null" >
-            #{applyerCode,jdbcType=VARCHAR},
-        </if>
-        <if test="auditerCode != null" >
-            #{auditerCode,jdbcType=VARCHAR},
-        </if>
-        <if test="syncerCode != null" >
-            #{syncerCode,jdbcType=VARCHAR},
-        </if>
-        <if test="pid != null" >
-            #{pid,jdbcType=VARCHAR},
-        </if>
-        <if test="dataTimes != null" >
-            #{dataTimes,jdbcType=VARCHAR},
-        </if>
-        <if test="auditBegintime != null" >
-            #{auditBegintime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="syncBegintime != null" >
-            #{syncBegintime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="tableNameTotal != null" >
-           #{tableNameTotal,jdbcType=VARCHAR},
-        </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    update ${centreTableName}
-    <set >
-      <if test="tableName != null" >
-        table_name = #{tableName,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectTdhDsInfo" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        delete from ${centreTableName}
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        insert into ${centreTableName} (id, table_name, state,
+        startdown_time, startup_time, creattime, type, audit_time, sync_time, user_code, data_month, sync_type,
+        check_status, applyer_code, auditer_code, syncer_code, pid, data_times, audit_begintime, sync_begintime,
+        table_nametotal)
+        values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER},
+        #{startdownTime,jdbcType=TIMESTAMP}, #{startupTime,jdbcType=TIMESTAMP}, #{creattime,jdbcType=TIMESTAMP},
+        #{type,jdbcType=INTEGER},#{auditTime,jdbcType=TIMESTAMP},#{syncTime,jdbcType=TIMESTAMP},#{userCode,jdbcType=VARCHAR},
+        #{dataMonth,jdbcType=VARCHAR},#{syncType,jdbcType=INTEGER},#{checkStatus,jdbcType=INTEGER},#{record.applyerCode,jdbcType=VARCHAR},auditer_code
+        = #{auditerCode,jdbcType=VARCHAR},syncer_code = #{syncerCode,jdbcType=VARCHAR},
+        #{pid,jdbcType=VARCHAR},#{dataTimes,jdbcType=VARCHAR},#{auditBegintime,jdbcType=TIMESTAMP},#{syncBegintime,jdbcType=TIMESTAMP},
+        #{tableNameTotal,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        insert into ${centreTableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tableName != null">
+                table_name,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="startdownTime != null">
+                startdown_time,
+            </if>
+            <if test="startupTime != null">
+                startup_time,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="auditStatus != null">
+                audit_status,
+            </if>
+            <if test="auditNotes != null">
+                audit_notes,
+            </if>
+            <if test="lastCheck != null">
+                last_check,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="auditTime != null">
+                audit_time,
+            </if>
+            <if test="syncTime != null">
+                sync_time,
+            </if>
+            <if test="userCode != null">
+                user_code,
+            </if>
+            <if test="dataMonth != null">
+                data_month,
+            </if>
+            <if test="syncType != null">
+                sync_type,
+            </if>
+            <if test="checkStatus != null">
+                check_status,
+            </if>
+            <if test="applyerCode != null">
+                applyer_code,
+            </if>
+            <if test="auditerCode != null">
+                auditer_code,
+            </if>
+            <if test="syncerCode != null">
+                syncer_code,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="dataTimes != null">
+                data_times,
+            </if>
+            <if test="auditBegintime != null">
+                audit_begintime,
+            </if>
+            <if test="syncBegintime != null">
+                sync_begintime,
+            </if>
+            <if test="tableNameTotal != null">
+                table_nametotal,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="tableName != null">
+                #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+            <if test="startdownTime != null">
+                #{startdownTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startupTime != null">
+                #{startupTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditStatus != null">
+                #{auditStatus,jdbcType=INTEGER},
+            </if>
+            <if test="auditNotes != null">
+                #{auditNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="lastCheck != null">
+                #{lastCheck,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncTime != null">
+                #{syncTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dataMonth != null">
+                #{dataMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="syncType != null">
+                #{syncType,jdbcType=INTEGER},
+            </if>
+            <if test="checkStatus != null">
+                #{checkStatus,jdbcType=INTEGER},
+            </if>
+            <if test="applyerCode != null">
+                #{applyerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="auditerCode != null">
+                #{auditerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="syncerCode != null">
+                #{syncerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="dataTimes != null">
+                #{dataTimes,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBegintime != null">
+                #{auditBegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncBegintime != null">
+                #{syncBegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableNameTotal != null">
+                #{tableNameTotal,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        update ${centreTableName}
+        <set>
+            <if test="tableName != null">
+                table_name = #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=INTEGER},
+            </if>
+            <if test="startdownTime != null">
+                startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startupTime != null">
+                startup_time = #{startupTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus,jdbcType=INTEGER},
+            </if>
+            <if test="auditNotes != null">
+                audit_notes = #{auditNotes,jdbcType=VARCHAR},
+            </if>
+            <if test="lastCheck != null">
+                last_check = #{lastCheck,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="auditTime != null">
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncTime != null">
+                sync_time = #{syncTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userCode != null">
+                user_code = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dataMonth != null">
+                data_month = #{dataMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="syncType != null">
+                sync_type = #{syncType,jdbcType=INTEGER},
+            </if>
+            <if test="checkStatus != null">
+                check_status = #{checkStatus,jdbcType=INTEGER},
+            </if>
+            <if test="applyerCode != null">
+                applyer_code = #{applyerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="auditerCode != null">
+                auditer_code = #{auditerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="syncerCode != null">
+                syncer_code = #{syncerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="dataTimes != null">
+                data_times = #{dataTimes,jdbcType=VARCHAR},
+            </if>
+            <if test="auditBegintime != null">
+                audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncBegintime != null">
+                sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tableNameTotal != null">
+                table_nametotal = #{tableNameTotal,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        update ${centreTableName}
+        set table_name = #{tableName,jdbcType=VARCHAR},
         state = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="startdownTime != null" >
         startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="startupTime != null" >
         startup_time = #{startupTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creattime != null" >
         creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-        <if test="auditStatus != null" >
-            audit_status = #{auditStatus,jdbcType=INTEGER},
-        </if>
-        <if test="auditNotes != null" >
-            audit_notes = #{auditNotes,jdbcType=VARCHAR},
-        </if>
-        <if test="lastCheck != null" >
-            last_check = #{lastCheck,jdbcType=VARCHAR},
-        </if>
-      <if test="type != null" >
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+        audit_notes = #{auditNotes,jdbcType=VARCHAR},
+        last_check = #{lastCheck,jdbcType=VARCHAR},
         type = #{type,jdbcType=INTEGER},
-      </if>
-        <if test="auditTime != null" >
-            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+        sync_time = #{syncTime,jdbcType=TIMESTAMP},
+        user_code = #{userCode,jdbcType=VARCHAR},
+        data_month = #{dataMonth,jdbcType=VARCHAR},
+        sync_type = #{syncType,jdbcType=INTEGER},
+        check_status = #{checkStatus,jdbcType=INTEGER},
+        applyer_code = #{applyerCode,jdbcType=VARCHAR},
+        auditer_code = #{auditerCode,jdbcType=VARCHAR},
+        syncer_code = #{syncerCode,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=VARCHAR},
+        data_times = #{dataTimes,jdbcType=VARCHAR},
+        audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
+        sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
+        table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectTdhServicesDsInfoByDTO" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+        where 1=1
+        <if test="id != null and id != ''">
+            and id = #{id,jdbcType=VARCHAR}
         </if>
-        <if test="syncTime != null" >
-            sync_time = #{syncTime,jdbcType=TIMESTAMP},
+        <if test="tableName != null and tableName != ''">
+            and table_name = #{tableName,jdbcType=VARCHAR}
         </if>
-        <if test="userCode != null" >
-            user_code = #{userCode,jdbcType=VARCHAR},
+        <if test="state != null ">
+            and state = #{state,jdbcType=INTEGER}
         </if>
-        <if test="dataMonth != null" >
-            data_month = #{dataMonth,jdbcType=VARCHAR},
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=INTEGER}
         </if>
-        <if test="syncType != null" >
-            sync_type = #{syncType,jdbcType=INTEGER},
+        <if test="creattime != null">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
         </if>
-        <if test="checkStatus != null" >
-            check_status = #{checkStatus,jdbcType=INTEGER},
+        <if test="auditStatus != null">
+            and audit_status = #{auditStatus,jdbcType=INTEGER}
         </if>
-        <if test="applyerCode != null" >
-            applyer_code = #{applyerCode,jdbcType=VARCHAR},
+        <if test="auditNotes != null">
+            and audit_notes = #{auditNotes,jdbcType=VARCHAR}
         </if>
-        <if test="auditerCode != null" >
-            auditer_code = #{auditerCode,jdbcType=VARCHAR},
+        <if test="lastCheck != null">
+            and last_check = #{lastCheck,jdbcType=VARCHAR}
         </if>
-        <if test="syncerCode != null" >
-            syncer_code = #{syncerCode,jdbcType=VARCHAR},
+        <if test="startdownTimems != null and startdownTimems != ''">
+            and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
         </if>
-        <if test="pid != null" >
-            pid = #{pid,jdbcType=VARCHAR},
+        <if test="startupTimems != null and startupTimems != ''">
+            and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
         </if>
-        <if test="dataTimes != null" >
-            data_times = #{dataTimes,jdbcType=VARCHAR},
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="auditBegintime != null" >
-            audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
+        <if test="syncTime != null">
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncBegintime != null" >
-            sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
+        <!--<if test="userCode != null and userCode != ''" >-->
+        <!--and user_code = #{userCode,jdbcType=VARCHAR}-->
+        <!--</if>-->
+        <if test="dataMonth != null and dataMonth != ''">
+            and data_month = #{dataMonth,jdbcType=VARCHAR}
         </if>
-        <if test="tableNameTotal != null" >
-            table_nametotal = #{tableNameTotal,jdbcType=VARCHAR},
+        <if test="syncType != null">
+            and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    update ${centreTableName}
-    set table_name = #{tableName,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
-      startdown_time = #{startdownTime,jdbcType=TIMESTAMP},
-      startup_time = #{startupTime,jdbcType=TIMESTAMP},
-      creattime = #{creattime,jdbcType=TIMESTAMP},
-      audit_status = #{auditStatus,jdbcType=INTEGER},
-      audit_notes = #{auditNotes,jdbcType=VARCHAR},
-      last_check = #{lastCheck,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      audit_time = #{auditTime,jdbcType=TIMESTAMP},
-      sync_time = #{syncTime,jdbcType=TIMESTAMP},
-      user_code = #{userCode,jdbcType=VARCHAR},
-      data_month = #{dataMonth,jdbcType=VARCHAR},
-      sync_type = #{syncType,jdbcType=INTEGER},
-      check_status = #{checkStatus,jdbcType=INTEGER},
-      applyer_code = #{applyerCode,jdbcType=VARCHAR},
-      auditer_code = #{auditerCode,jdbcType=VARCHAR},
-      syncer_code = #{syncerCode,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=VARCHAR},
-      data_times = #{dataTimes,jdbcType=VARCHAR},
-      audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
-      sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
-      table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <select id="selectTdhServicesDsInfoByDTO" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    select
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-    where 1=1
-    <if test="id != null and id != ''">
-      and id = #{id,jdbcType=VARCHAR}
-    </if>
-    <if test="tableName != null and tableName != ''">
-      and table_name = #{tableName,jdbcType=VARCHAR}
-    </if>
-    <if test="state != null ">
-      and state = #{state,jdbcType=INTEGER}
-    </if>
-    <if test="type != null and type != ''">
-      and type = #{type,jdbcType=INTEGER}
-    </if>
-    <if test="creattime != null">
-      and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-      <if test="auditStatus != null" >
-        and audit_status = #{auditStatus,jdbcType=INTEGER}
-      </if>
-      <if test="auditNotes != null" >
-        and audit_notes = #{auditNotes,jdbcType=VARCHAR}
-      </if>
-      <if test="lastCheck != null" >
-        and last_check = #{lastCheck,jdbcType=VARCHAR}
-      </if>
-    <if test="startdownTimems != null and startdownTimems != ''">
-      and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
-    </if>
-    <if test="startupTimems != null and startupTimems != ''">
-      and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
-    </if>
-      <if test="auditTime != null" >
-        and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="syncTime != null" >
-         and sync_time = #{syncTime,jdbcType=TIMESTAMP}
-      </if>
-      <!--<if test="userCode != null and userCode != ''" >-->
-         <!--and user_code = #{userCode,jdbcType=VARCHAR}-->
-      <!--</if>-->
-      <if test="dataMonth != null and dataMonth != ''" >
-          and data_month = #{dataMonth,jdbcType=VARCHAR}
-      </if>
-      <if test="syncType != null" >
-          and sync_type = #{syncType,jdbcType=INTEGER}
-      </if>
-      <if test="checkStatus != null" >
-         and check_status = #{checkStatus,jdbcType=INTEGER}
-      </if>
-      <if test="applyerCode != null and applyerCode != ''" >
-         and applyer_code = #{applyerCode,jdbcType=VARCHAR}
-      </if>
-      <if test="auditerCode != null and auditerCode != ''" >
-         and auditer_code = #{auditerCode,jdbcType=VARCHAR}
-      </if>
-      <if test="syncerCode != null and syncerCode != ''" >
-         and syncer_code = #{syncerCode,jdbcType=VARCHAR}
-      </if>
-      <if test="pid != null" >
-         and pid = #{pid,jdbcType=VARCHAR}
-      </if>
-      <!--<if test="dataTimes != null" >-->
-         <!--and data_times = #{dataTimes,jdbcType=VARCHAR}-->
-      <!--</if>-->
-      <if test="auditBegintime != null" >
-         and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="syncBegintime != null" >
-         and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="tableNameTotal != null" >
-         and table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
-      </if>
-      order by startdown_time
-  </select>
-  <select id="selectCountTdhServicesDs" resultType="java.lang.Long" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    select
-    count(*)
-    from ${centreTableName}
-    where 1=1
-    <if test="id != null and id != ''">
-      and id = #{id,jdbcType=VARCHAR}
-    </if>
-    <if test="tableName != null and tableName != ''">
-      and table_name = #{tableName,jdbcType=VARCHAR}
-    </if>
-    <if test="state != null and state != ''">
-      and state = #{state,jdbcType=INTEGER}
-    </if>
-    <if test="type != null and type != ''">
-      and type = #{type,jdbcType=INTEGER}
-    </if>
-    <if test="creattime != null">
-      and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-      <if test="auditStatus != null" >
-          and audit_status = #{auditStatus,jdbcType=INTEGER}
-      </if>
-      <if test="auditNotes != null" >
-          and audit_notes = #{auditNotes,jdbcType=VARCHAR}
-      </if>
-      <if test="lastCheck != null" >
-          and last_check = #{lastCheck,jdbcType=VARCHAR}
-      </if>
-    <if test="startdownTimems != null and startdownTimems != ''">
-      and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
-    </if>
-    <if test="startupTimems != null and startupTimems != ''">
-      and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
-    </if>
-      <if test="auditTime != null" >
-          and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="syncTime != null" >
-          and sync_time = #{syncTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="userCode != null and userCode != ''" >
-          and user_code = #{userCode,jdbcType=VARCHAR}
-      </if>
-      <if test="dataMonth != null and dataMonth != ''" >
-          and data_month = #{dataMonth,jdbcType=VARCHAR}
-      </if>
-      <if test="syncType != null" >
-          and sync_type = #{syncType,jdbcType=INTEGER}
-      </if>
-      <if test="checkStatus != null" >
-          and check_status = #{checkStatus,jdbcType=INTEGER}
-      </if>
-      <if test="applyerCode != null and applyerCode != ''" >
-          and applyer_code = #{applyerCode,jdbcType=VARCHAR}
-      </if>
-      <if test="auditerCode != null and auditerCode != ''" >
-          and auditer_code = #{auditerCode,jdbcType=VARCHAR}
-      </if>
-      <if test="syncerCode != null and syncerCode != ''" >
-          and syncer_code = #{syncerCode,jdbcType=VARCHAR}
-      </if>
-      <if test="pid != null" >
-          and pid = #{pid,jdbcType=VARCHAR}
-      </if>
-      <if test="dataTimes != null" >
-          and data_times = #{dataTimes,jdbcType=VARCHAR}
-      </if>
-      <if test="auditBegintime != null" >
-          and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="syncBegintime != null" >
-          and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="tableNameTotal != null" >
-         and table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
-      </if>
-  </select>
+        <if test="checkStatus != null">
+            and check_status = #{checkStatus,jdbcType=INTEGER}
+        </if>
+        <if test="applyerCode != null and applyerCode != ''">
+            and applyer_code = #{applyerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="auditerCode != null and auditerCode != ''">
+            and auditer_code = #{auditerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="syncerCode != null and syncerCode != ''">
+            and syncer_code = #{syncerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="pid != null">
+            and pid = #{pid,jdbcType=VARCHAR}
+        </if>
+        <!--<if test="dataTimes != null" >-->
+        <!--and data_times = #{dataTimes,jdbcType=VARCHAR}-->
+        <!--</if>-->
+        <if test="auditBegintime != null">
+            and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncBegintime != null">
+            and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="tableNameTotal != null">
+            and table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
+        </if>
+        order by startdown_time
+    </select>
+    <select id="selectCountTdhServicesDs" resultType="java.lang.Long"
+            parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        select
+        count(*)
+        from ${centreTableName}
+        where 1=1
+        <if test="id != null and id != ''">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="tableName != null and tableName != ''">
+            and table_name = #{tableName,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null and state != ''">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="creattime != null">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="auditStatus != null">
+            and audit_status = #{auditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="auditNotes != null">
+            and audit_notes = #{auditNotes,jdbcType=VARCHAR}
+        </if>
+        <if test="lastCheck != null">
+            and last_check = #{lastCheck,jdbcType=VARCHAR}
+        </if>
+        <if test="startdownTimems != null and startdownTimems != ''">
+            and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="startupTimems != null and startupTimems != ''">
+            and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncTime != null">
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="userCode != null and userCode != ''">
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="dataMonth != null and dataMonth != ''">
+            and data_month = #{dataMonth,jdbcType=VARCHAR}
+        </if>
+        <if test="syncType != null">
+            and sync_type = #{syncType,jdbcType=INTEGER}
+        </if>
+        <if test="checkStatus != null">
+            and check_status = #{checkStatus,jdbcType=INTEGER}
+        </if>
+        <if test="applyerCode != null and applyerCode != ''">
+            and applyer_code = #{applyerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="auditerCode != null and auditerCode != ''">
+            and auditer_code = #{auditerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="syncerCode != null and syncerCode != ''">
+            and syncer_code = #{syncerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="pid != null">
+            and pid = #{pid,jdbcType=VARCHAR}
+        </if>
+        <if test="dataTimes != null">
+            and data_times = #{dataTimes,jdbcType=VARCHAR}
+        </if>
+        <if test="auditBegintime != null">
+            and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncBegintime != null">
+            and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="tableNameTotal != null">
+            and table_nametotal = #{tableNameTotal,jdbcType=VARCHAR}
+        </if>
+    </select>
 
-  <update id="emptyThdDsData" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
-    truncate table ${centreTableName}
-</update>
+    <update id="emptyThdDsData" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        truncate table ${centreTableName}
+    </update>
 
-    <select id="selectTdhDsInfoByTdhDsMonthsDTO" resultMap="BaseResultMap" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
-        select * from (SELECT table_name,state,audit_status,audit_notes,audit_time,sync_time,user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code
+    <select id="selectTdhDsInfoByTdhDsMonthsDTO" resultMap="BaseResultMap"
+            parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO">
+        select * from (SELECT table_name,state,audit_status,audit_notes,audit_time,sync_time,user_code, data_month,
+        sync_type, check_status, applyer_code, auditer_code, syncer_code
         FROM ${centreTableName}
         WHERE 1=1
         <if test="tableName != null and tableName != ''">
@@ -688,67 +704,70 @@
             and audit_notes LIKE concat('%',#{auditNotes,jdbcType=VARCHAR},'%')
         </if>
         <!--<if test="startdownTime != null and startdownTime != ''">-->
-            <!--AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}-->
+        <!--AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}-->
         <!--</if>-->
-        <if test="auditTime != null" >
-            and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncTime != null" >
+        <if test="syncTime != null">
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="auditTimemsF != null and auditTimemsF != ''" >
-            and  audit_time &gt;= #{auditTimemsF,jdbcType=VARCHAR}
+        <if test="auditTimemsF != null and auditTimemsF != ''">
+            and audit_time &gt;= #{auditTimemsF,jdbcType=VARCHAR}
         </if>
-        <if test="auditTimemsL != null and auditTimemsL != ''" >
-            and  audit_time &lt;= #{auditTimemsL,jdbcType=VARCHAR}
+        <if test="auditTimemsL != null and auditTimemsL != ''">
+            and audit_time &lt;= #{auditTimemsL,jdbcType=VARCHAR}
         </if>
-        <if test="syncTime != null" >
+        <if test="syncTime != null">
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncTimemsF != null and syncTimemsF != ''" >
+        <if test="syncTimemsF != null and syncTimemsF != ''">
             and sync_time &gt;= #{syncTimemsF,jdbcType=VARCHAR}
         </if>
-        <if test="syncTimemsL != null and syncTimemsL != ''" >
+        <if test="syncTimemsL != null and syncTimemsL != ''">
             and sync_time &lt;= #{syncTimemsL,jdbcType=VARCHAR}
         </if>
-        <if test="userCode != null and userCode != ''" >
+        <if test="userCode != null and userCode != ''">
             and user_code = #{userCode,jdbcType=VARCHAR}
         </if>
-        <if test="dataMonth != null and dataMonth != ''" >
+        <if test="dataMonth != null and dataMonth != ''">
             and data_month = #{dataMonth,jdbcType=VARCHAR}
         </if>
-        <if test="syncType != null" >
+        <if test="syncType != null">
             and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-        <if test="checkStatus != null" >
+        <if test="checkStatus != null">
             and check_status = #{checkStatus,jdbcType=INTEGER}
         </if>
-        <if test="applyerCode != null and applyerCode != ''" >
+        <if test="applyerCode != null and applyerCode != ''">
             and applyer_code = #{applyerCode,jdbcType=VARCHAR}
         </if>
-        <if test="auditerCode != null and auditerCode != ''" >
+        <if test="auditerCode != null and auditerCode != ''">
             and auditer_code = #{auditerCode,jdbcType=VARCHAR}
         </if>
-        <if test="syncerCode != null and syncerCode != ''" >
+        <if test="syncerCode != null and syncerCode != ''">
             and syncer_code = #{syncerCode,jdbcType=VARCHAR}
         </if>
-        <if test="pid != null" >
+        <if test="pid != null">
             and pid = #{pid,jdbcType=VARCHAR}
         </if>
-        <if test="dataTimes != null" >
+        <if test="dataTimes != null">
             and data_times = #{dataTimes,jdbcType=VARCHAR}
         </if>
-        <if test="auditBegintime != null" >
+        <if test="auditBegintime != null">
             and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncBegintime != null" >
+        <if test="syncBegintime != null">
             and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
         </if>
         ) a GROUP by a.table_name
     </select>
 
-    <select id="countByTdhDsMonthsDTO" resultType="java.lang.Long" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
-        select count(*) from (select * from (SELECT table_name,state,audit_status,audit_notes,audit_time,sync_time,user_code, data_month, sync_type, check_status, applyer_code, auditer_code, syncer_code
+    <select id="countByTdhDsMonthsDTO" resultType="java.lang.Long"
+            parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO">
+        select count(*) from (select * from (SELECT
+        table_name,state,audit_status,audit_notes,audit_time,sync_time,user_code, data_month, sync_type, check_status,
+        applyer_code, auditer_code, syncer_code
         FROM ${centreTableName}
         WHERE 1=1
         <if test="tableName != null and tableName != ''">
@@ -769,162 +788,163 @@
         <if test="startdownTime != null and startdownTime != ''">
             AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}
         </if>
-        <if test="auditTime != null" >
-            and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncTime != null" >
+        <if test="syncTime != null">
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="auditTimemsF != null and auditTimemsF != ''" >
-            and  audit_time &gt;= #{auditTimemsF,jdbcType=VARCHAR}
+        <if test="auditTimemsF != null and auditTimemsF != ''">
+            and audit_time &gt;= #{auditTimemsF,jdbcType=VARCHAR}
         </if>
-        <if test="auditTimemsL != null and auditTimemsL != ''" >
-            and  audit_time &lt;= #{auditTimemsL,jdbcType=VARCHAR}
+        <if test="auditTimemsL != null and auditTimemsL != ''">
+            and audit_time &lt;= #{auditTimemsL,jdbcType=VARCHAR}
         </if>
-        <if test="syncTime != null" >
+        <if test="syncTime != null">
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncTimemsF != null and syncTimemsF != ''" >
+        <if test="syncTimemsF != null and syncTimemsF != ''">
             and sync_time &gt;= #{syncTimemsF,jdbcType=VARCHAR}
         </if>
-        <if test="syncTimemsL != null and syncTimemsL != ''" >
+        <if test="syncTimemsL != null and syncTimemsL != ''">
             and sync_time &lt;= #{syncTimemsL,jdbcType=VARCHAR}
         </if>
-        <if test="userCode != null and userCode != ''" >
+        <if test="userCode != null and userCode != ''">
             and user_code = #{userCode,jdbcType=VARCHAR}
         </if>
-        <if test="dataMonth != null and dataMonth != ''" >
+        <if test="dataMonth != null and dataMonth != ''">
             and data_month = #{dataMonth,jdbcType=VARCHAR}
         </if>
-        <if test="syncType != null" >
+        <if test="syncType != null">
             and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-        <if test="checkStatus != null" >
+        <if test="checkStatus != null">
             and check_status = #{checkStatus,jdbcType=INTEGER}
         </if>
-        <if test="applyerCode != null and applyerCode != ''" >
+        <if test="applyerCode != null and applyerCode != ''">
             and applyer_code = #{applyerCode,jdbcType=VARCHAR}
         </if>
-        <if test="auditerCode != null and auditerCode != ''" >
+        <if test="auditerCode != null and auditerCode != ''">
             and auditer_code = #{auditerCode,jdbcType=VARCHAR}
         </if>
-        <if test="syncerCode != null and syncerCode != ''" >
+        <if test="syncerCode != null and syncerCode != ''">
             and syncer_code = #{syncerCode,jdbcType=VARCHAR}
         </if>
-        <if test="pid != null" >
+        <if test="pid != null">
             and pid = #{pid,jdbcType=VARCHAR}
         </if>
-        <if test="dataTimes != null" >
+        <if test="dataTimes != null">
             and data_times = #{dataTimes,jdbcType=VARCHAR}
         </if>
-        <if test="auditBegintime != null" >
+        <if test="auditBegintime != null">
             and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncBegintime != null" >
+        <if test="syncBegintime != null">
             and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
         </if>
         ) a GROUP by a.table_name) b
     </select>
 
 
-    <update id="updateTdhDsInfo" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
+    <update id="updateTdhDsInfo" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO">
         update ${centreTableName}
-        <set >
-            <if test="state != null" >
+        <set>
+            <if test="state != null">
                 state = #{state,jdbcType=INTEGER},
             </if>
-            <if test="auditStatus != null" >
+            <if test="auditStatus != null">
                 audit_status = #{auditStatus,jdbcType=INTEGER},
             </if>
-            <if test="auditNotes != null" >
+            <if test="auditNotes != null">
                 audit_notes = #{auditNotes,jdbcType=VARCHAR},
             </if>
-            <if test="auditTime != null" >
+            <if test="auditTime != null">
                 audit_time = #{auditTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="syncTime != null" >
+            <if test="syncTime != null">
                 sync_time = #{syncTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="userCode != null and userCode != ''" >
+            <if test="userCode != null and userCode != ''">
                 user_code = concat_ws(',',user_code,#{userCode,jdbcType=VARCHAR}),
             </if>
             <!--<if test="operCode != null" >-->
-                <!--user_code = concat_ws(',',user_code,#{operCode,jdbcType=VARCHAR}),-->
+            <!--user_code = concat_ws(',',user_code,#{operCode,jdbcType=VARCHAR}),-->
             <!--</if>-->
             <!--<if test="dataMonth != null" >-->
             <!--data_month = #{dataMonth,jdbcType=VARCHAR},-->
-        <!--</if>-->
-        <!--<if test="syncType != null" >-->
+            <!--</if>-->
+            <!--<if test="syncType != null" >-->
             <!--sync_type = #{syncType,jdbcType=INTEGER},-->
-        <!--</if>-->
-        <if test="checkStatus != null" >
-            check_status = #{checkStatus,jdbcType=INTEGER},
-        </if>
-        <if test="applyerCode != null" >
-            applyer_code = concat_ws(',',applyer_code,#{applyerCode,jdbcType=VARCHAR}),
-        </if>
-        <if test="auditerCode != null" >
-            auditer_code = concat_ws(',',auditer_code,#{auditerCode,jdbcType=VARCHAR}),
-        </if>
-        <if test="syncerCode != null" >
-            syncer_code = concat_ws(',',syncer_code,#{syncerCode,jdbcType=VARCHAR}),
-        </if>
-            <if test="auditBegintime != null" >
-            audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
+            <!--</if>-->
+            <if test="checkStatus != null">
+                check_status = #{checkStatus,jdbcType=INTEGER},
             </if>
-            <if test="syncBegintime != null" >
-            sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
+            <if test="applyerCode != null">
+                applyer_code = concat_ws(',',applyer_code,#{applyerCode,jdbcType=VARCHAR}),
+            </if>
+            <if test="auditerCode != null">
+                auditer_code = concat_ws(',',auditer_code,#{auditerCode,jdbcType=VARCHAR}),
+            </if>
+            <if test="syncerCode != null">
+                syncer_code = concat_ws(',',syncer_code,#{syncerCode,jdbcType=VARCHAR}),
+            </if>
+            <if test="auditBegintime != null">
+                audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="syncBegintime != null">
+                sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP},
             </if>
         </set>
         WHERE 1=1
-        <if test="id != null and id != ''" >
+        <if test="id != null and id != ''">
             and id = #{id,jdbcType=VARCHAR}
         </if>
         <if test="tableName != null and tableName != ''">
             and table_name LIKE concat('%',#{tableName,jdbcType=VARCHAR},'%')
         </if>
         <!--&lt;!&ndash;<if test="startdownTime != null and startdownTime != ''">&ndash;&gt;-->
-            <!--&lt;!&ndash;AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}&ndash;&gt;-->
+        <!--&lt;!&ndash;AND date_format(startdown_time,'%Y-%m')= #{startdownTime,jdbcType=VARCHAR}&ndash;&gt;-->
         <!--&lt;!&ndash;</if>&ndash;&gt;-->
-        <if test="dataMonth != null and dataMonth != ''" >
+        <if test="dataMonth != null and dataMonth != ''">
             and data_month = #{dataMonth,jdbcType=VARCHAR}
         </if>
         <!--<if test="type != null" >-->
-            <!--and type = #{type,jdbcType=INTEGER}-->
+        <!--and type = #{type,jdbcType=INTEGER}-->
         <!--</if>-->
-        <if test="syncType != null" >
+        <if test="syncType != null">
             and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-        <if test="dataDay != null and dataDay != ''" >
+        <if test="dataDay != null and dataDay != ''">
             AND date_format(startdown_time,'%Y-%m-%d') = #{dataDay,jdbcType=VARCHAR}
         </if>
         <!--<if test="auditBegintime != null" >-->
-            <!--and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}-->
+        <!--and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}-->
         <!--</if>-->
         <!--<if test="syncBegintime != null" >-->
-            <!--and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}-->
+        <!--and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}-->
         <!--</if>-->
     </update>
 
 
-    <update id="updateTdhDsInfoFail" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO" >
+    <update id="updateTdhDsInfoFail" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsMonthsDTO">
         update ${centreTableName}
-        <set >
-            <if test="state != null" >
+        <set>
+            <if test="state != null">
                 state = #{state,jdbcType=INTEGER},
             </if>
 
-            <if test="syncTime != null" >
+            <if test="syncTime != null">
                 sync_time = #{syncTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="userCode != null and userCode != ''" >
+            <if test="userCode != null and userCode != ''">
                 user_code = concat_ws(',',user_code,#{userCode,jdbcType=VARCHAR}),
             </if>
         </set>
         WHERE 1=1 and state = 1
     </update>
 
-    <select id="countTdhDsDataByAuditStatusAndState" resultType="java.lang.Integer" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO" >
+    <select id="countTdhDsDataByAuditStatusAndState" resultType="java.lang.Integer"
+            parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO">
         select
         count(*)
         from ${centreTableName}
@@ -932,12 +952,13 @@
         <if test="state != null">
             and state = #{state,jdbcType=INTEGER}
         </if>
-        <if test="auditStatus != null" >
+        <if test="auditStatus != null">
             and audit_status = #{auditStatus,jdbcType=INTEGER}
         </if>
     </select>
 
-    <select id="countStateNotSuccess" resultType="java.util.HashMap" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    <select id="countStateNotSuccess" resultType="java.util.HashMap"
+            parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
         SELECT
         table_name tableName,
         COUNT(*) count
@@ -949,20 +970,20 @@
         <if test="tableName != null and tableName != ''">
             and table_name = #{tableName,jdbcType=VARCHAR}
         </if>
-            and state &lt;&gt; 2
+        and state &lt;&gt; 2
         <if test="type != null and type != ''">
             and type = #{type,jdbcType=INTEGER}
         </if>
         <if test="creattime != null">
             and creattime = #{creattime,jdbcType=TIMESTAMP}
         </if>
-        <if test="auditStatus != null" >
+        <if test="auditStatus != null">
             and audit_status = #{auditStatus,jdbcType=INTEGER}
         </if>
-        <if test="auditNotes != null" >
+        <if test="auditNotes != null">
             and audit_notes = #{auditNotes,jdbcType=VARCHAR}
         </if>
-        <if test="lastCheck != null" >
+        <if test="lastCheck != null">
             and last_check = #{lastCheck,jdbcType=VARCHAR}
         </if>
         <if test="startdownTimems != null and startdownTimems != ''">
@@ -971,127 +992,127 @@
         <if test="startupTimems != null and startupTimems != ''">
             and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
         </if>
-        <if test="auditTime != null" >
-            and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncTime != null" >
+        <if test="syncTime != null">
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="userCode != null and userCode != ''" >
+        <if test="userCode != null and userCode != ''">
             and user_code = #{userCode,jdbcType=VARCHAR}
         </if>
-        <if test="dataMonth != null and dataMonth != ''" >
+        <if test="dataMonth != null and dataMonth != ''">
             and data_month = #{dataMonth,jdbcType=VARCHAR}
         </if>
-        <if test="syncType != null" >
+        <if test="syncType != null">
             and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-        <if test="checkStatus != null" >
+        <if test="checkStatus != null">
             and check_status = #{checkStatus,jdbcType=INTEGER}
         </if>
-        <if test="applyerCode != null and applyerCode != ''" >
+        <if test="applyerCode != null and applyerCode != ''">
             and applyer_code = #{applyerCode,jdbcType=VARCHAR}
         </if>
-        <if test="auditerCode != null and auditerCode != ''" >
+        <if test="auditerCode != null and auditerCode != ''">
             and auditer_code = #{auditerCode,jdbcType=VARCHAR}
         </if>
-        <if test="syncerCode != null and syncerCode != ''" >
+        <if test="syncerCode != null and syncerCode != ''">
             and syncer_code = #{syncerCode,jdbcType=VARCHAR}
         </if>
-        <if test="pid != null" >
+        <if test="pid != null">
             and pid = #{pid,jdbcType=VARCHAR}
         </if>
-        <if test="dataTimes != null" >
+        <if test="dataTimes != null">
             and data_times = #{dataTimes,jdbcType=VARCHAR}
         </if>
-        <if test="auditBegintime != null" >
+        <if test="auditBegintime != null">
             and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncBegintime != null" >
+        <if test="syncBegintime != null">
             and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
         </if>
         GROUP BY table_name
     </select>
 
-    <update id="updateThdDsInfoCheckStatus" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
-    update ${centreTableName}
-    <set >
-        <if test="checkStatus != null" >
-            check_status = #{checkStatus,jdbcType=INTEGER},
-        </if>
-    </set>
-    where 1=1
-    <if test="id != null and id != ''">
-        and id = #{id,jdbcType=VARCHAR}
-    </if>
-    <if test="tableName != null and tableName != ''">
-        and table_name = #{tableName,jdbcType=VARCHAR}
-    </if>
-    <if test="state != null">
-        and state = #{state,jdbcType=INTEGER}
-    </if>
-    <if test="type != null and type != ''">
-        and type = #{type,jdbcType=INTEGER}
-    </if>
-    <if test="creattime != null">
-        and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="auditStatus != null" >
-        and audit_status = #{auditStatus,jdbcType=INTEGER}
-    </if>
-    <if test="auditNotes != null" >
-        and audit_notes = #{auditNotes,jdbcType=VARCHAR}
-    </if>
-    <if test="lastCheck != null" >
-        and last_check = #{lastCheck,jdbcType=VARCHAR}
-    </if>
-    <if test="startdownTimems != null and startdownTimems != ''">
-        and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
-    </if>
-    <if test="startupTimems != null and startupTimems != ''">
-        and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
-    </if>
-    <if test="auditTime != null" >
-        and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="syncTime != null" >
-        and sync_time = #{syncTime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="userCode != null and userCode != ''" >
-        and user_code = #{userCode,jdbcType=VARCHAR}
-    </if>
-    <if test="dataMonth != null and dataMonth != ''" >
-        and data_month = #{dataMonth,jdbcType=VARCHAR}
-    </if>
-    <if test="syncType != null" >
-        and sync_type = #{syncType,jdbcType=INTEGER}
-    </if>
-    <if test="applyerCode != null and applyerCode != ''" >
-        and applyer_code = #{applyerCode,jdbcType=VARCHAR}
-    </if>
-    <if test="auditerCode != null and auditerCode != ''" >
-        and auditer_code = #{auditerCode,jdbcType=VARCHAR}
-    </if>
-    <if test="syncerCode != null and syncerCode != ''" >
-        and syncer_code = #{syncerCode,jdbcType=VARCHAR}
-    </if>
-    <if test="pid != null" >
-        and pid = #{pid,jdbcType=VARCHAR}
-    </if>
-    <if test="dataTimes != null" >
-        and data_times = #{dataTimes,jdbcType=VARCHAR}
-    </if>
-    <if test="auditBegintime != null" >
-        and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="syncBegintime != null" >
-        and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
-    </if>
-</update>
-    <update id="updateThdDsInfoNotSuccessCheckStatus" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo" >
+    <update id="updateThdDsInfoCheckStatus" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
         update ${centreTableName}
-        <set >
-            <if test="checkStatus != null" >
+        <set>
+            <if test="checkStatus != null">
+                check_status = #{checkStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        where 1=1
+        <if test="id != null and id != ''">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="tableName != null and tableName != ''">
+            and table_name = #{tableName,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null">
+            and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type,jdbcType=INTEGER}
+        </if>
+        <if test="creattime != null">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="auditStatus != null">
+            and audit_status = #{auditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="auditNotes != null">
+            and audit_notes = #{auditNotes,jdbcType=VARCHAR}
+        </if>
+        <if test="lastCheck != null">
+            and last_check = #{lastCheck,jdbcType=VARCHAR}
+        </if>
+        <if test="startdownTimems != null and startdownTimems != ''">
+            and startdown_time &gt;= #{startdownTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="startupTimems != null and startupTimems != ''">
+            and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
+        </if>
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncTime != null">
+            and sync_time = #{syncTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="userCode != null and userCode != ''">
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="dataMonth != null and dataMonth != ''">
+            and data_month = #{dataMonth,jdbcType=VARCHAR}
+        </if>
+        <if test="syncType != null">
+            and sync_type = #{syncType,jdbcType=INTEGER}
+        </if>
+        <if test="applyerCode != null and applyerCode != ''">
+            and applyer_code = #{applyerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="auditerCode != null and auditerCode != ''">
+            and auditer_code = #{auditerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="syncerCode != null and syncerCode != ''">
+            and syncer_code = #{syncerCode,jdbcType=VARCHAR}
+        </if>
+        <if test="pid != null">
+            and pid = #{pid,jdbcType=VARCHAR}
+        </if>
+        <if test="dataTimes != null">
+            and data_times = #{dataTimes,jdbcType=VARCHAR}
+        </if>
+        <if test="auditBegintime != null">
+            and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="syncBegintime != null">
+            and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
+        </if>
+    </update>
+    <update id="updateThdDsInfoNotSuccessCheckStatus" parameterType="com.ucd.server.model.tdhdsinfomodel.TdhDsInfo">
+        update ${centreTableName}
+        <set>
+            <if test="checkStatus != null">
                 check_status = #{checkStatus,jdbcType=INTEGER},
             </if>
         </set>
@@ -1109,13 +1130,13 @@
         <if test="creattime != null">
             and creattime = #{creattime,jdbcType=TIMESTAMP}
         </if>
-        <if test="auditStatus != null" >
+        <if test="auditStatus != null">
             and audit_status = #{auditStatus,jdbcType=INTEGER}
         </if>
-        <if test="auditNotes != null" >
+        <if test="auditNotes != null">
             and audit_notes = #{auditNotes,jdbcType=VARCHAR}
         </if>
-        <if test="lastCheck != null" >
+        <if test="lastCheck != null">
             and last_check = #{lastCheck,jdbcType=VARCHAR}
         </if>
         <if test="startdownTimems != null and startdownTimems != ''">
@@ -1124,45 +1145,45 @@
         <if test="startupTimems != null and startupTimems != ''">
             and startup_time &lt;= #{startupTimems,jdbcType=VARCHAR}
         </if>
-        <if test="auditTime != null" >
-            and  audit_time = #{auditTime,jdbcType=TIMESTAMP}
+        <if test="auditTime != null">
+            and audit_time = #{auditTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncTime != null" >
+        <if test="syncTime != null">
             and sync_time = #{syncTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="userCode != null and userCode != ''" >
+        <if test="userCode != null and userCode != ''">
             and user_code = #{userCode,jdbcType=VARCHAR}
         </if>
-        <if test="dataMonth != null and dataMonth != ''" >
+        <if test="dataMonth != null and dataMonth != ''">
             and data_month = #{dataMonth,jdbcType=VARCHAR}
         </if>
-        <if test="syncType != null" >
+        <if test="syncType != null">
             and sync_type = #{syncType,jdbcType=INTEGER}
         </if>
-        <if test="applyerCode != null and applyerCode != ''" >
+        <if test="applyerCode != null and applyerCode != ''">
             and applyer_code = #{applyerCode,jdbcType=VARCHAR}
         </if>
-        <if test="auditerCode != null and auditerCode != ''" >
+        <if test="auditerCode != null and auditerCode != ''">
             and auditer_code = #{auditerCode,jdbcType=VARCHAR}
         </if>
-        <if test="syncerCode != null and syncerCode != ''" >
+        <if test="syncerCode != null and syncerCode != ''">
             and syncer_code = #{syncerCode,jdbcType=VARCHAR}
         </if>
-        <if test="pid != null" >
+        <if test="pid != null">
             and pid = #{pid,jdbcType=VARCHAR}
         </if>
-        <if test="dataTimes != null" >
+        <if test="dataTimes != null">
             and data_times = #{dataTimes,jdbcType=VARCHAR}
         </if>
-        <if test="auditBegintime != null" >
+        <if test="auditBegintime != null">
             and audit_begintime = #{auditBegintime,jdbcType=TIMESTAMP}
         </if>
-        <if test="syncBegintime != null" >
+        <if test="syncBegintime != null">
             and sync_begintime = #{syncBegintime,jdbcType=TIMESTAMP}
         </if>
     </update>
 
-    <select id="countUnSyncbyPID" resultType="java.lang.Long" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO" >
+    <select id="countUnSyncbyPID" resultType="java.lang.Long" parameterType="com.ucd.daocommon.DTO.tdhdsDTO.TdhDsDTO">
         select count(*)
         FROM ${centreTableName}
         WHERE 1=1

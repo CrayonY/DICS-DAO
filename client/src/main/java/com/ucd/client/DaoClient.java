@@ -1,6 +1,7 @@
 package com.ucd.client;
 
 //import com.netflix.hystrix.util.Exceptions;
+
 import com.ucd.daocommon.DTO.hardwareDTO.HardwareInfoDTO;
 import com.ucd.daocommon.DTO.operationLogInfoDTO.OperationLogInfoDTO;
 import com.ucd.daocommon.DTO.tdhDsauditDTO.TdhDsauditDTO;
@@ -20,9 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = "dao",fallback = DaoClient.ProductClientFallback.class)
+@FeignClient(name = "dao", fallback = DaoClient.ProductClientFallback.class)
 public interface DaoClient {
-
 
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/saveThdServicesData")
@@ -35,85 +35,85 @@ public interface DaoClient {
     public ResultVO getThdServicesInfo(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/saveThdServicesjobListData")
-    public  ResultVO saveThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
+    public ResultVO saveThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/getThdServicesjobData")
     public ResultVO getThdServicesjobData(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/getThdServicesjobListData")
-    public  ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO);
+    public ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/updateThdServicesjobListData")
-    public  ResultVO updateThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
+    public ResultVO updateThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/emptyThdServicesjobListData")
-    public  ResultVO emptyThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
+    public ResultVO emptyThdServicesjobListData(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesjobDao/getThdServicesjobListDataS")
-    public  ResultVO getThdServicesjobListDataS(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
+    public ResultVO getThdServicesjobListDataS(@RequestBody List<TdhServicesJobDTO> tdhServicesJobDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/saveTdhDsData")
-    public  ResultVO saveTdhDsData(@RequestBody List<TdhDsDTO> tdhDsDTOList);
+    public ResultVO saveTdhDsData(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsInfo")
     public ResultVO getTdhDsInfo(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/emptyThdDsListData")
-    public  ResultVO emptyThdDsListData(@RequestBody List<TdhDsDTO> tdhDsDTOList);
+    public ResultVO emptyThdDsListData(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getThdDsListDataS")
-    public  ResultVO getThdDsListDataS(@RequestBody List<TdhDsDTO> tdhDsDTOList);
+    public ResultVO getThdDsListDataS(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getThdDsListData")
-    public  ResultVO getThdDsListData(@RequestBody TdhDsDTO tdhDsDTO);
+    public ResultVO getThdDsListData(@RequestBody TdhDsDTO tdhDsDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsMonthsInfo")
     public ResultVO getTdhDsMonthsInfo(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/getTdhDsMonthsInfoS")
-    public  ResultVO getTdhDsMonthsInfoS(@RequestBody List<TdhDsMonthsDTO> tdhDsMonthsDTOS);
+    public ResultVO getTdhDsMonthsInfoS(@RequestBody List<TdhDsMonthsDTO> tdhDsMonthsDTOS);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/updateTdhDsInfoS")
-    public  ResultVO updateTdhDsInfoS(@RequestBody Map<String, Object> models);
+    public ResultVO updateTdhDsInfoS(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/countTdhDsauditDataoByAuditStatus")
-    public  ResultVO countTdhDsDataByAuditStatusAndState(@RequestBody TdhDsDTO tdhDsDTO);
+    public ResultVO countTdhDsDataByAuditStatusAndState(@RequestBody TdhDsDTO tdhDsDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/saveTdhDsauditInfo")
-    public  ResultVO saveTdhDsauditInfo(@RequestBody TdhDsauditDTO tdhDsauditDTO);
+    public ResultVO saveTdhDsauditInfo(@RequestBody TdhDsauditDTO tdhDsauditDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/saveTdhDsauditData")
-    public  ResultVO saveTdhDsauditData(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
+    public ResultVO saveTdhDsauditData(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/getTdhDsauditInfo")
     public ResultVO getTdhDsauditInfo(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/getTdhDsauditListDataS")
-    public  ResultVO getTdhDsauditListDataS(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
+    public ResultVO getTdhDsauditListDataS(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/updateTdhDsauditDataS")
-    public  ResultVO updateTdhDsauditDataS(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
+    public ResultVO updateTdhDsauditDataS(@RequestBody List<TdhDsauditDTO> tdhDsauditDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSauditDao/countTdhDsauditDataoByAuditStatus")
-    public  ResultVO countTdhDsauditDataoByAuditStatus(@RequestParam(value = "auditStatus",required = true) Integer auditStatus);
+    public ResultVO countTdhDsauditDataoByAuditStatus(@RequestParam(value = "auditStatus", required = true) Integer auditStatus);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/saveTdhDssyncData")
-    public  ResultVO saveTdhDssyncData(@RequestBody List<TdhDssyncDTO> tdhDssyncDTOList);
+    public ResultVO saveTdhDssyncData(@RequestBody List<TdhDssyncDTO> tdhDssyncDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/updateTdhDssyncData")
-    public  ResultVO updateTdhDssyncData(@RequestBody TdhDssyncDTO tdhDssyncDTO);
+    public ResultVO updateTdhDssyncData(@RequestBody TdhDssyncDTO tdhDssyncDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/getTdhDssyncInfoById")
-    public  ResultVO getTdhDssyncInfoById(@RequestBody TdhDssyncDTO tdhDssyncDTO);
+    public ResultVO getTdhDssyncInfoById(@RequestBody TdhDssyncDTO tdhDssyncDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSsyncDao/getTdhDssyncInfoByState")
-    public  ResultVO getTdhDssyncInfoByState(@RequestParam(value = "state",required = true) Integer state);
+    public ResultVO getTdhDssyncInfoByState(@RequestParam(value = "state", required = true) Integer state);
 
 //    @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/saveHardWareInfo")
 //    public ResultVO saveHardWareInfo(@RequestBody HardwareDTO hardwareDTO );
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/saveHardWareInfo")
-    public ResultVO saveHardWareInfo(@RequestBody HardwareInfoDTO hardwareInfoDTO );
+    public ResultVO saveHardWareInfo(@RequestBody HardwareInfoDTO hardwareInfoDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfo")
     public ResultVO getHardWareInfo(@RequestBody Map<String, Object> models);
@@ -121,15 +121,15 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareHostList")
     public ResultVO getHardWareHostList();
 
-    @RequestMapping(value="/server-0.0.1-SNAPSHOT/User/validateUser",method= RequestMethod.POST)
-    public ResultVO userValidate(@RequestParam(value = "username",required = true) String username,
-                                 @RequestParam(value = "password",required = true)String password);
+    @RequestMapping(value = "/server-0.0.1-SNAPSHOT/User/validateUser", method = RequestMethod.POST)
+    public ResultVO userValidate(@RequestParam(value = "username", required = true) String username,
+                                 @RequestParam(value = "password", required = true) String password);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/User/saveUserInfo")
-    public ResultVO saveUserInfo(@RequestBody List<UserDTO> userDTOList );
+    public ResultVO saveUserInfo(@RequestBody List<UserDTO> userDTOList);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/User/getUserListData")
-    public  ResultVO getUserListData(@RequestBody UserDTO userDTO);
+    public ResultVO getUserListData(@RequestBody UserDTO userDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/User/getUser")
     public ResultVO getUser(@RequestBody Map<String, Object> models);
@@ -157,13 +157,13 @@ public interface DaoClient {
     public ResultVO getHardWareThread(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getThdServicesInfoNow")
-    public TdhServicesAVO getThdServicesInfoNow(@RequestParam(value = "center",required = true) String center);
+    public TdhServicesAVO getThdServicesInfoNow(@RequestParam(value = "center", required = true) String center);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/updateThdServicesInfoNow")
-    public ResultVO updateThdServicesInfoNow(@RequestBody TdhServicesListDTO tdhServicesListDTO,@RequestParam(value = "num",required = true) String num);
+    public ResultVO updateThdServicesInfoNow(@RequestBody TdhServicesListDTO tdhServicesListDTO, @RequestParam(value = "num", required = true) String num);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/saveThdServicesInfoNowListData")
-    public  ResultVO saveThdServicesInfoNowListData(@RequestBody TdhServicesListDTO tdhServicesListDTO);
+    public ResultVO saveThdServicesInfoNowListData(@RequestBody TdhServicesListDTO tdhServicesListDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getThdServicesListNow")
     public ResultVO getThdServicesListNow(@RequestBody Map<String, Object> models);
@@ -171,37 +171,36 @@ public interface DaoClient {
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhServicesDao/getTdhHealthStatusByTime")
     public ResultVO getTdhHealthStatusByTime(@RequestBody Map<String, Object> models);
 
-    @RequestMapping(value="/server-0.0.1-SNAPSHOT/TdhDSDao/updateThdDsData",method= RequestMethod.POST)
-    public ResultVO updateThdDsData(@RequestParam(value = "centre",required = true) String centre);
+    @RequestMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/updateThdDsData", method = RequestMethod.POST)
+    public ResultVO updateThdDsData(@RequestParam(value = "centre", required = true) String centre);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/TdhDSDao/updateTdhDsInfoByIds")
-    public  ResultVO updateTdhDsInfoByIds(@RequestBody List<TdhDsDTO> tdhDsDTOList);
+    public ResultVO updateTdhDsInfoByIds(@RequestBody List<TdhDsDTO> tdhDsDTOList);
 
-    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardNicDao/getHardWareNicNow",method= RequestMethod.POST)
-    ResultVO<?> getHardWareNicNow(@RequestParam(value = "host",required = true) String host);
+    @RequestMapping(value = "/server-0.0.1-SNAPSHOT/hardNicDao/getHardWareNicNow", method = RequestMethod.POST)
+    ResultVO<?> getHardWareNicNow(@RequestParam(value = "host", required = true) String host);
 
-    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfoListNow",method= RequestMethod.POST)
-    ResultVO<?> getHardWareInfoListNow(@RequestParam(value = "host",required = true) String host);
+    @RequestMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareInfoListNow", method = RequestMethod.POST)
+    ResultVO<?> getHardWareInfoListNow(@RequestParam(value = "host", required = true) String host);
 
-    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardThreadDao/getHardWareThreadNow",method= RequestMethod.POST)
-    ResultVO<?> getHardWareThreadNow(@RequestParam(value = "host",required = true) String host);
+    @RequestMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao/getHardWareThreadNow", method = RequestMethod.POST)
+    ResultVO<?> getHardWareThreadNow(@RequestParam(value = "host", required = true) String host);
 
-    @RequestMapping(value="/server-0.0.1-SNAPSHOT/hardDao/getHardWareStatusByTime",method= RequestMethod.POST)
+    @RequestMapping(value = "/server-0.0.1-SNAPSHOT/hardDao/getHardWareStatusByTime", method = RequestMethod.POST)
     ResultVO<?> getHardWareStatusByTime(@RequestBody Map<String, Object> models);
-
 
 
     /*
     硬件监测第二套
     */
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/saveHardWareInfo2")
-    public ResultVO saveHardWareInfo2(@RequestBody HardwareInfoDTO hardwareInfoDTO );
+    public ResultVO saveHardWareInfo2(@RequestBody HardwareInfoDTO hardwareInfoDTO);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareInfo2")
     public ResultVO getHardWareInfo2(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareInfoListNow2")
-    public ResultVO<?> getHardWareInfoListNow2(@RequestParam(value = "host",required = true) String host);
+    public ResultVO<?> getHardWareInfoListNow2(@RequestParam(value = "host", required = true) String host);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardDao2/getHardWareStatusByTime2")
     public ResultVO<?> getHardWareStatusByTime2(@RequestBody Map<String, Object> models);
@@ -222,15 +221,15 @@ public interface DaoClient {
     public ResultVO getHardWareNic2(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardNicDao2/getHardWareNicNow2")
-    public ResultVO<?> getHardWareNicNow2(@RequestParam(value = "host",required = true) String host);
+    public ResultVO<?> getHardWareNicNow2(@RequestParam(value = "host", required = true) String host);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao2/getHardWareThread2")
     public ResultVO getHardWareThread2(@RequestBody Map<String, Object> models);
 
     @PostMapping(value = "/server-0.0.1-SNAPSHOT/hardThreadDao2/getHardWareThreadNow2")
-    public ResultVO<?> getHardWareThreadNow2(@RequestParam(value = "host",required = true) String host);
+    public ResultVO<?> getHardWareThreadNow2(@RequestParam(value = "host", required = true) String host);
 
-     @Component
+    @Component
     static class ProductClientFallback implements DaoClient {
 
         @Override
@@ -259,7 +258,7 @@ public interface DaoClient {
         }
 
         @Override
-        public  ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO) {
+        public ResultVO getThdServicesjobListData(@RequestBody TdhServicesJobDTO tdhServicesJobDTO) {
             return null;
         }
 
@@ -289,10 +288,14 @@ public interface DaoClient {
         }
 
         @Override
-        public ResultVO emptyThdDsListData(List<TdhDsDTO> tdhDsDTOList) { return null; }
+        public ResultVO emptyThdDsListData(List<TdhDsDTO> tdhDsDTOList) {
+            return null;
+        }
 
         @Override
-        public ResultVO getThdDsListDataS(List<TdhDsDTO> tdhDsDTOList) { return null; }
+        public ResultVO getThdDsListDataS(List<TdhDsDTO> tdhDsDTOList) {
+            return null;
+        }
 
         @Override
         public ResultVO getThdDsListData(TdhDsDTO tdhDsDTO) {
@@ -382,12 +385,12 @@ public interface DaoClient {
             return null;
         }
 
-         @Override
-         public ResultVO getHardWareHostList() {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareHostList() {
+            return null;
+        }
 
-         @Override
+        @Override
         public ResultVO userValidate(String username, String password) {
             return null;
         }
@@ -492,69 +495,69 @@ public interface DaoClient {
             return null;
         }
 
-         @Override
-         public ResultVO<?> getHardWareStatusByTime(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO<?> getHardWareStatusByTime(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO saveHardWareInfo2(HardwareInfoDTO hardwareInfoDTO) {
-             return null;
-         }
+        @Override
+        public ResultVO saveHardWareInfo2(HardwareInfoDTO hardwareInfoDTO) {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareInfo2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareInfo2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO<?> getHardWareInfoListNow2(String host) {
-             return null;
-         }
+        @Override
+        public ResultVO<?> getHardWareInfoListNow2(String host) {
+            return null;
+        }
 
-         @Override
-         public ResultVO<?> getHardWareStatusByTime2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO<?> getHardWareStatusByTime2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareHostList2() {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareHostList2() {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareCpu2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareCpu2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareDisk2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareDisk2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareMEM2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareMEM2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareNic2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareNic2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO<?> getHardWareNicNow2(String host) {
-             return null;
-         }
+        @Override
+        public ResultVO<?> getHardWareNicNow2(String host) {
+            return null;
+        }
 
-         @Override
-         public ResultVO getHardWareThread2(Map<String, Object> models) {
-             return null;
-         }
+        @Override
+        public ResultVO getHardWareThread2(Map<String, Object> models) {
+            return null;
+        }
 
-         @Override
-         public ResultVO<?> getHardWareThreadNow2(String host) {
-             return null;
-         }
-     }
+        @Override
+        public ResultVO<?> getHardWareThreadNow2(String host) {
+            return null;
+        }
+    }
 }

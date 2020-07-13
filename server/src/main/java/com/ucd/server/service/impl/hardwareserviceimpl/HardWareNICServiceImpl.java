@@ -42,24 +42,24 @@ public class HardWareNICServiceImpl implements HardWareNICService {
     @Override
     public PageView getHardWareNIC(PageView pageView, HardwareNicDTO hardwareNicDTO) throws Exception {
         HardWareNicExample hardWareNicExample = new HardWareNicExample();
-        logger.info("hardwareNicDTO:"+hardwareNicDTO.toString());
+        logger.info("hardwareNicDTO:" + hardwareNicDTO.toString());
         HardWareNicExample.Criteria criteria = hardWareNicExample.createCriteria();
         List<HardwareNicVO> hardwareNicVOList = new ArrayList<HardwareNicVO>();
         hardWareNicExample.setTablename(hardwareNicDTO.getTablename());
 
 
         // 关键字查询 host
-        if(hardwareNicDTO != null){
+        if (hardwareNicDTO != null) {
 
             // 格式化
             String checkTimeStart = (String) StringTool.parsentObjectNull(hardwareNicDTO.getChecktimeStart());
-            String  checktimeEnd = (String) StringTool.parsentObjectNull(hardwareNicDTO.getChecktimeEnd());
+            String checktimeEnd = (String) StringTool.parsentObjectNull(hardwareNicDTO.getChecktimeEnd());
 
-            if(!ObjectUtils.isEmpty(hardwareNicDTO.getHost())){
-                criteria.andHostLike("%"+hardwareNicDTO.getHost()+"%");
+            if (!ObjectUtils.isEmpty(hardwareNicDTO.getHost())) {
+                criteria.andHostLike("%" + hardwareNicDTO.getHost() + "%");
             }
 
-            if(!ObjectUtils.isEmpty(hardwareNicDTO.getNicstatus())){
+            if (!ObjectUtils.isEmpty(hardwareNicDTO.getNicstatus())) {
                 criteria.andNicstatusEqualTo(hardwareNicDTO.getNicstatus());
             }
 
@@ -68,16 +68,16 @@ public class HardWareNICServiceImpl implements HardWareNICService {
                 criteria.andChecktimeGreaterThanOrEqualTo(checkTimeStart);
             }
 
-            if(checktimeEnd != null){
+            if (checktimeEnd != null) {
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
             hardWareNicExample.setTablename("hard_ware_nic");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-            List<HardWareNic> hardWareNicList =  hardWareNicMapper.selectByExample(hardWareNicExample);
-            logger.info("hardWareNicList="+hardWareNicList.toString());
+            List<HardWareNic> hardWareNicList = hardWareNicMapper.selectByExample(hardWareNicExample);
+            logger.info("hardWareNicList=" + hardWareNicList.toString());
             long count = hardWareNicMapper.countByExample(hardWareNicExample);
             pageView.setTotalrecord(count);
-            for (HardWareNic hardWareNic : hardWareNicList){
+            for (HardWareNic hardWareNic : hardWareNicList) {
                 HardwareNicVO hardwareNicVO = new HardwareNicVO();
                 BeanUtils.copyProperties(hardWareNic, hardwareNicVO);
                 hardwareNicVOList.add(hardwareNicVO);
@@ -88,27 +88,27 @@ public class HardWareNICServiceImpl implements HardWareNICService {
     }
 
     @Override
-    public ResultVO<?> getHardWareNICNow(String host){
+    public ResultVO<?> getHardWareNICNow(String host) {
         List<HardWareNic> hardWareNicList = new ArrayList<>();
         List<HardwareNicVO> hardwareNicVOList = new ArrayList<>();
-        try{
+        try {
             HardWareNicExample hardWareNicExample = new HardWareNicExample();
             hardWareNicExample.createCriteria().andHostEqualTo(host);
             hardWareNicExample.setTablename("hard_ware_nic_now");
             // 获取信息
             hardWareNicList = hardWareNicMapper.selectByExample(hardWareNicExample);
 
-            for (HardWareNic hardWareNic : hardWareNicList){
+            for (HardWareNic hardWareNic : hardWareNicList) {
                 HardwareNicVO hardwareNicVO = new HardwareNicVO();
                 BeanUtils.copyProperties(hardWareNic, hardwareNicVO);
                 hardwareNicVOList.add(hardwareNicVO);
             }
-            return ResultVO.SUCC(ApiResultType.SUCCESS.code,ApiResultType.SUCCESS.message,hardwareNicVOList);
+            return ResultVO.SUCC(ApiResultType.SUCCESS.code, ApiResultType.SUCCESS.message, hardwareNicVOList);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("硬件NIC实时数据查询异常：", e);
             return ResultVO.FAIL(ApiResultType.SYS_ERROR.code,
-                    ApiResultType.SYS_ERROR.message,hardwareNicVOList);
+                    ApiResultType.SYS_ERROR.message, hardwareNicVOList);
         }
     }
 }

@@ -41,24 +41,24 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
     @Override
     public PageView getHardWareThread(PageView pageView, HardwareThreadDTO hardwareThreadDTO) throws Exception {
         HardWareThreadExample hardWareThreadExample = new HardWareThreadExample();
-        logger.info("hardwareThreadDTO:"+hardwareThreadDTO.toString());
+        logger.info("hardwareThreadDTO:" + hardwareThreadDTO.toString());
         HardWareThreadExample.Criteria criteria = hardWareThreadExample.createCriteria();
         List<HardwareThreadVO> hardwareThreadVOList = new ArrayList<HardwareThreadVO>();
         hardWareThreadExample.setTablename(hardwareThreadDTO.getTablename());
 
 
         // 关键字查询 host
-        if(hardwareThreadDTO != null){
+        if (hardwareThreadDTO != null) {
 
             // 格式化
             String checkTimeStart = (String) StringTool.parsentObjectNull(hardwareThreadDTO.getChecktimeStart());
-            String  checktimeEnd = (String) StringTool.parsentObjectNull(hardwareThreadDTO.getChecktimeEnd());
+            String checktimeEnd = (String) StringTool.parsentObjectNull(hardwareThreadDTO.getChecktimeEnd());
 
-            if(!ObjectUtils.isEmpty(hardwareThreadDTO.getHost())){
-                criteria.andHostLike("%"+hardwareThreadDTO.getHost()+"%");
+            if (!ObjectUtils.isEmpty(hardwareThreadDTO.getHost())) {
+                criteria.andHostLike("%" + hardwareThreadDTO.getHost() + "%");
             }
 
-            if(!ObjectUtils.isEmpty(hardwareThreadDTO.getPidstatus())){
+            if (!ObjectUtils.isEmpty(hardwareThreadDTO.getPidstatus())) {
                 criteria.andPidstatusEqualTo(hardwareThreadDTO.getPidstatus());
             }
 
@@ -67,16 +67,16 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
                 criteria.andChecktimeGreaterThanOrEqualTo(checkTimeStart);
             }
 
-            if(checktimeEnd != null){
+            if (checktimeEnd != null) {
                 criteria.andChecktimeLessThanOrEqualTo(checktimeEnd);
             }
             hardWareThreadExample.setTablename("hard_ware_thread");
             PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-            List<HardWareThread> hardWareThreadList =  hardWareThreadMapper.selectByExample(hardWareThreadExample);
-            logger.info("hardWareThreadList="+hardWareThreadList.toString());
+            List<HardWareThread> hardWareThreadList = hardWareThreadMapper.selectByExample(hardWareThreadExample);
+            logger.info("hardWareThreadList=" + hardWareThreadList.toString());
             long count = hardWareThreadMapper.countByExample(hardWareThreadExample);
             pageView.setTotalrecord(count);
-            for (HardWareThread hardWareThread : hardWareThreadList){
+            for (HardWareThread hardWareThread : hardWareThreadList) {
                 HardwareThreadVO hardwareThreadVO = new HardwareThreadVO();
                 BeanUtils.copyProperties(hardWareThread, hardwareThreadVO);
                 hardwareThreadVOList.add(hardwareThreadVO);
@@ -90,7 +90,7 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
     public ResultVO<?> getHardWareThreadNow(String host) {
         List<HardWareThread> hardWareThreadList = new ArrayList<>();
         List<HardwareThreadVO> hardwareThreadVOList = new ArrayList<>();
-        try{
+        try {
             HardWareThreadExample hardWareThreadExample = new HardWareThreadExample();
             hardWareThreadExample.createCriteria().andHostEqualTo(host);
             hardWareThreadExample.setTablename("hard_ware_thread_now");
@@ -98,17 +98,17 @@ public class HardWareThreadServiceImpl implements HardWareThreadService {
             // 获取信息
             hardWareThreadList = hardWareThreadMapper.selectByExample(hardWareThreadExample);
 
-            for (HardWareThread hardWareThread : hardWareThreadList){
+            for (HardWareThread hardWareThread : hardWareThreadList) {
                 HardwareThreadVO hardwareThreadVO = new HardwareThreadVO();
                 BeanUtils.copyProperties(hardWareThread, hardwareThreadVO);
                 hardwareThreadVOList.add(hardwareThreadVO);
             }
-            return ResultVO.SUCC(ApiResultType.SUCCESS.code,ApiResultType.SUCCESS.message,hardwareThreadVOList);
+            return ResultVO.SUCC(ApiResultType.SUCCESS.code, ApiResultType.SUCCESS.message, hardwareThreadVOList);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("硬件进行查询异常：", e);
             return ResultVO.FAIL(ApiResultType.SYS_ERROR.code,
-                    ApiResultType.SYS_ERROR.message,hardwareThreadVOList);
+                    ApiResultType.SYS_ERROR.message, hardwareThreadVOList);
 
         }
     }

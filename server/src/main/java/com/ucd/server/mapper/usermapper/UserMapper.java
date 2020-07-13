@@ -2,7 +2,9 @@ package com.ucd.server.mapper.usermapper;
 
 import com.ucd.server.model.usermodel.User;
 import com.ucd.server.model.usermodel.UserExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {

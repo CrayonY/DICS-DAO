@@ -1,612 +1,623 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucd.server.mapper.tdhservicesjobinfomapper.TdhServicesjobInfoMapper">
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="job_id" jdbcType="INTEGER" property="jobId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="scheduling_pool" jdbcType="VARCHAR" property="schedulingPool" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="submission_time" jdbcType="VARCHAR" property="submissionTime" />
-    <result column="stage_ids" jdbcType="VARCHAR" property="stageIds" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="num_tasks" jdbcType="INTEGER" property="numTasks" />
-    <result column="num_active_tasks" jdbcType="INTEGER" property="numActiveTasks" />
-    <result column="num_completed_tasks" jdbcType="INTEGER" property="numCompletedTasks" />
-    <result column="num_skipped_tasks" jdbcType="INTEGER" property="numSkippedTasks" />
-    <result column="num_failed_tasks" jdbcType="INTEGER" property="numFailedTasks" />
-    <result column="num_active_stages" jdbcType="INTEGER" property="numActiveStages" />
-    <result column="num_completed_stages" jdbcType="INTEGER" property="numCompletedStages" />
-    <result column="num_skipped_stages" jdbcType="INTEGER" property="numSkippedStages" />
-    <result column="num_failed_stages" jdbcType="INTEGER" property="numFailedStages" />
-    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
-    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
-    <result column="healthtime" jdbcType="TIMESTAMP" property="healthtime" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="job_id" jdbcType="INTEGER" property="jobId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="scheduling_pool" jdbcType="VARCHAR" property="schedulingPool"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="submission_time" jdbcType="VARCHAR" property="submissionTime"/>
+        <result column="stage_ids" jdbcType="VARCHAR" property="stageIds"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="num_tasks" jdbcType="INTEGER" property="numTasks"/>
+        <result column="num_active_tasks" jdbcType="INTEGER" property="numActiveTasks"/>
+        <result column="num_completed_tasks" jdbcType="INTEGER" property="numCompletedTasks"/>
+        <result column="num_skipped_tasks" jdbcType="INTEGER" property="numSkippedTasks"/>
+        <result column="num_failed_tasks" jdbcType="INTEGER" property="numFailedTasks"/>
+        <result column="num_active_stages" jdbcType="INTEGER" property="numActiveStages"/>
+        <result column="num_completed_stages" jdbcType="INTEGER" property="numCompletedStages"/>
+        <result column="num_skipped_stages" jdbcType="INTEGER" property="numSkippedStages"/>
+        <result column="num_failed_stages" jdbcType="INTEGER" property="numFailedStages"/>
+        <result column="table_name" jdbcType="VARCHAR" property="tableName"/>
+        <result column="creattime" jdbcType="TIMESTAMP" property="creattime"/>
+        <result column="healthtime" jdbcType="TIMESTAMP" property="healthtime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, job_id, user_name, name, scheduling_pool, description, submission_time, stage_ids, 
-    status, num_tasks, num_active_tasks, num_completed_tasks, num_skipped_tasks, num_failed_tasks, 
-    num_active_stages, num_completed_stages, num_skipped_stages, num_failed_stages,table_name, creattime, healthtime
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <select id="selectTdhServicesjobInfo" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    delete from ${centreTableName}
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    insert into ${centreTableName} (id, job_id, user_name,
-      name, scheduling_pool, description, 
-      submission_time, stage_ids, status, 
-      num_tasks, num_active_tasks, num_completed_tasks, 
-      num_skipped_tasks, num_failed_tasks, num_active_stages, 
-      num_completed_stages, num_skipped_stages, num_failed_stages, table_name,
-      creattime, healthtime)
-    values (#{id,jdbcType=VARCHAR}, #{jobId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{schedulingPool,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{submissionTime,jdbcType=VARCHAR}, #{stageIds,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{numTasks,jdbcType=INTEGER}, #{numActiveTasks,jdbcType=INTEGER}, #{numCompletedTasks,jdbcType=INTEGER}, 
-      #{numSkippedTasks,jdbcType=INTEGER}, #{numFailedTasks,jdbcType=INTEGER}, #{numActiveStages,jdbcType=INTEGER}, 
-      #{numCompletedStages,jdbcType=INTEGER}, #{numSkippedStages,jdbcType=INTEGER}, #{numFailedStages,jdbcType=INTEGER}, 
-      #{table_name,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{healthtime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    insert into ${centreTableName}
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="jobId != null">
-        job_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="schedulingPool != null">
-        scheduling_pool,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="submissionTime != null">
-        submission_time,
-      </if>
-      <if test="stageIds != null">
-        stage_ids,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="numTasks != null">
-        num_tasks,
-      </if>
-      <if test="numActiveTasks != null">
-        num_active_tasks,
-      </if>
-      <if test="numCompletedTasks != null">
-        num_completed_tasks,
-      </if>
-      <if test="numSkippedTasks != null">
-        num_skipped_tasks,
-      </if>
-      <if test="numFailedTasks != null">
-        num_failed_tasks,
-      </if>
-      <if test="numActiveStages != null">
-        num_active_stages,
-      </if>
-      <if test="numCompletedStages != null">
-        num_completed_stages,
-      </if>
-      <if test="numSkippedStages != null">
-        num_skipped_stages,
-      </if>
-      <if test="numFailedStages != null">
-        num_failed_stages,
-      </if>
-      <if test="tableName != null">
-        table_name,
-      </if>
-      <if test="creattime != null">
-        creattime,
-      </if>
-      <if test="healthtime != null">
-      healthtime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="jobId != null">
-        #{jobId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="schedulingPool != null">
-        #{schedulingPool,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="submissionTime != null">
-        #{submissionTime,jdbcType=VARCHAR},
-      </if>
-      <if test="stageIds != null">
-        #{stageIds,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="numTasks != null">
-        #{numTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numActiveTasks != null">
-        #{numActiveTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numCompletedTasks != null">
-        #{numCompletedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numSkippedTasks != null">
-        #{numSkippedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numFailedTasks != null">
-        #{numFailedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numActiveStages != null">
-        #{numActiveStages,jdbcType=INTEGER},
-      </if>
-      <if test="numCompletedStages != null">
-        #{numCompletedStages,jdbcType=INTEGER},
-      </if>
-      <if test="numSkippedStages != null">
-        #{numSkippedStages,jdbcType=INTEGER},
-      </if>
-      <if test="numFailedStages != null">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, job_id, user_name, name, scheduling_pool, description, submission_time, stage_ids,
+        status, num_tasks, num_active_tasks, num_completed_tasks, num_skipped_tasks, num_failed_tasks,
+        num_active_stages, num_completed_stages, num_skipped_stages, num_failed_stages,table_name, creattime, healthtime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectTdhServicesjobInfo"
+            parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        delete from ${centreTableName}
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        insert into ${centreTableName} (id, job_id, user_name,
+        name, scheduling_pool, description,
+        submission_time, stage_ids, status,
+        num_tasks, num_active_tasks, num_completed_tasks,
+        num_skipped_tasks, num_failed_tasks, num_active_stages,
+        num_completed_stages, num_skipped_stages, num_failed_stages, table_name,
+        creattime, healthtime)
+        values (#{id,jdbcType=VARCHAR}, #{jobId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR}, #{schedulingPool,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        #{submissionTime,jdbcType=VARCHAR}, #{stageIds,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+        #{numTasks,jdbcType=INTEGER}, #{numActiveTasks,jdbcType=INTEGER}, #{numCompletedTasks,jdbcType=INTEGER},
+        #{numSkippedTasks,jdbcType=INTEGER}, #{numFailedTasks,jdbcType=INTEGER}, #{numActiveStages,jdbcType=INTEGER},
+        #{numCompletedStages,jdbcType=INTEGER}, #{numSkippedStages,jdbcType=INTEGER},
         #{numFailedStages,jdbcType=INTEGER},
-      </if>
-      <if test="tableName != null">
-        #{tableName,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null">
-        #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="healthtime != null">
-        #{healthtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    update ${centreTableName}
-    <set>
-      <if test="jobId != null">
-        job_id = #{jobId,jdbcType=INTEGER},
-      </if>
-      <if test="userName != null">
+        #{table_name,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{healthtime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        insert into ${centreTableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="jobId != null">
+                job_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="schedulingPool != null">
+                scheduling_pool,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="submissionTime != null">
+                submission_time,
+            </if>
+            <if test="stageIds != null">
+                stage_ids,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="numTasks != null">
+                num_tasks,
+            </if>
+            <if test="numActiveTasks != null">
+                num_active_tasks,
+            </if>
+            <if test="numCompletedTasks != null">
+                num_completed_tasks,
+            </if>
+            <if test="numSkippedTasks != null">
+                num_skipped_tasks,
+            </if>
+            <if test="numFailedTasks != null">
+                num_failed_tasks,
+            </if>
+            <if test="numActiveStages != null">
+                num_active_stages,
+            </if>
+            <if test="numCompletedStages != null">
+                num_completed_stages,
+            </if>
+            <if test="numSkippedStages != null">
+                num_skipped_stages,
+            </if>
+            <if test="numFailedStages != null">
+                num_failed_stages,
+            </if>
+            <if test="tableName != null">
+                table_name,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="healthtime != null">
+                healthtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="jobId != null">
+                #{jobId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="schedulingPool != null">
+                #{schedulingPool,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="submissionTime != null">
+                #{submissionTime,jdbcType=VARCHAR},
+            </if>
+            <if test="stageIds != null">
+                #{stageIds,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="numTasks != null">
+                #{numTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numActiveTasks != null">
+                #{numActiveTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numCompletedTasks != null">
+                #{numCompletedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numSkippedTasks != null">
+                #{numSkippedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numFailedTasks != null">
+                #{numFailedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numActiveStages != null">
+                #{numActiveStages,jdbcType=INTEGER},
+            </if>
+            <if test="numCompletedStages != null">
+                #{numCompletedStages,jdbcType=INTEGER},
+            </if>
+            <if test="numSkippedStages != null">
+                #{numSkippedStages,jdbcType=INTEGER},
+            </if>
+            <if test="numFailedStages != null">
+                #{numFailedStages,jdbcType=INTEGER},
+            </if>
+            <if test="tableName != null">
+                #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="healthtime != null">
+                #{healthtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        update ${centreTableName}
+        <set>
+            <if test="jobId != null">
+                job_id = #{jobId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="schedulingPool != null">
+                scheduling_pool = #{schedulingPool,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="submissionTime != null">
+                submission_time = #{submissionTime,jdbcType=VARCHAR},
+            </if>
+            <if test="stageIds != null">
+                stage_ids = #{stageIds,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="numTasks != null">
+                num_tasks = #{numTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numActiveTasks != null">
+                num_active_tasks = #{numActiveTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numCompletedTasks != null">
+                num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numSkippedTasks != null">
+                num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numFailedTasks != null">
+                num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="numActiveStages != null">
+                num_active_stages = #{numActiveStages,jdbcType=INTEGER},
+            </if>
+            <if test="numCompletedStages != null">
+                num_completed_stages = #{numCompletedStages,jdbcType=INTEGER},
+            </if>
+            <if test="numSkippedStages != null">
+                num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER},
+            </if>
+            <if test="numFailedStages != null">
+                num_failed_stages = #{numFailedStages,jdbcType=INTEGER},
+            </if>
+            <if test="tableName != null">
+                table_name = #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="healthtime != null">
+                healthtime = #{healthtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where 1 = 1
+        <if test="id != null">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        update ${centreTableName}
+        set job_id = #{jobId,jdbcType=INTEGER},
         user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="schedulingPool != null">
         scheduling_pool = #{schedulingPool,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="submissionTime != null">
         submission_time = #{submissionTime,jdbcType=VARCHAR},
-      </if>
-      <if test="stageIds != null">
         stage_ids = #{stageIds,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="numTasks != null">
         num_tasks = #{numTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numActiveTasks != null">
         num_active_tasks = #{numActiveTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numCompletedTasks != null">
         num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numSkippedTasks != null">
         num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numFailedTasks != null">
         num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="numActiveStages != null">
         num_active_stages = #{numActiveStages,jdbcType=INTEGER},
-      </if>
-      <if test="numCompletedStages != null">
         num_completed_stages = #{numCompletedStages,jdbcType=INTEGER},
-      </if>
-      <if test="numSkippedStages != null">
         num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER},
-      </if>
-      <if test="numFailedStages != null">
         num_failed_stages = #{numFailedStages,jdbcType=INTEGER},
-      </if>
-      <if test="tableName != null">
         table_name = #{tableName,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="healthtime != null">
-        healthtime = #{healthtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where 1 = 1
-    <if test="id != null">
-    and id = #{id,jdbcType=VARCHAR}
-    </if>
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    update ${centreTableName}
-    set job_id = #{jobId,jdbcType=INTEGER},
-      user_name = #{userName,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      scheduling_pool = #{schedulingPool,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      submission_time = #{submissionTime,jdbcType=VARCHAR},
-      stage_ids = #{stageIds,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
-      num_tasks = #{numTasks,jdbcType=INTEGER},
-      num_active_tasks = #{numActiveTasks,jdbcType=INTEGER},
-      num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER},
-      num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER},
-      num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER},
-      num_active_stages = #{numActiveStages,jdbcType=INTEGER},
-      num_completed_stages = #{numCompletedStages,jdbcType=INTEGER},
-      num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER},
-      num_failed_stages = #{numFailedStages,jdbcType=INTEGER},
-      table_name = #{tableName,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP},
-      healthtime = #{healthtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="emptyThdServicesjobData" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
-    truncate table ${centreTableName}
-</update>
-  <select id="selectTdhServicesjobInfoByDTO" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" >
-    select
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-    where 1=1
-    <if test="jobId != null">
-      and job_id = #{jobId,jdbcType=INTEGER}
-    </if>
-    <if test="userName != null">
-      and user_name = #{userName,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null">
-      and name = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="schedulingPool != null">
-      and scheduling_pool = #{schedulingPool,jdbcType=VARCHAR}
-    </if>
-    <if test="description != null">
-      and description = #{description,jdbcType=VARCHAR}
-    </if>
-    <if test="submissionTime != null">
-      and submission_time = #{submissionTime,jdbcType=VARCHAR}
-    </if>
-    <if test="stageIds != null">
-      and stage_ids = #{stageIds,jdbcType=VARCHAR}
-    </if>
-    <if test="status != null">
-      and status = #{status,jdbcType=VARCHAR}
-    </if>
-    <if test="numTasks != null">
-      and num_tasks = #{numTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numActiveTasks != null">
-      and num_active_tasks = #{numActiveTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numCompletedTasks != null">
-      and num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numSkippedTasks != null">
-      and num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numFailedTasks != null">
-      and num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numActiveStages != null">
-      and num_active_stages = #{numActiveStages,jdbcType=INTEGER}
-    </if>
-    <if test="numCompletedStages != null">
-      and num_completed_stages = #{numCompletedStages,jdbcType=INTEGER}
-    </if>
-    <if test="numSkippedStages != null">
-      and num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER}
-    </if>
-    <if test="numFailedStages != null">
-      and num_failed_stages = #{numFailedStages,jdbcType=INTEGER}
-    </if>
-    <if test="tableName != null">
-      and table_name = #{tableName,jdbcType=VARCHAR}
-    </if>
-    <if test="creattime != null">
-      and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="healthtime != null">
-      and healthtime = #{healthtime,jdbcType=TIMESTAMP}
-    </if>
-  </select>
-  <select id="selectCountTdhServicesjob" resultType="java.lang.Long" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo" >
-    select
-    count(*)
-    from ${centreTableName}
-    where 1=1
-    <if test="jobId != null">
-      and job_id = #{jobId,jdbcType=INTEGER}
-    </if>
-    <if test="userName != null">
-      and user_name = #{userName,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null">
-      and name = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="schedulingPool != null">
-      and scheduling_pool = #{schedulingPool,jdbcType=VARCHAR}
-    </if>
-    <if test="description != null">
-      and description = #{description,jdbcType=VARCHAR}
-    </if>
-    <if test="submissionTime != null">
-      and submission_time = #{submissionTime,jdbcType=VARCHAR}
-    </if>
-    <if test="stageIds != null">
-      and stage_ids = #{stageIds,jdbcType=VARCHAR}
-    </if>
-    <if test="status != null">
-      and status = #{status,jdbcType=VARCHAR}
-    </if>
-    <if test="numTasks != null">
-      and num_tasks = #{numTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numActiveTasks != null">
-      and num_active_tasks = #{numActiveTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numCompletedTasks != null">
-      and num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numSkippedTasks != null">
-      and num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numFailedTasks != null">
-      and num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER}
-    </if>
-    <if test="numActiveStages != null">
-      and num_active_stages = #{numActiveStages,jdbcType=INTEGER}
-    </if>
-    <if test="numCompletedStages != null">
-      and num_completed_stages = #{numCompletedStages,jdbcType=INTEGER}
-    </if>
-    <if test="numSkippedStages != null">
-      and num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER}
-    </if>
-    <if test="numFailedStages != null">
-      and num_failed_stages = #{numFailedStages,jdbcType=INTEGER}
-    </if>
-    <if test="tableName != null">
-      and table_name = #{tableName,jdbcType=VARCHAR}
-    </if>
-    <if test="creattime != null">
-      and creattime = #{creattime,jdbcType=TIMESTAMP}
-    </if>
-    <if test="healthtime != null">
-      and healthtime = #{healthtime,jdbcType=TIMESTAMP}
-    </if>
-  </select>
+        healthtime = #{healthtime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="emptyThdServicesjobData"
+            parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        truncate table ${centreTableName}
+    </update>
+    <select id="selectTdhServicesjobInfoByDTO" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+        where 1=1
+        <if test="jobId != null">
+            and job_id = #{jobId,jdbcType=INTEGER}
+        </if>
+        <if test="userName != null">
+            and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="schedulingPool != null">
+            and scheduling_pool = #{schedulingPool,jdbcType=VARCHAR}
+        </if>
+        <if test="description != null">
+            and description = #{description,jdbcType=VARCHAR}
+        </if>
+        <if test="submissionTime != null">
+            and submission_time = #{submissionTime,jdbcType=VARCHAR}
+        </if>
+        <if test="stageIds != null">
+            and stage_ids = #{stageIds,jdbcType=VARCHAR}
+        </if>
+        <if test="status != null">
+            and status = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="numTasks != null">
+            and num_tasks = #{numTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numActiveTasks != null">
+            and num_active_tasks = #{numActiveTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numCompletedTasks != null">
+            and num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numSkippedTasks != null">
+            and num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numFailedTasks != null">
+            and num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numActiveStages != null">
+            and num_active_stages = #{numActiveStages,jdbcType=INTEGER}
+        </if>
+        <if test="numCompletedStages != null">
+            and num_completed_stages = #{numCompletedStages,jdbcType=INTEGER}
+        </if>
+        <if test="numSkippedStages != null">
+            and num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER}
+        </if>
+        <if test="numFailedStages != null">
+            and num_failed_stages = #{numFailedStages,jdbcType=INTEGER}
+        </if>
+        <if test="tableName != null">
+            and table_name = #{tableName,jdbcType=VARCHAR}
+        </if>
+        <if test="creattime != null">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="healthtime != null">
+            and healthtime = #{healthtime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+    <select id="selectCountTdhServicesjob" resultType="java.lang.Long"
+            parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfo">
+        select
+        count(*)
+        from ${centreTableName}
+        where 1=1
+        <if test="jobId != null">
+            and job_id = #{jobId,jdbcType=INTEGER}
+        </if>
+        <if test="userName != null">
+            and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="schedulingPool != null">
+            and scheduling_pool = #{schedulingPool,jdbcType=VARCHAR}
+        </if>
+        <if test="description != null">
+            and description = #{description,jdbcType=VARCHAR}
+        </if>
+        <if test="submissionTime != null">
+            and submission_time = #{submissionTime,jdbcType=VARCHAR}
+        </if>
+        <if test="stageIds != null">
+            and stage_ids = #{stageIds,jdbcType=VARCHAR}
+        </if>
+        <if test="status != null">
+            and status = #{status,jdbcType=VARCHAR}
+        </if>
+        <if test="numTasks != null">
+            and num_tasks = #{numTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numActiveTasks != null">
+            and num_active_tasks = #{numActiveTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numCompletedTasks != null">
+            and num_completed_tasks = #{numCompletedTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numSkippedTasks != null">
+            and num_skipped_tasks = #{numSkippedTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numFailedTasks != null">
+            and num_failed_tasks = #{numFailedTasks,jdbcType=INTEGER}
+        </if>
+        <if test="numActiveStages != null">
+            and num_active_stages = #{numActiveStages,jdbcType=INTEGER}
+        </if>
+        <if test="numCompletedStages != null">
+            and num_completed_stages = #{numCompletedStages,jdbcType=INTEGER}
+        </if>
+        <if test="numSkippedStages != null">
+            and num_skipped_stages = #{numSkippedStages,jdbcType=INTEGER}
+        </if>
+        <if test="numFailedStages != null">
+            and num_failed_stages = #{numFailedStages,jdbcType=INTEGER}
+        </if>
+        <if test="tableName != null">
+            and table_name = #{tableName,jdbcType=VARCHAR}
+        </if>
+        <if test="creattime != null">
+            and creattime = #{creattime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="healthtime != null">
+            and healthtime = #{healthtime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
 
-  <select id="countByExample" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfoExample" resultType="java.lang.Integer" >
-    select count(*) from ${centreTableName}
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+    <select id="countByExample" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfoExample"
+            resultType="java.lang.Integer">
+        select count(*) from ${centreTableName}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
 
-  <delete id="deleteByExample" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfoExample" >
-    delete from ${centreTableName}
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
+    <delete id="deleteByExample" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfoExample">
+        delete from ${centreTableName}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
 
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfoExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from ${centreTableName}
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.tdhservicesjobinfomodel.TdhServicesjobInfoExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from ${centreTableName}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
 
-  <update id="updateByExampleSelective" parameterType="map" >
-    update ${centreTableName}
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.jobId != null" >
+    <update id="updateByExampleSelective" parameterType="map">
+        update ${centreTableName}
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jobId != null">
+                job_id = #{record.jobId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userName != null">
+                user_name = #{record.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.schedulingPool != null">
+                scheduling_pool = #{record.schedulingPool,jdbcType=VARCHAR},
+            </if>
+            <if test="record.description != null">
+                description = #{record.description,jdbcType=VARCHAR},
+            </if>
+            <if test="record.submissionTime != null">
+                submission_time = #{record.submissionTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.stageIds != null">
+                stage_ids = #{record.stageIds,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.numTasks != null">
+                num_tasks = #{record.numTasks,jdbcType=INTEGER},
+            </if>
+            <if test="record.numActiveTasks != null">
+                num_active_tasks = #{record.numActiveTasks,jdbcType=INTEGER},
+            </if>
+            <if test="record.numCompletedTasks != null">
+                num_completed_tasks = #{record.numCompletedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="record.numSkippedTasks != null">
+                num_skipped_tasks = #{record.numSkippedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="record.numFailedTasks != null">
+                num_failed_tasks = #{record.numFailedTasks,jdbcType=INTEGER},
+            </if>
+            <if test="record.numActiveStages != null">
+                num_active_stages = #{record.numActiveStages,jdbcType=INTEGER},
+            </if>
+            <if test="record.numCompletedStages != null">
+                num_completed_stages = #{record.numCompletedStages,jdbcType=INTEGER},
+            </if>
+            <if test="record.numSkippedStages != null">
+                num_skipped_stages = #{record.numSkippedStages,jdbcType=INTEGER},
+            </if>
+            <if test="record.numFailedStages != null">
+                num_failed_stages = #{record.numFailedStages,jdbcType=INTEGER},
+            </if>
+            <if test="record.tableName != null">
+                table_name = #{record.tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creattime != null">
+                creattime = #{record.creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.healthtime != null">
+                healthtime = #{record.healthtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map">
+        update ${centreTableName}
+        set id = #{record.id,jdbcType=VARCHAR},
         job_id = #{record.jobId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userName != null" >
         user_name = #{record.userName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.schedulingPool != null" >
         scheduling_pool = #{record.schedulingPool,jdbcType=VARCHAR},
-      </if>
-      <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.submissionTime != null" >
         submission_time = #{record.submissionTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stageIds != null" >
         stage_ids = #{record.stageIds,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null" >
         status = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.numTasks != null" >
         num_tasks = #{record.numTasks,jdbcType=INTEGER},
-      </if>
-      <if test="record.numActiveTasks != null" >
         num_active_tasks = #{record.numActiveTasks,jdbcType=INTEGER},
-      </if>
-      <if test="record.numCompletedTasks != null" >
         num_completed_tasks = #{record.numCompletedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="record.numSkippedTasks != null" >
         num_skipped_tasks = #{record.numSkippedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="record.numFailedTasks != null" >
         num_failed_tasks = #{record.numFailedTasks,jdbcType=INTEGER},
-      </if>
-      <if test="record.numActiveStages != null" >
         num_active_stages = #{record.numActiveStages,jdbcType=INTEGER},
-      </if>
-      <if test="record.numCompletedStages != null" >
         num_completed_stages = #{record.numCompletedStages,jdbcType=INTEGER},
-      </if>
-      <if test="record.numSkippedStages != null" >
         num_skipped_stages = #{record.numSkippedStages,jdbcType=INTEGER},
-      </if>
-      <if test="record.numFailedStages != null" >
         num_failed_stages = #{record.numFailedStages,jdbcType=INTEGER},
-      </if>
-      <if test="record.tableName != null" >
         table_name = #{record.tableName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.creattime != null" >
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.healthtime != null">
-       healthtime = #{record.healthtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-
-  <update id="updateByExample" parameterType="map" >
-    update ${centreTableName}
-    set id = #{record.id,jdbcType=VARCHAR},
-    job_id = #{record.jobId,jdbcType=INTEGER},
-    user_name = #{record.userName,jdbcType=VARCHAR},
-    name = #{record.name,jdbcType=VARCHAR},
-    scheduling_pool = #{record.schedulingPool,jdbcType=VARCHAR},
-    description = #{record.description,jdbcType=VARCHAR},
-    submission_time = #{record.submissionTime,jdbcType=VARCHAR},
-    stage_ids = #{record.stageIds,jdbcType=VARCHAR},
-    status = #{record.status,jdbcType=VARCHAR},
-    num_tasks = #{record.numTasks,jdbcType=INTEGER},
-    num_active_tasks = #{record.numActiveTasks,jdbcType=INTEGER},
-    num_completed_tasks = #{record.numCompletedTasks,jdbcType=INTEGER},
-    num_skipped_tasks = #{record.numSkippedTasks,jdbcType=INTEGER},
-    num_failed_tasks = #{record.numFailedTasks,jdbcType=INTEGER},
-    num_active_stages = #{record.numActiveStages,jdbcType=INTEGER},
-    num_completed_stages = #{record.numCompletedStages,jdbcType=INTEGER},
-    num_skipped_stages = #{record.numSkippedStages,jdbcType=INTEGER},
-    num_failed_stages = #{record.numFailedStages,jdbcType=INTEGER},
-    table_name = #{record.tableName,jdbcType=VARCHAR},
-    creattime = #{record.creattime,jdbcType=TIMESTAMP},
-    healthtime = #{record.healthtime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+        healthtime = #{record.healthtime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
 </mapper>

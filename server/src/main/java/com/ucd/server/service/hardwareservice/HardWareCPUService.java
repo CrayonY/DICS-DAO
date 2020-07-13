@@ -9,12 +9,12 @@ import com.ucd.daocommon.DTO.hardwareDTO.HardwareCpuDTO;
 public interface HardWareCPUService {
 
     /**
+     * @return com.ucd.common.utils.pager.PageView
+     * @throws
      * @author Crayon
-     * @Description  获取硬件CPU数据
+     * @Description 获取硬件CPU数据
      * @date 2019/3/30 10:29 AM
      * @params [pageView, hardwareCpuDTO]
-     * @exception
-     * @return com.ucd.common.utils.pager.PageView
      */
     PageView getHardWareCPU(PageView pageView, HardwareCpuDTO hardwareCpuDTO) throws Exception;
 

@@ -34,6 +34,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class ThdServicesServiceImpl implements TdhServicesService {
 
@@ -44,7 +45,6 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
 
     private final String TDHB_SERVICES_INFO_NOW = "tdhb_services_info_now";
-
 
 
     @Autowired
@@ -59,22 +59,22 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
     @Override
     @Transactional
-    public int saveThdServicesData(TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception{
-        if(tdhServicesInfoDTO == null){
+    public int saveThdServicesData(TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
+        if (tdhServicesInfoDTO == null) {
             throw new DaoException(ResultExceptEnum.ERROR_PARAMETER);
         }
         TdhServices tdhServices = new TdhServices();
         BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServices);
         String ID = KeyUtil.genUniqueKey();
-        tdhServices.setServicesId(ID+UUIDUtils.getUUID());
+        tdhServices.setServicesId(ID + UUIDUtils.getUUID());
         tdhServices.setPages(tdhServicesInfoDTO.getPages().toString());
         tdhServices.setMetrics(tdhServicesInfoDTO.getMetrics().toString());
         tdhServices.setDependencies(tdhServicesInfoDTO.getDependencies().toString());
-        List<TdhServicesHealthckDTO> tdhServicesHealthckDTOList= tdhServicesInfoDTO.getHealthChecks();
-        for (TdhServicesHealthckDTO tdhServicesHealthckDTO: tdhServicesHealthckDTOList){
+        List<TdhServicesHealthckDTO> tdhServicesHealthckDTOList = tdhServicesInfoDTO.getHealthChecks();
+        for (TdhServicesHealthckDTO tdhServicesHealthckDTO : tdhServicesHealthckDTOList) {
             TdhServicesHealthck tdhServicesHealthck = new TdhServicesHealthck();
             BeanUtils.copyProperties(tdhServicesHealthckDTO, tdhServicesHealthck);
-            tdhServicesHealthck.setId(ID+UUIDUtils.getUUID());
+            tdhServicesHealthck.setId(ID + UUIDUtils.getUUID());
             thdServicesHealthckMapper.insertSelective(tdhServicesHealthck);
         }
         int count = tdhServicesMapper.insertSelective(tdhServices);
@@ -84,21 +84,21 @@ public class ThdServicesServiceImpl implements TdhServicesService {
     @Override
     @Transactional
     public int saveThdServicesData(TdhServicesListDTO tdhServicesListDTO) throws Exception {
-        if(tdhServicesListDTO == null){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhServicesListDTO == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         int countNum = 0;
         String ID = KeyUtil.genUniqueKey();
         String UUID = UUIDUtils.getUUID();
-        for (TdhServicesInfoDTO tdhServicesInfoDTO:tdhServicesListDTO.getTdhServicesInfoDTOList()){
-            if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
-                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        for (TdhServicesInfoDTO tdhServicesInfoDTO : tdhServicesListDTO.getTdhServicesInfoDTOList()) {
+            if (tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())) {
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
             }
             TdhServicesA tdhServicesA = new TdhServicesA();
             BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
-            tdhServicesA.setServicesId(ID+UUID);
+            tdhServicesA.setServicesId(ID + UUID);
             //tdhServicesA.setServicesId(ID+UUIDUtils.getUUID());
-            System.out.println("111111111111111111111111tdhServicesA:"+tdhServicesA);
+            System.out.println("111111111111111111111111tdhServicesA:" + tdhServicesA);
             int count = tdhServicesAMapper.insertSelective(tdhServicesA);
             countNum = countNum + count;
         }
@@ -107,29 +107,29 @@ public class ThdServicesServiceImpl implements TdhServicesService {
     }
 
     @Override
-    public PageView getThdServicesInfo(PageView pageView,TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
-        if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+    public PageView getThdServicesInfo(PageView pageView, TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
+        if (tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
         Gson gs = new Gson();
         List<TdhServicesVO> tdhServicesVOList = new ArrayList<TdhServicesVO>();
         TdhServicesA tdhServicesA = new TdhServicesA();
         BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
-        if (tdhServicesInfoDTO.getLastCheck() != null && !("".equals(tdhServicesInfoDTO.getLastCheck()))){
+        if (tdhServicesInfoDTO.getLastCheck() != null && !("".equals(tdhServicesInfoDTO.getLastCheck()))) {
             tdhServicesA.setStartTime(TimeUtil.getLongFromString(tdhServicesInfoDTO.getLastCheck()).toString());
             long stopTimeLong = TimeUtil.getLongFromString(tdhServicesInfoDTO.getLastCheck()) + 1000l;
             tdhServicesA.setStopTime(String.valueOf(stopTimeLong));
         }
-        if (tdhServicesInfoDTO.getStartTime() != null && !("".equals(tdhServicesInfoDTO.getStartTime()))){
+        if (tdhServicesInfoDTO.getStartTime() != null && !("".equals(tdhServicesInfoDTO.getStartTime()))) {
             tdhServicesA.setStartTime(TimeUtil.getLongFromString(tdhServicesInfoDTO.getStartTime()).toString());
         }
-        if (tdhServicesInfoDTO.getStopTime() != null && !("".equals(tdhServicesInfoDTO.getStopTime()))){
+        if (tdhServicesInfoDTO.getStopTime() != null && !("".equals(tdhServicesInfoDTO.getStopTime()))) {
             tdhServicesA.setStopTime(TimeUtil.getLongFromString(tdhServicesInfoDTO.getStopTime()).toString());
         }
         PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
 //        List<TdhServices> tdhServicesList =  tdhServicesMapper.selectTdhServicesInfo();//全部服务
 //        long count = tdhServicesMapper.selectCountTdhServices();                      //总记录数
-        List<TdhServicesA> tdhServicesAList =  tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
+        List<TdhServicesA> tdhServicesAList = tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
         long count = tdhServicesAMapper.selectCountTdhServices(tdhServicesA);
         pageView.setTotalrecord(count);
 //        for (TdhServices thdServices : tdhServicesList){
@@ -148,10 +148,10 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 //                tdhServicesVOList.add(thdServicesVO);
 //
 //        }
-        for (TdhServicesA thdServicesA : tdhServicesAList){
-                TdhServicesVO thdServicesVO = new TdhServicesVO();
-                BeanUtils.copyProperties(thdServicesA, thdServicesVO);
-                tdhServicesVOList.add(thdServicesVO);
+        for (TdhServicesA thdServicesA : tdhServicesAList) {
+            TdhServicesVO thdServicesVO = new TdhServicesVO();
+            BeanUtils.copyProperties(thdServicesA, thdServicesVO);
+            tdhServicesVOList.add(thdServicesVO);
         }
         pageView.setRecords(tdhServicesVOList);
         return pageView;
@@ -161,22 +161,22 @@ public class ThdServicesServiceImpl implements TdhServicesService {
     public TdhServicesAVO getThdServicesInfoNow(String center) {
 
         TdhServicesA tdhServicesA = new TdhServicesA();
-        if(ObjectUtils.isEmpty(center)){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        if (ObjectUtils.isEmpty(center)) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
         // 确定表名
-        if (center.equals("A")){
+        if (center.equals("A")) {
             tdhServicesA.setTableName(TDHA_SERVICES_INFO_NOW);
         }
 
-        if (center.equals("B")){
+        if (center.equals("B")) {
             tdhServicesA.setTableName(TDHB_SERVICES_INFO_NOW);
         }
 
         // 获取信息
         List<TdhServicesA> tdhServicesAList = tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
 
-        if(tdhServicesAList != null && tdhServicesAList.size()>0){
+        if (tdhServicesAList != null && tdhServicesAList.size() > 0) {
             tdhServicesA = tdhServicesAList.get(0);
         }
 
@@ -204,38 +204,38 @@ public class ThdServicesServiceImpl implements TdhServicesService {
             return countNum;
         }
         // 进行修改操作
-        for(TdhServicesInfoDTO tdhServicesInfoDTO1 :tdhServicesListDTO.getTdhServicesInfoDTOList()){
+        for (TdhServicesInfoDTO tdhServicesInfoDTO1 : tdhServicesListDTO.getTdhServicesInfoDTOList()) {
             TdhServicesA tdhServicesA = new TdhServicesA();
             BeanUtils.copyProperties(tdhServicesInfoDTO1, tdhServicesA);
-            if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
-                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+            if (tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())) {
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
             }
             int count = tdhServicesAMapper.updateByNameSelective(tdhServicesA);
             countNum = countNum + count;
         }
         // TODO 数据返回不完整时候，需要将不完整数据补充上
-            return countNum;
-}
+        return countNum;
+    }
 
     @Override
     @Transactional
     public int saveThdServicesInfoNow(TdhServicesListDTO tdhServicesListDTO) throws Exception {
-        logger.info("tdhServicesListDTO:"+tdhServicesListDTO.toString());
-        if(tdhServicesListDTO == null){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        logger.info("tdhServicesListDTO:" + tdhServicesListDTO.toString());
+        if (tdhServicesListDTO == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         int countNum = 0;
-        for (TdhServicesInfoDTO tdhServicesInfoDTO:tdhServicesListDTO.getTdhServicesInfoDTOList()){
-            if(tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())){
-                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        for (TdhServicesInfoDTO tdhServicesInfoDTO : tdhServicesListDTO.getTdhServicesInfoDTOList()) {
+            if (tdhServicesInfoDTO.getTableName() == null || "".equals(tdhServicesInfoDTO.getTableName())) {
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
             }
             TdhServicesA tdhServicesA = new TdhServicesA();
             // 对象转换
             BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
-            tdhServicesA.setServicesId(KeyUtil.genUniqueKey()+UUIDUtils.getUUID());
+            tdhServicesA.setServicesId(KeyUtil.genUniqueKey() + UUIDUtils.getUUID());
 
             // TODO 判断主键是否重复
-            logger.info("tdhServicesA:"+tdhServicesA);
+            logger.info("tdhServicesA:" + tdhServicesA);
             int count = tdhServicesAMapper.insertSelective(tdhServicesA);
             countNum = countNum + count;
         }
@@ -245,8 +245,8 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
     @Override
     public PageView getThdServicesListNow(PageView pageView, TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
-        if(ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        if (ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
 
         List<TdhServicesAVO> tdhServicesVOList = new ArrayList<>();
@@ -255,8 +255,8 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         TdhServicesA tdhServicesA = new TdhServicesA();
         BeanUtils.copyProperties(tdhServicesInfoDTO, tdhServicesA);
         List<TdhServicesA> tdhServicesAList = tdhServicesAMapper.selectTdhServicesInfoByDTO(tdhServicesA);
-        logger.info("tdhServicesAList="+tdhServicesAList.toString());
-        for (TdhServicesA thdServicesA : tdhServicesAList){
+        logger.info("tdhServicesAList=" + tdhServicesAList.toString());
+        for (TdhServicesA thdServicesA : tdhServicesAList) {
             TdhServicesAVO thdServicesAVO = new TdhServicesAVO();
             BeanUtils.copyProperties(thdServicesA, thdServicesAVO);
             tdhServicesVOList.add(thdServicesAVO);
@@ -267,8 +267,8 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
     @Override
     public PageView getTdhHealthStatusByTime(PageView pageView, TdhServicesInfoDTO tdhServicesInfoDTO) throws Exception {
-        if(ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        if (ObjectUtils.isEmpty(tdhServicesInfoDTO.getTableName())) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
         List<TdhServicesAVO> tdhServicesAVOList = new ArrayList<>();
         //PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
@@ -277,32 +277,32 @@ public class ThdServicesServiceImpl implements TdhServicesService {
 
         List<TdhServicesA> tdhServicesAList = new ArrayList<>();
         /** 如果查看30分钟内 数据*/
-        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_30_MIN){
-            tdhServicesAList =   tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
+        if (tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_30_MIN) {
+            tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
         }
 
         /** 如果查看1小时/2小时内 数据*/
-        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_HOUR){
+        if (tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_HOUR) {
             tdhServicesA.setSecondStart(TdhServiceConstant.SECOND_RANGE1);
             tdhServicesA.setSecondEnd(TdhServiceConstant.SECOND_RANGE2);
             tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
         }
 
         /** 如果查看1天以内 数据*/
-        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_12_HOUR){
+        if (tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_12_HOUR) {
             tdhServicesA.setSecondStart(TdhServiceConstant.SECOND_RANGE3);
             tdhServicesA.setSecondEnd(TdhServiceConstant.SECOND_RANGE4);
             tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
         }
 
         /** 如果查看1周以内 数据*/
-        if(tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_WEEK){
+        if (tdhServicesInfoDTO.getSecond() == TdhServiceConstant.TDH_SERVICE_1_WEEK) {
             tdhServicesA.setSecondStart(TdhServiceConstant.SECOND_RANGE5);
             tdhServicesAList = tdhServicesAMapper.selectTdhServiceHealthStatusByTime(tdhServicesA);
         }
 
-        logger.info("tdhServicesAList="+tdhServicesAList.toString());
-        for (TdhServicesA thdServicesA : tdhServicesAList){
+        logger.info("tdhServicesAList=" + tdhServicesAList.toString());
+        for (TdhServicesA thdServicesA : tdhServicesAList) {
             TdhServicesAVO thdServicesAVO = new TdhServicesAVO();
             BeanUtils.copyProperties(thdServicesA, thdServicesAVO);
             tdhServicesAVOList.add(thdServicesAVO);
@@ -316,8 +316,8 @@ public class ThdServicesServiceImpl implements TdhServicesService {
         return pageView;
     }
 
-    private void listModelToVO( List<TdhServicesHealthck> tdhServicesHealthckList,List<TdhServicesHealthckVO> tdhServicesHealthckListVO){
-        for (TdhServicesHealthck tdhServicesHealthck:tdhServicesHealthckList){
+    private void listModelToVO(List<TdhServicesHealthck> tdhServicesHealthckList, List<TdhServicesHealthckVO> tdhServicesHealthckListVO) {
+        for (TdhServicesHealthck tdhServicesHealthck : tdhServicesHealthckList) {
             TdhServicesHealthckVO tdhServicesHealthckVO = new TdhServicesHealthckVO();
             BeanUtils.copyProperties(tdhServicesHealthck, tdhServicesHealthckVO);
             tdhServicesHealthckListVO.add(tdhServicesHealthckVO);

@@ -34,16 +34,19 @@ public class HardwareThreadDTO {
 
     private String checktimeEnd;
 
-    /** 表名 */
+    /**
+     * 表名
+     */
     private String tablename;
 
-    /** 秒数 */
+    /**
+     * 秒数
+     */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
-
 
 
 }

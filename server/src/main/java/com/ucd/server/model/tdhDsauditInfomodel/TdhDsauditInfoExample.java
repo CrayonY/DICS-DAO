@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Data
 public class TdhDsauditInfoExample {
     protected String orderByClause;
@@ -966,7 +967,6 @@ public class TdhDsauditInfoExample {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
-
 
 
         public Criteria andSyncTypeIsNull() {

@@ -37,45 +37,44 @@ public class HardWareNICController {
     private final static Logger logger = LoggerFactory.getLogger(HardWareNICController.class);
 
     @PostMapping(value = "/getHardWareNic")
-    public ResultVO getHardWareNic(@RequestBody Map<String, Object> models){
+    public ResultVO getHardWareNic(@RequestBody Map<String, Object> models) {
 
         ResultVO resultVO;
         try {
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-            HardwareNicDTO hardwareNicDTO = Tools.map2obj((Map<String, Object>)models.get("hardwareNicDTO"), HardwareNicDTO.class);
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            HardwareNicDTO hardwareNicDTO = Tools.map2obj((Map<String, Object>) models.get("hardwareNicDTO"), HardwareNicDTO.class);
 
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("hardwareNicDTO:"+hardwareNicDTO);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("hardwareNicDTO:" + hardwareNicDTO);
 
-            if(pageView == null){
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView =hardWareNICService.getHardWareNIC(pageView,hardwareNicDTO);
-            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(),TdhServiceDaoEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = hardWareNICService.getHardWareNIC(pageView, hardwareNicDTO);
+            resultVO = ResultVOUtil.setResult(TdhServiceDaoEnum.SUCCESS.getCode(), TdhServiceDaoEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
-            logger.info("resultVO:"+resultVO);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
         }
     }
 
 
-
     /**
+     * @return com.ucd.common.VO.ResultVO<?>
+     * @throws
      * @author Crayon
      * @Description 获取硬件NIC实时数据信息
      * @date 2019/4/29 3:54 PM
      * @params [host]
-     * @exception
-     * @return com.ucd.common.VO.ResultVO<?>
      */
     @PostMapping(value = "/getHardWareNicNow")
-    public ResultVO<?> getHardWareNicNow(String host){
+    public ResultVO<?> getHardWareNicNow(String host) {
 
-      return hardWareNICService.getHardWareNICNow(host);
+        return hardWareNICService.getHardWareNICNow(host);
     }
 
 

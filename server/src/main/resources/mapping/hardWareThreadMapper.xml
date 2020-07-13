@@ -1,362 +1,373 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ucd.server.mapper.hardwareinfomapper.hardWareThreadmapper.HardWareThreadMapper">
-  <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="host" jdbcType="VARCHAR" property="host" />
-    <result column="pidname" jdbcType="VARCHAR" property="pidname" />
-    <result column="pidusememeper" jdbcType="VARCHAR" property="pidusememeper" />
-    <result column="pidstatus" jdbcType="VARCHAR" property="pidstatus" />
-    <result column="pidpwd" jdbcType="VARCHAR" property="pidpwd" />
-    <result column="pidthread" jdbcType="VARCHAR" property="pidthread" />
-    <result column="pid" jdbcType="VARCHAR" property="pid" />
-    <result column="creattime" jdbcType="TIMESTAMP" property="creattime" />
-    <result column="checktime" jdbcType="VARCHAR" property="checktime" />
-    <result column="prepare" jdbcType="VARCHAR" property="prepare" />
-    <result column="pids" jdbcType="VARCHAR" property="pids" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="host" jdbcType="VARCHAR" property="host"/>
+        <result column="pidname" jdbcType="VARCHAR" property="pidname"/>
+        <result column="pidusememeper" jdbcType="VARCHAR" property="pidusememeper"/>
+        <result column="pidstatus" jdbcType="VARCHAR" property="pidstatus"/>
+        <result column="pidpwd" jdbcType="VARCHAR" property="pidpwd"/>
+        <result column="pidthread" jdbcType="VARCHAR" property="pidthread"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="creattime" jdbcType="TIMESTAMP" property="creattime"/>
+        <result column="checktime" jdbcType="VARCHAR" property="checktime"/>
+        <result column="prepare" jdbcType="VARCHAR" property="prepare"/>
+        <result column="pids" jdbcType="VARCHAR" property="pids"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, host, pidname, pidusememeper, pidstatus, pidpwd, pidthread, pid, creattime, checktime,
+        prepare, pids
+    </sql>
+    <select id="selectByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, host, pidname, pidusememeper, pidstatus, pidpwd, pidthread, pid, creattime, checktime, 
-    prepare, pids
-  </sql>
-  <select id="selectByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from ${tablename}
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from hard_ware_thread
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from hard_ware_thread
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample">
-    delete from hard_ware_thread
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
-    insert into ${tablename} (id, host, pidname,
-      pidusememeper, pidstatus, pidpwd, 
-      pidthread, pid, creattime, 
-      checktime, prepare, pids
-      )
-    values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{pidname,jdbcType=VARCHAR}, 
-      #{pidusememeper,jdbcType=VARCHAR}, #{pidstatus,jdbcType=VARCHAR}, #{pidpwd,jdbcType=VARCHAR}, 
-      #{pidthread,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, 
-      #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, #{pids,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
-    insert into ${tablename}
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="host != null">
-        host,
-      </if>
-      <if test="pidname != null">
-        pidname,
-      </if>
-      <if test="pidusememeper != null">
-        pidusememeper,
-      </if>
-      <if test="pidstatus != null">
-        pidstatus,
-      </if>
-      <if test="pidpwd != null">
-        pidpwd,
-      </if>
-      <if test="pidthread != null">
-        pidthread,
-      </if>
-      <if test="pid != null">
-        pid,
-      </if>
-      <if test="creattime != null">
-        creattime,
-      </if>
-      <if test="checktime != null">
-        checktime,
-      </if>
-      <if test="prepare != null">
-        prepare,
-      </if>
-      <if test="pids != null">
-        pids,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="host != null">
-        #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="pidname != null">
-        #{pidname,jdbcType=VARCHAR},
-      </if>
-      <if test="pidusememeper != null">
-        #{pidusememeper,jdbcType=VARCHAR},
-      </if>
-      <if test="pidstatus != null">
-        #{pidstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="pidpwd != null">
-        #{pidpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="pidthread != null">
-        #{pidthread,jdbcType=VARCHAR},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null">
-        #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checktime != null">
-        #{checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="prepare != null">
-        #{prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="pids != null">
-        #{pids,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample" resultType="java.lang.Integer">
-    select count(*) from ${tablename}
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update hard_ware_thread
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.host != null">
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from ${tablename}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from hard_ware_thread
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from hard_ware_thread
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample">
+        delete from hard_ware_thread
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
+        insert into ${tablename} (id, host, pidname,
+        pidusememeper, pidstatus, pidpwd,
+        pidthread, pid, creattime,
+        checktime, prepare, pids
+        )
+        values (#{id,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{pidname,jdbcType=VARCHAR},
+        #{pidusememeper,jdbcType=VARCHAR}, #{pidstatus,jdbcType=VARCHAR}, #{pidpwd,jdbcType=VARCHAR},
+        #{pidthread,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP},
+        #{checktime,jdbcType=VARCHAR}, #{prepare,jdbcType=VARCHAR}, #{pids,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
+        insert into ${tablename}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="host != null">
+                host,
+            </if>
+            <if test="pidname != null">
+                pidname,
+            </if>
+            <if test="pidusememeper != null">
+                pidusememeper,
+            </if>
+            <if test="pidstatus != null">
+                pidstatus,
+            </if>
+            <if test="pidpwd != null">
+                pidpwd,
+            </if>
+            <if test="pidthread != null">
+                pidthread,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="creattime != null">
+                creattime,
+            </if>
+            <if test="checktime != null">
+                checktime,
+            </if>
+            <if test="prepare != null">
+                prepare,
+            </if>
+            <if test="pids != null">
+                pids,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="pidname != null">
+                #{pidname,jdbcType=VARCHAR},
+            </if>
+            <if test="pidusememeper != null">
+                #{pidusememeper,jdbcType=VARCHAR},
+            </if>
+            <if test="pidstatus != null">
+                #{pidstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="pidpwd != null">
+                #{pidpwd,jdbcType=VARCHAR},
+            </if>
+            <if test="pidthread != null">
+                #{pidthread,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                #{checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="prepare != null">
+                #{prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="pids != null">
+                #{pids,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThreadExample"
+            resultType="java.lang.Integer">
+        select count(*) from ${tablename}
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update hard_ware_thread
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=VARCHAR},
+            </if>
+            <if test="record.host != null">
+                host = #{record.host,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pidname != null">
+                pidname = #{record.pidname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pidusememeper != null">
+                pidusememeper = #{record.pidusememeper,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pidstatus != null">
+                pidstatus = #{record.pidstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pidpwd != null">
+                pidpwd = #{record.pidpwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pidthread != null">
+                pidthread = #{record.pidthread,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creattime != null">
+                creattime = #{record.creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.checktime != null">
+                checktime = #{record.checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.prepare != null">
+                prepare = #{record.prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pids != null">
+                pids = #{record.pids,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update hard_ware_thread
+        set id = #{record.id,jdbcType=VARCHAR},
         host = #{record.host,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pidname != null">
         pidname = #{record.pidname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pidusememeper != null">
         pidusememeper = #{record.pidusememeper,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pidstatus != null">
         pidstatus = #{record.pidstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pidpwd != null">
         pidpwd = #{record.pidpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pidthread != null">
         pidthread = #{record.pidthread,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pid != null">
         pid = #{record.pid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.creattime != null">
         creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.checktime != null">
         checktime = #{record.checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.prepare != null">
         prepare = #{record.prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pids != null">
-        pids = #{record.pids,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update hard_ware_thread
-    set id = #{record.id,jdbcType=VARCHAR},
-      host = #{record.host,jdbcType=VARCHAR},
-      pidname = #{record.pidname,jdbcType=VARCHAR},
-      pidusememeper = #{record.pidusememeper,jdbcType=VARCHAR},
-      pidstatus = #{record.pidstatus,jdbcType=VARCHAR},
-      pidpwd = #{record.pidpwd,jdbcType=VARCHAR},
-      pidthread = #{record.pidthread,jdbcType=VARCHAR},
-      pid = #{record.pid,jdbcType=VARCHAR},
-      creattime = #{record.creattime,jdbcType=TIMESTAMP},
-      checktime = #{record.checktime,jdbcType=VARCHAR},
-      prepare = #{record.prepare,jdbcType=VARCHAR},
-      pids = #{record.pids,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
-    update ${tablename}
-    <set>
-      <if test="host != null">
-        host = #{host,jdbcType=VARCHAR},
-      </if>
-      <if test="pidname != null">
+        pids = #{record.pids,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
+        update ${tablename}
+        <set>
+            <if test="host != null">
+                host = #{host,jdbcType=VARCHAR},
+            </if>
+            <if test="pidname != null">
+                pidname = #{pidname,jdbcType=VARCHAR},
+            </if>
+            <if test="pidusememeper != null">
+                pidusememeper = #{pidusememeper,jdbcType=VARCHAR},
+            </if>
+            <if test="pidstatus != null">
+                pidstatus = #{pidstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="pidpwd != null">
+                pidpwd = #{pidpwd,jdbcType=VARCHAR},
+            </if>
+            <if test="pidthread != null">
+                pidthread = #{pidthread,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="creattime != null">
+                creattime = #{creattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checktime != null">
+                checktime = #{checktime,jdbcType=VARCHAR},
+            </if>
+            <if test="prepare != null">
+                prepare = #{prepare,jdbcType=VARCHAR},
+            </if>
+            <if test="pids != null">
+                pids = #{pids,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
+        update ${tablename}
+        set host = #{host,jdbcType=VARCHAR},
         pidname = #{pidname,jdbcType=VARCHAR},
-      </if>
-      <if test="pidusememeper != null">
         pidusememeper = #{pidusememeper,jdbcType=VARCHAR},
-      </if>
-      <if test="pidstatus != null">
         pidstatus = #{pidstatus,jdbcType=VARCHAR},
-      </if>
-      <if test="pidpwd != null">
         pidpwd = #{pidpwd,jdbcType=VARCHAR},
-      </if>
-      <if test="pidthread != null">
         pidthread = #{pidthread,jdbcType=VARCHAR},
-      </if>
-      <if test="pid != null">
         pid = #{pid,jdbcType=VARCHAR},
-      </if>
-      <if test="creattime != null">
         creattime = #{creattime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="checktime != null">
         checktime = #{checktime,jdbcType=VARCHAR},
-      </if>
-      <if test="prepare != null">
         prepare = #{prepare,jdbcType=VARCHAR},
-      </if>
-      <if test="pids != null">
-        pids = #{pids,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
-    update ${tablename}
-    set host = #{host,jdbcType=VARCHAR},
-      pidname = #{pidname,jdbcType=VARCHAR},
-      pidusememeper = #{pidusememeper,jdbcType=VARCHAR},
-      pidstatus = #{pidstatus,jdbcType=VARCHAR},
-      pidpwd = #{pidpwd,jdbcType=VARCHAR},
-      pidthread = #{pidthread,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=VARCHAR},
-      creattime = #{creattime,jdbcType=TIMESTAMP},
-      checktime = #{checktime,jdbcType=VARCHAR},
-      prepare = #{prepare,jdbcType=VARCHAR},
-      pids = #{pids,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByHost" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from ${tablename}
-    where host = #{host,jdbcType=VARCHAR}
-  </select>
+        pids = #{pids,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByHost" parameterType="com.ucd.daocommon.DTO.hardwareDTO.HardwareNowDTO"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tablename}
+        where host = #{host,jdbcType=VARCHAR}
+    </select>
 
 
+    <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap"
+            parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread">
+        select
+        a.id,a.host,a.pidname,a.pidusememeper,a.pidstatus,a.pidpwd,a.pidthread,a.pid,a.creattime,a.checktime,a.prepare,a.pids
+        from(
+        select
+        id,host,pidname,pidusememeper,pidstatus,pidpwd,pidthread,pid,creattime,checktime,prepare,pids
 
-  <select id="selectHardWareHealthStatusByTime" resultMap="BaseResultMap" parameterType="com.ucd.server.model.hardwareinfomodel.hardWareThreadmodel.HardWareThread" >
-    select
-    a.id,a.host,a.pidname,a.pidusememeper,a.pidstatus,a.pidpwd,a.pidthread,a.pid,a.creattime,a.checktime,a.prepare,a.pids
-    from(
-    select
-    id,host,pidname,pidusememeper,pidstatus,pidpwd,pidthread,pid,creattime,checktime,prepare,pids
+        from ${tablename} force index(host_checktime_index) where 1=1
+        <if test="host != null">
+            AND host = #{host,jdbcType=VARCHAR}
+        </if>
+        <if test="checktimeStart != null and checktimeStart != ''">
+            and checktime &gt;= #{checktimeStart,jdbcType=VARCHAR}
+        </if>
+        <if test="checktimeEnd != null and checktimeEnd != ''">
+            and checktime &lt;= #{checktimeEnd,jdbcType=VARCHAR}
+        </if>
+        ) a
+        WHERE 1=1
+        <if test="secondStart != null and secondStart != ''">
+            and DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
+        </if>
 
-    from ${tablename}  force index(host_checktime_index) where 1=1
-    <if test="host != null" >
-      AND host = #{host,jdbcType=VARCHAR}
-    </if>
-    <if test="checktimeStart != null and checktimeStart != ''">
-      and checktime &gt;= #{checktimeStart,jdbcType=VARCHAR}
-    </if>
-    <if test="checktimeEnd != null and checktimeEnd != ''">
-      and checktime &lt;= #{checktimeEnd,jdbcType=VARCHAR}
-    </if>
-    ) a
-    WHERE 1=1
-    <if test="secondStart != null and secondStart != ''">
-      and DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondStart}')
-    </if>
+        <if test="secondEnd != null and secondEnd != ''">
+            OR DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
+        </if>
 
-    <if test="secondEnd != null and secondEnd != ''">
-      OR DATE_FORMAT(a.checktime,'%Y%m%d%H%i%s') LIKE CONCAT('%','${secondEnd}')
-    </if>
-
-  </select>
+    </select>
 
 </mapper>

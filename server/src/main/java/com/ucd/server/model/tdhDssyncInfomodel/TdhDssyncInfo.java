@@ -3,6 +3,7 @@ package com.ucd.server.model.tdhDssyncInfomodel;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class TdhDssyncInfo {
     private String id;

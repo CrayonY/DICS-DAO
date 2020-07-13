@@ -45,8 +45,8 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
     @Override
     @Transactional
     public int saveTdhDsauditInfo(TdhDsauditDTO tdhDsauditDTO) throws Exception {
-        if(tdhDsauditDTO == null ){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDsauditDTO == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         String ID = KeyUtil.genUniqueKey();
         String UUID = UUIDUtils.getUUID();
@@ -60,58 +60,58 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
 
     @Override
     public PageView getTdhDsauditInfo(PageView pageView, TdhDsauditDTO tdhDsauditDTO) throws Exception {
-        if(tdhDsauditDTO == null){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        if (tdhDsauditDTO == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
         Gson gs = new Gson();
         List<TdhDsauditVO> tdhDsauditVOList = new ArrayList<TdhDsauditVO>();
         TdhDsauditInfoExample tdhDsauditInfoExample = new TdhDsauditInfoExample();
-        logger.info("tdhDsauditDTO:"+tdhDsauditDTO);
+        logger.info("tdhDsauditDTO:" + tdhDsauditDTO);
         TdhDsauditInfoExample.Criteria criteria = tdhDsauditInfoExample.createCriteria();
         TdhDsauditInfoExample.Criteria criteriaOR = tdhDsauditInfoExample.or();
         tdhDsauditInfoExample.setOrderByClause("audit_time DESC,apply_time ASC");
-        if (tdhDsauditDTO.getId() != null && !("".equals(tdhDsauditDTO.getId()))){
-            criteria.andIdLike("%"+tdhDsauditDTO.getId()+"%");
+        if (tdhDsauditDTO.getId() != null && !("".equals(tdhDsauditDTO.getId()))) {
+            criteria.andIdLike("%" + tdhDsauditDTO.getId() + "%");
         }
-        if (tdhDsauditDTO.getTableName() != null && !("".equals(tdhDsauditDTO.getTableName()))){
-            criteria.andTableNameLike("%"+tdhDsauditDTO.getTableName()+"%");
+        if (tdhDsauditDTO.getTableName() != null && !("".equals(tdhDsauditDTO.getTableName()))) {
+            criteria.andTableNameLike("%" + tdhDsauditDTO.getTableName() + "%");
         }
-        if (tdhDsauditDTO.getTableNameall() != null && !("".equals(tdhDsauditDTO.getTableNameall()))){
-            criteria.andTableNameallLike("%"+tdhDsauditDTO.getTableNameall()+"%");
+        if (tdhDsauditDTO.getTableNameall() != null && !("".equals(tdhDsauditDTO.getTableNameall()))) {
+            criteria.andTableNameallLike("%" + tdhDsauditDTO.getTableNameall() + "%");
         }
-        if (tdhDsauditDTO.getApplyerCode() != null && !("".equals(tdhDsauditDTO.getApplyerCode()))){
-            criteria.andApplyerCodeLike("%"+tdhDsauditDTO.getApplyerCode()+"%");
+        if (tdhDsauditDTO.getApplyerCode() != null && !("".equals(tdhDsauditDTO.getApplyerCode()))) {
+            criteria.andApplyerCodeLike("%" + tdhDsauditDTO.getApplyerCode() + "%");
         }
-        if (tdhDsauditDTO.getAuditerCode() != null && !("".equals(tdhDsauditDTO.getAuditerCode()))){
-            criteria.andAuditerCodeLike("%"+tdhDsauditDTO.getAuditerCode()+"%");
+        if (tdhDsauditDTO.getAuditerCode() != null && !("".equals(tdhDsauditDTO.getAuditerCode()))) {
+            criteria.andAuditerCodeLike("%" + tdhDsauditDTO.getAuditerCode() + "%");
         }
-        if (tdhDsauditDTO.getApplysyncTime() != null && !("".equals(tdhDsauditDTO.getApplysyncTime()))){
-            criteria.andApplysyncTimeLike("%"+tdhDsauditDTO.getApplysyncTime()+"%");
+        if (tdhDsauditDTO.getApplysyncTime() != null && !("".equals(tdhDsauditDTO.getApplysyncTime()))) {
+            criteria.andApplysyncTimeLike("%" + tdhDsauditDTO.getApplysyncTime() + "%");
         }
-        if (tdhDsauditDTO.getAuditStatus() != null ){
+        if (tdhDsauditDTO.getAuditStatus() != null) {
             criteria.andAuditStatusEqualTo(tdhDsauditDTO.getAuditStatus());
         }
-        if (tdhDsauditDTO.getCreattime() != null ){
+        if (tdhDsauditDTO.getCreattime() != null) {
             criteria.andCreattimeEqualTo(tdhDsauditDTO.getCreattime());
         }
-        if (tdhDsauditDTO.getApplyTimemsF() != null && !("".equals(tdhDsauditDTO.getApplyTimemsF()))){
+        if (tdhDsauditDTO.getApplyTimemsF() != null && !("".equals(tdhDsauditDTO.getApplyTimemsF()))) {
             criteria.andApplyTimeGreaterThanOrEqualTo(sdf.parse(tdhDsauditDTO.getApplyTimemsF()));
         }
-        if (tdhDsauditDTO.getApplyTimemsL() != null && !("".equals(tdhDsauditDTO.getApplyTimemsL()))){
+        if (tdhDsauditDTO.getApplyTimemsL() != null && !("".equals(tdhDsauditDTO.getApplyTimemsL()))) {
             criteria.andApplyTimeLessThanOrEqualTo(sdf.parse(tdhDsauditDTO.getApplyTimemsL()));
         }
-        if (tdhDsauditDTO.getAuditTimemsF() != null && !("".equals(tdhDsauditDTO.getAuditTimemsF()))){
+        if (tdhDsauditDTO.getAuditTimemsF() != null && !("".equals(tdhDsauditDTO.getAuditTimemsF()))) {
             criteria.andAuditTimeGreaterThanOrEqualTo(sdf.parse(tdhDsauditDTO.getAuditTimemsF()));
         }
-        if (tdhDsauditDTO.getAuditTimemsL() != null && !("".equals(tdhDsauditDTO.getAuditTimemsL()))){
+        if (tdhDsauditDTO.getAuditTimemsL() != null && !("".equals(tdhDsauditDTO.getAuditTimemsL()))) {
             criteria.andAuditTimeLessThanOrEqualTo(sdf.parse(tdhDsauditDTO.getAuditTimemsL()));
         }
 
         PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-        List<TdhDsauditInfo> tdhDsauditInfoList =  tdhDsauditInfoMapper.selectByExample(tdhDsauditInfoExample);
+        List<TdhDsauditInfo> tdhDsauditInfoList = tdhDsauditInfoMapper.selectByExample(tdhDsauditInfoExample);
         long count = tdhDsauditInfoMapper.countByExample(tdhDsauditInfoExample);
         pageView.setTotalrecord(count);
-        for (TdhDsauditInfo tdhDsauditInfo : tdhDsauditInfoList){
+        for (TdhDsauditInfo tdhDsauditInfo : tdhDsauditInfoList) {
             TdhDsauditVO tdhDsauditVO = new TdhDsauditVO();
             BeanUtils.copyProperties(tdhDsauditInfo, tdhDsauditVO);
             tdhDsauditVOList.add(tdhDsauditVO);
@@ -122,16 +122,16 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
 
     @Override
     public int saveTdhDsauditData(List<TdhDsauditDTO> tdhDsauditDTOList) throws Exception {
-        if(tdhDsauditDTOList == null || tdhDsauditDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDsauditDTOList == null || tdhDsauditDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         int countNum = 0;
         String ID = KeyUtil.genUniqueKey();
         Date now = new Date();
-        for (TdhDsauditDTO tdhDsauditDTO:tdhDsauditDTOList){
+        for (TdhDsauditDTO tdhDsauditDTO : tdhDsauditDTOList) {
             TdhDsauditInfo tdhDsauditInfo = new TdhDsauditInfo();
             BeanUtils.copyProperties(tdhDsauditDTO, tdhDsauditInfo);
-            if (tdhDsauditInfo.getId() == null || ("".equals(tdhDsauditInfo.getId()))){
+            if (tdhDsauditInfo.getId() == null || ("".equals(tdhDsauditInfo.getId()))) {
                 tdhDsauditInfo.setId(ID + UUIDUtils.getUUID());
             }
             tdhDsauditInfo.setCreattime(now);
@@ -143,18 +143,18 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
 
     @Override
     public List<TdhDsauditVO> getTdhDsauditListDataS(List<TdhDsauditDTO> tdhDsauditDTOList) throws Exception {
-        if(tdhDsauditDTOList == null || tdhDsauditDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDsauditDTOList == null || tdhDsauditDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         List<TdhDsauditVO> tdhDsauditVOS = new ArrayList<TdhDsauditVO>();
         Gson gs = new Gson();
-        for (TdhDsauditDTO tdhDsauditDTO:tdhDsauditDTOList){
-            if(tdhDsauditDTO == null || tdhDsauditDTO.getId() == null || "".equals(tdhDsauditDTO.getId())){
-                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        for (TdhDsauditDTO tdhDsauditDTO : tdhDsauditDTOList) {
+            if (tdhDsauditDTO == null || tdhDsauditDTO.getId() == null || "".equals(tdhDsauditDTO.getId())) {
+                throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
             }
             TdhDsauditVO tdhDsauditVO = new TdhDsauditVO();
 
-            TdhDsauditInfo tdhDsauditInfo =  tdhDsauditInfoMapper.selectByPrimaryKey(tdhDsauditDTO.getId());//全部数据
+            TdhDsauditInfo tdhDsauditInfo = tdhDsauditInfoMapper.selectByPrimaryKey(tdhDsauditDTO.getId());//全部数据
             TdhDsauditVO thdDsauditVO = new TdhDsauditVO();
             BeanUtils.copyProperties(tdhDsauditInfo, thdDsauditVO);
             tdhDsauditVOS.add(thdDsauditVO);
@@ -165,12 +165,12 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
     @Override
     public int updateTdhDsauditDataS(List<TdhDsauditDTO> tdhDsauditDTOList) throws Exception {
         int countNum = 0;
-        if(tdhDsauditDTOList == null || tdhDsauditDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhDsauditDTOList == null || tdhDsauditDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
-        for (TdhDsauditDTO tdhDsauditDTO:tdhDsauditDTOList){
-            if(tdhDsauditDTO == null || tdhDsauditDTO.getId() == null || "".equals(tdhDsauditDTO.getId())){
-                throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        for (TdhDsauditDTO tdhDsauditDTO : tdhDsauditDTOList) {
+            if (tdhDsauditDTO == null || tdhDsauditDTO.getId() == null || "".equals(tdhDsauditDTO.getId())) {
+                throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
             }
             TdhDsauditInfo tdhDsauditInfo = new TdhDsauditInfo();
             BeanUtils.copyProperties(tdhDsauditDTO, tdhDsauditInfo);
@@ -185,10 +185,10 @@ public class ThdDsauditServiceImpl implements TdhDsauditService {
 
     @Override
     public int countTdhDsauditDataoByAuditStatus(Integer auditStatus) throws Exception {
-        if(auditStatus == null ){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (auditStatus == null) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
-        return  tdhDsauditInfoMapper.countTdhDsauditDataoByAuditStatus(auditStatus);
+        return tdhDsauditInfoMapper.countTdhDsauditDataoByAuditStatus(auditStatus);
     }
 
 

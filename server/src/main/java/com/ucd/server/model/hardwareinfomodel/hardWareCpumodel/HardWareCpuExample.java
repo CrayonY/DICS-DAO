@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Data
 public class HardWareCpuExample {
 
@@ -708,8 +709,6 @@ public class HardWareCpuExample {
             addCriterion("nip not between", value1, value2, "nip");
             return (Criteria) this;
         }
-
-
 
 
         public Criteria andCputempIsNull() {

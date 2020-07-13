@@ -3,6 +3,7 @@ package com.ucd.daocommon.DTO.hardwareDTO;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class HardwareMemDTO {
     private String id;
@@ -26,14 +27,18 @@ public class HardwareMemDTO {
     private String checktimeStart;
 
     private String checktimeEnd;
-    /** 秒数 */
+    /**
+     * 秒数
+     */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
 
-    /** 表名 */
+    /**
+     * 表名
+     */
     private String tablename;
 
 

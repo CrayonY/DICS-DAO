@@ -31,32 +31,32 @@ public class HardWareMEMController2 {
     @Autowired
     private HardWareMEMService2 hardWareMEMService2;
 
-   /**
-    * @author gwm
-    * @Description 获取MEM信息
-    * @date 2019/4/1 1:52 PM
-    * @params [models]
-    * @exception
-    * @return com.ucd.common.VO.ResultVO
-    */
-   @PostMapping(value = "/getHardWareMEM2")
-    public ResultVO getHardWareMEM2(@RequestBody Map<String, Object> models){
+    /**
+     * @return com.ucd.common.VO.ResultVO
+     * @throws
+     * @author gwm
+     * @Description 获取MEM信息
+     * @date 2019/4/1 1:52 PM
+     * @params [models]
+     */
+    @PostMapping(value = "/getHardWareMEM2")
+    public ResultVO getHardWareMEM2(@RequestBody Map<String, Object> models) {
         ResultVO resultVO = null;
         try {
 
-            PageView pageView = Tools.map2obj((Map<String, Object>)models.get("pageView"), PageView.class);
-            HardwareMemDTO hardwareMemDTO = Tools.map2obj((Map<String, Object>)models.get("hardwareMemDTO"),HardwareMemDTO.class);
-            logger.info("pageView:"+pageView.getCurrentpage()+"--"+pageView.getMaxresult());
-            logger.info("hardwareMemDTO:"+hardwareMemDTO);
-            if(pageView == null){
+            PageView pageView = Tools.map2obj((Map<String, Object>) models.get("pageView"), PageView.class);
+            HardwareMemDTO hardwareMemDTO = Tools.map2obj((Map<String, Object>) models.get("hardwareMemDTO"), HardwareMemDTO.class);
+            logger.info("pageView:" + pageView.getCurrentpage() + "--" + pageView.getMaxresult());
+            logger.info("hardwareMemDTO:" + hardwareMemDTO);
+            if (pageView == null) {
                 pageView = new PageView();
             }
-            pageView = hardWareMEMService2.getHardWareMEM(pageView,hardwareMemDTO);
-            resultVO = ResultVOUtil.setResult(UserServiceEnum.SUCCESS.getCode(),UserServiceEnum.SUCCESS.getMessage(),pageView);
-            logger.info("resultVO:"+resultVO);
+            pageView = hardWareMEMService2.getHardWareMEM(pageView, hardwareMemDTO);
+            resultVO = ResultVOUtil.setResult(UserServiceEnum.SUCCESS.getCode(), UserServiceEnum.SUCCESS.getMessage(), pageView);
+            logger.info("resultVO:" + resultVO);
             return resultVO;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             resultVO = ResultVOUtil.error(e);
             logger.info("resultVO:" + resultVO);

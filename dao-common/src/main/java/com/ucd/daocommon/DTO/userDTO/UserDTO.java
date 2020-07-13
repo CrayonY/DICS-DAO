@@ -23,9 +23,9 @@ public class UserDTO {
 
     private String userEmail;
 
-    private List<Map<String,String>> groups;
+    private List<Map<String, String>> groups;
 
-    private List<Map<String,String>> roles;
+    private List<Map<String, String>> roles;
 
     private Boolean userLocked;
 

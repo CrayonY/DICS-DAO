@@ -3,6 +3,7 @@ package com.ucd.daocommon.DTO.thirdinterfaceDTO;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class CenterStautsRecordsDTO {
     private Integer id;

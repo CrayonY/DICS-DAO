@@ -9,16 +9,14 @@ import com.ucd.daocommon.DTO.hardwareDTO.HardwareMemDTO;
 public interface HardWareMEMService {
 
     /**
+     * @return com.ucd.common.utils.pager.PageView
+     * @throws
      * @author Crayon
      * @Description 获取MEM信息
      * @date 2019/3/30 10:37 AM
      * @params [pageView, hardwareMemDTO]
-     * @exception  
-     * @return com.ucd.common.utils.pager.PageView  
      */
     PageView getHardWareMEM(PageView pageView, HardwareMemDTO hardwareMemDTO) throws Exception;
-
-
 
 
 }

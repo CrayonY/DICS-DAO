@@ -4,18 +4,19 @@ import lombok.Getter;
 
 /**
  * 异常枚举类
- * <p>Title: ExceptionEnum</p>  
- * @author  lx  
- * @date    
+ * <p>Title: ExceptionEnum</p>
+ *
+ * @author lx
+ * @date
  */
 @Getter
 public enum TdhServiceDaoEnum {
-    SUCCESS("000000","成功"),
-    PARAM_ERROR("100001","传入参数格式错误"),
-    TDH_SERVICE_DAO_FAIL("100002","服务指标入库失败"),
-    PARAM_SERVICE_TABLE_NULL("100003","传入参数表名为空"),
-    NUM_ERROR("200001","定时任务计数器错误，数据库回滚！"),
-    ERROR("500","内部错误");
+    SUCCESS("000000", "成功"),
+    PARAM_ERROR("100001", "传入参数格式错误"),
+    TDH_SERVICE_DAO_FAIL("100002", "服务指标入库失败"),
+    PARAM_SERVICE_TABLE_NULL("100003", "传入参数表名为空"),
+    NUM_ERROR("200001", "定时任务计数器错误，数据库回滚！"),
+    ERROR("500", "内部错误");
 
     private String code;
 

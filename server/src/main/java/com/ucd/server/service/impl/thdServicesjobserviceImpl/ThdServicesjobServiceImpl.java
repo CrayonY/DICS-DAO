@@ -42,26 +42,24 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
     TdhServicesjobInfoMapper tdhServicesjobInfoMapper;
 
 
-
-
     @Override
     @Transactional
     public int saveThdServicesjobData(List<TdhServicesJobDTO> tdhServicesJobDTOList) throws Exception {
-        if(tdhServicesJobDTOList == null || tdhServicesJobDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhServicesJobDTOList == null || tdhServicesJobDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         int countNum = 0;
         String ID = KeyUtil.genUniqueKey();
         String UUID = UUIDUtils.getUUID();
-        for (TdhServicesJobDTO tdhServicesJobDTO:tdhServicesJobDTOList){
+        for (TdhServicesJobDTO tdhServicesJobDTO : tdhServicesJobDTOList) {
 
             TdhServicesjobInfo tdhServicesjobInfo = new TdhServicesjobInfo();
             BeanUtils.copyProperties(tdhServicesJobDTO, tdhServicesjobInfo);
             tdhServicesjobInfo.setStageIds(tdhServicesJobDTO.getStageIds().toString());
             //if (tdhServicesjobInfo.getId() == null || "".equals(tdhServicesjobInfo.getId())) {
-                tdhServicesjobInfo.setId(ID + UUIDUtils.getUUID());
-           // }
-            System.out.println("111111111111111111111111tdhServicesjobInfo:"+tdhServicesjobInfo);
+            tdhServicesjobInfo.setId(ID + UUIDUtils.getUUID());
+            // }
+            System.out.println("111111111111111111111111tdhServicesjobInfo:" + tdhServicesjobInfo);
             int count = tdhServicesjobInfoMapper.insertSelective(tdhServicesjobInfo);
             countNum = countNum + count;
         }
@@ -72,19 +70,19 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
     @Override
     @Transactional
     public int updateThdServicesjobData(List<TdhServicesJobDTO> tdhServicesJobDTOList) throws Exception {
-        if(tdhServicesJobDTOList == null || tdhServicesJobDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhServicesJobDTOList == null || tdhServicesJobDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         int countNum = 0;
 
-        for (TdhServicesJobDTO tdhServicesJobDTO:tdhServicesJobDTOList){
+        for (TdhServicesJobDTO tdhServicesJobDTO : tdhServicesJobDTOList) {
 
             TdhServicesjobInfo tdhServicesjobInfo = new TdhServicesjobInfo();
             BeanUtils.copyProperties(tdhServicesJobDTO, tdhServicesjobInfo);
-            if (tdhServicesJobDTO.getStageIds() != null){
+            if (tdhServicesJobDTO.getStageIds() != null) {
                 tdhServicesjobInfo.setStageIds(tdhServicesJobDTO.getStageIds().toString());
             }
-            logger.info("111111111111111111111111tdhServicesjobInfo:"+tdhServicesjobInfo);
+            logger.info("111111111111111111111111tdhServicesjobInfo:" + tdhServicesjobInfo);
             int count = tdhServicesjobInfoMapper.updateByPrimaryKeySelective(tdhServicesjobInfo);
             countNum = countNum + count;
         }
@@ -96,10 +94,10 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
     @Transactional
     public int emptyThdServicesjobData(List<TdhServicesJobDTO> tdhServicesJobDTOList) throws Exception {
         int countNum = 0;
-        for (TdhServicesJobDTO tdhServicesJobDTO:tdhServicesJobDTOList){
+        for (TdhServicesJobDTO tdhServicesJobDTO : tdhServicesJobDTOList) {
             TdhServicesjobInfo tdhServicesjobInfo = new TdhServicesjobInfo();
             BeanUtils.copyProperties(tdhServicesJobDTO, tdhServicesjobInfo);
-            System.out.println("111111111111111111111111tdhServicesjobInfo:"+tdhServicesjobInfo);
+            System.out.println("111111111111111111111111tdhServicesjobInfo:" + tdhServicesjobInfo);
             int count = tdhServicesjobInfoMapper.emptyThdServicesjobData(tdhServicesjobInfo);
             countNum = countNum + count;
         }
@@ -108,96 +106,97 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
 
     @Override
     public PageView getThdServicesjobData(PageView pageView, TdhServicesJobDTO tdhServicesJobDTO) throws Exception {
-        if(tdhServicesJobDTO == null || tdhServicesJobDTO.getCentreTableName() == null || "".equals(tdhServicesJobDTO.getCentreTableName())){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(),TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
+        if (tdhServicesJobDTO == null || tdhServicesJobDTO.getCentreTableName() == null || "".equals(tdhServicesJobDTO.getCentreTableName())) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getCode(), TdhServiceDaoEnum.PARAM_SERVICE_TABLE_NULL.getMessage());
         }
         Gson gs = new Gson();
         List<TdhServicesJobVO> tdhServicesJobVOList = new ArrayList<TdhServicesJobVO>();
         TdhServicesjobInfoExample tdhServicesjobInfoExample = new TdhServicesjobInfoExample();
         tdhServicesjobInfoExample.setCentreTableName(tdhServicesJobDTO.getCentreTableName());
-        logger.info("tdhServicesJobDTO:"+tdhServicesJobDTO);
+        logger.info("tdhServicesJobDTO:" + tdhServicesJobDTO);
         TdhServicesjobInfoExample.Criteria criteria = tdhServicesjobInfoExample.createCriteria();
         TdhServicesjobInfoExample.Criteria criteriaOR = tdhServicesjobInfoExample.or();
-        if (tdhServicesJobDTO.getId() != null && !("".equals(tdhServicesJobDTO.getId()))){
-            criteria.andIdLike("%"+tdhServicesJobDTO.getId()+"%");
+        if (tdhServicesJobDTO.getId() != null && !("".equals(tdhServicesJobDTO.getId()))) {
+            criteria.andIdLike("%" + tdhServicesJobDTO.getId() + "%");
         }
-        if (tdhServicesJobDTO.getJobId() != null ){
+        if (tdhServicesJobDTO.getJobId() != null) {
             criteria.andJobIdEqualTo(tdhServicesJobDTO.getJobId());
         }
-        if (tdhServicesJobDTO.getUserName() != null && !("".equals(tdhServicesJobDTO.getUserName()))){
-            criteria.andUserNameLike("%"+tdhServicesJobDTO.getUserName()+"%");
+        if (tdhServicesJobDTO.getUserName() != null && !("".equals(tdhServicesJobDTO.getUserName()))) {
+            criteria.andUserNameLike("%" + tdhServicesJobDTO.getUserName() + "%");
         }
-        if (tdhServicesJobDTO.getName() != null && !("".equals(tdhServicesJobDTO.getName()))){
-            criteria.andNameLike("%"+tdhServicesJobDTO.getName()+"%");
+        if (tdhServicesJobDTO.getName() != null && !("".equals(tdhServicesJobDTO.getName()))) {
+            criteria.andNameLike("%" + tdhServicesJobDTO.getName() + "%");
         }
-        if (tdhServicesJobDTO.getSchedulingPool() != null && !("".equals(tdhServicesJobDTO.getSchedulingPool()))){
-            criteria.andSchedulingPoolLike("%"+tdhServicesJobDTO.getSchedulingPool()+"%");
+        if (tdhServicesJobDTO.getSchedulingPool() != null && !("".equals(tdhServicesJobDTO.getSchedulingPool()))) {
+            criteria.andSchedulingPoolLike("%" + tdhServicesJobDTO.getSchedulingPool() + "%");
         }
-        if (tdhServicesJobDTO.getDescription() != null && !("".equals(tdhServicesJobDTO.getDescription()))){
-            criteria.andDescriptionLike("%"+tdhServicesJobDTO.getDescription()+"%");
+        if (tdhServicesJobDTO.getDescription() != null && !("".equals(tdhServicesJobDTO.getDescription()))) {
+            criteria.andDescriptionLike("%" + tdhServicesJobDTO.getDescription() + "%");
         }
-        if (tdhServicesJobDTO.getSubmissionTime() != null && !("".equals(tdhServicesJobDTO.getSubmissionTime()))){
-            criteria.andSubmissionTimeLike("%"+tdhServicesJobDTO.getSubmissionTime()+"%");
+        if (tdhServicesJobDTO.getSubmissionTime() != null && !("".equals(tdhServicesJobDTO.getSubmissionTime()))) {
+            criteria.andSubmissionTimeLike("%" + tdhServicesJobDTO.getSubmissionTime() + "%");
         }
-        if (tdhServicesJobDTO.getStageIds() != null ){
-            criteria.andStageIdsLike("%"+tdhServicesJobDTO.getStageIds().toString()+"%");
+        if (tdhServicesJobDTO.getStageIds() != null) {
+            criteria.andStageIdsLike("%" + tdhServicesJobDTO.getStageIds().toString() + "%");
         }
-        if (tdhServicesJobDTO.getStatus() != null && !("".equals(tdhServicesJobDTO.getStatus()))){
-            criteria.andStatusLike("%"+tdhServicesJobDTO.getStatus()+"%");
+        if (tdhServicesJobDTO.getStatus() != null && !("".equals(tdhServicesJobDTO.getStatus()))) {
+            criteria.andStatusLike("%" + tdhServicesJobDTO.getStatus() + "%");
         }
-        if (tdhServicesJobDTO.getNumTasks() != null ){
+        if (tdhServicesJobDTO.getNumTasks() != null) {
             criteria.andNumTasksEqualTo(tdhServicesJobDTO.getNumTasks());
         }
-        if (tdhServicesJobDTO.getNumActiveTasks() != null ){
+        if (tdhServicesJobDTO.getNumActiveTasks() != null) {
             criteria.andNumActiveTasksEqualTo(tdhServicesJobDTO.getNumActiveTasks());
         }
-        if (tdhServicesJobDTO.getNumCompletedTasks() != null ){
+        if (tdhServicesJobDTO.getNumCompletedTasks() != null) {
             criteria.andNumCompletedTasksEqualTo(tdhServicesJobDTO.getNumCompletedTasks());
         }
-        if (tdhServicesJobDTO.getNumSkippedTasks() != null ){
+        if (tdhServicesJobDTO.getNumSkippedTasks() != null) {
             criteria.andNumSkippedTasksEqualTo(tdhServicesJobDTO.getNumSkippedTasks());
         }
-        if (tdhServicesJobDTO.getNumFailedTasks() != null ){
+        if (tdhServicesJobDTO.getNumFailedTasks() != null) {
             criteria.andNumFailedTasksEqualTo(tdhServicesJobDTO.getNumFailedTasks());
         }
-        if (tdhServicesJobDTO.getNumActiveStages() != null ){
+        if (tdhServicesJobDTO.getNumActiveStages() != null) {
             criteria.andNumActiveStagesEqualTo(tdhServicesJobDTO.getNumActiveStages());
         }
-        if (tdhServicesJobDTO.getNumCompletedStages() != null ){
+        if (tdhServicesJobDTO.getNumCompletedStages() != null) {
             criteria.andNumCompletedStagesEqualTo(tdhServicesJobDTO.getNumCompletedStages());
         }
-        if (tdhServicesJobDTO.getNumSkippedStages() != null ){
+        if (tdhServicesJobDTO.getNumSkippedStages() != null) {
             criteria.andNumSkippedStagesEqualTo(tdhServicesJobDTO.getNumSkippedStages());
         }
-        if (tdhServicesJobDTO.getNumFailedStages() != null ){
+        if (tdhServicesJobDTO.getNumFailedStages() != null) {
             criteria.andNumFailedStagesEqualTo(tdhServicesJobDTO.getNumFailedStages());
         }
-        if (tdhServicesJobDTO.getCreattime() != null ){
+        if (tdhServicesJobDTO.getCreattime() != null) {
             criteria.andCreattimeEqualTo(tdhServicesJobDTO.getCreattime());
         }
-        if (tdhServicesJobDTO.getStartTime() != null && !("".equals(tdhServicesJobDTO.getStartTime()))){
+        if (tdhServicesJobDTO.getStartTime() != null && !("".equals(tdhServicesJobDTO.getStartTime()))) {
             criteria.andHealthtimeLessThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStartTime()));
         }
-        if (tdhServicesJobDTO.getStopTime() != null && !("".equals(tdhServicesJobDTO.getStopTime()))){
+        if (tdhServicesJobDTO.getStopTime() != null && !("".equals(tdhServicesJobDTO.getStopTime()))) {
             criteria.andHealthtimeGreaterThanOrEqualTo(sdf.parse(tdhServicesJobDTO.getStopTime()));
         }
-        if (tdhServicesJobDTO.getTableName() != null && !("".equals(tdhServicesJobDTO.getTableName()))){
-            criteria.andTableNameLike("%"+tdhServicesJobDTO.getTableName()+"%");
+        if (tdhServicesJobDTO.getTableName() != null && !("".equals(tdhServicesJobDTO.getTableName()))) {
+            criteria.andTableNameLike("%" + tdhServicesJobDTO.getTableName() + "%");
         }
 
 
         PageHelper.startPage(pageView.getCurrentpage(), pageView.getMaxresult());
-        List<TdhServicesjobInfo> tdhServicesjobInfoList =  tdhServicesjobInfoMapper.selectByExample(tdhServicesjobInfoExample);
+        List<TdhServicesjobInfo> tdhServicesjobInfoList = tdhServicesjobInfoMapper.selectByExample(tdhServicesjobInfoExample);
 //        System.out.println("11111:"+tdhDsInfoList.toString());
         long count = tdhServicesjobInfoMapper.countByExample(tdhServicesjobInfoExample);
         pageView.setTotalrecord(count);
-        for (TdhServicesjobInfo tdhServicesjobInfo1 : tdhServicesjobInfoList){
+        for (TdhServicesjobInfo tdhServicesjobInfo1 : tdhServicesjobInfoList) {
             TdhServicesJobVO tdhServicesJobVO = new TdhServicesJobVO();
             BeanUtils.copyProperties(tdhServicesjobInfo1, tdhServicesJobVO);
             tdhServicesJobVO.setCentre(tdhServicesJobDTO.getCentre());
             tdhServicesJobVO.setCentreTableName(tdhServicesJobDTO.getCentreTableName());
-            if (tdhServicesjobInfo1.getStageIds() != null && !("".equals(tdhServicesjobInfo1.getStageIds()))){
-                tdhServicesJobVO.setStageIds(gs.fromJson(tdhServicesjobInfo1.getStageIds(), new TypeToken<List<Integer>>() {}.getType()));
+            if (tdhServicesjobInfo1.getStageIds() != null && !("".equals(tdhServicesjobInfo1.getStageIds()))) {
+                tdhServicesJobVO.setStageIds(gs.fromJson(tdhServicesjobInfo1.getStageIds(), new TypeToken<List<Integer>>() {
+                }.getType()));
             }
 
             tdhServicesJobVOList.add(tdhServicesJobVO);
@@ -208,23 +207,24 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
 
     @Override
     public List<TdhServicesJobListVO> getThdServicesjobListDataS(List<TdhServicesJobDTO> tdhServicesJobDTOList) throws Exception {
-        if(tdhServicesJobDTOList == null || tdhServicesJobDTOList.size() == 0){
-            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(),TdhServiceDaoEnum.PARAM_ERROR.getMessage());
+        if (tdhServicesJobDTOList == null || tdhServicesJobDTOList.size() == 0) {
+            throw new DaoException(TdhServiceDaoEnum.PARAM_ERROR.getCode(), TdhServiceDaoEnum.PARAM_ERROR.getMessage());
         }
         Gson gs = new Gson();
         List<TdhServicesJobListVO> tdhServicesJobListVOS = new ArrayList<TdhServicesJobListVO>();
-        for (TdhServicesJobDTO tdhServicesJobDTO:tdhServicesJobDTOList){
+        for (TdhServicesJobDTO tdhServicesJobDTO : tdhServicesJobDTOList) {
             TdhServicesJobListVO tdhServicesJobVOList = new TdhServicesJobListVO();
             List<TdhServicesJobVO> tdhServicesJobVOS = new ArrayList<TdhServicesJobVO>();
             TdhServicesjobInfo tdhServicesjobInfo1 = new TdhServicesjobInfo();
             BeanUtils.copyProperties(tdhServicesJobDTO, tdhServicesjobInfo1);
-            List<TdhServicesjobInfo> tdhServicesjobInfoList =  tdhServicesjobInfoMapper.selectTdhServicesjobInfo(tdhServicesjobInfo1);//全部服务
-            for (TdhServicesjobInfo tdhServicesjobInfo:tdhServicesjobInfoList){
+            List<TdhServicesjobInfo> tdhServicesjobInfoList = tdhServicesjobInfoMapper.selectTdhServicesjobInfo(tdhServicesjobInfo1);//全部服务
+            for (TdhServicesjobInfo tdhServicesjobInfo : tdhServicesjobInfoList) {
                 TdhServicesJobVO tdhServicesjobVO = new TdhServicesJobVO();
                 BeanUtils.copyProperties(tdhServicesjobInfo, tdhServicesjobVO);
                 tdhServicesjobVO.setCentreTableName(tdhServicesJobDTO.getCentreTableName());
-                if (tdhServicesjobInfo.getStageIds() != null && !("".equals(tdhServicesjobInfo.getStageIds()))){
-                    tdhServicesjobVO.setStageIds(gs.fromJson(tdhServicesjobInfo.getStageIds(), new TypeToken<List<Integer>>() {}.getType()));
+                if (tdhServicesjobInfo.getStageIds() != null && !("".equals(tdhServicesjobInfo.getStageIds()))) {
+                    tdhServicesjobVO.setStageIds(gs.fromJson(tdhServicesjobInfo.getStageIds(), new TypeToken<List<Integer>>() {
+                    }.getType()));
                 }
                 tdhServicesJobVOS.add(tdhServicesjobVO);
                 tdhServicesJobVOList.setTdhServicesJobVOList(tdhServicesJobVOS);
@@ -240,15 +240,14 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
         List<TdhServicesJobVO> tdhServicesJobVOList = new ArrayList<TdhServicesJobVO>();
         TdhServicesjobInfo tdhServicesjobInfo1 = new TdhServicesjobInfo();
         BeanUtils.copyProperties(tdhServicesJobDTO, tdhServicesjobInfo1);
-        List<TdhServicesjobInfo> tdhServicesjobInfoList =  tdhServicesjobInfoMapper.selectTdhServicesjobInfo(tdhServicesjobInfo1);//全部服务
-        for (TdhServicesjobInfo tdhServicesjobInfo:tdhServicesjobInfoList){
+        List<TdhServicesjobInfo> tdhServicesjobInfoList = tdhServicesjobInfoMapper.selectTdhServicesjobInfo(tdhServicesjobInfo1);//全部服务
+        for (TdhServicesjobInfo tdhServicesjobInfo : tdhServicesjobInfoList) {
             TdhServicesJobVO tdhServicesjobVO = new TdhServicesJobVO();
             BeanUtils.copyProperties(tdhServicesjobInfo, tdhServicesjobVO);
             tdhServicesJobVOList.add(tdhServicesjobVO);
         }
         return tdhServicesJobVOList;
     }
-
 
 
 //    @Override
@@ -299,8 +298,8 @@ public class ThdServicesjobServiceImpl implements TdhServicesjobService {
 //        return pageView;
 //    }
 
-    private void listModelToVO( List<TdhServicesHealthck> tdhServicesHealthckList,List<TdhServicesHealthckVO> tdhServicesHealthckListVO){
-        for (TdhServicesHealthck tdhServicesHealthck:tdhServicesHealthckList){
+    private void listModelToVO(List<TdhServicesHealthck> tdhServicesHealthckList, List<TdhServicesHealthckVO> tdhServicesHealthckListVO) {
+        for (TdhServicesHealthck tdhServicesHealthck : tdhServicesHealthckList) {
             TdhServicesHealthckVO tdhServicesHealthckVO = new TdhServicesHealthckVO();
             BeanUtils.copyProperties(tdhServicesHealthck, tdhServicesHealthckVO);
             tdhServicesHealthckListVO.add(tdhServicesHealthckVO);

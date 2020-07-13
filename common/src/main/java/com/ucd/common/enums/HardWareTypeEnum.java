@@ -18,7 +18,7 @@ public enum HardWareTypeEnum {
     public String value;
     public String description;
 
-    private HardWareTypeEnum(String value, String description){
+    private HardWareTypeEnum(String value, String description) {
         this.value = value;
         this.description = description;
     }

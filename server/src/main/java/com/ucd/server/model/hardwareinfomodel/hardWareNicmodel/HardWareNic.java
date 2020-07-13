@@ -3,6 +3,7 @@ package com.ucd.server.model.hardwareinfomodel.hardWareNicmodel;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class HardWareNic {
     private String id;
@@ -39,14 +40,14 @@ public class HardWareNic {
 
     private String checktimeEnd;
 
-    /** 秒数 */
+    /**
+     * 秒数
+     */
     private Integer second;
 
     private String secondStart;
 
     private String secondEnd;
-
-
 
 
 }

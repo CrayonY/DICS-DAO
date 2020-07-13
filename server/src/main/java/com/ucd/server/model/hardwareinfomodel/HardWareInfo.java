@@ -3,6 +3,7 @@ package com.ucd.server.model.hardwareinfomodel;
 import lombok.Data;
 
 import java.util.Date;
+
 @Data
 public class HardWareInfo {
     private String id;

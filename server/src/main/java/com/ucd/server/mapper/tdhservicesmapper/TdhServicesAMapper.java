@@ -31,12 +31,12 @@ public interface TdhServicesAMapper {
     int updateByTypeSelective(TdhServicesA record);
 
     /**
+     * @return java.util.List<com.ucd.server.model.tdhservicemodel.TdhServicesA>
+     * @throws
      * @author Crayon
      * @Description 根据时间段查询服务健康数据
      * @date 2019/4/19 5:24 PM
      * @params [tdhServicesA]
-     * @exception
-     * @return java.util.List<com.ucd.server.model.tdhservicemodel.TdhServicesA>
      */
     List<TdhServicesA> selectTdhServiceHealthStatusByTime(TdhServicesA tdhServicesA);
 }
